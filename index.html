@@ -72,6 +72,9 @@ input{font-size:16px;padding:6px;margin:4px 0;width:100%;box-sizing:border-box;b
 #rs{inset:0;background:rgba(0,0,0,.82);display:flex;align-items:center;justify-content:center;padding:10px;box-sizing:border-box}
 #toast{left:50%;top:14%;transform:translateX(-50%);padding:8px 18px;border-radius:20px;background:rgba(0,0,0,.8);border:2px solid rgba(255,255,255,.35);font-weight:900;font-size:16px;opacity:0;transition:opacity .3s;max-width:90vw;text-align:center}
 .cn{position:absolute;width:22px;height:22px;border-radius:50%;background:#ffd23f;border:3px solid #000;transition:all .5s}
+.dxg{display:grid;grid-template-columns:repeat(auto-fill,minmax(66px,1fr));gap:6px}.dxc{border:2px solid #000;border-radius:10px;background:#26358a;text-align:center;padding:4px 2px}.dxe{font-size:28px}.dxn{font-size:10px;font-weight:900}.dxc.lk .dxe{filter:brightness(0) opacity(.45)}
+.bdg.num{width:auto;min-width:16px;height:16px;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;border-radius:8px;padding:0 3px;line-height:1;box-sizing:border-box}
+#emp{right:calc(14px + var(--sr));bottom:calc(120px + var(--sb));display:flex;gap:6px;padding:6px;width:240px;flex-wrap:wrap;pointer-events:auto}.eb{font-size:28px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:10px;background:rgba(255,255,255,.14);cursor:pointer}.eb:active{background:rgba(255,255,255,.35)}
 .rk{display:flex;align-items:center;gap:8px;padding:5px 10px;margin:4px 0;font-weight:900;font-size:14px}.rk b{width:34px;text-align:center}.rk span{margin-left:auto}.rk.me{outline:3px solid #ffd93b}
 @media (max-height:520px){#menu{display:grid;grid-template-columns:repeat(2,64px)}#play{font-size:22px;padding:8px 24px}.se{height:54px;font-size:32px}.sc{flex-basis:96px;padding:4px}.dc{padding:5px 8px}.mc{padding-top:38px}#mb{max-height:calc(100vh - 100px)}#stick{width:110px;height:110px}#knob{left:25px;top:25px}.abtn{width:60px;height:60px}.abtn.big{width:76px;height:76px}}
 </style></head><body>
@@ -87,7 +90,8 @@ input{font-size:16px;padding:6px;margin:4px 0;width:100%;box-sizing:border-box;b
 <div id="mis" class="card"><div id="arr">▲</div><div><div class="mt">🎯 2人で出口へ</div><div id="md2"></div></div><div id="tmr"></div></div>
 <div id="nt"></div><canvas id="mm" width="112" height="112"></canvas><div id="exit" class="btn xs red">✕ 退出</div>
 <div id="capb" class="card hide">⛓ 拘束中…<div class="bar" style="margin-top:6px"><i id="capf" style="width:100%"></i></div></div><div id="warn" class="card hide">⚠ 怪物が近い！</div>
-<div id="bt"><div id="trap" class="abtn">🪤<span>罠</span><i id="trn">10</i></div><div id="jmp" class="abtn grn">⤴<span>ジャンプ</span></div><div id="come" class="abtn big">📣<span>カモン</span></div></div></div>
+<div id="emp" class="card hide"><div class="eb" data-e="👍">👍</div><div class="eb" data-e="😂">😂</div><div class="eb" data-e="😱">😱</div><div class="eb" data-e="🙏">🙏</div><div class="eb" data-e="❤️">❤️</div><div class="eb" data-e="📍">📍</div></div>
+<div id="bt"><div id="emo" class="abtn">😀<span>エモ</span></div><div id="trap" class="abtn">🪤<span>罠</span><i id="trn">10</i></div><div id="jmp" class="abtn grn">⤴<span>ジャンプ</span></div><div id="come" class="abtn big">📣<span>カモン</span></div></div></div>
 <div id="shop" class="hide"><div class="sh-top"><div id="sht" class="pill"></div><div id="shtabs" style="display:flex;gap:6px"></div><div id="shcoin" class="pill" style="margin-left:auto"></div><div id="shx" class="btn xs red">✕</div></div><div id="shl"></div></div>
 <div id="stm" class="modal hide"><div class="mc"><div class="rib">📮 ログインスタンプ</div><div id="stx" class="btn xs red x">✕</div><div id="stg"></div><div id="sts"></div><div style="text-align:center"><div id="stc" class="btn big grn"></div></div></div></div>
 <div id="md" class="modal hide"><div class="mc"><div class="rib" id="mt"></div><div id="mx" class="btn xs red x">✕</div><div id="mb"></div></div></div>
@@ -106,6 +110,7 @@ let D=JSON.parse(JSON.stringify(DEF)),ses=null,sy='ローカル保存',pt;
 try{Object.assign(D,JSON.parse(localStorage.uf||'{}'));ses=JSON.parse(localStorage.ufs||'null')}catch(e){}
 delete D.fr;
 function migrate(){if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=60+i*15});D.skins=[0];D.skin=0;D.sv=2}}migrate();
+let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 async function sbf(p,m='GET',b,h={},na){const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));return j}
 const uid=()=>ses&&ses.user&&ses.user.id;
 function setSes(x){ses=x;if(x)x.exp=Date.now()+(x.expires_in||3600)*1000-60000;try{localStorage.ufs=JSON.stringify(x)}catch(e){}}
@@ -291,7 +296,7 @@ function updInfo(){$('pname').textContent=D.name;$('plv').textContent='Lv.'+D.lv
 function toast(s){const t=$('toast');t.textContent=s;t.style.opacity=1;clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.opacity=0,2200)}
 function note(s){const d=document.createElement('div');d.className='kf';d.textContent='💀 '+s;$('nt').appendChild(d);setTimeout(()=>d.remove(),4500)}
 function setMode(m){mode=m;const h=m=='home',l=m=='lobby',g=m=='game';
- home.visible=h;lobby.visible=l;hotel.visible=g;sh('prof',h);sh('coin',h||l);sh('menu',h);sh('play',h);sh('lb',l);sh('stick',l||g);sh('hud',g);['shop','md','stm'].forEach(i=>sh(i,0));shown=0;
+ home.visible=h;lobby.visible=l;hotel.visible=g;sh('prof',h);sh('coin',h||l);sh('menu',h);sh('play',h);sh('lb',l);sh('stick',l||g);sh('hud',g);['shop','md','stm','emp'].forEach(i=>sh(i,0));shown=0;
  S.background=h?null:new T.Color(l?0x0a1640:0x030302);S.fog=g?new T.FogExp2(0x050403,.075):null;document.body.style.background=h?'':'#0a1640';
  amb.intensity=g?.22:.9;dl.intensity=g?0:.8;pl.intensity=g?1.2:l?.6:0;pl.position.set(0,6,0);ambOn(g);
  (h?home:l?lobby:hotel).add(me);me.rotation.z=0;me.scale.set(1,1,1);if(h)me.position.set(-1.4,0,0);if(l)me.position.copy(lp)}
@@ -338,7 +343,7 @@ function start(s){
  for(let i=0;i<5;i++){const [x,z]=ctr(RN()*N*N|0),p=new T.PointLight(0xffe3a0,.45,11);p.position.set(x,3,z);hotel.add(p)}
  const [sx,sz]=ctr(sc);pos.set(sx,0,sz);jy=vy=0;
  E=['Aki','Ren','Mio','Sora'].map((n,k)=>{const sk=(k*29+7)%NS,g=av(sk),[x,z]=ctr(near(sc,2));hotel.add(g);return{n,sk,g,p:new T.Vector3(x,0,z),tg:null,w:0,hold:0,hid:0,dead:0,go:rnd(25,70)}});
- RN=Math.random;FK=[];TR=[];EX=new Set();cap=0;tm=0;trL=10;swT=rnd(12,25);monCd=s>=1?3:999;$('nt').innerHTML='';buildTeam();setMode('game');
+ RN=Math.random;FK=[];TR=[];EX=new Set();pings=[];cap=0;tm=0;trL=10;swT=rnd(12,25);monCd=s>=1?3:999;$('nt').innerHTML='';buildTeam();setMode('game');
  yaw=0;pit=.14;camGame();camP.copy(tP);camL.copy(tL);
  toast('🏨 ステージ '+(s+1)+'/3　'+(s?'⚠ 怪物が徘徊している…':''))}
 function stageClear(){if(mode!='game')return;send({t:'clear',st});if(st>=2)return result(true);mode='trans';SE.clear();sumT+=tm;toast('🛗 ステージ '+(st+1)+' クリア！次はさらに広い…');setTimeout(()=>{if(mode=='trans')start(st+1)},2200)}
@@ -418,7 +423,7 @@ function game(dt,t){
   if(r.dead)hotel.remove(r.m)}
  hudUpd(t);camGame()}
 // ===== 入力・UI =====
-addEventListener('keydown',e=>{if(e.target.tagName=='INPUT')return;keys[e.code]=1;if(e.code.startsWith('Arrow')||e.code=='Space')e.preventDefault();if(mode=='game'){if(e.code=='KeyE')$('trap').click();if(e.code=='KeyQ')$('come').click();if(e.code=='Space')jreq=1}});addEventListener('keyup',e=>keys[e.code]=0);
+addEventListener('keydown',e=>{if(e.target.tagName=='INPUT')return;keys[e.code]=1;if(e.code.startsWith('Arrow')||e.code=='Space')e.preventDefault();if(mode=='game'){if(e.code=='KeyE')$('trap').click();if(e.code=='KeyQ')$('come').click();if(e.code=='Space')jreq=1;const dg=/^Digit([1-6])$/.exec(e.code);if(dg)emote(EMO[dg[1]-1])}});addEventListener('keyup',e=>keys[e.code]=0);
 addEventListener('blur',()=>{for(const k in keys)keys[k]=0});
 const stk=$('stick'),kn=$('knob');let sid=null;
 function sm(e){const r=stk.getBoundingClientRect(),h=r.width/2;let dx=e.clientX-r.left-h,dy=e.clientY-r.top-h;const l=Math.hypot(dx,dy),m=h-10;if(l>m){dx*=m/l;dy*=m/l}kn.style.left=h-30+dx+'px';kn.style.top=h-30+dy+'px';mv.x=dx/m;mv.y=dy/m}
@@ -433,10 +438,10 @@ $('trap').onclick=()=>{if(mode!='game'||cap||trL<=0)return;trL--;SE.trap();const
 $('jmp').onclick=()=>{if(mode=='game')jreq=1};
 $('come').onclick=()=>{if(mode!='game'||cap)return;SE.come();const m=new T.Mesh(new T.TorusGeometry(.5,.08,6,24),new T.MeshBasicMaterial({color:0xffee00}));m.rotation.x=Math.PI/2;m.position.set(pos.x,.3,pos.z);hotel.add(m);let s=1;const iv=setInterval(()=>{s+=.25;m.scale.set(s,s,s);if(s>9){clearInterval(iv);hotel.remove(m)}},40);E.forEach(e=>{if(!e.dead)e.hold=12});note('カモン!')};
 $('exit').onclick=()=>{if(mode=='game'&&confirm('ゲームから退出しますか？(ゲームオーバー扱い)'))result(false)};
-let capMax=1,shown=0,shO=0,shC=-1,pv=null,EX=new Set();
+let capMax=1,shown=0,shO=0,shC=-1,pv=null,EX=new Set(),pings=[];
 const td=()=>new Date().toDateString(),yd=()=>new Date(Date.now()-864e5).toDateString(),RW=[30,40,50,60,80,100,150];
 const stS=()=>{const cl=D.last==td();return{cl,day:cl?(D.str-1)%7+1:(D.last==yd()?D.str:0)%7+1}};
-function updBadge(){const b=$('bdg');if(b)b.classList.toggle('hide',stS().cl)}
+function updBadge(){const b=$('bdg');if(b)b.classList.toggle('hide',stS().cl);const n=$('bdgn');if(n){const c=NTF.length+frN;n.textContent=c;n.classList.toggle('hide',!c)}const d=$('bdgd');if(d){const cl=D.cl||[];d.classList.toggle('hide',!MS.some((m,i)=>D.skins.length>=m[0]&&!cl.includes(i)))}}
 const modal=(t,h)=>{$('mt').textContent=t;$('mb').innerHTML=h;sh('md',1)};
 function buildTeam(){$('team').innerHTML=`<div class="tc me" id="t0">${esc(D.name[0]||'?')}</div>`+E.map((e,i)=>`<div class="tc" id="t${i+1}">${e.n[0]}</div>`).join('')}
 function mini(t){const mc=$('mm').getContext('2d'),s=112/N;mc.clearRect(0,0,112,112);
@@ -452,7 +457,7 @@ function mini(t){const mc=$('mm').getContext('2d'),s=112/N;mc.clearRect(0,0,112,
  E.forEach(e=>{if(!e.dead&&!e.hid&&EX.has(cellOf(e.p)))dot(e.p,'#5aa0ff',3)});
  FK.forEach(f=>{if(!f.dead&&f.ma<0&&EX.has(cellOf(f.p)))dot(f.p,'#5aa0ff',3)});
  Object.values(peers).forEach(p=>{if(p.m=='g'&&p.st==st&&!p.d)dot({x:p.tx,z:p.tz},'#5bff8a',3.5)});
- mc.strokeStyle='#ffd23f';mc.lineWidth=2;mc.beginPath();mc.moveTo(pos.x*k,pos.z*k);mc.lineTo((pos.x-Math.sin(yaw)*5)*k*1.0+0,(pos.z-Math.cos(yaw)*5)*k);mc.stroke();dot(pos,'#ffd23f',4)}
+ pings.forEach(p=>{mc.strokeStyle='#ffee00';mc.lineWidth=2;mc.beginPath();mc.arc(p.x*k,p.z*k,3+(performance.now()/150%4),0,7);mc.stroke()});mc.strokeStyle='#ffd23f';mc.lineWidth=2;mc.beginPath();mc.moveTo(pos.x*k,pos.z*k);mc.lineTo((pos.x-Math.sin(yaw)*5)*k*1.0+0,(pos.z-Math.cos(yaw)*5)*k);mc.stroke();dot(pos,'#ffd23f',4)}
 function hudUpd(t){
  $('tmr').textContent=mmss((sumT+tm)|0);$('md2').textContent=`ステージ${st+1}/3　ゴールまで ${Math.round(dist(pos,goalP)/2)}m　(${gcount()}/2人)`;
  const cy_=Math.atan2(goalP.x-pos.x,-(goalP.z-pos.z));$('arr').style.transform=`rotate(${cy_+yaw}rad)`;
@@ -491,21 +496,21 @@ async function otp(v){const em=$('em').value.trim().toLowerCase(),am=$('am');if(
   else{const tk=$('cd').value.replace(/\s/g,'');if(tk.length<6){am.textContent='コードを入力してください';return}const r=await sbf('/auth/v1/verify','POST',{type:'email',email:em,token:tk},{},1);setSes(r);await pull();am.textContent='✅ ログインしました: '+D.name}}
  catch(e){am.textContent='❌ '+jp(e.message)}}
 // ---- フレンド(名前検索→実在プレイヤーに申請→承認) ----
-async function friends(){modal('👥 フレンド','<div class="row" style="margin:0"><input id="fn" placeholder="プレイヤー名を検索" maxlength="12"><div id="fs" class="btn xs">検索</div></div><div id="fres"></div><div id="fb">読み込み中…</div>');
+async function friends(){cur='f';modal('👥 フレンド','<div class="row" style="margin:0"><input id="fn" placeholder="プレイヤー名を検索" maxlength="12"><div id="fs" class="btn xs">検索</div></div><div id="fres"></div><div id="fb">読み込み中…</div>');
  try{await auth();const me_=uid(),rows=await sbf('/rest/v1/friendships?select=id,a,b,status'),ids=[...new Set(rows.map(r=>r.a==me_?r.b:r.a))],pr={};
   if(ids.length)(await sbf('/rest/v1/profiles?select=id,name,lv,seen&id=in.('+ids.join(',')+')')).forEach(p=>pr[p.id]=p);
   const on=p=>p&&Date.now()-new Date(p.seen)<18e4,o=r=>r.a==me_?r.b:r.a;
   const row=(r,b)=>{const p=pr[o(r)]||{name:'(不明)',lv:'?'};return `<div class="card fr"><div class="pav">${on(p)?'😀':'😴'}</div><div>${esc(p.name)} <span class="small">Lv.${p.lv}</span><div style="font-size:11px;color:${on(p)?'#7dff7d':'#aab'}">${on(p)?'● オンライン':'○ オフライン'}</div></div>${b}</div>`};
   const inc=rows.filter(r=>r.status=='pending'&&r.b==me_),out=rows.filter(r=>r.status=='pending'&&r.a==me_),ok=rows.filter(r=>r.status=='accepted');
-  $('fb').innerHTML=(inc.length?'<div class="sec">📩 届いた申請</div>'+inc.map(r=>row(r,`<div class="btn xs grn" data-a="ok" data-id="${r.id}">承認</div><div class="btn xs red" data-a="del" data-id="${r.id}">拒否</div>`)).join(''):'')+(out.length?'<div class="sec">📤 申請中</div>'+out.map(r=>row(r,`<div class="btn xs gry" data-a="del" data-id="${r.id}">取消</div>`)).join(''):'')+'<div class="sec">👥 フレンド ('+ok.length+')</div>'+(ok.map(r=>row(r,(mode=='lobby'&&on(pr[o(r)])?`<div class="btn xs grn" data-a="inv" data-id="${o(r)}">📨招待</div>`:'')+`<div class="btn xs red" data-a="del" data-id="${r.id}" data-c="1">削除</div>`)).join('')||'<div class="small">まだいません。名前で検索して申請しましょう</div>');
+  $('fb').innerHTML=(inc.length?'<div class="sec">📩 届いた申請</div>'+inc.map(r=>row(r,`<div class="btn xs grn" data-a="ok" data-id="${r.id}">承認</div><div class="btn xs red" data-a="del" data-id="${r.id}">拒否</div>`)).join(''):'')+(out.length?'<div class="sec">📤 申請中</div>'+out.map(r=>row(r,`<div class="btn xs gry" data-a="del" data-id="${r.id}">取消</div>`)).join(''):'')+'<div class="sec">👥 フレンド ('+ok.length+')</div>'+(ok.map(r=>row(r,mode=='lobby'?(on(pr[o(r)])?`<div class="btn xs grn" data-a="inv" data-id="${o(r)}">📨 招待</div>`:'<div class="small" style="margin-left:auto">オフライン</div>'):`<div class="btn xs red" data-a="del" data-id="${r.id}" data-c="1">削除</div>`)).join('')||'<div class="small">まだいません。名前で検索して申請しましょう</div>');
   $('fs').onclick=async()=>{const q=$('fn').value.trim().replace(/[*,()%]/g,'');if(!q)return;$('fres').innerHTML='<div class="small">検索中…</div>';
    try{const ps=await sbf('/rest/v1/profiles?select=id,name,lv&name=ilike.'+encodeURIComponent('*'+q+'*')+'&id=neq.'+me_+'&limit=10');
     $('fres').innerHTML='<div class="sec">🔎 検索結果</div>'+(ps.map(p=>{const r=rows.find(r=>o(r)==p.id),b=r?`<div class="small" style="margin-left:auto">${r.status=='accepted'?'フレンド':'申請済み'}</div>`:`<div class="btn xs" data-a="req" data-id="${p.id}">申請</div>`;return `<div class="card fr"><div class="pav">🙂</div><div>${esc(p.name)} <span class="small">Lv.${p.lv}</span></div>${b}</div>`}).join('')||'<div class="small">該当するプレイヤーがいません</div>')}catch(e){$('fres').innerHTML='<div class="small">検索失敗: '+esc(e.message)+'</div>'}};
   $('fn').onkeydown=e=>{if(e.key=='Enter')$('fs').click()}}
  catch(e){$('fb').innerHTML='<div class="small">オンラインに接続できません: '+esc(e.message)+'<br>SQLの設定が済んでいるか確認してください</div>'}}
-async function frAct(a,id,c){if(a=='inv')return inviteFriend(id);if(a=='join'){sh('md',0);return acceptInvite(id)}try{if(a=='req'){await sbf('/rest/v1/friendships','POST',{a:uid(),b:id},{Prefer:'return=minimal'});toast('📨 申請しました')}
+async function frAct(a,id,c){if(a=='inv')return inviteFriend(id);if(a=='join'){sh('md',0);return acceptInvite(id)}if(a=='nx'){NTF=NTF.filter(x=>x.room!=id);ntfSave();updBadge();return notif()}try{if(a=='req'){await sbf('/rest/v1/friendships','POST',{a:uid(),b:id},{Prefer:'return=minimal'});toast('📨 申請しました');ping(id,'fr',{})}
  else if(a=='ok'){await sbf('/rest/v1/friendships?id=eq.'+id,'PATCH',{status:'accepted'},{Prefer:'return=minimal'});toast('✅ 承認しました')}
- else{if(c&&!confirm('フレンドを削除しますか？'))return;await sbf('/rest/v1/friendships?id=eq.'+id,'DELETE');toast('削除しました')}friends()}catch(e){toast(/duplicate|unique/i.test(e.message)?'すでに申請済み/フレンドです':'失敗: '+e.message.slice(0,40))}}
+ else{if(c&&!confirm('フレンドを削除しますか？'))return;await sbf('/rest/v1/friendships?id=eq.'+id,'DELETE');toast('削除しました')}if(cur=='n'){refreshFr();notif()}else friends()}catch(e){toast(/duplicate|unique/i.test(e.message)?'すでに申請済み/フレンドです':'失敗: '+e.message.slice(0,40))}}
 $('mb').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b){SE.btn();frAct(b.dataset.a,b.dataset.id,b.dataset.c)}const r=e.target.closest('[data-rk]');if(r){SE.btn();rank(r.dataset.rk)}});
 // ---- 世界ランキング ----
 async function rank(by){by=by||'best';modal('🏆 世界ランキング',`<div style="display:flex;gap:8px;justify-content:center"><div class="btn xs${by=='best'?'':' gry'}" data-rk="best">⏱ クリアタイム</div><div class="btn xs${by=='lv'?'':' gry'}" data-rk="lv">⭐ レベル</div></div><div id="rkl" class="small" style="margin-top:8px">読み込み中…</div>`);
@@ -517,10 +522,38 @@ function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー
  $('nms').onclick=()=>{const v=$('nm').value.trim().slice(0,12);if(!v)return toast('名前を入力してください');D.name=v;save();updInfo();SE.pon();toast('✅ 名前を「'+v+'」に変更')};
  $('vo').oninput=e=>{D.vol=+e.target.value;save();SE.btn()};$('ss').oninput=e=>{D.sens=+e.target.value;save()};$('rg').onclick=()=>acc('reg');$('lg').onclick=()=>acc('login');$('oc').onclick=()=>otp(0);$('ov').onclick=()=>otp(1);
  $('lo').onclick=()=>{if(confirm('ログアウトしますか？(ゲストのままだとデータは戻せません)')){ses=null;try{localStorage.removeItem('ufs')}catch(e){}leaveRT();toast('ログアウトしました');setTimeout(()=>location.reload(),800)}};$('rst').onclick=async()=>{if(confirm('設定・レベル・コイン・スキン・記録をすべて削除します。本当に初期化しますか？')&&confirm('元に戻せません。よろしいですか？')){try{localStorage.removeItem('uf')}catch(e){}D=JSON.parse(JSON.stringify(DEF));await push();location.reload()}}}
-const guide=()=>modal('📖 ガイド',[['🎯','各ステージのゴール(赤い光)に合計2人が入ると全員脱出。1人だけでは反応しません。ゴール担当のCPUが1人います。'],['🏨','ステージは全3回。進むほど広くなり、2つ目からは常に怪物が1体徘徊します。'],['👥','隔離されると仲間そっくりの偽物が現れ、やがて怪物化します。'],['🪤','罠は最大10個。走りながら設置OK。自分が踏んでも死亡(ジャンプ中は回避)。'],['📣','カモンでCPUの仲間が集まります。'],['🎮','移動: スティック / WASD・矢印　視点: 画面ドラッグ　ジャンプ: Space　罠: E　カモン: Q']].map(a=>`<div class="card gd"><b>${a[0]}</b><div>${a[1]}</div></div>`).join(''));
-const MI=[['👕','スキン',()=>shop(1)],['🛒','ショップ',()=>shop(0)],['📮','スタンプ',stamp],['👥','フレンド',friends],['🏆','ランキング',()=>rank('best')],['⚙️','設定',settings],['📖','ガイド',guide]];
-MI.forEach(a=>{const b=document.createElement('div');b.className='btn mi'+(a[1]=='ショップ'?'':' blu');b.innerHTML=`<div class="mi-i">${a[0]}</div><div>${a[1]}</div>`+(a[1]=='スタンプ'?'<i id="bdg" class="bdg"></i>':'');b.onclick=()=>{SE.btn();a[2]()};$('menu').appendChild(b)});
-$('menu').lastChild.style.fontSize='10px';
+const guide=()=>modal('📖 ガイド',[['🎯','各ステージのゴール(赤い光)に合計2人が入ると全員脱出。1人だけでは反応しません。ゴール担当のCPUが1人います。'],['🏨','ステージは全3回。進むほど広くなり、2つ目からは常に怪物が1体徘徊します。'],['👥','隔離されると仲間そっくりの偽物が現れ、やがて怪物化します。'],['🪤','罠は最大10個。走りながら設置OK。自分が踏んでも死亡(ジャンプ中は回避)。'],['📣','カモンでCPUの仲間が集まります。'],['🔔','招待やフレンド申請はホームの🔔通知に届きます。ここから参加・承認できます。'],['😀','エモート: 右下のボタン(キー1〜6)。📍は仲間のミニマップに位置を伝えます。'],['🎰','図鑑のガチャで未所持スキンを獲得。図鑑の達成で報酬コイン!'],['🎮','移動: スティック / WASD・矢印　視点: 画面ドラッグ　ジャンプ: Space　罠: E　カモン: Q']].map(a=>`<div class="card gd"><b>${a[0]}</b><div>${a[1]}</div></div>`).join(''));
+// ===== 通知(ルーム招待 / フレンド申請) =====
+const ntfSave=()=>{try{localStorage.ufn=JSON.stringify(NTF)}catch(e){}};
+function ntfClean(){const n=Date.now();NTF=NTF.filter(x=>n-x.t<6e5)}
+function addInvite(p){ntfClean();NTF=NTF.filter(x=>x.room!=p.room);NTF.unshift({room:p.room,name:p.name,t:Date.now()});ntfSave();updBadge()}
+async function refreshFr(){try{await auth();const r=await sbf('/rest/v1/friendships?select=id&status=eq.pending&b=eq.'+uid());frN=r.length}catch(e){}updBadge()}
+setInterval(()=>{if(document.visibilityState=='visible'){ntfClean();refreshFr()}},30000);
+async function notif(){cur='n';ntfClean();modal('🔔 通知','<div id="nb">読み込み中…</div>');
+ const inv=NTF.map(x=>`<div class="card fr"><div class="pav">📨</div><div>${esc(x.name)}<div class="small">${Math.max(1,(Date.now()-x.t)/6e4|0)}分前に招待</div></div><div class="btn xs grn" data-a="join" data-id="${esc(x.room)}">参加</div><div class="btn xs gry" data-a="nx" data-id="${esc(x.room)}">✕</div></div>`).join('');
+ let fr='';try{await auth();const rows=await sbf('/rest/v1/friendships?select=id,a&status=eq.pending&b=eq.'+uid());frN=rows.length;updBadge();
+  if(rows.length){const ps=await sbf('/rest/v1/profiles?select=id,name,lv&id=in.('+rows.map(r=>r.a).join(',')+')'),pm={};ps.forEach(p=>pm[p.id]=p);
+   fr=rows.map(r=>{const p=pm[r.a]||{name:'(不明)',lv:'?'};return `<div class="card fr"><div class="pav">🙋</div><div>${esc(p.name)} <span class="small">Lv.${p.lv}</span><div class="small">フレンド申請</div></div><div class="btn xs grn" data-a="ok" data-id="${r.id}">承認</div><div class="btn xs red" data-a="del" data-id="${r.id}">拒否</div></div>`}).join('')}}
+ catch(e){fr='<div class="small">フレンド申請を取得できません('+esc(e.message)+')</div>'}
+ if($('nb'))$('nb').innerHTML=((inv?'<div class="sec">📨 ルーム招待</div>'+inv:'')+(fr?'<div class="sec">🙋 フレンド申請</div>'+fr:''))||'<div class="small" style="text-align:center;padding:20px">新しい通知はありません</div>'}
+// ===== 図鑑 & ガチャ =====
+const MS=[[10,100],[25,300],[40,600],[55,1000],[70,3000]],GC=200;let gcB=0;
+function dex(tab){const n=D.skins.length,cl=D.cl=D.cl||[];
+ let h=`<div style="display:flex;gap:8px;justify-content:center"><div class="btn xs${tab?' gry':''}" data-dx="0">📚 図鑑</div><div class="btn xs${tab?'':' gry'}" data-dx="1">🎰 ガチャ</div></div>`;
+ if(!tab){h+=`<div class="pill" style="justify-content:center;margin:8px auto;width:max-content;font-size:15px">コンプ率 ${n}/${NS}</div><div class="bar"><i style="width:${n/NS*100}%"></i></div><div class="sec" style="text-align:center">🎁 達成報酬</div><div style="display:flex;gap:6px;margin:4px 0 8px;flex-wrap:wrap;justify-content:center">`+MS.map((m,i)=>{const ok=n>=m[0],got=cl.includes(i);return `<div class="btn xs ${got?'dis':ok?'grn':'gry'}" ${ok&&!got?`data-ms="${i}"`:''}>${m[0]}種<br>🪙${m[1]}${got?' ✔':''}</div>`}).join('')+'</div>';
+  CAT.forEach((c,ci)=>{const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].c==ci),have=ids.filter(i=>D.skins.includes(i)).length;h+=`<div class="sec">${c} ${have}/${ids.length}</div><div class="dxg">`+ids.map(i=>{const o=D.skins.includes(i);return `<div class="dxc${o?'':' lk'}"><div class="dxe">${SKN[i].e}</div><div class="dxn">${o?SKN[i].n:'???'}</div></div>`}).join('')+'</div>'})}
+ else{const left=NS-n;h+=`<div id="gch" style="text-align:center;font-weight:900;margin:10px 0">🪙 ${D.coin}　未所持 ${left}種</div><div id="gcr" class="card" style="min-height:130px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;padding:10px;font-weight:900;text-align:center">${left?'ガチャを回してスキンを手に入れよう！<br><span class="small">必ず未所持のスキンが出ます</span>':'🎉 全スキンコンプリート！'}</div><div style="display:flex;gap:10px;justify-content:center;margin-top:10px"><div class="btn big${left?'':' dis'}" data-gc="1">1回<br><small>🪙${GC}</small></div><div class="btn big red${left?'':' dis'}" data-gc="10">10回<br><small>🪙${GC*9}</small></div></div>`}
+ modal('📚 図鑑 / 🎰 ガチャ',h);updBadge()}
+function gachaPull(k){if(gcB)return;const pool=SKN.map((_,i)=>i).filter(i=>!D.skins.includes(i));if(!pool.length)return toast('すべて所持しています');k=Math.min(k,pool.length);const cost=k==10?GC*9:GC*k;if(D.coin<cost)return toast('🪙 コインが足りません');
+ gcB=1;D.coin-=cost;const res=[];for(let i=0;i<k;i++)res.push(pool.splice(Math.random()*pool.length|0,1)[0]);let n=0;
+ const iv=setInterval(()=>{const box=$('gcr');if(box)box.innerHTML=`<div style="font-size:64px">${SKN[Math.random()*NS|0].e}</div>`;se(500+(n++)*40,.05,'square',.05);
+  if(n>16){clearInterval(iv);res.forEach(i=>D.skins.push(i));save();updInfo();SE.lvl();burst();gcB=0;const b2=$('gcr');
+   if(b2){b2.innerHTML=res.map(i=>`<div class="card" style="padding:6px 10px;text-align:center"><div style="font-size:${k==1?56:30}px">${SKN[i].e}</div><div>${SKN[i].n}</div><div class="small" style="color:#ffd93b">NEW! ${CAT[SKN[i].c]}</div>${k==1?`<div class="btn xs grn" data-gq="${i}" style="margin-top:4px">装備する</div>`:''}</div>`).join('');const h=$('gch');if(h)h.textContent='🪙 '+D.coin+'　未所持 '+(NS-D.skins.length)+'種'}}},70)}
+function claim(i){const cl=D.cl=D.cl||[];if(D.skins.length<MS[i][0]||cl.includes(i))return;cl.push(i);D.coin+=MS[i][1];save();updInfo();SE.lvl();burst();toast('🎁 +'+MS[i][1]+' コイン');dex(0)}
+$('mb').addEventListener('click',e=>{const d=e.target.closest('[data-dx]');if(d){SE.btn();dex(+d.dataset.dx)}const g=e.target.closest('[data-gc]');if(g)gachaPull(+g.dataset.gc);const m=e.target.closest('[data-ms]');if(m)claim(+m.dataset.ms);const q=e.target.closest('[data-gq]');if(q){act(+q.dataset.gq);toast('装備しました')}});
+const MI=[['👕','スキン',()=>shop(1)],['🛒','ショップ',()=>shop(0)],['📚','図鑑',()=>dex(0)],['🔔','通知',notif],['📮','スタンプ',stamp],['👥','フレンド',friends],['🏆','ランキング',()=>rank('best')],['⚙️','設定',settings],['📖','ガイド',guide]];
+MI.forEach(a=>{const b=document.createElement('div');b.className='btn mi'+(a[1]=='ショップ'?'':' blu');b.innerHTML=`<div class="mi-i">${a[0]}</div><div>${a[1]}</div>`+({'スタンプ':'<i id="bdg" class="bdg"></i>','通知':'<i id="bdgn" class="bdg num hide"></i>','図鑑':'<i id="bdgd" class="bdg hide"></i>'})[a[1]]||'';b.onclick=()=>{SE.btn();a[2]()};$('menu').appendChild(b)});
+[...$('menu').children].forEach(c=>{if(c.textContent.length>=5)c.style.fontSize='10px'});
 [['🟢','かんたん','初心者向け ★'],['🟡','ふつう','標準 ★★'],['🔴','難しい','高報酬 ★★★']].forEach((a,i)=>{const d=document.createElement('div');d.className='dc'+(i==df?' sel':'');d.innerHTML=`<span class="di">${a[0]}</span><div><b class="st">${a[1]}</b><small>${a[2]}</small></div>`;d.onclick=()=>{SE.btn();df=i;[...$('dcol').children].forEach((c,k)=>c.classList.toggle('sel',k==df))};$('dcol').appendChild(d)});
 $('play').onclick=()=>{SE.btn();setMode('lobby')};$('bk').onclick=()=>{SE.btn();leaveRT();setMode('home')};$('lfr').onclick=()=>{SE.btn();friends()};
 $('st').onclick=()=>{SE.btn();if(room!=RID)return toast('ホストが開始するまでお待ちください');SEEDV=Math.random()*1e9|0;send({t:'start',seed:SEEDV,df});start(0)};
@@ -529,7 +562,7 @@ const RID=code+Math.random().toString(36).slice(2,8);let room=RID,sbc=null,sbU=n
 function initRT(){try{if(!window.supabase||!uid()||sbU==uid())return;if(sbc){try{sbc.removeAllChannels()}catch(e){}}sbU=uid();
  sbc=supabase.createClient(SB.u,SB.k,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},realtime:{params:{eventsPerSecond:20}}});
  try{sbc.realtime.setAuth(ses.access_token)}catch(e){}
- uch=sbc.channel('uf-u-'+uid()).on('broadcast',{event:'inv'},p=>gotInvite(p.payload)).subscribe();joinRoom(room)}catch(e){sbU=null}}
+ uch=sbc.channel('uf-u-'+uid()).on('broadcast',{event:'inv'},p=>gotInvite(p.payload)).on('broadcast',{event:'fr'},()=>{refreshFr();toast('🙋 フレンド申請が届きました(🔔通知)')}).subscribe();joinRoom(room);refreshFr()}catch(e){sbU=null}}
 function clearPeers(){Object.values(peers).forEach(p=>{if(p.g&&p.g.parent)p.g.parent.remove(p.g)});peers={}}
 function joinRoom(r){if(!sbc)return;if(rch){try{sbc.removeChannel(rch)}catch(e){}}clearPeers();room=r;
  rch=sbc.channel('uf-r-'+r,{config:{broadcast:{self:false}}}).on('broadcast',{event:'m'},p=>onMsg(p.payload)).subscribe(s=>{if(s=='SUBSCRIBED'&&room!=RID)sendPos(1)})}
@@ -545,6 +578,7 @@ function onMsg(m){if(!m)return;
   if(m.s!=p.s){p.s=m.s;if(p.g&&p.g.parent)p.g.parent.remove(p.g);p.g=av(SKN[m.s]?m.s:0);label(p.g,m.n);p.first=1}}
  else if(m.t=='start'){if(mode=='lobby'&&room!=RID){SEEDV=m.seed;df=m.df;SE.btn();start(0)}}
  else if(m.t=='clear'){if(mode=='game'&&m.st==st)stageClear()}
+ else if(m.t=='em'){const p=peers[m.u];if(p&&p.g&&p.g.parent)bubble(p.g,m.e);if(m.e=='📍'&&mode=='game'&&m.st==st){addPing(m.x,m.z);toast('📍 '+m.n+' がここを指しています')}}
  else if(m.t=='dead'){const p=peers[m.u];if(p)p.d=1}
  else if(m.t=='bye'){const p=peers[m.u];if(p){if(p.g&&p.g.parent)p.g.parent.remove(p.g);delete peers[m.u];toast('👋 '+(p.n||'')+' が退出')}}}
 function peersTick(dt,t){const now=performance.now();
@@ -553,13 +587,22 @@ function peersTick(dt,t){const now=performance.now();
   if(p.g.parent!=gp){if(p.g.parent)p.g.parent.remove(p.g);if(gp){gp.add(p.g);p.first=1}}if(!gp)continue;
   const g=p.g;if(p.first){g.position.set(p.tx,0,p.tz);p.first=0}const q=Math.min(1,dt*10);g.position.x+=(p.tx-g.position.x)*q;g.position.z+=(p.tz-g.position.z)*q;g.position.y=p.j||0;g.rotation.y=p.tr;g.rotation.z=p.d?1.3:0;
   anim(g,p.v&&!p.d,t);trail(g,dt,p.v&&!p.d)}}
-function inviteFriend(fid){if(!sbc)return toast('オンライン接続中です。少し待ってからもう一度');if(room!=RID)return toast('ゲストは他の人を招待できません');
- const c=sbc.channel('uf-u-'+fid);c.subscribe(s=>{if(s=='SUBSCRIBED'){c.send({type:'broadcast',event:'inv',payload:{room:RID,name:D.name}});toast('📨 招待を送りました');setTimeout(()=>{try{sbc.removeChannel(c)}catch(e){}},1200)}})}
-function gotInvite(p){if(!p||!p.room||p.room==RID)return;if(mode=='game'||mode=='trans'||mode=='res'){toast('📨 '+p.name+' から招待が来ています(ロビーで確認)');return}
- SE.pon();modal('📨 招待',`<div style="text-align:center;font-weight:900"><div style="margin:8px">${esc(p.name)} さんが部屋に招待しています</div><div class="btn big grn" data-a="join" data-id="${esc(p.room)}">参加する</div></div>`)}
-function acceptInvite(r){if(mode=='game'||mode=='trans')return;sh('rs',0);if(mode!='lobby')setMode('lobby');joinRoom(r);toast('🚪 部屋に参加しました')}
+function ping(fid,ev,pl){if(!sbc)return false;const c=sbc.channel('uf-u-'+fid);c.subscribe(s=>{if(s=='SUBSCRIBED'){c.send({type:'broadcast',event:ev,payload:pl});setTimeout(()=>{try{sbc.removeChannel(c)}catch(e){}},1200)}});return true}
+function inviteFriend(fid){if(!ping(fid,'inv',{room,name:D.name}))return toast('オンライン接続中です。少し待ってからもう一度');toast('📨 招待を送りました(相手の🔔通知に届きます)')}
+function gotInvite(p){if(!p||!p.room||p.room==room)return;addInvite(p);SE.pon();toast('📨 '+p.name+' から招待が届きました(ホームの🔔から参加)')}
+function acceptInvite(r){if(mode=='game'||mode=='trans')return toast('ゲーム中は参加できません');NTF=NTF.filter(x=>x.room!=r);ntfSave();updBadge();sh('rs',0);if(mode!='lobby')setMode('lobby');send({t:'bye',u:uid()});joinRoom(r);toast('🚪 部屋に参加しました');
+ setTimeout(()=>{if(room==r&&!Object.keys(peers).length&&mode=='lobby'){toast('部屋が見つかりません。ホストが退出した可能性があります');joinRoom(RID)}},7000)}
 setInterval(()=>{sendPos();if(mode=='lobby'){$('pcnt').textContent='👤 '+(1+Object.keys(peers).length)+'/6　🤖 CPU×4'+(room!=RID?'　👥ゲスト':'');$('st').textContent=room!=RID?'⏳ ホストを待っています':'▶ ミッション開始'}},125);
 addEventListener('pagehide',()=>send({t:'bye',u:uid()}));
+// ===== エモート & 位置ピン =====
+const EMO=['👍','😂','😱','🙏','❤️','📍'];let emT=0;
+function bubble(o,e){if(o.userData.bub)o.remove(o.userData.bub);const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');x.font='96px serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,64,70);
+ const s=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),transparent:true,depthTest:false,fog:false}));s.scale.set(1.2,1.2,1);s.position.y=3.6;s.renderOrder=10;o.add(s);o.userData.bub=s;setTimeout(()=>{if(o.userData.bub===s){o.remove(s);o.userData.bub=null}},3000)}
+function addPing(x,z){const g=new T.Group(),r=new T.Mesh(new T.TorusGeometry(.9,.09,8,28),new T.MeshBasicMaterial({color:0xffee00}));r.rotation.x=Math.PI/2;r.position.y=.1;
+ const b=new T.Mesh(new T.CylinderGeometry(.12,.12,3.4,8,1,true),new T.MeshBasicMaterial({color:0xffee00,transparent:true,opacity:.5,fog:false}));b.position.y=1.7;g.add(r,b);g.position.set(x,0,z);hotel.add(g);const p={x,z};pings.push(p);setTimeout(()=>{hotel.remove(g);pings=pings.filter(q=>q!==p)},9000)}
+function emote(e){if(mode!='game'||performance.now()-emT<900)return;emT=performance.now();bubble(me,e);se(880,.1,'triangle',.1);const o={t:'em',u:uid(),n:D.name,e,st};if(e=='📍'){o.x=pos.x;o.z=pos.z;addPing(pos.x,pos.z);toast('📍 位置を仲間に伝えました')}send(o)}
+$('emo').onclick=()=>{SE.btn();sh('emp',$('emp').classList.contains('hide'))};
+$('emp').onclick=e=>{const b=e.target.closest('.eb');if(b){emote(b.dataset.e);sh('emp',0)}};
 // ===== メインループ =====
 const clk=new T.Clock();let wt=0,wv=0;
 function loop(){requestAnimationFrame(loop);const dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime,u=me.userData;
