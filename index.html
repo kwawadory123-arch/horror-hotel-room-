@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>UNKNOWN FLOOR</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:linear-gradient(160deg,#1a0f55,#3d1f95 50%,#0e55a8);touch-action:none;user-select:none;-webkit-user-select:none;font-family:system-ui,"Hiragino Sans","Noto Sans JP",sans-serif;color:#fff}
@@ -265,7 +265,9 @@ async function sbf(p,m='GET',b,h={},na){const H={apikey:SB.k,'Content-Type':'app
 const uid=()=>ses&&ses.user&&ses.user.id;
 // 管理者のID一覧(設定画面に表示される自分のIDを '' の中に貼り付ける)。ここに入っているアカウントだけランキングに削除ボタンが出る
 const ADMIN_IDS=[];
-const isAdm=()=>!!uid()&&ADMIN_IDS.includes(uid());
+// true: 全員に削除ボタンを表示 / false: 上の ADMIN_IDS のアカウントだけに表示
+const ALLOW_ALL_DELETE=true;
+const isAdm=()=>!!uid()&&(ALLOW_ALL_DELETE||ADMIN_IDS.includes(uid()));
 function setSes(x){ses=x;if(x)x.exp=Date.now()+(x.expires_in||3600)*1000-60000;try{localStorage.ufs=JSON.stringify(x)}catch(e){}}
 let authP=null;
 async function auth(){if(ses&&ses.exp>Date.now()&&uid())return;if(authP)return authP;authP=(async()=>{try{const rt=ses&&ses.refresh_token;if(rt){let er;for(let i=0;i<3;i++){try{setSes(await sbf('/auth/v1/token?grant_type=refresh_token','POST',{refresh_token:rt},{},1));return}catch(e){er=e;if(/ネットワーク|タイムアウト|HTTP 5/.test(e.message)){await new Promise(r=>setTimeout(r,700));continue}break}}if(/ネットワーク|タイムアウト|HTTP 5/.test(er.message))throw er}setSes(await sbf('/auth/v1/signup','POST',{data:{}},{},1))}finally{authP=null}})();return authP}
