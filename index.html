@@ -180,9 +180,55 @@ html,body{background:repeating-conic-gradient(from 0deg at 30% 60%,rgba(255,255,
 #bt #jmp{width:16vh;height:16vh;right:calc(10px + var(--sr));bottom:calc(10px + var(--sb))}
 #bt #trap{width:14vh;height:14vh;right:calc(18px + 16vh + var(--sr));bottom:calc(10px + var(--sb))}
 #bt #emo{width:12vh;height:12vh;right:calc(18px + 16vh + 1vh + var(--sr));bottom:calc(14vh + 16px + var(--sb))}
+
+/* ===== v4: レイアウト調整(縦画面スマホ基準 / 重なり防止) ===== */
+#ui{--hh:max(16.667vh,64px);--j:max(8vh,44px);--c:max(8.5vh,46px);--t:max(7vh,40px);--e:max(6vh,38px);--g:6px;--bm:8px;--ph:max(7.5vh,44px)}
+/* 上の黒背景 = 画面の縦の1/6 */
+#tb{height:var(--hh);min-height:0;padding:0 calc(10px + var(--sr)) 0 calc(10px + var(--sl));gap:8px}
+#tbl{flex:1;min-width:0;gap:8px}
+#fav{width:calc(var(--hh)*.45);height:calc(var(--hh)*.45);min-width:40px;min-height:40px;border-radius:10px;border-width:2px}
+#tbi{flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(42vw,176px));grid-template-areas:"nm lv" "rw fr";column-gap:8px;row-gap:4px;align-items:center}
+#tb #pname{grid-area:nm;font-size:clamp(13px,calc(var(--hh)*.125),19px);line-height:1.1;max-width:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tb .lvl{grid-area:lv;margin:0;gap:5px;min-width:0}
+#tb .lvb{font-size:clamp(10px,calc(var(--hh)*.09),14px);padding:0 5px;white-space:nowrap}
+#tb .lvl .bar{flex:1;width:auto;min-width:0;height:clamp(9px,calc(var(--hh)*.08),14px);min-height:0}
+#tb #rkrow{grid-area:rw;display:flex;align-items:center;gap:5px;min-width:0;flex-wrap:nowrap}
+#tb #pbest{font-size:clamp(10px,calc(var(--hh)*.085),13px);white-space:nowrap;max-width:none;flex:none}
+#tb #rkp{font-size:clamp(10px,calc(var(--hh)*.085),13px);padding:0 6px;gap:2px;border-width:2px;border-radius:10px;margin:0;line-height:1.5;flex:none}
+#tb #frb{grid-area:fr;margin:0;height:calc(var(--hh)*.3);min-height:32px;padding:0 6px;display:flex;align-items:center;justify-content:center;gap:4px;font-size:clamp(13px,calc(var(--hh)*.115),18px);white-space:nowrap;border-radius:10px;box-sizing:border-box;width:100%}
+.pl{max-height:calc(var(--hh) - 30px)}
+/* コイン: 黒背景のすぐ左下 */
+#hm #coin{left:calc(10px + var(--sl));right:auto;top:calc(var(--hh) + 6px);bottom:auto;width:auto;min-width:0;font-size:clamp(16px,calc(var(--hh)*.13),22px);padding:2px 14px;gap:6px;justify-content:flex-start}
+/* 右: スキン/ショップ/図鑑/ランキング = 縦を短く */
+#hm #nv{right:calc(10px + var(--sr));left:auto;top:calc(var(--hh) + 8px);gap:6px;width:min(46vw,230px)}
+.nvb{height:max(6vh,38px);min-height:0;font-size:clamp(14px,2.5vh,19px);padding:0 10px;gap:8px;box-sizing:border-box}
+.nvb .ti{font-size:1.2em}
+/* 左下: 🔔📮⚙️📖 = 約2/3 */
+#hm #ic{left:calc(10px + var(--sl));bottom:calc(var(--bm) + var(--sb));top:auto;gap:6px}
+.icb{width:max(6.7vh,36px);height:max(6.7vh,36px);min-width:0;min-height:0;border-radius:9px}
+.icb .ii{font-size:max(3.6vh,19px)}
+/* プレイ: 横長・縦短め */
+#hm #play{right:calc(10px + var(--sr));left:auto;bottom:calc(var(--bm) + var(--sb));width:min(56vw,320px);height:var(--ph);font-size:clamp(22px,4.6vh,34px);padding:0;border-radius:12px}
+/* ロビー: 招待はスタートの真上(隙間小さく) */
+#lb #bk{top:calc(var(--hh) + 8px);font-size:clamp(14px,3.2vh,18px);padding:6px 14px}
+#lb #dcol{top:calc(var(--hh) + 8px)}
+#dcol .dc b{white-space:nowrap}
+#lb #st,#lb #lfr{width:min(46vw,260px);height:var(--ph);font-size:clamp(20px,4.4vh,30px);right:calc(10px + var(--sr))}
+#lb #st{top:auto;left:auto;bottom:calc(var(--bm) + var(--sb))}
+#lb #lfr{top:auto;left:auto;bottom:calc(var(--bm) + var(--ph) + 6px + var(--sb))}
+/* ゲーム操作ボタン = 約1/2 & 右下の端に寄せる */
+#bt #jmp{width:var(--j);height:var(--j);right:calc(6px + var(--sr));bottom:calc(var(--bm) + var(--sb))}
+#bt #trap{width:var(--t);height:var(--t);right:calc(6px + var(--j) + var(--g) + var(--sr));bottom:calc(var(--bm) + var(--sb))}
+#bt #come{width:var(--c);height:var(--c);right:calc(6px + var(--sr));bottom:calc(var(--bm) + var(--j) + var(--g) + var(--sb))}
+#bt #emo{width:var(--e);height:var(--e);right:calc(6px + var(--j) + var(--g) + var(--sr));bottom:calc(var(--bm) + var(--t) + var(--g) + var(--sb))}
+#bt>.abtn{box-sizing:border-box;font-size:clamp(16px,3.2vh,26px);border-width:2px;box-shadow:0 3px 0 #000,inset 0 2px 0 rgba(255,255,255,.4)}
+#bt .abtn span{font-size:clamp(8px,1.4vh,11px);margin-top:1px}
+#bt .abtn i{min-width:16px;height:16px;font-size:10px;border-radius:8px;right:-3px;top:-3px}
+#emp{right:calc(6px + var(--sr));bottom:calc(var(--bm) + var(--j) + var(--c) + var(--g)*2 + var(--sb));width:156px;box-sizing:border-box}
+@media (orientation:landscape){#emp{width:auto;flex-wrap:nowrap}}
 </style></head><body>
 <div id="ui">
-<div id="tb" data-m="h"><div id="tbl"><img id="fav" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><div id="tbi"><div id="pname"></div><div class="lvl"><b id="plv" class="lvb"></b><div class="bar"><i id="pxp"></i></div></div><div id="rkrow"><div id="rkp" class="pill"><span>🏆</span><b id="rk">--</b></div><div id="pbest"></div></div></div></div><div id="tbm"></div><div id="frb" class="btn"><img class="fi" id="fi1" alt=""><img class="fi" id="fi2" alt=""><span>フレンド</span></div></div>
+<div id="tb" data-m="h"><div id="tbl"><img id="fav" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><div id="tbi"><div id="pname"></div><div class="lvl"><b id="plv" class="lvb"></b><div class="bar"><i id="pxp"></i></div></div><div id="rkrow"><div id="pbest"></div><div id="rkp" class="pill"><span>🏆</span><b id="rk">--</b></div></div><div id="frb" class="btn">👥 フレンド</div></div></div><div id="tbm"></div></div>
 <div id="hm"><div id="nv"></div><div id="ic"></div><div id="coin" class="pill"><span class="gc"></span><b id="cv"></b></div><div id="play" class="btn big">▶ プレイ</div></div>
 <div id="lb" class="hide"><div id="bk" class="btn gry">◀ 戻る</div><div id="lfr" class="btn blu">招待</div><div id="dcol"></div><div id="st" class="btn big red">スタート</div></div>
 <div id="stick" class="hide"><div id="knob"></div></div>
