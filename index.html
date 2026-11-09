@@ -675,8 +675,10 @@ function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=
  if((D.sv||0)<3){D.name='Player'+(1000+Math.floor(Math.random()*9000));D.sv=3;try{localStorage.uf=JSON.stringify(D)}catch(e){}}}migrate();
 let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 async function sbf(p,m='GET',b,h={},na){const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));if(Array.isArray(j))j.forEach(decTag);return j}
-function decTag(o){if(!o||typeof o.name!='string')return;const k=o.name.indexOf('\u2063');if(k<0)return;const b=o.name.slice(k+1);o.name=o.name.slice(0,k);if(b.length==10){let v=0;for(const c of b)v=v*2+(c=='\u200C'?1:0);if(o.skin==null)o.skin=v}}
-function pname(){let t='\u2063';for(let b=9;b>=0;b--)t+=((D.skin>>b)&1)?'\u200C':'\u200B';return D.name+t}
+function decTag(o){if(!o||typeof o.name!='string')return;const k=o.name.indexOf('\u2063');if(k<0)return;const b=o.name.slice(k+1);o.name=o.name.slice(0,k);const sb=b.slice(0,10);if(sb.length==10){let v=0;for(const c of sb)v=v*2+(c=='\u200C'?1:0);if(o.skin==null)o.skin=v}
+ if(b.length==15&&b[10]=='\u2064'){let f=0;for(const c of b.slice(11))f=f*4+Math.max(0,['\u200B','\u200C','\u200D','\u2060'].indexOf(c));o.tw=f}}
+var twOff=0;
+function pname(noTw){let t='\u2063';for(let b=9;b>=0;b--)t+=((D.skin>>b)&1)?'\u200C':'\u200B';const f=Math.min(255,(D.tw&&D.tw.best)||0);if(f>0&&!noTw&&!twOff){t+='\u2064';const Z=['\u200B','\u200C','\u200D','\u2060'];for(let b=6;b>=0;b-=2)t+=Z[(f>>b)&3]}return D.name+t}
 const uid=()=>ses&&ses.user&&ses.user.id;
 function setSes(x){ses=x;if(x)x.exp=Date.now()+(x.expires_in||3600)*1000-60000;try{localStorage.ufs=JSON.stringify(x)}catch(e){}}
 let authP=null;
@@ -685,7 +687,7 @@ async function beat(){try{await auth();await sbf('/rest/v1/profiles?id=eq.'+uid(
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
 const MIN={Prefer:'resolution=merge-duplicates,return=minimal'};
 var tagNo=0,iconSt='';
-async function pushProf(){const id=uid(),U='/rest/v1/profiles?on_conflict=id',pr={id,name:D.name,lv:D.lv,best:D.best||0,seen:new Date().toISOString()};if(!tagNo||Date.now()-tagNo>6e5){try{await sbf(U,'POST',{...pr,name:pname()},MIN);tagNo=0;iconSt='ok';return}catch(e){if(/ネットワーク|タイムアウト/.test(e.message))throw e;tagNo=Date.now();iconSt=e.message}}await sbf(U,'POST',pr,MIN)}
+async function pushProf(){const id=uid(),U='/rest/v1/profiles?on_conflict=id',pr={id,name:D.name,lv:D.lv,best:D.best||0,seen:new Date().toISOString()};if(!tagNo||Date.now()-tagNo>6e5){try{await sbf(U,'POST',{...pr,name:pname()},MIN);tagNo=0;iconSt='ok';return}catch(e){if(/ネットワーク|タイムアウト/.test(e.message))throw e;try{await sbf(U,'POST',{...pr,name:pname(1)},MIN);twOff=1;tagNo=0;iconSt='ok';return}catch(e2){if(/ネットワーク|タイムアウト/.test(e2.message))throw e2}tagNo=Date.now();iconSt=e.message}}await sbf(U,'POST',pr,MIN)}
 async function push(){try{await auth();const id=uid(),n=new Date().toISOString();await pushProf();await sbf('/rest/v1/saves?on_conflict=id','POST',{id,data:D,updated_at:n},MIN);sy='☁ 同期OK'}catch(e){sy='オフライン'}try{updInfo()}catch(e){}}
 async function pull(){try{sy='同期中…';await auth();const r=await sbf('/rest/v1/saves?id=eq.'+uid()+'&select=data');if(r&&r[0]&&r[0].data&&r[0].data.lv!=null&&(!D.ts||(r[0].data.ts||0)>=D.ts)){Object.assign(D,r[0].data);delete D.fr;migrate();try{localStorage.uf=JSON.stringify(D)}catch(e){}}await push()}catch(e){sy='オフライン'}try{setSkin();updInfo()}catch(e){}initRT()}
 const save=()=>{D.ts=Date.now();try{localStorage.uf=JSON.stringify(D)}catch(e){}clearTimeout(pt);pt=setTimeout(push,1500)};
@@ -1004,7 +1006,7 @@ const S_=(P,r,c,x,y,z,a=1,b=1,d=1)=>{const o=mk(new T.SphereGeometry(r,26,18),c,
  col=(v,d)=>v==null?d:v,
  // ---- 体型: [横,縦,奥, 上端H, 下端Bt, 顔の奥行きz, 目の間隔, 目の高さ] (Rに対する倍率) ----
  SH={ball:[1,1,1,1,1,.93,.36,.12],egg:[1,1.2,1,1.2,1.2,.93,.36,.1],bean:[.86,1.32,.9,1.32,1.32,.85,.32,.1],blob:[1.24,.82,1.05,.82,.82,.98,.44,.12],
-  drop:[1,1,1,1.65,1,.93,.36,.1],pill:[.9,1,.9,1.45,1.45,.8,.3,.2],cube:[1,1,1,.75,.75,.78,.38,.12],cone:[1,1,1,1,1,.6,.24,-.25]},
+  drop:[1,1,1,1.65,1,.93,.36,.1],pill:[.9,1,.9,1.45,1.45,.8,.3,.2],cube:[1,1,1,.75,.75,.78,.38,.12],cone:[1,1,1,1,1,.72,.24,-.25]},
  LIFT=['shoe','legs','tent','cup'];
 let EYS=null;const OLM=new T.MeshBasicMaterial({color:0x1c1030,side:T.BackSide}),outl=(P,n0)=>{const L=[];P.children.slice(n0).forEach(o=>o.traverse(m=>L.push(m)));L.forEach(o=>{if(!o.isMesh||o.userData.no||!o.material||o.material.isMeshBasicMaterial||o.material.transparent)return;const g=o.geometry;if(!g.boundingSphere)g.computeBoundingSphere();if(g.boundingSphere.radius<.16)return;const l=new T.Mesh(g,OLM);l.scale.setScalar(1.07);l.userData.no=1;o.add(l)})};
 const eyesF=(P,fy,fz,ex,we,st,cl,R)=>{const bl=B(0x111118),wh=B(0xffffff);
@@ -1035,7 +1037,7 @@ const eyesF=(P,fy,fz,ex,we,st,cl,R)=>{const bl=B(0x111118),wh=B(0xffffff);
  hrt=(P,c,s)=>{const g=new T.Group();P.add(g);[-1,1].forEach(u=>S_(g,.1*s,B(c),u*.08*s,.06*s,0,1,1,.6));const k=cn(.17*s,.24*s,B(c),0,-.08*s,0,4,g);k.rotation.z=Math.PI;return g};
 // ---- アクセサリー ----
 const XT={
- bowtie:(Q,c)=>{c=col(c,0xff4a6a);[-1,1].forEach(s=>{const o=N_(Q.P,Q.R*.2,Q.R*.34,c,s*Q.R*.2,Q.fy-Q.R*.55,Q.fz-.02,4);o.rotation.z=-s*Math.PI/2});S_(Q.P,Q.R*.08,c,0,Q.fy-Q.R*.55,Q.fz)},
+ bowtie:(Q,c)=>{c=col(c,0xff4a6a);[-1,1].forEach(s=>{const o=N_(Q.P,Q.R*.2,Q.R*.34,c,s*Q.R*.2,Q.fy-Q.R*.55,Q.fz+.03,4);o.rotation.z=-s*Math.PI/2});S_(Q.P,Q.R*.08,c,0,Q.fy-Q.R*.55,Q.fz+.05)},
  antenna:(Q,c)=>{c=col(c,0xffee66);const st=Y_(Q.P,.02,.02,Q.R*.55,0x333344,0,Q.top+Q.R*.2,0),b=S_(Q.P,Q.R*.1,B(c),0,Q.top+Q.R*.5,0);FX.push(t=>{b.scale.setScalar(.85+Math.sin(t*5)*.25);st.rotation.z=Math.sin(t*2)*.12})},
  horns:(Q,c)=>{c=col(c,0xfff0c8);[-1,1].forEach(s=>{const o=N_(Q.P,Q.R*.11,Q.R*.4,c,s*Q.R*.38,Q.top+Q.R*.02,0,6);o.rotation.z=-s*.5})},
  flower:(Q,c)=>{c=col(c,0xff7ab8);for(let j=0;j<5;j++){const a=j*1.2566;S_(Q.P,Q.R*.13,c,Math.cos(a)*Q.R*.2+Q.R*.35,Q.top+Q.R*.02+Math.sin(a)*Q.R*.2,Q.R*.05,1,1,.5)}S_(Q.P,Q.R*.09,B(0xffee66),Q.R*.35,Q.top+Q.R*.02,Q.R*.08)},
@@ -1065,6 +1067,10 @@ const XT={
  bow:(Q,c)=>{c=col(c,0xff5a8a);const x=Q.R*Q.sx*.5,y=Q.top-Q.R*.12,z=Q.R*.15;[-1,1].forEach(s=>{const o=N_(Q.P,Q.R*.2,Q.R*.42,c,x+s*Q.R*.2,y,z,4);o.rotation.z=-s*Math.PI/2});S_(Q.P,Q.R*.1,c,x,y,z)},
  shell:(Q,c)=>{c=col(c,Q.c3);S_(Q.P,Q.R*.7,c,0,Q.y0+Q.H*.3,-Q.R*.75,1,1,.8);[0,Math.PI/2].forEach(a=>{const o=O_(Q.P,Q.R*.45,.06,0xffe0c0,0,Q.y0+Q.H*.3,-Q.R*.75);o.rotation.y=a})},
  spout:(Q)=>{for(let j=0;j<3;j++){const o=S_(Q.P,.07,B(0x9ae0ff),0,0,0);FX.push(t=>{const q=(t*1.1+j*.33)%1;o.position.set((j-1)*.18*q,Q.top+.05+q*.9,0);o.scale.setScalar(1-q*.6)})}},
+ yolk:(Q)=>{S_(Q.P,Q.R*.34,0xffc21a,0,Q.top-Q.R*.02,0,1.15,.7,1.15);S_(Q.P,Q.R*.09,B(0xffffff),-Q.R*.12,Q.top+Q.R*.1,Q.R*.1,1,.6,.6)},
+ cork:(Q)=>{Y_(Q.P,Q.R*.22,Q.R*.26,Q.R*.32,0xc8905a,0,Q.top+Q.R*.08,0);Y_(Q.P,Q.R*.3,Q.R*.3,.05,0xe8c898,0,Q.top+Q.R*.24,0)},
+ pleat:(Q)=>{for(let j=0;j<7;j++){const a=-1.05+j*.35;S_(Q.P,Q.R*.1,0xe0b060,Math.sin(a)*Q.R*Q.sx*.98,Q.y0+Math.cos(a)*Q.R*Q.sy*.98,0,1,1.1,1)}},
+ bolt:(Q)=>{const c=0xff8a1a,y=Q.top+Q.R*.3;const a=X_(Q.P,.07,Q.R*.5,.05,c,Q.R*.06,y+Q.R*.2,0);a.rotation.z=.5;X_(Q.P,Q.R*.3,.07,.05,c,0,y,0);const d=X_(Q.P,.07,Q.R*.5,.05,c,-Q.R*.06,y-Q.R*.2,0);d.rotation.z=.5},
  belly:(Q,c)=>{S_(Q.P,Q.R*.62,col(c,Q.c2),0,Q.y0-Q.R*.3*Q.sy,Q.R*.45*Q.sz,1,1.05,.9)},
  leaf:(Q)=>{for(let j=0;j<5;j++){const a=j*1.2566,o=N_(Q.P,Q.R*.16,Q.R*.45,0x3a9a3a,Math.cos(a)*Q.R*.3,Q.top+Q.R*.05,Math.sin(a)*Q.R*.3,4);o.rotation.z=-Math.cos(a)*.6;o.rotation.x=Math.sin(a)*.6}},
  moonhalo:(Q)=>{const h=O_(Q.P,Q.R*.45,.07,0xffe14a,0,Q.top+Q.R*.5,0);h.rotation.x=Math.PI/2;FX.push(t=>h.position.y=Q.top+Q.R*.5+Math.sin(t*3)*.05);const m=S_(Q.P,Q.R*.16,B(0xfff3a0),Q.R*.5,Q.top+Q.R*.5,0)},
@@ -1072,19 +1078,19 @@ const XT={
  wing:(Q,c)=>[-1,1].forEach(s=>{const o=X_(Q.P,Q.R*.9,Q.R*.7,.06,col(c,0xffffff),s*(Q.R*Q.sx+Q.R*.45),Q.y0+Q.H*.1,-Q.R*.25);FX.push((t,m)=>o.rotation.y=s*(.4+Math.sin(t*(m?12:5))*.3))}),
  tail:(Q,c)=>{const a=[];for(let j=0;j<5;j++)a.push(S_(Q.P,Q.R*.2*(1-j*.08),col(c,Q.c1),0,0,0));FX.push(t=>a.forEach((o,j)=>o.position.set(Math.sin(t*3+j*.6)*Q.R*.3,Q.y0-Q.Bm*.5+j*.05*Q.R,-(Q.R*Q.sz+j*Q.R*.22))))},
  lamp:(Q)=>{const s=Y_(Q.P,.03,.03,Q.R*.9,0x222233,0,Q.top+Q.R*.3,Q.R*.15);s.rotation.x=.5;const b=S_(Q.P,Q.R*.22,B(0xffee66),0,Q.top+Q.R*.72,Q.R*.5);FX.push(t=>b.scale.setScalar(.85+Math.sin(t*4)*.2))},
- clock:(Q)=>{const z=Q.R*.88,y=Q.y0-Q.R*.35;const d=Y_(Q.P,Q.R*.32,Q.R*.32,.04,0xfffff0,0,y,z);d.rotation.x=Math.PI/2;O_(Q.P,Q.R*.32,.03,0x333333,0,y,z+.02);const h=new T.Group();h.position.set(0,y,z+.04);Q.P.add(h);X_(h,.03,Q.R*.26,.02,0x222222,0,Q.R*.12,0);FX.push(t=>h.rotation.z=-t*3)},
- whisk:(Q)=>[-1,1].forEach(s=>[0,1,2].forEach(j=>{const o=X_(Q.P,Q.R*.5,.015,.015,0x333344,s*Q.R*.5,Q.fy-Q.R*.12+j*.07,Q.fz-.02);o.rotation.z=s*(j-1)*.15})),
+ clock:(Q)=>{const z=Q.R*.85,y=Q.y0-Q.R*.58;const d=Y_(Q.P,Q.R*.27,Q.R*.27,.04,0xfffff0,0,y,z);d.rotation.x=Math.PI/2;O_(Q.P,Q.R*.27,.03,0x333333,0,y,z+.02);const h=new T.Group();h.position.set(0,y,z+.04);Q.P.add(h);X_(h,.03,Q.R*.22,.02,0x222222,0,Q.R*.1,0);FX.push(t=>h.rotation.z=-t*3)},
+ whisk:(Q)=>[-1,1].forEach(s=>[0,1,2].forEach(j=>{const o=X_(Q.P,Q.R*.5,.015,.015,0x333344,s*Q.R*.5,Q.fy-Q.R*.12+j*.07,Q.fz+.05);o.rotation.z=s*(j-1)*.15})),
  patch:(Q,c)=>[-1,1].forEach(s=>S_(Q.P,Q.R*.2,col(c,Q.c3),s*Q.ex,Q.fy,Q.fz-.03,1,1.3,.4)),
  flame:(Q,c)=>{c=col(c,0xff8a1a);[-.3,0,.3].forEach((x,j)=>{const o=N_(Q.P,Q.R*.2,Q.R*(.6+(j%2)*.3),B(c),x*Q.R,Q.top+Q.R*.2,0,6);FX.push(t=>o.scale.y=1+Math.sin(t*9+j*2)*.25)})},
  ribbon:(Q,c)=>{c=col(c,Q.c2);X_(Q.P,Q.R*1.62,.06,Q.R*.22,c,0,Q.top+.02,0);X_(Q.P,Q.R*.22,.06,Q.R*1.52,c,0,Q.top+.02,0);[-1,1].forEach(s=>S_(Q.P,Q.R*.25,c,s*Q.R*.25,Q.top+Q.R*.12,0,1,.7,1));S_(Q.P,Q.R*.12,c,0,Q.top+Q.R*.1,0)},
  string:(Q)=>Y_(Q.P,.012,.012,1.2,0xeeeeee,0,Q.bt-.6,0),
- shine:(Q)=>S_(Q.P,Q.R*.2,B(0xffffff),-Q.R*.45,Q.y0+Q.R*.55,Q.R*.62,1,.6,.4),
+ shine:(Q)=>S_(Q.P,Q.R*.2,B(0xffffff),-Q.R*.45,Q.y0+Q.R*.55,Q.R*.8,1,.6,.4),
  orbit:(Q,c)=>{c=col(c,0xffee88);for(let j=0;j<3;j++){const o=oct(Q.P,Q.R*.13,c,0,0,0);FX.push(t=>{o.position.set(Math.cos(t*1.6+j*2.094)*Q.R*1.5,Q.y0+Math.sin(t*2.2+j)*.4,Math.sin(t*1.6+j*2.094)*Q.R*1.5);o.rotation.y=t*3})}},
  hearts:(Q,c)=>{c=col(c,0xff5a9a);for(let j=0;j<3;j++){const g=hrt(Q.P,c,1);FX.push(t=>{g.position.set(Math.cos(t*1.4+j*2.094)*Q.R*1.5,Q.y0+.2+Math.sin(t*2.4+j)*.35,Math.sin(t*1.4+j*2.094)*Q.R*1.5);g.rotation.y=t*2})}},
  specs:(Q,c)=>{c=col(c,0x2a2a3a);[-1,1].forEach(s=>O_(Q.P,Q.R*.22,Q.R*.03,c,s*Q.ex,Q.fy,Q.fz+.04));X_(Q.P,Q.ex*.7,.03,.03,c,0,Q.fy,Q.fz+.05)},
  shades:(Q,c)=>{c=col(c,0x111118);[-1,1].forEach(s=>X_(Q.P,Q.R*.3,Q.R*.14,.04,c,s*Q.ex,Q.fy,Q.fz+.05));X_(Q.P,Q.ex*.7,.03,.03,c,0,Q.fy+Q.R*.03,Q.fz+.05)},
  grad:(Q)=>{X_(Q.P,Q.R*1.3,.07,Q.R*1.3,0x222228,0,Q.top+.12,0);Y_(Q.P,Q.R*.5,Q.R*.55,.2,0x222228,0,Q.top+.02,0);Y_(Q.P,.02,.02,.35,0xffd24a,Q.R*.6,Q.top-.05,Q.R*.5);S_(Q.P,.06,0xffd24a,Q.R*.6,Q.top-.25,Q.R*.5)},
- mustache:(Q)=>[-1,1].forEach(s=>{const o=X_(Q.P,Q.R*.28,Q.R*.07,.04,0x4a3a2a,s*Q.R*.12,Q.fy-Q.R*.14,Q.fz+.03);o.rotation.z=-s*.35}),
+ mustache:(Q)=>[-1,1].forEach(s=>{const o=X_(Q.P,Q.R*.28,Q.R*.07,.04,0x4a3a2a,s*Q.R*.12,Q.fy-Q.R*.14,Q.fz+.07);o.rotation.z=-s*.35}),
  phones:(Q,c)=>{c=col(c,0x2a2a3a);for(let i=0;i<=8;i++){const a=i*Math.PI/8;S_(Q.P,Q.R*.06,c,Math.cos(a)*Q.R*Q.sx*1.03,Q.y0+Math.sin(a)*Q.R*Q.sy*1.03,0)}[-1,1].forEach(s=>{const o=Y_(Q.P,Q.R*.3,Q.R*.3,.18,c,s*Q.R*Q.sx*1.03,Q.y0,0);o.rotation.z=Math.PI/2;const q=Y_(Q.P,Q.R*.22,Q.R*.22,.2,B(0x33eeff),s*Q.R*Q.sx*1.06,Q.y0,0);q.rotation.z=Math.PI/2})},
  cap:(Q,c)=>{c=col(c,0x4a6aff);S_(Q.P,Q.R*.62,c,0,Q.top-Q.R*.12,0,1,.62,1);X_(Q.P,Q.R*.9,.06,Q.R*.55,c,0,Q.top-Q.R*.08,Q.R*.4)},
  chef:(Q)=>{Y_(Q.P,Q.R*.45,Q.R*.5,Q.R*.5,0xffffff,0,Q.top+Q.R*.15,0);[0,1,2,3].forEach(j=>S_(Q.P,Q.R*.28,0xffffff,Math.cos(j*1.57)*Q.R*.25,Q.top+Q.R*.5,Math.sin(j*1.57)*Q.R*.25))},
@@ -1110,7 +1116,6 @@ const crit=(P,S,mini)=>{const n0=P.children.length,R=S.R||.95,[sx,sy,sz,Hm,Bm,fz
  EYS=[];eyesF(P,fy,fz,ex,we,col(S.e&&S.e[0],0),S.e&&S.e[1],R);const ey=EYS;EYS=null;if(ey.length){const ph=Math.random()*4;FX.push(t=>{const k=(t*.9+ph)%4,q=k<.16?Math.sin(k/.16*Math.PI):0;ey.forEach(e=>e.scale.y=1.35*(1-.88*q))})}
  mouthF(P,col(S.m,0),fy,fz,R);
  {const lm=!mini||S.pet,XN=X.map(e=>Array.isArray(e)?e[0]:e),dk=new T.Color(c1).multiplyScalar(.78).getHex();
-  if(lm&&['ball','egg','bean','blob','drop'].includes(b)&&!XN.includes('belly')&&!XN.includes('patch'))S_(P,R*.55,gl(c2),0,y0-H*.5,R*sz*.72,sx*.85,.55,.4);
   if(lm&&!lift&&!S.fl&&b!='cone'&&!XN.includes('donut')&&!XN.includes('neonring')){
    [-1,1].forEach(s=>{const g=new T.Group();g.position.set(s*R*.42*sx,bt+.02,R*.05);P.add(g);Y_(g,R*.11,R*.13,.22,dk,0,-.12,0);S_(g,R*.25,dk,0,-.24,R*.1,1,.55,1.35);FX.push((t,m)=>{g.rotation.x=m?Math.sin(t*11+(s>0?0:Math.PI))*.55:0})});
    [-1,1].forEach(s=>{const g=new T.Group();g.position.set(s*R*sx*.93,y0-H*.02,R*.04);P.add(g);S_(g,R*.2,c1,s*R*.1,-R*.2,0,.85,1.15,.85);FX.push((t,m)=>{g.rotation.z=s*(.28+(m?0:Math.sin(t*2.2+s)*.08));g.rotation.x=m?Math.sin(t*11+(s>0?Math.PI:0))*.5:0})});
@@ -1154,17 +1159,17 @@ const MYS=[
 ['くじらポット','🫖',1,0,E_('ball',[0x4a8ae0,0xe8f4ff,0xffaac0],[0],0,[7],['spout','belly'],{au:0x6ab8ff})],
 ['いちごスラ','🍓',1,0,E_('blob',[0xff5a6a,0xffc0c8,0xffee88],[1],0,[0],['leaf','spots'],{au:0xff8a9a})],
 ['ムーンわん','🌙',1,0,E_('ball',[0xfff0b0,0xfffbe8,0xc8a860],[0],5,[2],['moonhalo','blush'],{au:0xffe888})],
-['ポーションりゅう','🧪',1,0,E_('bean',[0x4ad8c8,0xd8fff6,0xff7ab8],[1],0,[4],['wing','tail'],{au:0x6affe8})],
+['ポーションりゅう','🧪',1,0,E_('bean',[0x4ad8c8,0xd8fff6,0xff7ab8],[1],0,[4],['cork','wing','tail'],{au:0x6affe8})],
 ['カセットことり','📼',1,0,E_('cube',[0x6a8aff,0xffffff,0xffe14a],[0],4,[0],['beak',['wing',0x4a6ae0]],{au:0x8aa8ff})],
 ['トーストきつね','🍞',1,0,E_('cube',[0xe8c27a,0xfff0c8,0xf08a30],[1],2,[1,0xf08a30],[['tail',0xf08a30]],{au:0xffc88a})],
 ['ちょうちんあんこう','🏮',1,0,E_('ball',[0x2a3a8a,0x6a7ac8,0xffee66],[0],3,[0],['lamp'],{au:0xffee66})],
 ['くらげランプ','🪼',1,0,E_('ball',[0xffb0dd,0xffffff,0xff7ab8],[0],1,[0],['tent','blush'],{au:0xffb0dd,tr:.78,fl:1})],
 ['とけいふくろう','⏰',1,0,E_('ball',[0x9a6a3a,0xf8f0d8,0xffb020],[1],4,[1,0x6a4a2a],['beak','clock'],{au:0xffcc66})],
-['ぎょうざアザラシ','🥟',1,0,E_('blob',[0xf6f0e6,0xe8dcc8,0xffa0b0],[1],4,[0],['whisk','blush'],{au:0xfff0d0})],
+['ぎょうざアザラシ','🥟',1,0,E_('blob',[0xf6f0e6,0xe8dcc8,0xffa0b0],[1],4,[0],['pleat','whisk','blush'],{au:0xfff0d0})],
 ['もちもちパンダ','🐼',1,0,E_('blob',[0xffffff,0x222228,0xff9ab0],[0],0,[2,0x222228],['patch'],{au:0xe0e0ff})],
 ['メロンパンぺん','🍈',1,0,E_('egg',[0xf0d070,0xfff4c0,0xff9a2a],[0],4,[0],['beak',['stripes',0xd8a840]],{au:0xffe48a})],
 ['ひとだまふわり','🔥',1,0,E_('drop',[0x6a9aff,0xcfe4ff,0xffffff],[1],1,[0],[['flame',0x8ae0ff]],{au:0x8ac8ff,fl:1})],
-['めだまやきうさ','🍳',1,0,E_('blob',[0xffffff,0xffd02a,0xff9ab0],[0],0,[3],['belly'],{au:0xffe888})],
+['めだまやきうさ','🍳',1,0,E_('blob',[0xffffff,0xffd02a,0xff9ab0],[0],0,[3],['yolk'],{au:0xffe888})],
 // ===== ふしぎ(R) 14 =====
 ['ミステリーボックス','🎁',2,0,E_('cube',[0x8a5aff,0xffe14a,0xff5a9a],[3,0xffe14a],4,[0],['ribbon'],{au:0xb88aff})],
 ['ヒミツのタマゴ','🥚',2,0,E_('egg',[0xfff4e0,0x8ae0c8,0xff7ab0],[4],1,[0],['spots'],{au:0x8affe0})],
@@ -1174,7 +1179,7 @@ const MYS=[
 ['ふしぎはかせ','🎓',2,0,E_('ball',[0xd8c8a8,0xfff8e8,0xff9a9a],[1],0,[0],['specs','grad','mustache'],{au:0xe8d8a8})],
 ['マグマこびと','🌋',2,0,E_('cone',[0x5a2a2a,0xff7a2a,0xffdd44],[1,0xffdd44],3,[0],['flame'],{au:0xff7a2a,R:.9})],
 ['ゆきだるまねこ','⛄',2,0,E_('ball',[0xffffff,0xe0f0ff,0xff8a4a],[0],4,[1],[['scarf',0xff4a5a],['beak',0xff8a2a]],{au:0xbfe8ff})],
-['かみなりぞう','⚡',2,0,E_('ball',[0xffe14a,0xfff6b0,0xff9a2a],[1],0,[8],['trunk',['orbit',0xffffaa]],{au:0xffee66})],
+['かみなりぞう','⚡',2,0,E_('ball',[0xffe14a,0xfff6b0,0xff9a2a],[1],0,[8],['trunk','bolt',['orbit',0xffffaa]],{au:0xffee66})],
 ['ひまわりカバ','🌻',2,0,E_('blob',[0xa8a8d0,0xe8e8ff,0xff9ab0],[0],4,[2],['petals'],{au:0xffd21a})],
 ['ふわふわマシュ','🍡',2,0,E_('cube',[0xfff4f8,0xffffff,0xffaabb],[2],0,[0],['blush',['bow',0xff9ab8]],{au:0xffd0e0})],
 ['ガラスのウサギ','🔮',2,0,E_('egg',[0x9ae8ff,0xffffff,0xff9ad0],[1],0,[3,0x9ae8ff],['orbit'],{au:0x9ae8ff,tr:.72})],
@@ -1295,6 +1300,14 @@ function walk(e,dt,sp,tg){const n=nxt(cellOf(e.p),tg),[x,z]=ctr(n);let dx=x-e.p.
  if(e.ha==null)e.ha=a;let d=a-e.ha;d=Math.atan2(Math.sin(d),Math.cos(d));e.ha+=d*Math.min(1,dt*9);
  const ox=e.p.x,oz=e.p.z;e.p.x+=Math.sin(e.ha)*sp*dt;e.p.z+=Math.cos(e.ha)*sp*dt;hit(e.p,.4);
  if(Math.hypot(e.p.x-ox,e.p.z-oz)<sp*dt*.3){e.stk=(e.stk||0)+dt;if(e.stk>.35){e.ha+=(Math.random()<.5?1:-1)*1.7;e.stk=0}}else e.stk=0;e.g.rotation.y=e.ha}
+function cpuFlee(m,cc,pc){// 怪物から、迷路の道に沿って遠ざかれる安全な場所を探す(行き止まり・怪物側への道は避ける)
+ const dm=dmap(cellOf(m.p)),dp=dmap(pc),seen=new Map([[cc,0]]),q=[cc];let best=-1,bs=-1e9;
+ for(let h=0;h<q.length;h++){const c=q[h],d=seen.get(c);
+  if(c!=cc){let o=0;for(const n of nb(c))if(opn.has(c*65536+n))o++;const sc=dm[c]-d*.25-Math.max(0,dp[c])*.12+(o>1?1.5:0);if(sc>bs){bs=sc;best=c}}
+  if(d>=8)continue;
+  for(const n of nb(c))if(opn.has(c*65536+n)&&!seen.has(n)&&(dm[n]>=dm[c]||dm[n]>=9)){seen.set(n,d+1);q.push(n)}}
+ return best}
+function safeNear(pc){let b=near(pc,3),bs=-1;const ms=MONS();if(!ms.length)return b;for(let k=0;k<5;k++){const c=k?near(pc,3):b;let s=99;for(const f of ms){const d=dmap(cellOf(f.p))[c];s=Math.min(s,d<0?99:d)}if(s>bs){bs=s;b=c}}return b}
 const near=(c,r)=>{const i=Math.max(0,Math.min(N-1,(c/N|0)+ri(-r,r))),j=Math.max(0,Math.min(N-1,c%N+ri(-r,r)));return i*N+j};
 // ===== ゲーム状態 =====
 let mode='home',df=1,E=[],FK=[],TR=[],pos=new T.Vector3(),lp=new T.Vector3(0,0,8),goalP=new T.Vector3(),goalC=0,cap=0,capT=0,tm=0,sumT=0,st=0,swT=0,trL=10,jy=0,vy=0,jreq=0,monCd=5,stp=0,ambT=5,pnl=[],PNI=null,flT=0,ctb=0;
@@ -1430,7 +1443,7 @@ const MONS=()=>[...FK,...E].filter(o=>!o.dead&&o.ma>=1);
 const nearPl=p=>{let b={x:pos.x,z:pos.z},bd=dist(p,b);for(const q of Object.values(peers)){if(q.m=='g'&&q.st==st&&!q.d&&q.tx!=null){const d=Math.hypot(p.x-q.tx,p.z-q.tz);if(d<bd){bd=d;b={x:q.tx,z:q.tz}}}}return b};
 const pn=s=>{note(s);if(mode=='game')send({t:'kn',s:String(s).slice(0,70)})};
 const rk_=(k,i)=>{if(!simOn()){const o={t:'ek',st,k,i,n:D.name};send(o);setTimeout(()=>send(o),300)}};
-function restoreCpu(e){if(e.g&&e.g.parent)e.g.parent.remove(e.g);const g=av(e.sk);label(g,e.n);g.position.set(e.p.x,0,e.p.z);hotel.add(g);e.g=g;e.ma=0;e.sus=0;e.sm=0;e.mn=0;e.tw=0;e.tg=null;e.w=0;e.an=rnd(3,7);e.net=null}
+function restoreCpu(e){if(e.g&&e.g.parent)e.g.parent.remove(e.g);const g=av(e.sk);label(g,e.n);g.position.set(e.p.x,0,e.p.z);hotel.add(g);e.g=g;e.ma=0;e.sus=0;e.sm=0;e.mn=0;e.tw=0;e.tg=null;e.w=0;e.fl=null;e.cool=0;e.an=rnd(3,7);e.net=null}
 function monMove(f,dt,tp){f.ma=Math.min(1,f.ma+dt/2.5);if(f.ma<1)return;const d=dist(f.p,tp),sp=[3.2,4,4.8][df]*(TW?Math.min(1.5,1+st*.03)*(1-TWP.slow*.06):1),cc=cellOf(f.p),pc=cellOf(tp);
  if(d<[9,12,15][df]-(TW?TWP.ste*1.2:0)){if(cc!=pc)walk(f,dt,sp,pc);else{const ax=tp.x-f.p.x,az=tp.z-f.p.z,l=Math.hypot(ax,az)||1;f.p.x+=ax/l*sp*dt;f.p.z+=az/l*sp*dt;f.g.rotation.y=Math.atan2(ax,az)}}
  else{if(f.tg==null||cc==f.tg)f.tg=Math.random()*N*N|0;walk(f,dt,1.8,f.tg)}}
@@ -1465,17 +1478,22 @@ function game(dt,t){
  if(simOn()){
   const BT=evOn('bet');swT-=dt;if(swT<=0){swT=BT?rnd(3,7):rnd(8,17);const c=E.filter(e=>!e.dead&&!(e.ma>0)&&!(e.sus>0));if(c.length>=2){const e=c[Math.random()*c.length|0];e.sus=BT?rnd(5,11):rnd(9,22);e.an=rnd(3,6);e.tw=0}}
   const MF=BB||(st==1&&evOn('mon')),TWM=TW?twMon(st):0;if(st>=1&&FK.filter(f=>f.perm&&!f.dead).length<(TW?TWM:MF?2:1)){monCd-=dt;if(monCd<=0){spawnMon();monCd=TW?twCd(st):BB?2.5:MF?6:20}}
-  const gc=E.find(e=>!e.dead&&!(e.ma>0)&&e.go<tm);
+  let gc=E.find(e=>!e.dead&&!(e.ma>0)&&e.go<tm);
+  if(!gc){const hn=nearPl(goalP);if(Math.hypot(hn.x-goalP.x,hn.z-goalP.z)<10){let bd=1e9;const dg=dmap(goalC);for(const e of E){if(e.dead||e.ma>0)continue;const d=dg[cellOf(e.p)];if(d>=0&&d<bd){bd=d;gc=e}}}}// 仲間がゴールで待っていたら、いちばん近いCPUが急いで向かう
   for(const e of E){if(e.dead)continue;const ox_=e.p.x,oz_=e.p.z,tp=nearPl(e.p);
    if(e.ma>0)monMove(e,dt,tp);
-   else{const cc=cellOf(e.p),pc=cellOf(tp),m=MONS().find(f=>dist(f.p,e.p)<9);
-    if(m){const ax=e.p.x-m.p.x,az=e.p.z-m.p.z,d=Math.hypot(ax,az)||1;e.p.x+=ax/d*4.2*dt;e.p.z+=az/d*4.2*dt;hit(e.p,.4);e.g.rotation.y=Math.atan2(ax,az)}
+   else{const cc=cellOf(e.p),pc=cellOf(tp);let m=null,ms_=99;
+    for(const f of MONS()){const de=dist(f.p,e.p);if(de>13)continue;const p0=dmap(cellOf(f.p))[cc],pd=p0<0?99:p0;if(de<4.5||pd<=4){const sc=Math.min(pd,de/3);if(sc<ms_){ms_=sc;m=f}}}
+    if(m){e.flT=(e.flT||0)-dt;if(e.fl==null||e.flT<=0||cc==e.fl){const f_=cpuFlee(m,cc,pc);e.fl=f_>=0?f_:null;e.flT=.4}e.cool=1.4;e.w=0;
+     if(e.fl!=null){if(cc!=e.fl)walk(e,dt,4.3,e.fl)}else{const ax=e.p.x-m.p.x,az=e.p.z-m.p.z,d=Math.hypot(ax,az)||1;e.p.x+=ax/d*4.2*dt;e.p.z+=az/d*4.2*dt;hit(e.p,.4);e.g.rotation.y=Math.atan2(ax,az)}}
+    else if(e.cool>0){e.cool-=dt;e.tg=null;if(e.fl!=null&&cc!=e.fl)walk(e,dt,3.8,e.fl)}
     else{
      if(e.so>0)e.so-=dt;else{e.sl-=dt;if(e.sl<=0){e.so=rnd(14,26);e.sl=rnd(30,55)}}
      if(e.hold>0){e.hold-=dt;e.tg=e.mc!=null?e.mc:pc;if(e.hold<=0)e.mc=null}
      else if(e===gc||e.so>0){e.tg=goalC;if(e.so>0)e.w=0}
-     else if(e.tg==null||cc==e.tg||Math.abs((cc/N|0)-(pc/N|0))>4||Math.abs(cc%N-pc%N)>4){e.tg=near(pc,3);if(Math.random()<.5)e.w=rnd(1,4)}
+     else if(e.tg==null||cc==e.tg||Math.abs((cc/N|0)-(pc/N|0))>4||Math.abs(cc%N-pc%N)>4){e.tg=safeNear(pc);if(Math.random()<.5)e.w=rnd(1,4)}
      if(e.w>0)e.w-=dt;else if(!(e.hold>0&&cc==e.tg))walk(e,dt,3.4,e.tg)}
+    if(!(e.sus>0)){for(const r of TR){if(r.dead)continue;const ax=e.p.x-r.p.x,az=e.p.z-r.p.z,d=Math.hypot(ax,az);if(d<1.15&&d>1e-3){e.p.x=r.p.x+ax/d*1.15;e.p.z=r.p.z+az/d*1.15;hit(e.p,.4)}}}// 罠はよけて歩く(裏切り前の怪しいCPUはよけない)
     if(e.sus>0){e.sus-=dt;if(e.sus<=0){if(dist(e.p,tp)<11){e.ma=.001;e.sus=0;SE.mon()}else e.sus=.5}}}
    e.mvf=Math.hypot(e.p.x-ox_,e.p.z-oz_)>1e-4}
   for(const f of FK){if(!f.dead)monMove(f,dt,nearPl(f.p))}
@@ -1683,9 +1701,10 @@ async function frAct(a,id,c){if(a=='inv')return inviteFriend(id);if(a=='join'){s
  else{if(c&&!confirm('フレンドを削除しますか？'))return;await sbf('/rest/v1/friendships?id=eq.'+id,'DELETE');toast('削除しました')}if(cur=='n'){refreshFr();notif()}else friends()}catch(e){toast(/duplicate|unique/i.test(e.message)?'すでに申請済み/フレンドです':'失敗: '+e.message.slice(0,40))}}
 $('mb').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b){SE.btn();frAct(b.dataset.a,b.dataset.id,b.dataset.c)}const r=e.target.closest('[data-rk]');if(r){SE.btn();rank(r.dataset.rk)}});
 // ---- 世界ランキング ----
-async function rank(by){by=by||'best';modal('🏆 世界ランキング',`<div style="display:flex;gap:8px;justify-content:center"><div class="btn xs${by=='best'?'':' gry'}" data-rk="best">⏱ クリアタイム</div><div class="btn xs${by=='lv'?'':' gry'}" data-rk="lv">⭐ レベル</div></div><div id="rkl" class="small" style="margin-top:8px">読み込み中…</div>`);
- try{await auth();const q=by=='best'?'best=gt.0&order=best.asc':'order=lv.desc';await pushProf().catch(()=>{});const ps=await sbf('/rest/v1/profiles?select=id,name,lv,best&'+q+'&limit=50'),m=uid();
-  $('rkl').outerHTML='<div id="rkl">'+(ps.map((p,i)=>`<div class="card rk${p.id==m?' me':''}${i<3?' t'+(i+1):''}"><b>${['🥇','🥈','🥉'][i]||i+1}</b>${rkIc(p)}${esc(p.name)}<span>${by=='best'?mmss(p.best):'Lv.'+p.lv}</span></div>`).join('')||'<div class="small">まだ記録がありません</div>')+'<div class="small" style="margin-top:6px">※全3ステージ脱出の合計タイムが記録されます</div><div class="small" style="margin-top:4px">🖼 アイコン取得 '+ps.filter(p=>p.skin!=null&&SKN[p.skin]).length+'/'+ps.length+'人 ・ 自分の送信 '+(iconSt=='ok'?'✅ 正常':'⚠ '+esc(iconSt||'未送信'))+'<br>※新しいバージョンを開いたプレイヤーから順にアイコンが表示されます</div></div>'}
+async function rank(by){by=by||'best';modal('🏆 世界ランキング',`<div style="display:flex;gap:8px;justify-content:center"><div class="btn xs${by=='best'?'':' gry'}" data-rk="best">⏱ クリアタイム</div><div class="btn xs${by=='lv'?'':' gry'}" data-rk="lv">⭐ レベル</div><div class="btn xs${by=='tw'?'':' gry'}" data-rk="tw">🗼 タワー</div></div><div id="rkl" class="small" style="margin-top:8px">読み込み中…</div>`);
+ try{await auth();const q=by=='best'?'best=gt.0&order=best.asc':by=='tw'?'order=seen.desc':'order=lv.desc';await pushProf().catch(()=>{});let ps=await sbf('/rest/v1/profiles?select=id,name,lv,best&'+q+'&limit='+(by=='tw'?500:50)),m=uid();
+  if(by=='tw'){ps.forEach(p=>{if(p.id==m)p.tw=(D.tw&&D.tw.best)||0});ps=ps.filter(p=>p.tw>0).sort((a,b)=>b.tw-a.tw||b.lv-a.lv).slice(0,50)}
+  $('rkl').outerHTML='<div id="rkl">'+(ps.map((p,i)=>`<div class="card rk${p.id==m?' me':''}${i<3?' t'+(i+1):''}"><b>${['🥇','🥈','🥉'][i]||i+1}</b>${rkIc(p)}${esc(p.name)}<span>${by=='best'?mmss(p.best):by=='tw'?p.tw+'階':'Lv.'+p.lv}</span></div>`).join('')||'<div class="small">まだ記録がありません</div>')+'<div class="small" style="margin-top:6px">'+(by=='tw'?'※🗼ふしぎタワーの最高とうたつ階です(新しいバージョンのプレイヤーから順に表示)':'※全3ステージ脱出の合計タイムが記録されます')+'</div><div class="small" style="margin-top:4px">🖼 アイコン取得 '+ps.filter(p=>p.skin!=null&&SKN[p.skin]).length+'/'+ps.length+'人 ・ 自分の送信 '+(iconSt=='ok'?'✅ 正常':'⚠ '+esc(iconSt||'未送信'))+'<br>※新しいバージョンを開いたプレイヤーから順にアイコンが表示されます</div></div>'}
  catch(e){$('rkl').textContent='取得失敗: '+e.message}}
 // ---- 設定/ガイド ----
 function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー名</div><div class="row" style="margin:2px 0"><input id="nm" maxlength="20" value="${esc(D.name)}"><div id="nms" class="btn xs grn">変更</div></div><div class="row">🔊 音量<input id="vo" type="range" min="0" max="1" step=".05" value="${D.vol}"></div><div class="row">🎮 操作感度<input id="ss" type="range" min=".5" max="1.5" step=".1" value="${D.sens}"></div><div class="card" style="padding:8px 12px;margin:10px 0;font-weight:900;font-size:13px">☁ この端末に自動保存＆クラウド同期　${sy}<div class="small">ログイン不要。データは端末に残ります</div></div><div style="text-align:center"><div id="rst" class="btn red">🗑 データ初期化</div></div>`);
@@ -1857,16 +1876,25 @@ function wkClaim(i){msEnsure();const w=WK[i];if(!w||D.ws.s<w[0]||D.ws.c.includes
 // ---------- ネオンロード ----------
 const NPT=80,NSK=[0,0,0];
 const NR=[[1,'c',60],[2,'c',80],[3,'eg',1],[4,'ob',20],[5,'t',1],[6,'c',120],[7,'eg',1],[8,'c',150],[9,'l',1],[10,'t',2],[11,'c',180],[12,'ob',40],[13,'c',200],[14,'eg',2],[15,'sk',2],[16,'c',250],[17,'l',1],[18,'eg',1],[19,'c',300],[20,'t',2],[21,'ob',60],[22,'c',350],[23,'l',1],[24,'eg',2],[25,'t',2],[26,'c',400],[27,'ob',80],[28,'eg',2],[29,'c',500],[30,'sk',3]].map(a=>({t:a[0],k:a[1],v:a[2]}));
-const nrIcon=r=>r.k=='c'?'🪙':r.k=='t'?'🎫':r.k=='l'?'🎡':r.k=='ob'?'🔮':r.k=='eg'?(r.v==2?'🥚✨':'🥚'):'🎁',nrLabel=r=>r.k=='c'?r.v:r.k=='t'?'×'+r.v:r.k=='l'?'回数券':r.k=='ob'?'×'+r.v:r.k=='eg'?(r.v==2?'レアタマゴ':'タマゴ'):(r.v==3?'SR以上確定':'R以上確定');
+// 追加の100段(31〜130): コイン・オーブ・チケット・タマゴ・回数券をくり返し、10段ごとにスキン、130段目はUR確定
+for(let t=31;t<=130;t++){let k,v;const m=t%10;
+ if(t==130){k='sk';v=4}else if(t%25==0){k='sk';v=3}else if(m==0){k='sk';v=2}
+ else if(m==1||m==4||m==9){k='c';v=Math.round((300+(t-30)*5)/10)*10}
+ else if(m==2||m==6){k='ob';v=50+Math.floor((t-30)/5)*5}
+ else if(m==3||m==7){k='t';v=t<80?2:3}
+ else if(m==5){k='eg';v=t%20==5?2:1}
+ else{k='l';v=1}
+ NR.push({t,k,v})}
+const nrIcon=r=>r.k=='c'?'🪙':r.k=='t'?'🎫':r.k=='l'?'🎡':r.k=='ob'?'🔮':r.k=='eg'?(r.v==2?'🥚✨':'🥚'):'🎁',nrLabel=r=>r.k=='c'?r.v:r.k=='t'?'×'+r.v:r.k=='l'?'回数券':r.k=='ob'?'×'+r.v:r.k=='eg'?(r.v==2?'レアタマゴ':'タマゴ'):(r.v==4?'UR確定':r.v==3?'SR以上確定':'R以上確定');
 function nrEnsure(){const k=mkey();if(D.nk!==k){if(D.nk){nrClaimAll(1)}D.nk=k;D.np=0;D.nc=[]}}
-const nrTier=()=>{nrEnsure();return Math.min(30,Math.floor(D.np/NPT))};
+const nrTier=()=>{nrEnsure();return Math.min(NR.length,D.np<2400?Math.floor(D.np/NPT):30+Math.floor((D.np-2400)/40))};
 function nrApply(r){if(r.k=='c')D.coin+=r.v;else if(r.k=='t')D.tk=(D.tk||0)+r.v;else if(r.k=='l')D.lx=(D.lx||0)+r.v;else if(r.k=='ob')D.ob=(D.ob||0)+r.v;else if(r.k=='eg')giveEgg(r.v);
  else if(r.k=='sk'){const p=SKN.map((_,i)=>i).filter(i=>SKN[i].m&&SKN[i].rt>=r.v&&!D.skins.includes(i));if(!p.length){D.tk=(D.tk||0)+3;return null}const id=p[Math.random()*p.length|0];D.skins.push(id);return id}return null}
-function nrClaimAll(auto){let sk=[],n=0;const t=auto?30:nrTier();NR.forEach(r=>{if(r.t<=t&&!D.nc.includes(r.t)){D.nc.push(r.t);const id=nrApply(r);if(id!=null)sk.push(id);n++}});
+function nrClaimAll(auto){let sk=[],n=0;const t=auto?NR.length:nrTier();NR.forEach(r=>{if(r.t<=t&&!D.nc.includes(r.t)){D.nc.push(r.t);const id=nrApply(r);if(id!=null)sk.push(id);n++}});
  if(n&&!auto){save();updInfo();SE.lvl();confetti(70);if(sk.length)mysFx(sk,()=>road());else{toast('🎁 '+n+'こ受け取りました');road()}}else if(n)save()}
 function nrClaim(t){const r=NR[t-1];if(!r||nrTier()<t||D.nc.includes(t))return;D.nc.push(t);const id=nrApply(r);save();updInfo();SE.lvl();confetti(50);if(id!=null)mysFx([id],()=>road());else{toast('🎁 '+nrIcon(r)+' '+nrLabel(r)+' ゲット！');road()}}
-function road(){nrEnsure();const t=nrTier(),per=D.np%NPT,got=D.nc.length,rdy=NR.filter(r=>r.t<=t&&!D.nc.includes(r.t)).length,dl=Math.ceil((Date.UTC(jst().getUTCFullYear(),jst().getUTCMonth()+1,1)-jst().getTime())/864e5);
- modal('🛣️ ネオンロード',`<div class="pill" style="justify-content:center;margin:4px auto;width:max-content;font-size:17px">Lv ${t}/30　✨${D.np}pt</div><div class="bar" style="height:16px"><i style="width:${t>=30?100:per/NPT*100}%"></i></div><div class="small" style="text-align:center;margin:4px 0">${t>=30?'🎉 コンプリート！':'次のごほうびまで あと '+(NPT-per)+'pt'}　／　シーズン終了まで あと${dl}日</div><div class="small" style="text-align:center">ゲーム・ミッションでptゲット！ ほんもののプレイヤーとあそぶと<b>1.5倍</b>（なかよしボーナス）</div><div style="text-align:center;margin:8px 0"><div class="btn ${rdy?'grn':'dis'}" data-n="all">🎁 まとめて受け取る (${rdy})</div></div><div class="nrg">${NR.map(r=>{const ok=r.t<=t,g=D.nc.includes(r.t);return `<div class="nrc${g?' got':ok?' ok':''}${r.k=='sk'?' big':''}" ${ok&&!g?`data-n="${r.t}"`:''}><div class="nrn">${r.t}</div><div class="nri">${nrIcon(r)}</div><div class="nrl">${esc(String(nrLabel(r)))}</div>${g?'<div class="nrx">✔</div>':''}</div>`}).join('')}</div><div class="small" style="margin-top:6px">🥚 タマゴは🐾ペットで孵化！ 🔮 はペットのごはんに使えます。シーズンは毎月リセット(受け取り忘れは自動で受け取り)。</div>`);newBadges()}
+function road(){nrEnsure();const t=nrTier(),per=t<30?D.np%NPT:(D.np-2400)%40,cost=t<30?NPT:40,got=D.nc.length,rdy=NR.filter(r=>r.t<=t&&!D.nc.includes(r.t)).length,dl=Math.ceil((Date.UTC(jst().getUTCFullYear(),jst().getUTCMonth()+1,1)-jst().getTime())/864e5);
+ modal('🛣️ ネオンロード',`<div class="pill" style="justify-content:center;margin:4px auto;width:max-content;font-size:17px">Lv ${t}/${NR.length}　✨${D.np}pt</div><div class="bar" style="height:16px"><i style="width:${t>=NR.length?100:per/cost*100}%"></i></div><div class="small" style="text-align:center;margin:4px 0">${t>=NR.length?'🎉 コンプリート！':'次のごほうびまで あと '+(cost-per)+'pt'}　／　シーズン終了まで あと${dl}日</div><div class="small" style="text-align:center">ゲーム・ミッションでptゲット！ ほんもののプレイヤーとあそぶと<b>1.5倍</b>（なかよしボーナス）</div><div style="text-align:center;margin:8px 0"><div class="btn ${rdy?'grn':'dis'}" data-n="all">🎁 まとめて受け取る (${rdy})</div></div><div class="nrg">${NR.map(r=>{const ok=r.t<=t,g=D.nc.includes(r.t);return `<div class="nrc${g?' got':ok?' ok':''}${r.k=='sk'?' big':''}" ${ok&&!g?`data-n="${r.t}"`:''}><div class="nrn">${r.t}</div><div class="nri">${nrIcon(r)}</div><div class="nrl">${esc(String(nrLabel(r)))}</div>${g?'<div class="nrx">✔</div>':''}</div>`}).join('')}</div><div class="small" style="margin-top:6px">🥚 タマゴは🐾ペットで孵化！ 🔮 はペットのごはんに使えます。シーズンは毎月リセット(受け取り忘れは自動で受け取り)。</div>`);newBadges()}
 // ---------- ふしぎオーブ & ダッシュ ----------
 let OB=[],dsE=60,dsT=0,dsC=0,runOrb=0,runFr=0,orbX=0,runOrbS=0;
 function runBegin(){runOrb=0;runFr=Object.keys(peers).length>0?1:0;if(runFr)mq('friend');mq('play')}
