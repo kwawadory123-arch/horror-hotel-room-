@@ -419,7 +419,7 @@ i.rsp{position:absolute!important;bottom:-24px;pointer-events:none;font-style:no
 #bt #dash.lo{filter:grayscale(.75)}
 .dsb{position:absolute;left:8%;right:8%;bottom:-8px;height:8px;border:2px solid #000;border-radius:5px;background:#1a2260;overflow:hidden}.dsb u{display:block;height:100%;width:60%;background:linear-gradient(#fff6a0,#ffb000);text-decoration:none}
 #orbc{left:calc(10px + var(--sl));top:calc(112px + var(--sa));font-size:15px;padding:2px 12px}
-.gcs.mys{background:linear-gradient(160deg,#6a2ad8,#140a3a);box-shadow:0 4px 0 #000,0 0 18px #b88aff}
+.gcs.mys{background:linear-gradient(160deg,#6a2ad8,#140a3a);box-shadow:0 4px 0 #000,0 0 18px #b88aff}.gcs.his{background:linear-gradient(160deg,#b8801a,#2a1604);box-shadow:0 4px 0 #000,0 0 18px #ffd24a}
 .gcs .gcct b{color:#ffe45a}
 .mgc{width:min(46vw,190px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7a5aff,#14083a 65%);box-shadow:0 0 0 6px var(--mc),0 0 70px 24px var(--mc);display:flex;align-items:center;justify-content:center;animation:mgs 1.9s ease-in forwards}
 .mgq{font-size:96px;font-weight:900;color:#fff;text-shadow:0 0 20px var(--mc),0 5px 0 #000}
@@ -715,7 +715,7 @@ function adaptPR(dt){prA+=dt;prN++;if(prA<1.6)return;const v=prA/prN;prA=0;prN=0
 const amb=new T.AmbientLight(0xffffff,.7),dl=new T.DirectionalLight(0xffffff,.8),pl=new T.PointLight(0xffe0a0,0,14);dl.position.set(3,6,4);S.add(amb,dl,pl);
 const tex=(w,h,fn,rx=1,ry=1)=>{const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new T.CanvasTexture(c);t.wrapS=t.wrapT=T.RepeatWrapping;t.repeat.set(rx,ry);return t};
 // ===== アバター =====
-const CAT=['人物','和風','ホラー','動物','食べ物・植物','ロボ・物','ファンタジー','極レア','超レア','ミステリー'];
+const CAT=['人物','和風','ホラー','動物','食べ物・植物','ロボ・物','ファンタジー','極レア','超レア','ミステリー','ヒストリー'];
 let G,HD,FX;
 const M=(c,e=0,s=20)=>new T.MeshPhongMaterial({color:c,shininess:s,emissive:e?c:0,emissiveIntensity:e}),B=c=>new T.MeshBasicMaterial({color:c}),OL=new T.MeshBasicMaterial({color:0,side:T.BackSide}),mm=c=>c&&c.isMaterial?c:M(c),hsv=(h,s,l)=>new T.Color().setHSL((h%1+1)%1,s,l);
 const mk=(Ge,m,x,y,z,p)=>{const o=new T.Mesh(Ge,mm(m));o.position.set(x,y,z);p.add(o);return o};
@@ -1067,6 +1067,12 @@ const XT={
  bow:(Q,c)=>{c=col(c,0xff5a8a);const x=Q.R*Q.sx*.5,y=Q.top-Q.R*.12,z=Q.R*.15;[-1,1].forEach(s=>{const o=N_(Q.P,Q.R*.2,Q.R*.42,c,x+s*Q.R*.2,y,z,4);o.rotation.z=-s*Math.PI/2});S_(Q.P,Q.R*.1,c,x,y,z)},
  shell:(Q,c)=>{c=col(c,Q.c3);S_(Q.P,Q.R*.7,c,0,Q.y0+Q.H*.3,-Q.R*.75,1,1,.8);[0,Math.PI/2].forEach(a=>{const o=O_(Q.P,Q.R*.45,.06,0xffe0c0,0,Q.y0+Q.H*.3,-Q.R*.75);o.rotation.y=a})},
  spout:(Q)=>{for(let j=0;j<3;j++){const o=S_(Q.P,.07,B(0x9ae0ff),0,0,0);FX.push(t=>{const q=(t*1.1+j*.33)%1;o.position.set((j-1)*.18*q,Q.top+.05+q*.9,0);o.scale.setScalar(1-q*.6)})}},
+ helm:(Q,c)=>{c=col(c,0x9aa2ae);S_(Q.P,Q.R*.7,M(c,0,90),0,Q.top-Q.R*.1,0,1,.72,1)},
+ laurel:(Q,c)=>{c=col(c,0x4aa84a);for(let j=0;j<9;j++){const a=j*.698;S_(Q.P,Q.R*.12,c,Math.cos(a)*Q.R*.7,Q.top-Q.R*.25,Math.sin(a)*Q.R*.7,1,.5,1.6)}},
+ beard:(Q,c)=>{S_(Q.P,Q.R*.36,col(c,0xf2f2f2),0,Q.y0-Q.R*.55,Q.R*.85,1,1.1,.6)},
+ sword:(Q)=>{const x=Q.R*Q.sx*1.12,z=Q.R*.25;X_(Q.P,.09,Q.R*1.1,.03,0xdfe6f0,x,Q.y0+Q.R*.55,z);X_(Q.P,Q.R*.4,.06,.05,0xffd24a,x,Q.y0,z);X_(Q.P,.07,Q.R*.3,.05,0x7a3a1a,x,Q.y0-Q.R*.18,z)},
+ shield:(Q,c)=>{c=col(c,0x4a6aff);const x=-Q.R*Q.sx*1.1,y=Q.y0-Q.R*.1,z=Q.R*.25;const o=Y_(Q.P,Q.R*.45,Q.R*.45,.07,c,x,y,z);o.rotation.x=Math.PI/2;const q=Y_(Q.P,Q.R*.2,Q.R*.2,.09,0xffd24a,x,y,z);q.rotation.x=Math.PI/2},
+ staff:(Q,c)=>{c=col(c,0x7a3a1a);const x=Q.R*Q.sx*1.15,z=Q.R*.2;Y_(Q.P,.04,.04,Q.R*2.2,c,x,.3+Q.R*1.1,z);S_(Q.P,Q.R*.14,B(0xff8aff),x,.35+Q.R*2.2,z)},
  yolk:(Q)=>{S_(Q.P,Q.R*.34,0xffc21a,0,Q.top-Q.R*.02,0,1.15,.7,1.15);S_(Q.P,Q.R*.09,B(0xffffff),-Q.R*.12,Q.top+Q.R*.1,Q.R*.1,1,.6,.6)},
  cork:(Q)=>{Y_(Q.P,Q.R*.22,Q.R*.26,Q.R*.32,0xc8905a,0,Q.top+Q.R*.08,0);Y_(Q.P,Q.R*.3,Q.R*.3,.05,0xe8c898,0,Q.top+Q.R*.24,0)},
  pleat:(Q)=>{for(let j=0;j<7;j++){const a=-1.05+j*.35;S_(Q.P,Q.R*.1,0xe0b060,Math.sin(a)*Q.R*Q.sx*.98,Q.y0+Math.cos(a)*Q.R*Q.sy*.98,0,1,1.1,1)}},
@@ -1229,6 +1235,90 @@ MYS.push(
 if(MYS.length!==80)console.warn('ミステリー数 '+MYS.length);
 const HATS=['cap','chef','crown','wiz','grad','umb','prop','straw','halo','mushcap','leafhat','flower','antenna','horns','fin'],AUT=['antenna','horns','flower','leafhat','spikes'],AUF=['bowtie','star','bell'];
 MYS.forEach(([n,e,rt,kd,S],i)=>{S.rt=rt;if(!S.mini&&(S.x||[]).length<4){const xs=(S.x||[]).map(q=>Array.isArray(q)?q[0]:q),tp=!(S.ar&&S.ar[0])&&!xs.some(q=>HATS.includes(q)),L=tp?AUT:AUF;S.x=[...(S.x||[]),[L[(i*5+3)%L.length],S.c[2]]]}SKN.push({n,e,c:9,g:1,m:1,rt,kd,nt:1,nh:1,nl:1,na:1,nb:1,t:S.c[0],l:S.c[0],s:S.c[0],a:S.c[0],h:S.c[0],x(){build(S)}})});
+// ===== ヒストリー(古代勇者と仲間たち) 80体: UR10 SR16 R24 N30 =====
+const H_=E_,HIS=[
+['古代勇者アルス','⚔️',4,1,H_('bean',[0x4a7aff,0xffe0c0,0xff9a5a],[1],0,[0],['helm','sword','shield','cape'],{au:0x6aa0ff})],
+['せいけんドラゴン','🐉',4,1,H_('egg',[0xe8f0ff,0xffd24a,0xff7ab8],[1,0xffd24a],3,[4,0xffd24a],['sword','wing','tail','halo'],{au:0xffe888})],
+['古代の大賢者マーリン','🧙',4,1,H_('bean',[0xe8e0ff,0xffffff,0xb88aff],[2],0,[0],['wiz','beard','staff','orbit'],{au:0xb88aff})],
+['ルミナ姫','👸',4,1,H_('egg',[0xfff0f8,0xffffff,0xff7ab8],[7,0xff9ad8],0,[3,0xfff0f8],['crown','bow','hearts','wing'],{au:0xff9ad8})],
+['竜騎士ガイア','🛡️',4,1,H_('ball',[0x7a2a2a,0xffd24a,0xff5a2a],[1],0,[0],['helm','horns','shield','cape'],{au:0xff7a4a})],
+['古代魔王ベル','😈',4,1,H_('ball',[0x2a1a4a,0xb06aff,0xff2a6a],[8,0xff2a6a],3,[0],['horns','cape','flame','orbit'],{au:0xb06aff})],
+['時の女神クロノ','⏳',4,1,H_('ball',[0xfff4d8,0xffd24a,0xffee88],[1],0,[2],['halo','clock','wing','orbit'],{au:0xffe888})],
+['ゴーレム王','🗿',4,1,H_('cube',[0x8a8a9a,0x6ac8ff,0xffe14a],[5],0,[0],['crown','shield','spots','neonring'],{au:0x6ac8ff})],
+['光の精霊王','✨',4,1,H_('drop',[0xffffee,0xffe88a,0xffffff],[1],1,[0],['halo','wing','orbit','crown'],{au:0xffffaa,tr:.85})],
+['英雄王レオン','🦁',4,1,H_('ball',[0xf0b040,0xfff0c8,0xff7a2a],[1],0,[8],['crown','mane','cape','sword'],{au:0xffc860})],
+['騎士団長ロイ','🛡️',3,1,H_('ball',[0xaeb6c2,0xffffff,0xcc2222],[1],0,[0],['helm','sword','shield'],{au:0xaac0e0})],
+['見習い魔法使いミミ','🪄',3,1,H_('bean',[0x6a4aa8,0xd8c8ff,0xffe14a],[1],0,[0],['wiz','staff','orbit'],{au:0xb88aff})],
+['怪盗ニャンジャ','🦝',3,1,H_('ball',[0x3a3a4a,0xffffff,0xff5a5a],[1],2,[1],['shades','scarf','bell'],{au:0x8a8aaa})],
+['吟遊詩人ピコ','🎵',3,1,H_('egg',[0xffd0a0,0xfff0e0,0xff9a7a],[7,0x6a8aff],0,[1],['cap','flower','hearts'],{au:0xffc8a0})],
+['神官サクラ','🌸',3,1,H_('bean',[0xffffff,0xffd0e0,0xff9ab0],[1],0,[3],['halo','staff','blush'],{au:0xffd0e0})],
+['弓使いエルフィ','🏹',3,1,H_('egg',[0x8ad87a,0xeaffd8,0xffe14a],[1],0,[4],['leafhat','scarf','blush'],{au:0x8affa0})],
+['鍛冶屋ドワルド','🔨',3,1,H_('cube',[0xb87a4a,0xf0d4a8,0xff7a2a],[0],0,[2],['mustache','helm','sword'],{au:0xffa860})],
+['王さまグラン','🤴',3,1,H_('ball',[0xffd24a,0xfff0c8,0xcc1133],[0],0,[0],['crown','cape','mustache'],{au:0xffd24a})],
+['王妃エレナ','👑',3,1,H_('egg',[0xffc0d8,0xffffff,0xff5a8a],[7,0xff5a9a],0,[3,0xffc0d8],['crown','bow','blush','hearts'],{au:0xff9ac8})],
+['古代ドラゴンの王','🐲',3,1,H_('bean',[0x6a3a2a,0xffd0a0,0xff7a2a],[8,0xffe14a],3,[4,0xffd24a],['wing','tail','flame'],{au:0xff8a4a})],
+['いにしえのゴーレム','🪨',3,1,H_('cube',[0x9a9a8a,0xd0d0c0,0x6ac8ff],[5],0,[0],['spots','leaf','shield'],{au:0xa8c8a0})],
+['影の忍者カゲマル','🥷',3,1,H_('bean',[0x2a2a3a,0xffffff,0xff3a3a],[1],0,[0],['shades','scarf','bell'],{au:0x6a6a8a})],
+['船長ガレオ','🏴‍☠️',3,1,H_('ball',[0x8a1c1c,0xffe0c0,0xffd24a],[0],0,[0],['cap','mustache','sword'],{au:0xff6a5a})],
+['月の巫女ルナ','🌙',3,1,H_('egg',[0xe8e0ff,0xffffff,0xffe14a],[1],0,[3],['moonhalo','bow','orbit'],{au:0xe0d8ff})],
+['妖精女王ティタ','🧚',3,1,H_('drop',[0xffd0f0,0xffffff,0xff7ab8],[1],1,[0],['crown','wing','orbit'],{au:0xffb0e0})],
+['竜の子ドラコ','🥚',3,1,H_('egg',[0x7ad87a,0xeaffc8,0xffe14a],[0],0,[4],['wing','tail','blush'],{au:0x8aff9a})],
+['スライムナイト','🟢',2,0,H_('blob',[0x5be37d,0xd8ffe0,0xff8aa8],[1],0,[0],['helm','sword'],{au:0x7aff9a})],
+['ガーゴイル','🦇',2,0,H_('bean',[0x6a6a7a,0xb0b0c0,0xff5a5a],[8,0xff5a5a],3,[4],['wing','tail','horns'],{au:0x9a9aaa})],
+['ミミック','📦',2,0,H_('cube',[0x8a5a2a,0xffd24a,0xff3a5a],[1],3,[0],['ribbon','legs'],{au:0xc89a5a})],
+['ガイコツ剣士','💀',2,0,H_('bean',[0xf4f0e0,0xffffff,0xcfc8b0],[6],4,[0],['helm','sword','shield'],{au:0xe8e0c8})],
+['森のエルフ','🧝',2,0,H_('egg',[0xb8f0a0,0xffffff,0xffe14a],[1],0,[4],['leafhat','blush'],{au:0xa0ffb0})],
+['ドワーフ職人','⛏️',2,0,H_('ball',[0xc89a6a,0xf0d4a8,0xff9a5a],[0],0,[2],[['beard',0x7a4a2a],'cap'],{au:0xd8a870})],
+['旅の商人トト','🎒',2,0,H_('blob',[0xffd0a0,0xfff0e0,0x4a8aff],[1],0,[0],['cap','bell','scarf'],{au:0xffd8a0})],
+['村長さん','👴',2,0,H_('bean',[0xe8e8e8,0xffffff,0xffa0a0],[2],0,[0],['beard','staff'],{au:0xf0f0f0})],
+['酒場のマスター','🍺',2,0,H_('ball',[0xc87a4a,0xfff0d0,0xff7a5a],[0],0,[0],['mustache','chef'],{au:0xffb070})],
+['こども勇者ポポ','🧒',2,0,H_('ball',[0xffd0a0,0xffffff,0xff7a5a],[1],0,[0],['helm','sword'],{au:0xffc890})],
+['ランプの精','🪔',2,0,H_('drop',[0x4ac8ff,0xe0f8ff,0xffe14a],[1],1,[0],['cap','mustache','orbit'],{au:0x6ad8ff})],
+['氷の精霊','❄️',2,0,H_('ball',[0xbfe8ff,0xffffff,0x8ac8ff],[1],1,[0],['spikes','blush'],{au:0xbfe8ff,tr:.8})],
+['炎の精霊','🔥',2,0,H_('drop',[0xff7a2a,0xffd24a,0xff3a3a],[1],3,[0],['flame','blush'],{au:0xff9a4a})],
+['風の精霊','🌪️',2,0,H_('ball',[0xd8f4e8,0xffffff,0x8ae8c8],[1],0,[0],['cloud','wing'],{au:0xb8ffe0,fl:1})],
+['大地の精霊','🌍',2,0,H_('blob',[0xa07a4a,0xd8c098,0x6aaa4a],[0],0,[0],['leaf','spots'],{au:0xc8a070})],
+['トレント','🌳',2,0,H_('pill',[0x7a5a3a,0xb08a5a,0x4aaa4a],[2],0,[0],['leaf','leafhat'],{au:0x7ac85a,R:.85})],
+['石の巨人','🗿',2,0,H_('cube',[0xa0a0a8,0xd8d8e0,0x7aaa6a],[0],0,[0],['spots','leaf'],{au:0xb8b8c8})],
+['フェニックスのひな','🐣',2,0,H_('egg',[0xff9a3a,0xffe08a,0xff4a2a],[1],4,[0],['beak','flame','wing'],{au:0xffa860})],
+['天空カメ','🐢',2,0,H_('blob',[0x6aaa8a,0xe0f4d8,0xffe14a],[0],0,[0],['shell','cloud'],{au:0x8affc8})],
+['ケルベロスのこいぬ','🐕',2,0,H_('ball',[0x3a3a4a,0xdde0ee,0xff5a5a],[1],3,[7],['flame','bell','bow'],{au:0xff7a5a})],
+['賢者のふくろう','🦉',2,0,H_('ball',[0x9a6a3a,0xf8f0d8,0xffb020],[3],4,[2],['beak','specs','grad'],{au:0xffcc66})],
+['せいなるライオン','🦁',2,0,H_('ball',[0xf0c860,0xfff0c8,0xff9a5a],[1],0,[8],['mane','halo'],{au:0xffd880})],
+['森の魔女','🧹',2,0,H_('bean',[0x6aaa6a,0xe0ffd8,0xff7a8a],[1],2,[0],['wiz','blush','bowtie'],{au:0x8aff9a})],
+['泉のカエル王','🐸',2,0,H_('blob',[0x6fcf6a,0xeaf8c8,0x6ac8ff],[1],0,[0],['crown','blush','spout'],{au:0x8affa0})],
+['村人タロウ','🧑‍🌾',1,0,H_('ball',[0xffd0a0,0xfff0e0,0xff9a7a],[0],0,[0],['cap','blush'],{au:0xffd0a0})],
+['村むすめハナ','👧',1,0,H_('ball',[0xffe0c8,0xffffff,0xff7a9a],[1],0,[0],['flower','blush','bow'],{au:0xffc0d0})],
+['かかし','🌾',1,0,H_('bean',[0xe8c27a,0xfff0c8,0xc87a4a],[9],4,[0],['cap','stripes'],{au:0xe8c27a})],
+['見習い剣士','🗡️',1,0,H_('ball',[0xc8d0e0,0xffffff,0x4a8aff],[0],0,[0],['sword','cap'],{au:0xaac0e0})],
+['見習い神官','🙏',1,0,H_('bean',[0xffffff,0xffe0e8,0xffb0c0],[2],0,[0],['halo','blush'],{au:0xffe0e8})],
+['ゴブリン','👺',1,0,H_('blob',[0x7ac85a,0xd8f0b0,0xff7a5a],[8,0xffe14a],3,[7],['sword','horns'],{au:0x9aff7a})],
+['コボルト','🐕',1,0,H_('ball',[0xc8a070,0xf0e0c0,0xff9a7a],[0],0,[7],['bell','blush'],{au:0xd8b080})],
+['グリーンスライム','🟢',1,0,H_('blob',[0x5be37d,0xd8ffe0,0xff8aa8],[1],0,[0],['blush','shine'],{au:0x7aff9a})],
+['ブルースライム','🔵',1,0,H_('blob',[0x5ab8ff,0xe0f4ff,0xff8aa8],[1],0,[0],['blush','shine'],{au:0x7ac8ff})],
+['コウモリ','🦇',1,0,H_('ball',[0x4a3a6a,0xb8a8d8,0xff5a8a],[1],3,[1],['wing','blush'],{au:0x8a7aaa})],
+['クモさん','🕷️',1,0,H_('ball',[0x3a3a4a,0xdde0ee,0xff5a5a],[1],0,[0],['tent','spots'],{au:0x8a8aaa})],
+['ネズミ','🐭',1,0,H_('ball',[0xc8c8d0,0xffffff,0xff9ab0],[0],0,[8],['blush','tail'],{au:0xd8d8e0})],
+['ニワトリ','🐔',1,0,H_('egg',[0xffffff,0xffe0e0,0xff3a3a],[0],4,[0],['beak',['leafhat',0xff3a3a]],{au:0xffe0e0})],
+['ヤギ','🐐',1,0,H_('bean',[0xf0ece0,0xffffff,0xc8b898],[0],0,[7],['horns','beard'],{au:0xf0ece0})],
+['ブタ','🐷',1,0,H_('ball',[0xffb0c0,0xffd8e0,0xff7a9a],[0],0,[7],['blush','tail'],{au:0xffc0d0})],
+['白ウサギ','🐰',1,0,H_('egg',[0xffffff,0xffe0ee,0xff9ab0],[1],0,[3],['blush'],{au:0xffe0ee})],
+['のうふの馬','🐴',1,0,H_('bean',[0xb87a4a,0xf0d4a8,0xff9a7a],[0],0,[7],['mane','blush'],{au:0xd8a070})],
+['ネコ','🐱',1,0,H_('ball',[0xf6a04a,0xfff0d8,0xff9ab0],[1],2,[1],['blush'],{au:0xffb870})],
+['イヌ','🐶',1,0,H_('ball',[0xe0c8a0,0xffffff,0xff9a7a],[0],0,[7],['blush','bell'],{au:0xf0d8b0})],
+['カエル','🐸',1,0,H_('blob',[0x6fcf6a,0xeaf8c8,0xff9ab0],[1],0,[0],['blush'],{au:0x8affa0})],
+['ヘビ','🐍',1,0,H_('pill',[0x6aaa4a,0xe0f4b0,0xff5a5a],[8,0xffe14a],0,[0],['spots'],{au:0x8aca6a,R:.85})],
+['オーク','👹',1,0,H_('ball',[0x7a9a5a,0xd0e0b0,0xff7a5a],[1],3,[0],['horns','spikes'],{au:0x9aba7a})],
+['ミイラ','🧻',1,0,H_('bean',[0xf4f0e0,0xffffff,0xffa0a0],[1],0,[0],['stripes'],{au:0xf4f0e0})],
+['おばけ','👻',1,0,H_('drop',[0xf4f4ff,0xffffff,0xffa0b8],[1],1,[0],['blush'],{au:0xcfd8ff})],
+['ひのたま','🔥',1,0,H_('drop',[0xff9a3a,0xffe08a,0xffffff],[1],1,[0],['flame'],{au:0xffa860,fl:1})],
+['宝箱','🧰',1,0,H_('cube',[0x9a6a3a,0xffd24a,0xff5a5a],[0],0,[0],['ribbon','legs'],{au:0xc89a5a})],
+['たいまつ','🔦',1,0,H_('pill',[0x8a5a3a,0xffd098,0xff9a3a],[2],0,[0],['flame'],{au:0xffb060,R:.85})],
+['石像','🗽',1,0,H_('ball',[0xb8b8c0,0xe8e8f0,0x9ab8d8],[2],0,[0],['laurel','spots'],{au:0xd0d0e0})],
+['どんぐり妖精','🌰',1,0,H_('ball',[0xb87a4a,0xf0d4a8,0x6aaa4a],[0],0,[0],['cap','leaf'],{au:0xd8a070})],
+['ひよこ','🐥',1,0,H_('egg',[0xffe14a,0xfff6b0,0xff9a2a],[0],4,[0],['beak','blush'],{au:0xffee66})]];
+if(HIS.length!==80)console.warn('ヒストリー数 '+HIS.length);
+HIS.forEach(([n,e,rt,kd,S],i)=>{S.rt=rt;if((S.x||[]).length<4){const xs=(S.x||[]).map(q=>Array.isArray(q)?q[0]:q),tp=!(S.ar&&S.ar[0])&&!xs.some(q=>[...HATS,'helm','laurel'].includes(q)),L=tp?AUT:AUF;S.x=[...(S.x||[]),[L[(i*5+3)%L.length],S.c[2]]]}SKN.push({n,e,c:10,g:1,hs:1,rt,kd,nt:1,nh:1,nl:1,na:1,nb:1,t:S.c[0],l:S.c[0],s:S.c[0],a:S.c[0],h:S.c[0],x(){build(S)}})});
 PETLIB={crit};
 }
 
@@ -1322,8 +1412,8 @@ let fvt=null;
 function humanFace(){try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const o=av(0),cam=new T.PerspectiveCamera(32,1,.1,50);o.position.set(40,0,0);S.add(o);o.updateMatrixWorld(true);const hp=new T.Vector3();o.userData.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+1.5);cam.lookAt(hp);const bg=S.background,fg=S.fog;S.background=null;S.fog=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;S.fog=fg;S.remove(o);const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fi1').src=$('fi2').src=c.toDataURL()}catch(e){}}
 
 function faceIcon(){if(mode!='home'||!me||!me.parent)return;try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const cam=new T.PerspectiveCamera(32,1,.1,50),u=me.userData,ry=me.rotation.y,hy=u.hd.rotation.y,pv_=pts.visible,dv=disc.visible;me.rotation.y=0;u.hd.rotation.y=0;pts.visible=disc.visible=false;me.updateMatrixWorld(true);const hp=new T.Vector3();u.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+([1.5,3.4,5][u.big|0]));cam.lookAt(hp.x,hp.y,hp.z);const bg=S.background;S.background=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;me.rotation.y=ry;u.hd.rotation.y=hy;pts.visible=pv_;disc.visible=dv;const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fav').src=c.toDataURL()}catch(e){}}
-const GP={g:{n:'極レアガチャ',pick:'ゴールドナイト',icon:'👑',d:'かっこいい極レアスキンが出るガチャ！必ず未所持のスキンが出ます。',cls:'gold'},u:{n:'超レアガチャ',pick:'ブラックボール',icon:'⚫',d:'ブラックボールなど、ふしぎで個性的な超レアキャラが出るガチャ！必ず未所持が出ます。',cls:'neo'},m:{n:'ミステリーガチャ',icon:'🔮',d:'ふしぎでかわいい全80体！トリオ(3体セット)や映えスキンも。必ず未所持が出ます。',cls:'mys'}},GT={};
-const skT=q=>!q.g?'':q.m?'m':q.u?'u':'g',gpool=t=>SKN.map((_,i)=>i).filter(i=>skT(SKN[i])==t&&!D.skins.includes(i)),gall=t=>SKN.filter(q=>skT(q)==t).length,gimg=t=>{const i=t=='m'?mysPick():SKN.findIndex(q=>q.n==GP[t].pick),k=t+i;if(GT[k]===undefined)GT[k]=i<0?null:skinThumb(i,200,300,SKN[i].kd==2?8.8:6.2);return GT[k]};
+const GP={g:{n:'極レアガチャ',pick:'ゴールドナイト',icon:'👑',d:'かっこいい極レアスキンが出るガチャ！必ず未所持のスキンが出ます。',cls:'gold'},u:{n:'超レアガチャ',pick:'ブラックボール',icon:'⚫',d:'ブラックボールなど、ふしぎで個性的な超レアキャラが出るガチャ！必ず未所持が出ます。',cls:'neo'},h:{n:'ヒストリーガチャ',icon:'📜',d:'古代勇者とその仲間たち、個性豊かな全80体！10連はSR以上が1体確定。必ず未所持が出ます。',cls:'his'},m:{n:'ミステリーガチャ',icon:'🔮',d:'ふしぎでかわいい全80体！トリオ(3体セット)や映えスキンも。必ず未所持が出ます。',cls:'mys'}},GT={};
+const skT=q=>!q.g?'':q.hs?'h':q.m?'m':q.u?'u':'g',gpool=t=>SKN.map((_,i)=>i).filter(i=>skT(SKN[i])==t&&!D.skins.includes(i)),gall=t=>SKN.filter(q=>skT(q)==t).length,gimg=t=>{const i=t=='m'?mysPick():t=='h'?hisPick():SKN.findIndex(q=>q.n==GP[t].pick),k=t+i;if(GT[k]===undefined)GT[k]=i<0?null:skinThumb(i,200,300,SKN[i].kd==2?8.8:6.2);return GT[k]};
 const thTs={};
 function skinThumb(i,w=160,h=w,d=7.6){try{const k=w+'x'+h,tg=thTs[k]||(thTs[k]=new T.WebGLRenderTarget(w,h)),o=av(i),cam=new T.PerspectiveCamera(30,w/h,.1,60);o.position.set(60,0,0);S.add(o);o.userData.fx.forEach(f=>f(.8,false));o.updateMatrixWorld(true);cam.position.set(60,1.3,d);cam.lookAt(60,1.2,0);const bg=S.background,fg=S.fog;S.background=null;S.fog=null;R.setRenderTarget(tg);R.clear();R.render(S,cam);const b=new Uint8Array(w*h*4);R.readRenderTargetPixels(tg,0,0,w,h,b);R.setRenderTarget(null);S.background=bg;S.fog=fg;S.remove(o);o.traverse(m=>{if(m.geometry)m.geometry.dispose()});const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d'),im=x.createImageData(w,h);for(let y=0;y<h;y++)im.data.set(b.subarray((h-1-y)*w*4,(h-y)*w*4),y*w*4);x.putImageData(im,0,0);return c.toDataURL()}catch(e){try{R.setRenderTarget(null)}catch(_){}return null}}
 function updInfo(){const q=SKN[D.skin]||SKN[0];$('pname').textContent=D.name;$('plv').textContent='Lv.'+D.lv;$('pxp').style.width=D.xp/(D.lv*50+50)*100+'%';$('pbest').textContent='🏁 '+(D.best?mmss(D.best):'--:--');$('cv').textContent=D.coin;updBadge();updRank()}
@@ -1728,12 +1818,12 @@ async function notif(){cur='n';ntfClean();modal('🔔 通知','<div id="nb">読�
  catch(e){fr='<div class="small">フレンド申請を取得できません('+esc(e.message)+')</div>'}
  if($('nb'))$('nb').innerHTML=((inv?'<div class="sec">📨 ルーム招待</div>'+inv:'')+(fr?'<div class="sec">🙋 フレンド申請</div>'+fr:''))||'<div class="small" style="text-align:center;padding:20px">新しい通知はありません</div>'}
 // ===== 図鑑 & ガチャ =====
-const MS=[[10,100],[25,300],[40,600],[55,1000],[70,3000],[100,5000]],GC=200;let gcB=0;
+const MS=[[10,100],[25,300],[40,600],[55,1000],[70,3000],[100,5000],[120,6000],[150,8000],[200,10000],[240,12000],[270,14000],[300,16000],[310,17000],[350,20000],[390,25000]],GC=200;let gcB=0;
 function dex(tab){const n=D.skins.length,cl=D.cl=D.cl||[];
  let h=`<div class="dxt"><div class="dxb${tab?'':' on'}" data-dx="0"><i>📚</i>図鑑</div><div class="dxb${tab?' on':''}" data-dx="1"><i>🎰</i>ガチャ</div></div>`;
  if(!tab){h+=`<div class="pill" style="justify-content:center;margin:8px auto;width:max-content;font-size:15px">コンプ率 ${n}/${NS}</div><div class="bar"><i style="width:${n/NS*100}%"></i></div><div class="sec" style="text-align:center">🎁 達成報酬</div><div style="display:flex;gap:6px;margin:4px 0 8px;flex-wrap:wrap;justify-content:center">`+MS.map((m,i)=>{const ok=n>=m[0],got=cl.includes(i);return `<div class="btn xs ${got?'dis':ok?'grn':'gry'}" ${ok&&!got?`data-ms="${i}"`:''}>${m[0]}種<br>🪙${m[1]}${got?' ✔':''}</div>`}).join('')+'</div>';
   CAT.forEach((c,ci)=>{const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].c==ci),have=ids.filter(i=>D.skins.includes(i)).length;h+=`<div class="sec">${c} ${have}/${ids.length}</div><div class="dxg">`+ids.map(i=>{const o=D.skins.includes(i);return `<div class="dxc${o?'':' lk'}"><div class="dxe">${SKN[i].e}</div><div class="dxn">${o?SKN[i].n:'???'}</div></div>`}).join('')+'</div>'})}
- else{h+=`<div id="gch" style="text-align:center;font-weight:900;margin:10px 0">🪙 ${D.coin}</div>`+['m','g','u'].map(t=>{const p=GP[t],left=gpool(t).length,im=gimg(t),dis=left?'':' dis';return `<div class="card gcs ${p.cls}"><div class="gcl"><div class="gcst">${p.icon} ${p.n}</div><div class="gcds">${left?p.d:'🎉 全種コンプリート！'}</div><div class="gcct">未所持 ${left} / ${gall(t)}種</div>${t=='m'?mysInfo():''}<div class="gcbr"><div class="btn big${dis}" data-gc="1" data-gt="${t}">1回引く　🪙${t=='m'?MGC:GC}</div><div class="btn big red${dis}" data-gc="10" data-gt="${t}">10連引く　🪙${(t=='m'?MGC:GC)*9}</div>${t=='m'?`<div class="btn big grn${(D.tk||0)&&left?'':' dis'}" data-gc="1" data-gt="m" data-tk="1">🎫チケットで1回 (${D.tk||0})</div>`:''}</div></div><div class="gcim">${im?`<img alt="" src="${im}">`:`<div class="gce">${p.icon}</div>`}</div></div>`}).join('')}
+ else{h+=`<div id="gch" style="text-align:center;font-weight:900;margin:10px 0">🪙 ${D.coin}</div>`+['h','m','g','u'].map(t=>{const p=GP[t],left=gpool(t).length,im=gimg(t),dis=left?'':' dis';return `<div class="card gcs ${p.cls}"><div class="gcl"><div class="gcst">${p.icon} ${p.n}</div><div class="gcds">${left?p.d:'🎉 全種コンプリート！'}</div><div class="gcct">未所持 ${left} / ${gall(t)}種</div>${t=='m'?mysInfo():t=='h'?hisInfo():''}<div class="gcbr"><div class="btn big${dis}" data-gc="1" data-gt="${t}">1回引く　🪙${(t=='m'||t=='h')?MGC:GC}</div><div class="btn big red${dis}" data-gc="10" data-gt="${t}">10連引く　🪙${((t=='m'||t=='h')?MGC:GC)*9}</div>${t=='m'?`<div class="btn big grn${(D.tk||0)&&left?'':' dis'}" data-gc="1" data-gt="m" data-tk="1">🎫チケットで1回 (${D.tk||0})</div>`:''}</div></div><div class="gcim">${im?`<img alt="" src="${im}">`:`<div class="gce">${p.icon}</div>`}</div></div>`}).join('')}
  modal('📚 図鑑 / 🎰 ガチャ',h);updBadge()}
 function gachaFx(res,done,t){const nm=t=='g'?'極レア':'超レア';const v=$('gcv'),k=res.length;sh('gcv',1);
  v.innerHTML=`<div class="gcbg"></div><div class="gcorb${t=='g'?' gd':''}"></div><div class="gct">${t=='g'?'👑':'⚫'} ${nm}反応…！</div>`;
@@ -1832,26 +1922,29 @@ const MGC=250,MPITY=30,MW={1:100,2:60,3:30,4:12};
 const mysPick=()=>{const a=SKN.map((_,i)=>i).filter(i=>SKN[i].m&&SKN[i].rt>=3);return a[Math.floor((jst().getTime()+3*864e5)/(7*864e5))%a.length]};
 function mysInfo(){const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].m),pk=mysPick(),own=[1,2,3,4].map(r=>{const a=ids.filter(i=>SKN[i].rt==r);return `<span style="color:${RC4[r]}">${RN4[r]} ${a.filter(i=>D.skins.includes(i)).length}/${a.length}</span>`}).join('　'),left=Math.max(0,MPITY-(D.mp||0));
  return `<div class="gcct">${own}</div><div class="gcct">🎯 UR確定まで あと<b>${left}</b>回　🎫 ${D.tk||0}枚</div><div class="gcct">⭐今週のピックアップ: ${SKN[pk].e} <b>${esc(SKN[pk].n)}</b> (出やすい!)</div><div class="gcct">10連はSR以上が1体確定！</div>`}
-function mysDraw(k,pool){const res=[],pk=mysPick();pool=pool.slice();D.mp=D.mp||0;
- for(let n=0;n<k;n++){D.mp++;let want=0;
-  if(D.mp>=MPITY&&pool.some(i=>SKN[i].rt==4))want=4;else if(k==10&&n==9&&!res.some(i=>SKN[i].rt>=3)&&pool.some(i=>SKN[i].rt>=3))want=3;
+const hisPick=()=>{const a=SKN.map((_,i)=>i).filter(i=>SKN[i].hs&&SKN[i].rt==4);return a[Math.floor((jst().getTime()+5*864e5)/(7*864e5))%a.length]};
+function hisInfo(){const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].hs),pk=hisPick(),own=[1,2,3,4].map(r=>{const a=ids.filter(i=>SKN[i].rt==r);return `<span style="color:${RC4[r]}">${RN4[r]} ${a.filter(i=>D.skins.includes(i)).length}/${a.length}</span>`}).join('　'),left=Math.max(0,MPITY-(D.hp||0));
+ return `<div class="gcct">${own}</div><div class="gcct">🎯 UR確定まで あと<b>${left}</b>回</div><div class="gcct">⭐今週のピックアップ: ${SKN[pk].e} <b>${esc(SKN[pk].n)}</b> (出やすい!)</div><div class="gcct">10連はSR以上が1体確定！</div>`}
+function mysDraw(k,pool,H){const res=[],pk=H?hisPick():mysPick(),K=H?'hp':'mp';pool=pool.slice();D[K]=D[K]||0;
+ for(let n=0;n<k;n++){D[K]++;let want=0;
+  if(D[K]>=MPITY&&pool.some(i=>SKN[i].rt==4))want=4;else if(k==10&&n==9&&!res.some(i=>SKN[i].rt>=3)&&pool.some(i=>SKN[i].rt>=3))want=3;
   const cand=want?pool.filter(i=>SKN[i].rt>=want):pool,w=cand.map(i=>MW[SKN[i].rt]*(i==pk?3:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),j=0;while(j<w.length-1&&(r-=w[j])>=0)j++;
-  const id=cand[j];pool.splice(pool.indexOf(id),1);res.push(id);if(SKN[id].rt==4)D.mp=0}
+  const id=cand[j];pool.splice(pool.indexOf(id),1);res.push(id);if(SKN[id].rt==4)D[K]=0}
  return res}
 function gachaPull(k,t,tk){if(gcB)return;t=t||'u';const pool=gpool(t);if(!pool.length)return toast(GP[t].n+'は全種そろっています');k=Math.min(k,pool.length);
- const unit=t=='m'?MGC:GC,cost=k==10?unit*9:unit*k;let useT=0;
+ const unit=(t=='m'||t=='h')?MGC:GC,cost=k==10?unit*9:unit*k;let useT=0;
  if(t=='m'&&tk){if((D.tk||0)<k)return toast('🎫 チケットが足りません');useT=k}else if(D.coin<cost)return toast('🪙 コインが足りません');
  gcB=1;if(useT)D.tk-=useT;else D.coin-=cost;let res;
- if(t=='m')res=mysDraw(k,pool);else{res=[];for(let i=0;i<k;i++)res.push(pool.splice(Math.random()*pool.length|0,1)[0])}
+ if(t=='m'||t=='h')res=mysDraw(k,pool,t=='h');else{res=[];for(let i=0;i<k;i++)res.push(pool.splice(Math.random()*pool.length|0,1)[0])}
  res.forEach(i=>D.skins.push(i));mq('gacha',k);save();updInfo();
- (t=='m'?mysFx:gachaFx)(res,()=>{gcB=0;dex(1)},t)}
+ (t=='m'||t=='h'?mysFx:gachaFx)(res,()=>{gcB=0;dex(1)},t)}
 const mthumb=i=>skinThumb(i,160,160,SKN[i].kd==2?9.6:7.6);
-function mysFx(res,done){const v=$('gcv'),k=res.length,best=Math.max(...res.map(i=>SKN[i].rt));sh('gcv',1);
- v.innerHTML=`<div class="gcbg"></div><div class="mgc" style="--mc:${RC4[best]}"><div class="mgq">?</div></div><div class="gct">🔮 ミステリー反応…！</div>`;
+function mysFx(res,done,t){const HI=t=='h';const v=$('gcv'),k=res.length,best=Math.max(...res.map(i=>SKN[i].rt));sh('gcv',1);
+ v.innerHTML=`<div class="gcbg"></div><div class="mgc" style="--mc:${RC4[best]}"><div class="mgq">?</div></div><div class="gct">${HI?'📜 ヒストリー反応…！':'🔮 ミステリー反応…！'}</div>`;
  tn(110,1.6,'sawtooth',.07,0,1400);noiseB(1.5,.1,200,4000);shake();
  setTimeout(()=>{flash(best==4?'#ff9af0':'#ffffff');shake();confetti(best>=3?110:60);SE.lvl();tn(70,.5,'sine',.6,0,30);noiseB(.4,.3,3000,200);
   const th=res.map(mthumb);
-  v.innerHTML=`<div class="gcbg on"></div><div class="gcrays"></div><div class="gcban">🔮 ミステリー ${k>1?k+'体 ':''}ゲット！</div><div class="gcg mg k${k==1?1:10}">${res.map((i,j)=>{const q=SKN[i];return `<div class="gcc mcc rt${q.rt}" style="animation-delay:${.25+j*.16}s;--d:${.9+j*.16}s">${th[j]?`<img alt="" src="${th[j]}">`:`<div class="gce">${q.e}</div>`}<div class="mgs">${'★'.repeat(q.rt)}</div><div class="gcn">${esc(q.n)}</div>${q.kd==2?'<div class="mgt">TRIO</div>':q.kd==1?'<div class="mgt h">映え</div>':''}</div>`}).join('')}</div><div class="gcbt">${k==1?'<div class="btn grn" id="gceq">装備する</div>':''}<div class="btn" id="gcok">OK</div></div>`;
+  v.innerHTML=`<div class="gcbg on"></div><div class="gcrays"></div><div class="gcban">${HI?'📜 ヒストリー':'🔮 ミステリー'} ${k>1?k+'体 ':''}ゲット！</div><div class="gcg mg k${k==1?1:10}">${res.map((i,j)=>{const q=SKN[i];return `<div class="gcc mcc rt${q.rt}" style="animation-delay:${.25+j*.16}s;--d:${.9+j*.16}s">${th[j]?`<img alt="" src="${th[j]}">`:`<div class="gce">${q.e}</div>`}<div class="mgs">${'★'.repeat(q.rt)}</div><div class="gcn">${esc(q.n)}</div>${q.kd==2?'<div class="mgt">TRIO</div>':q.kd==1?'<div class="mgt h">映え</div>':''}</div>`}).join('')}</div><div class="gcbt">${k==1?'<div class="btn grn" id="gceq">装備する</div>':''}<div class="btn" id="gcok">OK</div></div>`;
   res.forEach((i,j)=>setTimeout(()=>{se(700+j*70+SKN[i].rt*120,.1,'triangle',.1);if(SKN[i].rt>=3){flash(RC4[SKN[i].rt]);confetti(30)}},900+j*160));
   $('gcok').onclick=()=>{SE.btn();sh('gcv',0);v.innerHTML='';done&&done()};
   if(k==1)$('gceq').onclick=()=>{act(res[0]);toast('装備しました');$('gcok').click()}},1900)}
