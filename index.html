@@ -2489,7 +2489,7 @@ const SMS=[
 ];
 const SMN=SMS.length,smIds=r=>SMS.map((_,i)=>i).filter(i=>SMS[i][2]==r);
 const SG={},sg=(k,f)=>SG[k]||(SG[k]=f());
-const gB=()=>sg('b',()=>new T.BoxGeometry(1,1,1)),gS=()=>sg('s',()=>new T.SphereGeometry(1,12,9)),gC=()=>sg('c',()=>new T.ConeGeometry(1,1,6)),gY=()=>sg('y',()=>new T.CylinderGeometry(1,1,1,10)),gT=()=>sg('t',()=>new T.TorusGeometry(1,.07,6,32)),gO=()=>sg('o',()=>new T.OctahedronGeometry(1));
+const gB=()=>sg('b',()=>new T.BoxGeometry(1,1,1)),gS=()=>sg('s',()=>new T.SphereGeometry(1,12,9)),gC=()=>sg('c',()=>new T.ConeGeometry(1,1,6)),gY=()=>sg('y',()=>new T.CylinderGeometry(1,1,1,10)),gT=()=>sg('t',()=>new T.TorusGeometry(1,.07,6,32)),gO=()=>sg('o',()=>new T.OctahedronGeometry(1)),gHx=()=>sg('hx',()=>new T.CylinderGeometry(1,1,1,6));
 const pp=(g,ge,mt,x,y,z,sx,sy,sz)=>{const o=new T.Mesh(ge,mt);o.position.set(x,y,z);o.scale.set(sx,sy==null?sx:sy,sz==null?sx:sz);g.add(o);return o},pvt=(g,x,y,z)=>{const o=new T.Group();o.position.set(x,y,z);g.add(o);return o};
 function sMats(s){const L=[],mk=(m,o)=>{m.transparent=true;m.opacity=o;L.push([m,o]);return m};
  return{a:mk(new T.MeshPhongMaterial({color:s[4],emissive:s[4],emissiveIntensity:.22,shininess:50}),1),b:mk(new T.MeshPhongMaterial({color:s[5],emissive:s[5],emissiveIntensity:.2,shininess:30}),1),c:mk(new T.MeshBasicMaterial({color:s[6]}),1),k:mk(new T.MeshBasicMaterial({color:0x040408}),1),au:mk(new T.MeshBasicMaterial({color:s[6],depthWrite:false,blending:T.AdditiveBlending}),.14),mk:c=>mk(new T.MeshBasicMaterial({color:c}),1),L}}
@@ -2512,9 +2512,9 @@ function bSp(g,K,o,A,ur,cl){const{a,b,c}=K,body=pvt(g,0,0,0);
  if(o.w)smWings(body,K,0,2.0,-.35,cl?2:1.5,A,cl?5:4);
  for(let i=0;i<(o.r||0);i++){const r=pp(body,gT(),c,0,1.3+i*.45,0,1.5+i*.15),sp=(i%2?-1:1)*(.8+i*.2);r.rotation.x=Math.PI/2;A.push(t=>{r.rotation.z=t*sp})}
  if(cl){for(const s of[-1,1]){pp(body,gS(),b,s*1.0,2.2,0,.5,.4,.5);const sp=pp(body,gC(),c,s*1.15,2.65,0,.14,.8,.14);sp.rotation.z=-s*.5}for(let i=0;i<8;i++){const q=i/8*6.283,p=pp(body,gB(),b,Math.sin(q)*.6,.95,Math.cos(q)*.4,.34,.75,.06);p.rotation.y=q}pp(body,gS(),c,0,1.7,.4,.22)}}
-function bBs(g,K,o,A,ur,cl,id){const{a,b,c}=K,bd=pvt(g,0,0,0),Lg=[];
- pp(bd,gS(),a,0,1.05,0,.62,.55,1.0);pp(bd,gS(),b,0,1.0,-.5,.52,.48,.5);pp(bd,gS(),a,0,1.2,.5,.45,.5,.5);
- const mkH=x=>{const hd=pvt(bd,x,1.4,1.0);pp(hd,gS(),a,0,0,0,.42,.38,.45);pp(hd,gS(),b,0,-.1,.4,.22,.17,.26);pp(hd,gS(),c,-.17,.1,.34,.06);pp(hd,gS(),c,.17,.1,.34,.06);
+function bBs(g,K,o,A,ur,cl,id){const{a,b,c}=K,bd=pvt(g,0,.6,0),Lg=[];
+ pp(bd,gS(),a,0,1.2,0,.8,.72,1.05);pp(bd,gHx(),b,0,.82,0,.98,.3,1.3);pp(bd,gY(),c,0,.64,0,.98,.05,1.3);pp(bd,gS(),a,0,1.3,.75,.45,.45,.45);
+ const mkH=x=>{const hd=pvt(bd,x,1.55,1.2);pp(hd,gS(),a,0,0,0,.42,.38,.45);pp(hd,gS(),b,0,-.1,.4,.22,.17,.26);pp(hd,gS(),c,-.17,.1,.34,.06);pp(hd,gS(),c,.17,.1,.34,.06);
   for(const s of[-1,1]){const e=pp(hd,gC(),a,s*.24,.4+(o.e?.25:0),-.05,.1,.3+(o.e?.5:0),.08);e.rotation.z=-s*.25;
    if(o.h){const h=pp(hd,gC(),c,s*.2,.45,-.1,.07,.55,.07);h.rotation.z=-s*.5;h.rotation.x=-.3}
    if(o.antler){pp(hd,gC(),b,s*.2,.7,-.1,.06,.8,.06).rotation.z=-s*.3;for(let j=0;j<2;j++)pp(hd,gC(),b,s*(.3+j*.12),.75+j*.25,-.1,.05,.45,.05).rotation.z=-s*(.9+j*.2)}}
@@ -2522,17 +2522,17 @@ function bBs(g,K,o,A,ur,cl,id){const{a,b,c}=K,bd=pvt(g,0,0,0),Lg=[];
   if(o.m||o.rainbow)for(let i=0;i<11;i++){const q=i/11*6.283,mt=o.rainbow?K.mk(hsv(i/11,1,.6).getHex()):b,p=pp(hd,gC(),mt,Math.sin(q)*.55,Math.cos(q)*.55,-.2,.13,.5,.13);p.rotation.z=-q}
   return hd};
  mkH(o.h2?-.4:0);if(o.h2)mkH(.4);
- for(const fx of[.38,-.38])for(const fz of[.6,-.6]){const lg=pvt(bd,fx,.85,fz);pp(lg,gY(),a,0,-.42,0,.14,.8,.14);pp(lg,gB(),b,0,-.84,.05,.2,.1,.28);Lg.push([lg,fx*fz>0?0:Math.PI])}
- A.push((t,mv)=>{Lg.forEach(([l,p])=>{l.rotation.x=mv?Math.sin(t*9+p)*.6:0})});
- if(o.t==1){const sp=[];for(let i=0;i<6;i++)sp.push(pp(bd,gS(),i%2?c:a,0,1.3,-1,.28-.03*i));A.push(t=>{sp.forEach((q,i)=>{q.position.set(Math.sin(t*3+i*.6)*.18*i*.5,1.35+i*.17,-1-i*.22)})})}
- else if(o.t>1)for(let k=0;k<o.t;k++){const p=pvt(bd,0,1.2,-.95),ch=[];p.rotation.order='YXZ';const ph=(k-(o.t-1)/2)/o.t*2.2;for(let i=0;i<5;i++)ch.push(pp(p,gS(),i>2?c:(k%2?a:b),0,i*i*.04,-(.25+i*.3),.24-.03*i));p.rotation.x=.35;A.push(t=>{p.rotation.y=ph+Math.sin(t*2.2+k)*.14})}
- if(o.s)for(let i=0;i<4;i++)pp(bd,gS(),b,0,1.05,-.55+i*.38,.64,.57,.07);
- if(o.sp)for(let i=0;i<5;i++)pp(bd,gC(),c,0,1.62-Math.abs(i-2)*.05,-.6+i*.3,.1,.4,.1);
- if(o.w)smWings(bd,K,0,1.7,-.1,1.3,A,4);
- if(o.shell){pp(bd,gS(),b,0,1.45,-.05,.78,.5,1.1);for(let i=0;i<6;i++){const q=i/6*6.283;pp(bd,gS(),c,Math.sin(q)*.5,1.75,Math.cos(q)*.7,.1)}}
- if(o.c){for(let i=0;i<5;i++){const q=i/5*6.283;pp(bd,gC(),c,Math.sin(q)*.3,2.0,1.0+Math.cos(q)*.3,.07,.3,.07)}}
- if(o.fl)for(let i=0;i<6;i++)pp(bd,gS(),K.mk(hsv(i/6,.7,.75).getHex()),(i%2?.4:-.4),1.7,-.5+i*.2,.12);
- if(o.orn){const n=o.orn,cp=pvt(bd,0,1.65,0),ln=[];pp(cp,gB(),b,0,0,0,1.5,.12,1.9);
+ for(const fx of[.38,-.38])for(const fz of[.6,-.6]){const lg=pvt(bd,fx*1.1,.85,fz*1.05);pp(lg,gY(),a,0,-.72,0,.19,1.45,.19);pp(lg,gB(),b,0,-1.44,.06,.3,.14,.4);Lg.push([lg,fx*fz>0?0:Math.PI])}
+ A.push((t,mv)=>{const w=Math.sin(t*5.2);Lg.forEach(([l,p])=>{l.rotation.x=mv?Math.sin(t*5.2+p)*.5:l.rotation.x*.9});bd.position.y=.6+(mv?Math.abs(w)*.1:0)});
+ if(o.t==1){const sp=[];for(let i=0;i<6;i++)sp.push(pp(bd,gS(),i%2?c:a,0,1.5,-1,.28-.03*i));A.push(t=>{sp.forEach((q,i)=>{q.position.set(Math.sin(t*3+i*.6)*.18*i*.5,1.55+i*.17,-1.1-i*.22)})})}
+ else if(o.t>1)for(let k=0;k<o.t;k++){const p=pvt(bd,0,1.4,-1.05),ch=[];p.rotation.order='YXZ';const ph=(k-(o.t-1)/2)/o.t*2.2;for(let i=0;i<5;i++)ch.push(pp(p,gS(),i>2?c:(k%2?a:b),0,i*i*.04,-(.25+i*.3),.24-.03*i));p.rotation.x=.35;A.push(t=>{p.rotation.y=ph+Math.sin(t*2.2+k)*.14})}
+ if(o.s)for(let i=0;i<4;i++)pp(bd,gS(),b,0,1.2,-.55+i*.38,.8,.72,.07);
+ if(o.sp)for(let i=0;i<5;i++)pp(bd,gC(),c,0,1.95-Math.abs(i-2)*.06,-.6+i*.3,.1,.4,.1);
+ if(o.w)smWings(bd,K,0,2.0,-.1,1.4,A,4);
+ if(o.shell){pp(bd,gS(),b,0,1.78,-.05,.82,.5,1.12);for(let i=0;i<6;i++){const q=i/6*6.283;pp(bd,gS(),c,Math.sin(q)*.5,2.08,Math.cos(q)*.7,.1)}}
+ if(o.c){for(let i=0;i<5;i++){const q=i/5*6.283;pp(bd,gC(),c,Math.sin(q)*.3,2.15,1.2+Math.cos(q)*.3,.07,.3,.07)}}
+ if(o.fl)for(let i=0;i<6;i++)pp(bd,gS(),K.mk(hsv(i/6,.7,.75).getHex()),(i%2?.4:-.4),1.95,-.5+i*.2,.12);
+ if(o.orn){const n=o.orn,cp=pvt(bd,0,2.05,0),ln=[];pp(cp,gB(),b,0,0,0,1.5,.12,1.9);
   for(const x of[-.65,.65])for(const z of[-.8,.8])pp(cp,gY(),c,x,.55,z,.06,1.1,.06);
   for(let t=0;t<=n;t++){const rr=1.5-t*.38;pp(cp,gC(),a,0,1.25+t*.5,0,rr,.55,rr).rotation.y=Math.PI/6;pp(cp,gT(),c,0,1.0+t*.5,0,rr*.95).rotation.x=Math.PI/2}
   pp(cp,gS(),c,0,1.4+n*.55,0,.16);pp(cp,gC(),c,0,1.7+n*.55,0,.07,.5,.07);
@@ -2582,8 +2582,7 @@ function buildSum(i){const s=SMS[i],rt=s[2],ty=s[3],o=s[7]||{},K=sMats(s),g=new 
  smDeco(body,K,rt,A,gnd?1.4:1.8,gnd?2.0:2.2);
  const sc=[0,.55,.72,.95,1.5][rt]*(o.big?1.25:1)*(ty=='cl'?1.15:1);body.scale.setScalar(sc);
  const r={sp:2.1,cl:2.4,bs:2.3,dr:3.2,bd:2.4,ob:2.2,ms:2.2}[ty]*sc;
- if(gnd){pp(body,gT(),K.c,0,.05,0,1.5).rotation.x=Math.PI/2;pp(body,gT(),K.c,0,.05,0,1.0).rotation.x=Math.PI/2}
- return{g,gnd,sc,r,h:({sp:3.4,cl:3.4,bs:3.2,dr:3,bd:2.4,ob:3.2,ms:3.2}[ty])*sc,cy:(gnd?1.1:1.7)*sc,L:K.L,sd:i%2?1:-1,up:(t,mv)=>A.forEach(f=>f(t,mv))}}
+  return{g,gnd,sc,r,h:({sp:3.4,cl:3.4,bs:4.2,dr:3,bd:2.4,ob:3.2,ms:3.2}[ty])*sc,cy:(gnd?1.9:1.7)*sc,L:K.L,sd:i%2?1:-1,up:(t,mv)=>A.forEach(f=>f(t,mv))}}
 // ---- サムネイル ----
 const STH={};
 function sumThumb(i,w=170,h=210){const k=i+'_'+w;if(STH[k]!==undefined)return STH[k];STH[k]=null;
@@ -2605,12 +2604,16 @@ function sumStep(U,tg,par,i,dt,t){
   tx=tg.position.x-Math.sin(ry)*back+Math.cos(ry)*side,tz=tg.position.z-Math.cos(ry)*back-Math.sin(ry)*side;
  if(U.first){g.position.set(tx,0,tz);g.rotation.y=ry;U.first=0}
  const k=Math.min(1,dt*(b.gnd?4:5)),ox=g.position.x,oz=g.position.z;g.position.x+=(tx-ox)*k;g.position.z+=(tz-oz)*k;
- const sp=Math.hypot(g.position.x-ox,g.position.z-oz)/Math.max(dt,.001),mv=sp>.8;
+ const sp=Math.hypot(g.position.x-ox,g.position.z-oz)/Math.max(dt,.001);U.sp=(U.sp||0)*.88+sp*.12;const mv=U.sp>(U.mv?.45:1.0);U.mv=mv;
  const hd=b.gnd&&mv?Math.atan2(g.position.x-ox,g.position.z-oz):ry,dd=((hd-g.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;g.rotation.y+=dd*Math.min(1,dt*6);
- const lift=b.gnd?.8+s*.8:1.3+s*1.1,mx=par===hotel?HH-.3-b.h:99;g.position.y=tg.position.y+Math.max(.1,Math.min(lift,mx))+Math.sin(t*1.6)*.1*s;
+ g.position.y=b.gnd?0:tg.position.y+.15+Math.sin(t*1.6)*.1*s;
  b.up(t,mv);
- const cp=C.position,d=Math.hypot(cp.x-g.position.x,cp.y-(g.position.y+b.cy),cp.z-g.position.z),f=Math.max(.55,Math.min(1,(d-b.r*.3)/(b.r*.6)));
- U.f+=(f-U.f)*Math.min(1,dt*6);if(Math.abs(U.f-U.pf)>.015){U.pf=U.f;b.L.forEach(([m,o])=>m.opacity=o*U.f)}}
+ const cp=C.position,cx=g.position.x,cy=g.position.y+b.cy,cz=g.position.z,bx_=me.position.x,by_=me.position.y+1.5,bz_=me.position.z,
+  ax=bx_-cp.x,ay=by_-cp.y,az=bz_-cp.z,L2=ax*ax+ay*ay+az*az||1,Lh=Math.sqrt(L2),tt=((cx-cp.x)*ax+(cy-cp.y)*ay+(cz-cp.z)*az)/L2,
+  tc=Math.max(0,Math.min(1,tt)),dx=cx-(cp.x+ax*tc),dy=cy-(cp.y+ay*tc),dz=cz-(cp.z+az*tc),dl=Math.hypot(dx,dy,dz),dc=Math.hypot(cp.x-cx,cp.y-cy,cp.z-cz);
+ let f=Math.max(.12,Math.min(1,(dc-b.r*.3)/(b.r*.6)));
+ if(tt*Lh-b.r*.4<Lh)f=Math.min(f,Math.max(.12,Math.min(1,(dl-b.r*.3)/(b.r*.45))));
+ U.f+=(f-U.f)*Math.min(1,dt*8);if(Math.abs(U.f-U.pf)>.015){U.pf=U.f;b.L.forEach(([m,o])=>m.opacity=o*U.f)}}
 function sumTick(dt,t){const i=D.su;
  if(i==null||i<0||!SMS[i]||!me||!me.parent||mode=='res'||mode=='trans'){if(SU.g&&SU.g.parent)SU.g.parent.remove(SU.g);return}
  sumStep(SU,me,me.parent,i,dt,t)}
