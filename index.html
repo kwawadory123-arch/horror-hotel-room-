@@ -638,7 +638,8 @@ i.rsp{position:absolute!important;bottom:-24px;pointer-events:none;font-style:no
 #crst{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 12px;max-width:100%;box-sizing:border-box;height:auto;padding:5px 12px;line-height:1.3;font-size:clamp(11px,3.5vw,15px)}
 #crst .crc{white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
 .exc.exday{background:linear-gradient(160deg,#7a5a10,#2a1a05)}.exc.exday .exi{font-size:32px}
-</style></head><body><div id="hzv"></div><div id="bbn"></div><canvas id="bbfx"></canvas><div id="rg"><div id="rgt"></div></div><div id="bbb"></div>
+</style><style>.smc{width:190px;height:190px;border-radius:50%;border:4px dashed var(--mc,#b06aff);box-shadow:0 0 40px var(--mc,#b06aff),inset 0 0 40px var(--mc,#b06aff);animation:smsp 1.2s linear infinite;position:relative}.smc:before,.smc:after{content:'';position:absolute;inset:26px;border:3px solid var(--mc,#b06aff)}.smc:after{transform:rotate(45deg)}@keyframes smsp{to{transform:rotate(360deg)}}</style>
+</head><body><div id="hzv"></div><div id="bbn"></div><canvas id="bbfx"></canvas><div id="rg"><div id="rgt"></div></div><div id="bbb"></div>
 <div id="ui">
 <div id="tb" data-m="h"><div id="tbl"><img id="fav" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><div id="tbi"><div id="pname"></div><div class="lvl"><b id="plv" class="lvb"></b><div class="bar"><i id="pxp"></i></div></div><div id="rkrow"><div id="pbest"></div><div id="rkp" class="pill"><span>🏆</span><b id="rk">--</b></div></div><div id="frb" class="btn">👥 フレンド</div></div></div><div id="tbm"></div></div>
 <div id="hm"><div id="nv"></div><div id="ic"></div><div id="ic2"></div><div id="twb" class="btn"><span class="hbi">🗼</span><span class="hbl">タワー</span><i id="bdgtw" class="bdg hide"></i></div><div id="rmb" class="btn"><span class="hbi">⚔️</span><span class="hbl">ボスバトル</span></div><div id="coin" class="pill"><span class="gc"></span><b id="cv"></b></div><div id="sup" class="btn xs"></div><div id="evb"><div class="evh">🎉 開催イベント</div><div id="evs"></div><div id="evd"></div></div><div id="play" class="btn big">▶ プレイ</div></div>
@@ -665,11 +666,11 @@ let RN=Math.random,SEEDV=1;const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.im
 const $=i=>document.getElementById(i),T=THREE,sh=(i,v)=>$(i).classList.toggle('hide',!v),rnd=(a,b)=>a+RN()*(b-a),ri=(a,b)=>Math.floor(rnd(a,b+1)),dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z),esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 // ===== データ & Supabase =====
 const SB={u:'https://tgftgxbvoksvljfsqwye.supabase.co',k:'sb_publishable_mGzKef4AynwpdYJQ7Zyl9Q_XOJsJcw2'};
-const DEF={name:'Player'+(1000+ri(0,8999)),lv:1,xp:0,coin:0,skins:[0],skin:0,best:0,str:0,last:'',vol:.6,sens:1};
+const DEF={name:'Player'+(1000+ri(0,8999)),lv:1,xp:0,coin:0,skins:[0],skin:0,sm:[],su:-1,sc:[],spy:0,best:0,str:0,last:'',vol:.6,sens:1};
 let D=JSON.parse(JSON.stringify(DEF)),ses=null,sy='ローカル保存',pt;
 try{Object.assign(D,JSON.parse(localStorage.uf||'{}'));ses=JSON.parse(localStorage.ufs||'null')}catch(e){}
 delete D.fr;
-function nz(){const d=D;if(d.tk==null)d.tk=0;if(d.np==null)d.np=0;if(!d.nc)d.nc=[];if(d.nk==null)d.nk='';if(d.lr==null)d.lr='';if(d.lx==null)d.lx=0;if(!d.pf)d.pf=['simple','polaroid'];if(!d.pb)d.pb=[0,1,2,3];if(!d.pt)d.pt=[];if(d.ph==null)d.ph=0;if(d.mp==null)d.mp=0;if(d.fg==null)d.fg=0;if(d.ob==null)d.ob=0;if(d.ti==null)d.ti='';if(!d.tw)d.tw={best:0,runs:0,med:0,day:'',wk:'',wb:0};if(!d.cr)d.cr={d:'',f:2};if(!d.nw)d.nw={};if(!d.rm)d.rm={own:{c13:1,c10:1,w1:1},pl:[{id:'c13',x:1,y:2,f:0},{id:'c10',x:3,y:1,f:0},{id:'w1',x:2,y:-1,f:0}],wl:0,fl:0,th:{w:[0,1],f:[0,1]},lc:Date.now()};if(!d.pe)d.pe={eggs:[{r:1,h:60,t:Date.now()}],pets:[],act:0,dex:[]}}
+function nz(){const d=D;if(!d.sm)d.sm=[];if(d.su==null)d.su=-1;if(!d.sc)d.sc=[];if(d.spy==null)d.spy=0;if(d.tk==null)d.tk=0;if(d.np==null)d.np=0;if(!d.nc)d.nc=[];if(d.nk==null)d.nk='';if(d.lr==null)d.lr='';if(d.lx==null)d.lx=0;if(!d.pf)d.pf=['simple','polaroid'];if(!d.pb)d.pb=[0,1,2,3];if(!d.pt)d.pt=[];if(d.ph==null)d.ph=0;if(d.mp==null)d.mp=0;if(d.fg==null)d.fg=0;if(d.ob==null)d.ob=0;if(d.ti==null)d.ti='';if(!d.tw)d.tw={best:0,runs:0,med:0,day:'',wk:'',wb:0};if(!d.cr)d.cr={d:'',f:2};if(!d.nw)d.nw={};if(!d.rm)d.rm={own:{c13:1,c10:1,w1:1},pl:[{id:'c13',x:1,y:2,f:0},{id:'c10',x:3,y:1,f:0},{id:'w1',x:2,y:-1,f:0}],wl:0,fl:0,th:{w:[0,1],f:[0,1]},lc:Date.now()};if(!d.pe)d.pe={eggs:[{r:1,h:60,t:Date.now()}],pets:[],act:0,dex:[]}}
 function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=60+i*15});D.skins=[0];D.skin=0;D.sv=2}
  // v3: 一度だけ名前を初期の「Player」に戻す(レベル・コイン・スキン・記録などは一切変更しない)。sv=3 を保存するので2回目以降は実行されず、名前は自由に変更できる
  if((D.sv||0)<3){D.name='Player'+(1000+Math.floor(Math.random()*9000));D.sv=3;try{localStorage.uf=JSON.stringify(D)}catch(e){}}}migrate();
@@ -1411,7 +1412,7 @@ async function updRank(f){if(!f&&Date.now()-(updRank.t||0)<20000)return;updRank.
 let fvt=null;
 function humanFace(){try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const o=av(0),cam=new T.PerspectiveCamera(32,1,.1,50);o.position.set(40,0,0);S.add(o);o.updateMatrixWorld(true);const hp=new T.Vector3();o.userData.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+1.5);cam.lookAt(hp);const bg=S.background,fg=S.fog;S.background=null;S.fog=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;S.fog=fg;S.remove(o);const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fi1').src=$('fi2').src=c.toDataURL()}catch(e){}}
 
-function faceIcon(){if(mode!='home'||!me||!me.parent)return;try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const cam=new T.PerspectiveCamera(32,1,.1,50),u=me.userData,ry=me.rotation.y,hy=u.hd.rotation.y,pv_=pts.visible,dv=disc.visible;me.rotation.y=0;u.hd.rotation.y=0;pts.visible=disc.visible=false;me.updateMatrixWorld(true);const hp=new T.Vector3();u.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+([1.5,3.4,5][u.big|0]));cam.lookAt(hp.x,hp.y,hp.z);const bg=S.background;S.background=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;me.rotation.y=ry;u.hd.rotation.y=hy;pts.visible=pv_;disc.visible=dv;const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fav').src=c.toDataURL()}catch(e){}}
+function faceIcon(){if(mode!='home'||!me||!me.parent)return;try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const cam=new T.PerspectiveCamera(32,1,.1,50),u=me.userData,ry=me.rotation.y,hy=u.hd.rotation.y,pv_=pts.visible,dv=disc.visible;me.rotation.y=0;u.hd.rotation.y=0;pts.visible=disc.visible=false;const _sv=SU.g?SU.g.visible:true;if(SU.g)SU.g.visible=false;me.updateMatrixWorld(true);const hp=new T.Vector3();u.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+([1.5,3.4,5][u.big|0]));cam.lookAt(hp.x,hp.y,hp.z);const bg=S.background;S.background=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;me.rotation.y=ry;u.hd.rotation.y=hy;pts.visible=pv_;disc.visible=dv;if(SU.g)SU.g.visible=_sv;const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fav').src=c.toDataURL()}catch(e){}}
 const GP={g:{n:'極レアガチャ',pick:'ゴールドナイト',icon:'👑',d:'かっこいい極レアスキンが出るガチャ！必ず未所持のスキンが出ます。',cls:'gold'},u:{n:'超レアガチャ',pick:'ブラックボール',icon:'⚫',d:'ブラックボールなど、ふしぎで個性的な超レアキャラが出るガチャ！必ず未所持が出ます。',cls:'neo'},h:{n:'ヒストリーガチャ',icon:'📜',d:'古代勇者とその仲間たち、個性豊かな全80体！10連はSR以上が1体確定。必ず未所持が出ます。',cls:'his'},m:{n:'ミステリーガチャ',icon:'🔮',d:'ふしぎでかわいい全80体！トリオ(3体セット)や映えスキンも。必ず未所持が出ます。',cls:'mys'}},GT={};
 const skT=q=>!q.g?'':q.hs?'h':q.m?'m':q.u?'u':'g',gpool=t=>SKN.map((_,i)=>i).filter(i=>skT(SKN[i])==t&&!D.skins.includes(i)),gall=t=>SKN.filter(q=>skT(q)==t).length,gimg=t=>{const i=t=='m'?mysPick():t=='h'?hisPick():SKN.findIndex(q=>q.n==GP[t].pick),k=t+i;if(GT[k]===undefined)GT[k]=i<0?null:skinThumb(i,200,300,SKN[i].kd==2?8.8:6.2);return GT[k]};
 const thTs={};
@@ -1801,7 +1802,7 @@ function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー
  $('nms').onclick=()=>{const v=$('nm').value.trim().slice(0,20);if(!v)return toast('名前を入力してください');D.name=v;save();updInfo();SE.pon();beat();sendPos(1);toast('✅ 名前を「'+v+'」に変更')};
  $('vo').oninput=e=>{D.vol=+e.target.value;save();SE.btn()};$('ss').oninput=e=>{D.sens=+e.target.value;save()};
  $('rst').onclick=async()=>{if(confirm('設定・レベル・コイン・スキン・記録をすべて削除します。本当に初期化しますか？')&&confirm('元に戻せません。よろしいですか？')){try{localStorage.removeItem('uf')}catch(e){}D=JSON.parse(JSON.stringify(DEF));await push();location.reload()}}}
-const guide=()=>modal('📖 ガイド',[['🎯','各ステージのゴール(赤い光)に合計2人が入ると全員脱出。1人だけでは反応しません。ゴール担当のCPUが1人います。'],['🏨','ステージは全3回。進むほど広くなり、2つ目からは常に怪物が1体徘徊します。'],['👥','CPUの仲間が突然、怪物に変身することがあります。変身するとその場から追ってきます。CPUと怪物の位置は部屋の全員で同じです。'],['🪤','罠は最大10個。走りながら設置OK。自分が踏んでも死亡(ジャンプ中は回避)。'],['📣','カモンでCPUの仲間が集まります。'],['🔔','招待やフレンド申請はホームの🔔通知に届きます。ここから参加・承認できます。'],['😀','エモート: 右下のボタン(キー1〜6)。📍は仲間のミニマップに位置を伝えます。'],['🎰','図鑑のガチャで極レア・超レアスキンを獲得。図鑑の達成で報酬コイン!'],['💥','ビッグバンフェス: 毎月27日〜末日は通常試合のかわりに特大ステージ1つだけ。怪物が常に2体。2人でゴールを見つけると報酬！'],['🔮','ミステリーガチャ: 図鑑→ガチャ。トリオ(3体)・映えスキンが出る。10連でSR以上確定、30回でUR確定。'],['📋','ミッション・🛣️ネオンロード・🎡ルーレットで毎日ごほうび！チケット🎫でもガチャが引けます。'],['🔮','マップのふしぎオーブを集めるとダッシュ⚡が使える！(F/Shiftキー)'],['🐾','ふしぎペット: タマゴをあたためて孵化→ごはん(🔮)で育てて進化！ペットはついてきて、結果ボーナスもくれる。'],['🗼','ふしぎタワー: ホームの🗼かロビーで選ぶ。クリアするたびパワーアップを1つえらべる！怪物はどんどん強くなる。どこまで登れる？'],['🏠','マイルーム: グッズをかざって映え度アップ→おるすばんでコインがたまる。🎪クレーンや🗼タワーでレアグッズをゲット！'],['🎪','ふしぎクレーン: ◀▶でねらって「つかむ」。むりょうは1日2回、🗼タワーの🏅でもあそべる。'],['🎮','移動: スティック / WASD・矢印　視点: 画面ドラッグ　ジャンプ: Space　罠: E　カモン: Q　ダッシュ: F']].map(a=>`<div class="card gd"><b>${a[0]}</b><div>${a[1]}</div></div>`).join(''));
+const guide=()=>modal('📖 ガイド',[['🎯','各ステージのゴール(赤い光)に合計2人が入ると全員脱出。1人だけでは反応しません。ゴール担当のCPUが1人います。'],['🏨','ステージは全3回。進むほど広くなり、2つ目からは常に怪物が1体徘徊します。'],['👥','CPUの仲間が突然、怪物に変身することがあります。変身するとその場から追ってきます。CPUと怪物の位置は部屋の全員で同じです。'],['🪤','罠は最大10個。走りながら設置OK。自分が踏んでも死亡(ジャンプ中は回避)。'],['📣','カモンでCPUの仲間が集まります。'],['🔔','招待やフレンド申請はホームの🔔通知に届きます。ここから参加・承認できます。'],['😀','エモート: 右下のボタン(キー1〜6)。📍は仲間のミニマップに位置を伝えます。'],['🎰','図鑑のガチャで極レア・超レアスキンを獲得。図鑑の達成で報酬コイン!'],['💥','ビッグバンフェス: 毎月27日〜末日は通常試合のかわりに特大ステージ1つだけ。怪物が常に2体。2人でゴールを見つけると報酬！'],['🌀','召喚ガチャ: 図鑑→召喚タブ。600コインで引くと、背後に付いてくる召喚体が仲間に！全80体、10連でSR以上確定、30回でUR確定。当たり判定は本人だけです。'],['🔮','ミステリーガチャ: 図鑑→ガチャ。トリオ(3体)・映えスキンが出る。10連でSR以上確定、30回でUR確定。'],['📋','ミッション・🛣️ネオンロード・🎡ルーレットで毎日ごほうび！チケット🎫でもガチャが引けます。'],['🔮','マップのふしぎオーブを集めるとダッシュ⚡が使える！(F/Shiftキー)'],['🐾','ふしぎペット: タマゴをあたためて孵化→ごはん(🔮)で育てて進化！ペットはついてきて、結果ボーナスもくれる。'],['🗼','ふしぎタワー: ホームの🗼かロビーで選ぶ。クリアするたびパワーアップを1つえらべる！怪物はどんどん強くなる。どこまで登れる？'],['🏠','マイルーム: グッズをかざって映え度アップ→おるすばんでコインがたまる。🎪クレーンや🗼タワーでレアグッズをゲット！'],['🎪','ふしぎクレーン: ◀▶でねらって「つかむ」。むりょうは1日2回、🗼タワーの🏅でもあそべる。'],['🎮','移動: スティック / WASD・矢印　視点: 画面ドラッグ　ジャンプ: Space　罠: E　カモン: Q　ダッシュ: F']].map(a=>`<div class="card gd"><b>${a[0]}</b><div>${a[1]}</div></div>`).join(''));
 // ===== 通知 =====
 const ntfSave=()=>{try{localStorage.ufn=JSON.stringify(NTF)}catch(e){}};
 function ntfClean(){const n=Date.now();NTF=NTF.filter(x=>n-x.t<6e5)}
@@ -1819,8 +1820,8 @@ async function notif(){cur='n';ntfClean();modal('🔔 通知','<div id="nb">読�
  if($('nb'))$('nb').innerHTML=((inv?'<div class="sec">📨 ルーム招待</div>'+inv:'')+(fr?'<div class="sec">🙋 フレンド申請</div>'+fr:''))||'<div class="small" style="text-align:center;padding:20px">新しい通知はありません</div>'}
 // ===== 図鑑 & ガチャ =====
 const MS=[[10,100],[25,300],[40,600],[55,1000],[70,3000],[100,5000],[120,6000],[150,8000],[200,10000],[240,12000],[270,14000],[300,16000],[310,17000],[350,20000],[390,25000]],GC=200;let gcB=0;
-function dex(tab){const n=D.skins.length,cl=D.cl=D.cl||[];
- let h=`<div class="dxt"><div class="dxb${tab?'':' on'}" data-dx="0"><i>📚</i>図鑑</div><div class="dxb${tab?' on':''}" data-dx="1"><i>🎰</i>ガチャ</div></div>`;
+function dex(tab){if(tab==2)return sdex();const n=D.skins.length,cl=D.cl=D.cl||[];
+ let h=`<div class="dxt"><div class="dxb${tab?'':' on'}" data-dx="0"><i>📚</i>図鑑</div><div class="dxb${tab==1?' on':''}" data-dx="1"><i>🎰</i>ガチャ</div><div class="dxb" data-dx="2"><i>🌀</i>召喚</div></div>`;
  if(!tab){h+=`<div class="pill" style="justify-content:center;margin:8px auto;width:max-content;font-size:15px">コンプ率 ${n}/${NS}</div><div class="bar"><i style="width:${n/NS*100}%"></i></div><div class="sec" style="text-align:center">🎁 達成報酬</div><div style="display:flex;gap:6px;margin:4px 0 8px;flex-wrap:wrap;justify-content:center">`+MS.map((m,i)=>{const ok=n>=m[0],got=cl.includes(i);return `<div class="btn xs ${got?'dis':ok?'grn':'gry'}" ${ok&&!got?`data-ms="${i}"`:''}>${m[0]}種<br>🪙${m[1]}${got?' ✔':''}</div>`}).join('')+'</div>';
   CAT.forEach((c,ci)=>{const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].c==ci),have=ids.filter(i=>D.skins.includes(i)).length;h+=`<div class="sec">${c} ${have}/${ids.length}</div><div class="dxg">`+ids.map(i=>{const o=D.skins.includes(i);return `<div class="dxc${o?'':' lk'}"><div class="dxe">${SKN[i].e}</div><div class="dxn">${o?SKN[i].n:'???'}</div></div>`}).join('')+'</div>'})}
  else{h+=`<div id="gch" style="text-align:center;font-weight:900;margin:10px 0">🪙 ${D.coin}</div>`+['h','m','g','u'].map(t=>{const p=GP[t],left=gpool(t).length,im=gimg(t),dis=left?'':' dis';return `<div class="card gcs ${p.cls}"><div class="gcl"><div class="gcst">${p.icon} ${p.n}</div><div class="gcds">${left?p.d:'🎉 全種コンプリート！'}</div><div class="gcct">未所持 ${left} / ${gall(t)}種</div>${t=='m'?mysInfo():t=='h'?hisInfo():''}<div class="gcbr"><div class="btn big${dis}" data-gc="1" data-gt="${t}">1回引く　🪙${(t=='m'||t=='h')?MGC:GC}</div><div class="btn big red${dis}" data-gc="10" data-gt="${t}">10連引く　🪙${((t=='m'||t=='h')?MGC:GC)*9}</div>${t=='m'?`<div class="btn big grn${(D.tk||0)&&left?'':' dis'}" data-gc="1" data-gt="m" data-tk="1">🎫チケットで1回 (${D.tk||0})</div>`:''}</div></div><div class="gcim">${im?`<img alt="" src="${im}">`:`<div class="gce">${p.icon}</div>`}</div></div>`}).join('')}
@@ -2229,10 +2230,10 @@ function mkCrane(){const o=mkOv('cr','🎪 ふしぎクレーン',`<div class="r
  $('crbuy').onclick=e=>{const b=e.target.closest('[data-cb]');if(!b)return;SE.btn();crStart(b.dataset.cb)};
  addEventListener('keydown',e=>{if($('cr').classList.contains('hide'))return;if(e.code=='ArrowLeft')CRG.dir=-1;else if(e.code=='ArrowRight')CRG.dir=1;else if(e.code=='Space'||e.code=='Enter')$('crd').click()});addEventListener('keyup',e=>{if(e.code=='ArrowLeft'&&CRG.dir==-1||e.code=='ArrowRight'&&CRG.dir==1)CRG.dir=0});return o}
 function crStart(k){if(CRG.st!='idle'||CRG.credit)return;const c=crDay();
- if(k=='free'){if(c.f<1)return;c.f--}else if(k=='coin'){if(D.coin<120)return toast('🪙 コインが足りません');D.coin-=120;updInfo()}else{if((D.tw.med||0)<10)return toast('🏅 メダルが足りません(🗼タワーでためよう)');D.tw.med-=10}
+ if(k=='free'){if(c.f<1)return;c.f--}else if(k=='coin'){if(D.coin<300)return toast('🪙 コインが足りません');D.coin-=300;D.crb=(D.crb||0)+1;updInfo()}else{if((D.tw.med||0)<10)return toast('🏅 メダルが足りません(🗼タワーでためよう)');D.tw.med-=10}
  CRG.credit=1;D.crp=(D.crp||0)+1;CRG.x=200;save();crRender();toast('◀▶でうごかして「つかむ」！')}
-function crRender(){const c=crDay(),act=CRG.credit||CRG.st!='idle';$('crst').innerHTML=`<span class="crc">🪙 <b>${D.coin}</b></span><span class="crc">🏅 <b>${D.tw.med||0}</b></span><span class="crc">🎁 むりょう <b>${c.f}</b>回</span><span class="crc">🛸 ジャックポット運 <b>${Math.min(100,Math.round((D.crp||0)/40*100))}%</b></span>`;
- $('crbuy').innerHTML=act?'<div class="small" style="text-align:center">あそび中…！</div>':`<div class="btn ${c.f>0?'grn':'dis'}" data-cb="free">🎁 むりょう (のこり${c.f})</div><div class="btn ${D.coin>=120?'':'dis'}" data-cb="coin">🪙 120</div><div class="btn ${(D.tw.med||0)>=10?'blu':'dis'}" data-cb="med">🏅 10</div>`;
+function crRender(){const c=crDay(),act=CRG.credit||CRG.st!='idle';$('crst').innerHTML=`<span class="crc">🪙 <b>${D.coin}</b></span><span class="crc">🏅 <b>${D.tw.med||0}</b></span><span class="crc">🎁 むりょう <b>${c.f}</b>回</span><span class="crc">💳 つかみ率ボーナス <b>+${Math.min(50,(D.crb||0)*2)}%</b></span><span class="crc">🛸 ジャックポット運 <b>${Math.min(100,Math.round((D.crp||0)/40*100))}%</b></span>`;
+ $('crbuy').innerHTML=act?'<div class="small" style="text-align:center">あそび中…！</div>':`<div class="btn ${c.f>0?'grn':'dis'}" data-cb="free">🎁 むりょう (のこり${c.f})</div><div class="btn ${D.coin>=300?'':'dis'}" data-cb="coin">🪙 300 <small>(つかみ率+2%)</small></div><div class="btn ${(D.tw.med||0)>=10?'blu':'dis'}" data-cb="med">🏅 10</div>`;
  $('crd').classList.toggle('dis',!(CRG.credit&&CRG.st=='idle'));['crl','crr'].forEach(i=>$(i).classList.toggle('dis',!CRG.credit||CRG.st!='idle'))}
 function crUpd(dt){const G=CRG;
  if(G.st=='idle'){if(G.credit)G.x=Math.max(30,Math.min(340,G.x+G.dir*135*dt))}
@@ -2246,7 +2247,7 @@ const crTopP=p=>{let t=356;CRG.pr.forEach(q=>{if(Math.abs(q.x-p.x)<26)t=Math.min
 function crEval(){const G=CRG;let best=null,bd=99;G.pr.forEach(p=>{const d=Math.abs(p.x-G.x);if(d<bd&&p.y>=G.y-6){bd=d;best=p}});
  if(!best||bd>30){toast('くうぶり…！ もうすこし！');G.st='lift';G.slipDone=1;G.held=null;return}
  let ok=(.3+.7*(1-bd/30))*[1,1,.92,.78,.58][best.rt];if(best.rt==4){const pt=D.crp||0;ok=pt>=40?1:Math.min(.7,.015+pt*.012)*(.6+.4*(1-bd/30))}
- if(Math.random()<ok){G.pr.splice(G.pr.indexOf(best),1);G.held=best;G.slipDone=0;G.slipY=140+Math.random()*120;G.slipP=best.rt==4?((D.crp||0)>=30?0:.4):(best.rt>=3?.22:.1)+bd/120;SE.pon();toast('つかんだ！')}else{toast('つかめなかった…！');if(best.rt==4){D.crp=(D.crp||0)+2;crRender()}G.held=null;G.slipDone=1}G.st='lift'}
+ ok=Math.min(1,ok+Math.min(.5,(D.crb||0)*.02));if(Math.random()<ok){G.pr.splice(G.pr.indexOf(best),1);G.held=best;G.slipDone=0;G.slipY=140+Math.random()*120;G.slipP=best.rt==4?((D.crp||0)>=30?0:.4):(best.rt>=3?.22:.1)+bd/120;SE.pon();toast('つかんだ！')}else{toast('つかめなかった…！');if(best.rt==4){D.crp=(D.crp||0)+2;crRender()}G.held=null;G.slipDone=1}G.st='lift'}
 function crSlip(){const G=CRG;if(!G.held)return;toast('あっ！おちちゃった…');if(G.held.rt==4)D.crp=(D.crp||0)+2;G.fall={p:G.held,vy:0};G.held.x+=Math.random()*20-10;G.held=null;SE.trap()}
 function crEnd(ok,p){const G=CRG;G.credit=0;G.st='idle';G.cl=0;G.dir=0;mq('crane');if(ok&&p){crGive(p);crAdd(p.k=='jp')}else if(G.pr.length+(G.fall?1:0)<9)crAdd();if(!G.pr.some(q=>q.k=='jp')&&!G.fall)crAdd(1);save();crRender()}
 function crGive(p){let m='';if(p.k=='jp'){D.coin+=6000;D.tk=(D.tk||0)+5;D.tw.med=(D.tw.med||0)+50;giveEgg(2);D.crp=0;m='🛸 特大ジャックポット!!<br><small>🪙6000 🎫5 🏅50 🥚レア</small>';setTimeout(()=>{confetti(220);flash('#ffd93b')},300)}else if(p.k=='med'){D.tw.med=(D.tw.med||0)+p.v;m='🏅 メダル +'+p.v}else if(p.k=='fur'){rmGive(p.id);m=p.e+' '+p.n+'<br><small>マイルームに おけるよ！</small>'}else if(p.k=='coin'){D.coin+=p.v;m='💰 コイン +'+p.v}else if(p.k=='orb'){D.ob=(D.ob||0)+p.v;m='🔮 オーブ +'+p.v}else if(p.k=='egg'){giveEgg(p.r);m='🥚 '+p.n+'！<br><small>🐾ペットで孵化</small>'}else{D.tk=(D.tk||0)+1;m='🎫 ガチャチケット +1'}
@@ -2390,14 +2391,261 @@ const clk=new T.Clock();let wt=0,wv=0;
 function loop(){requestAnimationFrame(loop);if(mode!='game'&&hzOn)hzUpd(0,0);const dt=Math.min(clk.getDelta(),.05),t=clk.elapsedTime,u=me.userData;bbfxTick(dt,t);if(mode=='game')adaptPR(dt);else if(prNow<prC){prNow=prC;R.setPixelRatio(prNow);rs()}if(mode=='lobby'&&bbOn()){S.background.setHSL((t*.06)%1,.85,.17);pl.color.setHSL(((t*.06)+.5)%1,1,.6)}if(mode!='game'&&intro>0)introEnd();
  if(mode=='home'){base.rotation.y+=dt*.6;pts.rotation.y=t*.03;pts.position.y=Math.sin(t*.5)*.2;base.position.x+=(0-base.position.x)*Math.min(1,dt*8);disc.position.x=base.position.x;me.position.set(0,Math.sin(t*2)*.03,0);me.rotation.y=.5+Math.sin(t*.5)*.15;u.hd.rotation.y=Math.sin(t*.8)*.25;
   wt+=dt;const w=wt%6<2.2;if(w&&!wv)SE.wave();wv=w;
-  u.aR.rotation.z=w?2.5+Math.sin(t*9)*.3:.05+Math.sin(t*2)*.04;u.aL.rotation.z=-.05;u.aL.rotation.x=u.aR.rotation.x=u.lL.rotation.x=u.lR.rotation.x=0;u.fx.forEach(f=>f(t));const mo_=!$('md').classList.contains('hide')||!$('stm').classList.contains('hide');tP.set(0,1.7,mo_?7.8:5.6);tL.set(0,mo_?-1.25:shown?.85:1.05,0)}
+  u.aR.rotation.z=w?2.5+Math.sin(t*9)*.3:.05+Math.sin(t*2)*.04;u.aL.rotation.z=-.05;u.aL.rotation.x=u.aR.rotation.x=u.lL.rotation.x=u.lR.rotation.x=0;u.fx.forEach(f=>f(t));const mo_=!$('md').classList.contains('hide')||!$('stm').classList.contains('hide');tP.set(0,1.7+sumCam()*.25,(mo_?7.8:5.6)+sumCam());tL.set(0,mo_?-1.25:shown?.85:1.05,0)}
  else if(mode=='lobby'){const ix=mv.x*D.sens+((keys.KeyD||keys.ArrowRight)?1:0)-((keys.KeyA||keys.ArrowLeft)?1:0),iz=mv.y*D.sens+((keys.KeyS||keys.ArrowDown)?1:0)-((keys.KeyW||keys.ArrowUp)?1:0),sn=Math.sin(yaw),cs=Math.cos(yaw),x=ix*cs+iz*sn,z=iz*cs-ix*sn,l=Math.hypot(x,z);
   if(l>.1){const k=Math.min(1,l)/l*5*dt;lp.x=Math.max(-13.5,Math.min(13.5,lp.x+x*k));lp.z=Math.max(-13.5,Math.min(13.5,lp.z+z*k));me.rotation.y=Math.atan2(x,z)}
   me.position.copy(lp);anim(me,l>.1,t);trail(me,dt,l>.1);u.aL.rotation.z=-.05;u.aR.rotation.z=.05;const cp=Math.cos(pit);tP.set(Math.max(-14.2,Math.min(14.2,lp.x+Math.sin(yaw)*cp*6)),Math.max(.6,1.5+Math.sin(pit)*6),Math.max(-14.2,Math.min(14.2,lp.z+Math.cos(yaw)*cp*6)));tL.set(lp.x,1.4,lp.z)}
  else if(mode=='game')game(dt,t);
- if(mode=='lobby')lobbyCpu(dt,t);peersTick(dt,t);trlTick(dt);petTick(dt,t);
+ if(mode=='lobby')lobbyCpu(dt,t);peersTick(dt,t);trlTick(dt);petTick(dt,t);sumTick(dt,t);
  if(mode=='game'||mode=='trans'){if(mode=='trans')camGame();camP.copy(tP);camL.copy(tL)}else{camP.lerp(tP,Math.min(1,dt*4));camL.lerp(tL,Math.min(1,dt*4))}
  C.position.copy(camP);C.lookAt(camL);R.render(S,C)}
+// ===== v10: 召喚ガチャ (後ろに付いてくる召喚体 80体 / 500コイン / 図鑑報酬) =====
+const SMC=600,SMP=30,SMW={1:100,2:60,3:30,4:10};
+const SMM=[[5,300],[10,600],[20,1200],[30,1800],[40,2500],[50,3500],[60,5000],[70,7000],[80,15000]],SMB=[0,1500,3000,5000,10000];
+// [名前,絵文字,レア度(1N 2R 3SR 4UR),型,メイン色,サブ色,発光色,オプション]
+const SMS=[
+['影の従者','👤',1,'sp',0x2a2a3a,0x7a5aff,0xb89aff,{h:1}],
+['蒼き番犬','🐺',1,'bs',0x3a5aa8,0x9ad0ff,0x66e0ff,{t:1}],
+['紅蓮の鴉','🐦‍⬛',1,'bd',0x2a1a1a,0xff4a2a,0xff9a3a,{}],
+['月光の猫','🐱',1,'bs',0xe8e8ff,0x8a7aff,0xc8d0ff,{e:1}],
+['鉄の守護兵','🤖',1,'sp',0x6a7080,0xd0d8e8,0x66ffee,{v:1}],
+['氷霊の剣','🗡️',1,'ob',0x9ad8ff,0xffffff,0x66e0ff,{it:'bl'}],
+['翠風の梟','🦉',1,'bd',0x3a8a4a,0xd8ffb0,0x9aff7a,{}],
+['黒曜の蛇','🐍',1,'dr',0x1a1a22,0x5a2ad8,0xb06aff,{n:9}],
+['琥珀の虎','🐯',1,'bs',0xe89a2a,0x3a2a1a,0xffd05a,{s:1}],
+['白銀の狐','🦊',1,'bs',0xe8eef8,0xff8aa8,0xffd0e0,{t:2}],
+['雷鳴の鷹','🦅',1,'bd',0x5a4a2a,0xffe14d,0xfff59a,{}],
+['砂塵の騎士','🛡️',1,'sp',0xc8a060,0x6a4a2a,0xffe0a0,{v:1,k:1}],
+['深海の使い','🌊',1,'ob',0x1a5aa8,0x66e0ff,0xaaf4ff,{it:'or'}],
+['朱雀の羽根','🪶',1,'ob',0xff5a2a,0xffd04a,0xffa05a,{it:'ft'}],
+['夜叉の面','👹',1,'ms',0x8a1a2a,0xf0e0c0,0xff4a4a,{}],
+['星屑の精','✨',1,'ob',0x6a4aff,0xfff59a,0xffffff,{it:'st'}],
+['鋼の蜘蛛','🕷️',1,'bs',0x4a5060,0xff4a4a,0xff7a7a,{sp:1}],
+['紫電の鴉','⚡',1,'bd',0x3a1a6a,0xb04aff,0xe0a0ff,{}],
+['炎の子獅子','🦁',1,'bs',0xe85a1a,0xffd04a,0xffa03a,{m:1}],
+['水晶の幽霊','👻',1,'sp',0xaad8ff,0xffffff,0xd8f0ff,{o:1}],
+['古の石像','🗿',1,'sp',0x7a7a70,0x4a5a4a,0xa0ffa0,{r:1}],
+['毒花の守り','🌺',1,'ob',0x7a2aa8,0x66ff7a,0xff7ad8,{it:'fl'}],
+['銀月の兎','🐰',1,'bs',0xf0f0ff,0xa0a8ff,0xd0d8ff,{e:1}],
+['嵐の小竜','🐲',1,'dr',0x3a8aa8,0xffe14d,0x9af0ff,{n:7,w:1}],
+['双角の悪魔','😈',2,'sp',0x5a1a3a,0xff4a6a,0xff8aa0,{h:1,w:1}],
+['氷牙の狼','🐺',2,'bs',0xaad8ff,0x3a5aa8,0xe0f8ff,{m:1}],
+['雷光の騎士','⚔️',2,'sp',0xe8d84a,0x3a3a6a,0xfff59a,{v:1,k:1,r:1}],
+['炎翼の鳳','🔥',2,'bd',0xff4a1a,0xffd04a,0xffe07a,{tail:1}],
+['魔導書の番人','📖',2,'ob',0x3a2a7a,0xffd04a,0xb89aff,{it:'bk'}],
+['翡翠の龍','🐉',2,'dr',0x1aa86a,0xffe14d,0x7affb0,{n:11,w:1}],
+['幻影の忍者','🥷',2,'sp',0x1a1a2a,0xff2a4a,0xff7a8a,{v:1,k:1}],
+['黄金の獅子王','🦁',2,'bs',0xe8b82a,0x8a3a1a,0xfff09a,{m:1,c:1}],
+['時計仕掛けの騎兵','⚙️',2,'sp',0x8a6a3a,0xe8d09a,0xffe14d,{r:2,v:1}],
+['紫水晶の蠍','🦂',2,'bs',0x6a2aa8,0xe8a0ff,0xff7aff,{t:1,sp:1}],
+['氷結の女王','❄️',2,'sp',0xc8f0ff,0x5a9ae8,0xffffff,{c:1,k:1}],
+['暴風の大鷲','🌪️',2,'bd',0x4a6a8a,0xe0f0ff,0x9ad8ff,{tail:1}],
+['骸骨の将軍','💀',2,'sp',0xe8e0d0,0x3a1a3a,0xa0ff7a,{c:1,k:1}],
+['闇夜のペガサス','🐴',2,'bs',0x1a1a3a,0x6a4aff,0xb08aff,{w:1,e:1}],
+['鏡面の双子','🪞',2,'ob',0xd8e8ff,0x8aa8e8,0xffffff,{it:'bl',n:2}],
+['灼熱の牛魔','🐂',2,'bs',0x8a2a1a,0xff8a2a,0xffc04a,{h:1,t:1}],
+['深緑の樹精','🌳',2,'sp',0x2a6a2a,0x8a5a2a,0x9aff7a,{w:1,o:1}],
+['蒼海の海蛇','🌊',2,'dr',0x1a5aa8,0xaaf0ff,0x66e0ff,{n:12}],
+['桜花の舞姫','🌸',2,'ob',0xff8ab8,0xffe0f0,0xffb0d0,{it:'fl',n:9}],
+['砂漠の守護像','🐫',2,'bs',0xc8a050,0x4a3a1a,0xffe08a,{c:1}],
+['影の双頭犬','🐕',2,'bs',0x2a1a2a,0xff2a2a,0xff6a6a,{h2:1}],
+['彗星のクジラ','🐋',2,'dr',0x2a3a8a,0x9ad0ff,0xffffff,{n:6,fat:1}],
+['雷槌の巨人','🔨',2,'sp',0x4a5a8a,0xffe14d,0xffffa0,{a:1,r:1}],
+['白虎の化身','🐅',2,'bs',0xf0f0f0,0x2a2a3a,0x9ad8ff,{s:1,m:1}],
+['幽玄の天狗','🏮',2,'sp',0xc82a2a,0xf0e0c0,0xffd04a,{h:1,w:1}],
+['魔晶の亀','🐢',2,'bs',0x2a8a7a,0x6a4a2a,0x7affee,{shell:1}],
+['煉獄の魔神','👿',3,'sp',0x4a0a1a,0xff3a1a,0xffa03a,{h:1,w:1,a:1,r:2}],
+['天空の聖騎士','🛡️',3,'sp',0xf0f0ff,0xffd04a,0xfff59a,{w:1,o:1,k:1,v:1}],
+['九尾の妖狐','🦊',3,'bs',0xf8e8d8,0xff4a8a,0xffa0d0,{t:9}],
+['八岐の大蛇','🐍',3,'dr',0x2a5a2a,0xffd04a,0x9aff7a,{n:8,heads:3}],
+['銀河の翼竜','🐉',3,'dr',0x1a1a5a,0xb06aff,0xffffff,{n:14,w:1,big:1}],
+['氷河の巨狼','🐺',3,'bs',0xd8f0ff,0x3a6ac8,0x9ae8ff,{m:1,h:1,sp:1}],
+['黄泉の死神','☠️',3,'sp',0x1a1a22,0xa0ff7a,0xd0ffa0,{k:1,r:1,h:1}],
+['嵐神の雷獣','⚡',3,'bs',0x3a3a8a,0xffe14d,0xfff59a,{m:1,t:1,sp:1}],
+['黄金の不死鳥','🔥',3,'bd',0xe8a01a,0xff4a1a,0xfff09a,{tail:1,tl:7,o:1}],
+['機械仕掛けの王','🤖',3,'sp',0x7a8090,0x3affea,0xa0fff4,{v:1,a:1,r:2,c:1}],
+['月影の白蛇姫','🌙',3,'dr',0xe8e8ff,0x6a5aff,0xffffff,{n:13,o:1}],
+['剣舞の千刃','⚔️',3,'ob',0xd0e0ff,0xff4a6a,0xffffff,{it:'bl',n:12,r:1}],
+['星読みの賢者','🔮',3,'sp',0x3a2a8a,0xffd04a,0xb89aff,{r:3,o:1,k:1}],
+['鬼火の九尾猫','🐈',3,'bs',0x2a1a3a,0x7aff9a,0x9affd0,{t:4,e:1}],
+['灼岩の巨亀','🌋',3,'bs',0x6a3a2a,0xff6a1a,0xffb04a,{shell:1,sp:1}],
+['虹彩の蝶神','🦋',3,'bd',0xff7ad8,0x4affea,0xfff59a,{butterfly:1,o:1}],
+['深淵の眼','👁️',3,'ms',0x1a0a2a,0xff2a6a,0xff7aa0,{tent:8}],
+['紅蓮の羅刹','👹',3,'sp',0x8a1a1a,0x1a1a1a,0xff6a3a,{h:1,a:1,k:1}],
+['森羅の鹿王','🦌',3,'bs',0x2a8a5a,0xe8d09a,0x9affb0,{antler:1}],
+['神樹の守護獣','🌲',3,'bs',0x3a7a3a,0xffd0e0,0xaaff9a,{antler:1,m:1}],
+['天魔王ガルダ','👑',4,'cl',0x2a0a4a,0xffd04a,0xff4aff,{h:1,w:1,a:3,r:4,c:1,o:1,k:1}],
+['黄金の龍神','🐲',4,'dr',0xe8a81a,0xff3a1a,0xfff09a,{n:22,w:1,big:1}],
+['星喰らいの巨獣','🌌',4,'bs',0x1a1a4a,0xb06aff,0xffffff,{big:1,m:1,sp:1,h:1,w:1,orn:1}],
+['曼荼羅の祭壇獣','🏯',4,'bs',0xc82a2a,0xffd04a,0xffe9a0,{big:1,orn:3,t:1,h:1}],
+['終焉の巨神兵','⚙️',4,'cl',0x5a6070,0xff3a3a,0xffa0a0,{v:1,a:2,r:3,c:1,w:1}],
+['蒼天の大鳳凰','🦚',4,'bd',0x1a8ae8,0xffd04a,0xaaf0ff,{tail:1,tl:9,o:1,big:1}],
+['氷獄の大帝','🧊',4,'cl',0x9ad8ff,0x2a4a9a,0xffffff,{c:1,a:1,r:3,w:1,k:1,h:1}],
+['千手の雷霆観音','🕉️',4,'cl',0xe8d8a0,0xffe14d,0xffffa0,{a:5,r:4,o:1,c:1}],
+['深淵の大目玉','👁️',4,'ms',0x0a0a1a,0xff2a2a,0xff9a4a,{tent:14,big:1,r:3}],
+['虹彩の天馬王','🦄',4,'bs',0xfff0ff,0xff7ad8,0x7affee,{w:1,m:1,rainbow:1,big:1,horn:1,orn:2}]
+];
+const SMN=SMS.length,smIds=r=>SMS.map((_,i)=>i).filter(i=>SMS[i][2]==r);
+const SG={},sg=(k,f)=>SG[k]||(SG[k]=f());
+const gB=()=>sg('b',()=>new T.BoxGeometry(1,1,1)),gS=()=>sg('s',()=>new T.SphereGeometry(1,12,9)),gC=()=>sg('c',()=>new T.ConeGeometry(1,1,6)),gY=()=>sg('y',()=>new T.CylinderGeometry(1,1,1,10)),gT=()=>sg('t',()=>new T.TorusGeometry(1,.07,6,32)),gO=()=>sg('o',()=>new T.OctahedronGeometry(1));
+const pp=(g,ge,mt,x,y,z,sx,sy,sz)=>{const o=new T.Mesh(ge,mt);o.position.set(x,y,z);o.scale.set(sx,sy==null?sx:sy,sz==null?sx:sz);g.add(o);return o},pvt=(g,x,y,z)=>{const o=new T.Group();o.position.set(x,y,z);g.add(o);return o};
+function sMats(s){const L=[],mk=(m,o)=>{m.transparent=true;m.opacity=o;L.push([m,o]);return m};
+ return{a:mk(new T.MeshPhongMaterial({color:s[4],emissive:s[4],emissiveIntensity:.22,shininess:50}),1),b:mk(new T.MeshPhongMaterial({color:s[5],emissive:s[5],emissiveIntensity:.2,shininess:30}),1),c:mk(new T.MeshBasicMaterial({color:s[6]}),1),k:mk(new T.MeshBasicMaterial({color:0x040408}),1),au:mk(new T.MeshBasicMaterial({color:s[6],depthWrite:false,blending:T.AdditiveBlending}),.14),mk:c=>mk(new T.MeshBasicMaterial({color:c}),1),L}}
+function smWings(g,K,x,y,z,s,A,n){n=n||4;for(const sd of[-1,1]){const w=pvt(g,x+sd*.3,y,z);for(let i=0;i<n;i++){const f=pp(w,gC(),i%2?K.b:K.a,sd*(.5+i*.32)*s,(.35-i*.22)*s,0,.15*s,(1.5-.17*i)*s,.05);f.rotation.z=-sd*(1.05+i*.24)}A.push(t=>{w.rotation.y=sd*(.4+Math.sin(t*2.2)*.22);w.rotation.z=sd*Math.sin(t*2.2)*.1})}}
+function smDeco(g,K,rt,A,h,r){const nG=[0,2,5,9,16][rt],rn=[0,0,1,2,3][rt],gm=[],rs=[];
+ for(let i=0;i<nG;i++)gm.push(pp(g,gO(),K.c,0,h,0,.12+rt*.03,.18+rt*.04,.12+rt*.03));
+ for(let i=0;i<rn;i++){const q=pp(g,gT(),K.c,0,h,0,r*(.95+i*.2));q.rotation.x=Math.PI/2+(i==1?.55:i==2?-.55:0);rs.push(q)}
+ if(rt>=3)pp(g,gS(),K.au,0,h,0,r*1.05);if(rt==4)pp(g,gS(),K.au,0,h,0,r*1.4);
+ A.push(t=>{gm.forEach((q,i)=>{const a=t*(.7+(i%3)*.15)+i/gm.length*6.283,rr=r*(.85+(i%3)*.17);q.position.set(Math.cos(a)*rr,h+Math.sin(t*1.3+i)*r*.35,Math.sin(a)*rr);q.rotation.y=t*2});rs.forEach((q,i)=>{q.rotation.z=t*(i%2?-.6:.5)})})}
+function bSp(g,K,o,A,ur,cl){const{a,b,c}=K,body=pvt(g,0,0,0);
+ pp(body,gC(),b,0,.55,0,.62,1.3,.62).rotation.x=Math.PI;pp(body,gB(),a,0,1.65,0,1.15,1.1,.62);pp(body,gB(),c,0,1.7,.33,.34,.34,.06);pp(body,gB(),b,0,1.08,0,.9,.28,.55);
+ const hd=pvt(body,0,2.55,0);pp(hd,gS(),a,0,0,0,.42,.46,.42);
+ if(o.v)pp(hd,gB(),c,0,.02,.36,.56,.1,.06);else{pp(hd,gS(),c,-.15,.04,.36,.07);pp(hd,gS(),c,.15,.04,.36,.07)}
+ for(const s of[-1,1]){pp(body,gS(),b,s*.8,2.12,0,.32,.26,.32);const ar=pvt(body,s*.85,2.1,0);pp(ar,gY(),a,0,-.5,0,.17,.8,.17);pp(ar,gS(),c,0,-1.1,.05,.22);A.push(t=>{ar.rotation.x=Math.sin(t*2+s)*.28-.25;ar.rotation.z=s*(.18+Math.sin(t*1.5)*.08)})}
+ for(let i=0;i<(o.a||0);i++)for(const s of[-1,1]){const ar=pvt(body,s*.7,1.95-i*.2,-.1),ph=i*1.3+(s>0?0:2),bs=s*(.45+i*.22);pp(ar,gY(),b,0,-.5,0,.13,.85,.13);pp(ar,gS(),c,0,-1.05,0,.17);A.push(t=>{ar.rotation.z=bs+Math.sin(t*2+ph)*.18;ar.rotation.x=-.35+Math.sin(t*1.7+ph)*.2})}
+ if(o.h)for(const s of[-1,1]){const h=pp(hd,gC(),c,s*.3,.38,0,.1,.55,.1);h.rotation.z=-s*.5}
+ if(o.c){for(let i=0;i<6;i++){const q=i/6*6.283;pp(hd,gC(),c,Math.sin(q)*.34,.62,Math.cos(q)*.34,.07,.3,.07)}pp(hd,gS(),c,0,.7,0,.1)}
+ if(o.o){const h=pp(body,gT(),c,0,2.6,-.5,.9);A.push(t=>{h.rotation.z=t*.8})}
+ if(o.k){const cp=pp(body,gB(),b,0,1.2,-.4,1.3,2.3,.07);cp.rotation.x=.12;A.push(t=>{cp.rotation.x=.12+Math.sin(t*2)*.06})}
+ if(o.w)smWings(body,K,0,2.0,-.35,cl?2:1.5,A,cl?5:4);
+ for(let i=0;i<(o.r||0);i++){const r=pp(body,gT(),c,0,1.3+i*.45,0,1.5+i*.15),sp=(i%2?-1:1)*(.8+i*.2);r.rotation.x=Math.PI/2;A.push(t=>{r.rotation.z=t*sp})}
+ if(cl){for(const s of[-1,1]){pp(body,gS(),b,s*1.0,2.2,0,.5,.4,.5);const sp=pp(body,gC(),c,s*1.15,2.65,0,.14,.8,.14);sp.rotation.z=-s*.5}for(let i=0;i<8;i++){const q=i/8*6.283,p=pp(body,gB(),b,Math.sin(q)*.6,.95,Math.cos(q)*.4,.34,.75,.06);p.rotation.y=q}pp(body,gS(),c,0,1.7,.4,.22)}}
+function bBs(g,K,o,A,ur,cl,id){const{a,b,c}=K,bd=pvt(g,0,0,0),Lg=[];
+ pp(bd,gS(),a,0,1.05,0,.62,.55,1.0);pp(bd,gS(),b,0,1.0,-.5,.52,.48,.5);pp(bd,gS(),a,0,1.2,.5,.45,.5,.5);
+ const mkH=x=>{const hd=pvt(bd,x,1.4,1.0);pp(hd,gS(),a,0,0,0,.42,.38,.45);pp(hd,gS(),b,0,-.1,.4,.22,.17,.26);pp(hd,gS(),c,-.17,.1,.34,.06);pp(hd,gS(),c,.17,.1,.34,.06);
+  for(const s of[-1,1]){const e=pp(hd,gC(),a,s*.24,.4+(o.e?.25:0),-.05,.1,.3+(o.e?.5:0),.08);e.rotation.z=-s*.25;
+   if(o.h){const h=pp(hd,gC(),c,s*.2,.45,-.1,.07,.55,.07);h.rotation.z=-s*.5;h.rotation.x=-.3}
+   if(o.antler){pp(hd,gC(),b,s*.2,.7,-.1,.06,.8,.06).rotation.z=-s*.3;for(let j=0;j<2;j++)pp(hd,gC(),b,s*(.3+j*.12),.75+j*.25,-.1,.05,.45,.05).rotation.z=-s*(.9+j*.2)}}
+  if(o.horn)pp(hd,gC(),c,0,.5,.3,.08,.9,.08).rotation.x=.9;
+  if(o.m||o.rainbow)for(let i=0;i<11;i++){const q=i/11*6.283,mt=o.rainbow?K.mk(hsv(i/11,1,.6).getHex()):b,p=pp(hd,gC(),mt,Math.sin(q)*.55,Math.cos(q)*.55,-.2,.13,.5,.13);p.rotation.z=-q}
+  return hd};
+ mkH(o.h2?-.4:0);if(o.h2)mkH(.4);
+ for(const fx of[.38,-.38])for(const fz of[.6,-.6]){const lg=pvt(bd,fx,.85,fz);pp(lg,gY(),a,0,-.42,0,.14,.8,.14);pp(lg,gB(),b,0,-.84,.05,.2,.1,.28);Lg.push([lg,fx*fz>0?0:Math.PI])}
+ A.push((t,mv)=>{Lg.forEach(([l,p])=>{l.rotation.x=mv?Math.sin(t*9+p)*.6:0})});
+ if(o.t==1){const sp=[];for(let i=0;i<6;i++)sp.push(pp(bd,gS(),i%2?c:a,0,1.3,-1,.28-.03*i));A.push(t=>{sp.forEach((q,i)=>{q.position.set(Math.sin(t*3+i*.6)*.18*i*.5,1.35+i*.17,-1-i*.22)})})}
+ else if(o.t>1)for(let k=0;k<o.t;k++){const p=pvt(bd,0,1.2,-.95),ch=[];p.rotation.order='YXZ';const ph=(k-(o.t-1)/2)/o.t*2.2;for(let i=0;i<5;i++)ch.push(pp(p,gS(),i>2?c:(k%2?a:b),0,i*i*.04,-(.25+i*.3),.24-.03*i));p.rotation.x=.35;A.push(t=>{p.rotation.y=ph+Math.sin(t*2.2+k)*.14})}
+ if(o.s)for(let i=0;i<4;i++)pp(bd,gS(),b,0,1.05,-.55+i*.38,.64,.57,.07);
+ if(o.sp)for(let i=0;i<5;i++)pp(bd,gC(),c,0,1.62-Math.abs(i-2)*.05,-.6+i*.3,.1,.4,.1);
+ if(o.w)smWings(bd,K,0,1.7,-.1,1.3,A,4);
+ if(o.shell){pp(bd,gS(),b,0,1.45,-.05,.78,.5,1.1);for(let i=0;i<6;i++){const q=i/6*6.283;pp(bd,gS(),c,Math.sin(q)*.5,1.75,Math.cos(q)*.7,.1)}}
+ if(o.c){for(let i=0;i<5;i++){const q=i/5*6.283;pp(bd,gC(),c,Math.sin(q)*.3,2.0,1.0+Math.cos(q)*.3,.07,.3,.07)}}
+ if(o.fl)for(let i=0;i<6;i++)pp(bd,gS(),K.mk(hsv(i/6,.7,.75).getHex()),(i%2?.4:-.4),1.7,-.5+i*.2,.12);
+ if(o.orn){const n=o.orn,cp=pvt(bd,0,1.65,0),ln=[];pp(cp,gB(),b,0,0,0,1.5,.12,1.9);
+  for(const x of[-.65,.65])for(const z of[-.8,.8])pp(cp,gY(),c,x,.55,z,.06,1.1,.06);
+  for(let t=0;t<=n;t++){const rr=1.5-t*.38;pp(cp,gC(),a,0,1.25+t*.5,0,rr,.55,rr).rotation.y=Math.PI/6;pp(cp,gT(),c,0,1.0+t*.5,0,rr*.95).rotation.x=Math.PI/2}
+  pp(cp,gS(),c,0,1.4+n*.55,0,.16);pp(cp,gC(),c,0,1.7+n*.55,0,.07,.5,.07);
+  for(let i=0;i<8;i++){const q=i/8*6.283,l=pp(cp,gS(),c,Math.sin(q)*1.05,.85,Math.cos(q)*1.2,.1);ln.push(l)}
+  for(let i=0;i<4;i++)pp(cp,gB(),i%2?b:a,[-.85,.85][i%2],.4,[-1,1][i>>1]*.95,.04,.5,.04);
+  A.push(t=>{ln.forEach((l,i)=>{l.position.y=.85+Math.sin(t*2+i)*.06})})}}
+function bDr(g,K,o,A,ur,cl){const{a,b,c}=K,N=o.n||10,HC=o.heads||1,chs=[],hds=[];
+ const mkSeg=(n,fat)=>{const s=[];for(let i=0;i<n;i++){const r=(fat?.75:.55)*(1-i/n*.7)+.08;s.push([pp(g,gS(),i%2?a:b,0,0,0,r,r*.9,r*1.1),pp(g,gC(),c,0,0,0,r*.3,r*.8,r*.2),r])}return s};
+ const mkHd=()=>{const hd=pvt(g,0,0,0);pp(hd,gS(),a,0,0,0,.5,.42,.6);pp(hd,gB(),b,0,-.1,.55,.4,.2,.5);pp(hd,gS(),c,-.25,.15,.35,.08);pp(hd,gS(),c,.25,.15,.35,.08);for(const s of[-1,1]){const h=pp(hd,gC(),c,s*.25,.4,-.3,.09,.6,.09);h.rotation.x=-.9;h.rotation.z=-s*.2}return hd};
+ const tail=mkSeg(HC>1?7:N,o.fat),tH=HC>1?null:mkHd();
+ const necks=[];if(HC>1)for(let k=0;k<HC;k++)necks.push({s:mkSeg(5,0),h:mkHd(),ph:(k-(HC-1)/2)*.9});
+ if(o.w)smWings(g,K,0,2.1,-.3,1.8,A,5);
+ A.push(t=>{tail.forEach(([m,f,r],i)=>{const x=Math.sin(t*2-i*.5)*.45*(.2+i/tail.length),y=1.6+Math.cos(t*2-i*.45)*.25-i*.04,z=-i*.62+(HC>1?-.3:.3);m.position.set(x,y,z);f.position.set(x,y+r*.9,z)});
+  if(tH){const m=tail[0][0];tH.position.set(m.position.x,m.position.y+.05,m.position.z+.6);tH.rotation.y=Math.sin(t*2)*.15}
+  necks.forEach((n,k)=>{n.s.forEach(([m,f,r],i)=>{const x=Math.sin(n.ph)*(.3+i*.55)+Math.sin(t*1.8+i*.6+k)*.15,y=1.7+i*.5,z=.3+i*.3;m.position.set(x,y,z);f.position.set(x,y+r*.9,z)});const L=n.s[4][0];n.h.position.set(L.position.x,L.position.y+.3,L.position.z+.4);n.h.rotation.x=.3})})}
+function bBd(g,K,o,A,ur,cl){const{a,b,c}=K,f=pvt(g,0,1.6,0);
+ pp(f,gS(),a,0,0,0,.45,.4,.9);pp(f,gS(),a,0,.2,.8,.3,.3,.3);pp(f,gC(),c,0,.15,1.2,.1,.35,.1).rotation.x=Math.PI/2;pp(f,gS(),c,-.14,.3,1.0,.06);pp(f,gS(),c,.14,.3,1.0,.06);
+ for(const sd of[-1,1]){const w=pvt(f,sd*.3,.1,.1);
+  if(o.butterfly){pp(w,gS(),a,sd*1.2,.05,.2,1.4,.05,.95);pp(w,gS(),b,sd*.9,.02,-.7,.95,.05,.7);pp(w,gS(),c,sd*2.0,.05,.2,.18)}
+  else for(let i=0;i<5;i++)pp(w,gS(),i%2?a:b,sd*(.8+i*.5),0,-i*.14,.8,.05,.32+(i<2?.1:0));
+  A.push(t=>{w.rotation.z=sd*Math.sin(t*(o.butterfly?3:6))*.6})}
+ if(o.tail){const n=o.tl||5;for(let i=0;i<n;i++){const p=pvt(f,0,0,-.7),ang=(i-(n-1)/2)*.28;p.rotation.order='YXZ';p.rotation.y=ang;pp(p,gC(),i%2?a:b,0,0,-1.0,.1,2,.1).rotation.x=-Math.PI/2;pp(p,gS(),c,0,0,-2.0,.14)}}
+ if(o.o)pp(f,gT(),c,0,.4,-.5,1.1);
+ A.push(t=>{f.position.y=1.6+Math.sin(t*2)*.12})}
+function bOb(g,K,o,A,ur,cl){const{a,b,c}=K,N=o.n||6,it=o.it||'or',c0=pvt(g,0,1.7,0),items=[];
+ pp(c0,gO(),c,0,0,0,.3,.45,.3);pp(c0,gS(),K.au,0,0,0,.9);
+ for(let i=0;i<N;i++){const q=pvt(g,0,0,0);
+  if(it=='bl'){pp(q,gC(),a,0,.6,0,.12,1.3,.05);pp(q,gB(),b,0,-.1,0,.34,.08,.1);pp(q,gY(),c,0,-.35,0,.05,.4,.05)}
+  else if(it=='or')pp(q,gS(),i%2?a:c,0,0,0,.22);
+  else if(it=='ft'){pp(q,gS(),i%2?a:b,0,.5,0,.1,.55,.03);pp(q,gS(),c,0,1.0,0,.07)}
+  else if(it=='st')pp(q,gO(),i%2?c:b,0,0,0,.2,.3,.2);
+  else if(it=='fl'){for(let j=0;j<4;j++){const p=pp(q,gS(),i%2?a:b,Math.sin(j*1.57)*.18,0,Math.cos(j*1.57)*.18,.18,.04,.1);p.rotation.y=j*1.57}pp(q,gS(),c,0,.02,0,.07)}
+  else if(it=='bk'){pp(q,gB(),a,0,0,0,.5,.07,.38);pp(q,gB(),b,0,.02,0,.44,.09,.34);pp(q,gS(),c,0,.1,0,.07)}
+  items.push(q)}
+ A.push(t=>{c0.rotation.y=t;items.forEach((q,i)=>{const an=t*.9+i/N*6.283,r=1.35+(ur?.3:0);q.position.set(Math.cos(an)*r,1.7+Math.sin(t*1.5+i)*.3,Math.sin(an)*r);q.rotation.y=-an;if(it=='bl')q.rotation.z=-1.2;else q.rotation.z=Math.sin(t+i)*.3})});
+ for(let i=0;i<(o.r||0);i++){const r=pp(g,gT(),c,0,1.7,0,1.9+i*.3);r.rotation.x=Math.PI/2+.4*i;A.push(t=>{r.rotation.z=t*(.6+i*.2)})}}
+function bMs(g,K,o,A,ur,cl){const{a,b,c,k}=K,f=pvt(g,0,1.8,0),eye=o.tent!=null,tn_=[];
+ if(eye){pp(f,gS(),b,0,0,0,1.1);pp(f,gS(),c,0,0,.8,.62,.62,.35);pp(f,gS(),k,0,0,1.02,.26,.5,.1);pp(f,gT(),a,0,0,.2,1.2).rotation.z=0;for(let i=0;i<12;i++){const q=i/12*6.283,p=pp(f,gC(),a,Math.sin(q)*1.25,Math.cos(q)*1.25,.1,.08,.35,.08);p.rotation.z=-q}
+  const n=o.tent;for(let i=0;i<n;i++){const s=[],bx_=(i-(n-1)/2)*.28;for(let j=0;j<6;j++)s.push(pp(g,gS(),j%2?a:b,0,0,0,.22-.025*j));tn_.push([s,bx_,i])}}
+ else{pp(f,gS(),b,0,0,0,.9,1.1,.5);for(const s of[-1,1]){const e=pp(f,gB(),c,s*.32,.22,.46,.3,.09,.05);e.rotation.z=-s*.3;const h=pp(f,gC(),a,s*.6,.95,0,.14,.8,.14);h.rotation.z=-s*.5;pp(f,gS(),a,s*.55,-.1,.4,.12)}for(let i=0;i<6;i++)pp(f,gC(),c,-.4+i*.16,-.55,.42,.05,.2,.05).rotation.z=Math.PI;
+  for(let i=0;i<4;i++){const s=[];for(let j=0;j<5;j++)s.push(pp(g,gS(),a,0,0,0,.18-.02*j));tn_.push([s,(i-1.5)*.35,i])}}
+ A.push(t=>{f.position.y=1.8+Math.sin(t*1.8)*.15;tn_.forEach(([s,x0,i])=>{s.forEach((m,j)=>{m.position.set(x0+Math.sin(t*2+j*.7+i)*.18*j,1.1-j*.34,.1+Math.cos(t*1.6+j*.5+i)*.1*j)})});if(eye)f.rotation.y=Math.sin(t*.9)*.3});
+ for(let i=0;i<(o.r||0);i++){const r=pp(g,gT(),c,0,1.8,0,1.9+i*.35);r.rotation.x=Math.PI/2+.5*i;A.push(t=>{r.rotation.z=t*(.5+i*.2)})}}
+const SMB_={sp:bSp,cl:bSp,bs:bBs,dr:bDr,bd:bBd,ob:bOb,ms:bMs};
+function buildSum(i){const s=SMS[i],rt=s[2],ty=s[3],o=s[7]||{},K=sMats(s),g=new T.Group(),body=new T.Group(),A=[],gnd=ty=='bs',ur=rt==4;g.add(body);
+ SMB_[ty](body,K,o,A,ur,ty=='cl',i);
+ smDeco(body,K,rt,A,gnd?1.4:1.8,gnd?2.0:2.2);
+ const sc=[0,.55,.72,.95,1.5][rt]*(o.big?1.25:1)*(ty=='cl'?1.15:1);body.scale.setScalar(sc);
+ const r={sp:2.1,cl:2.4,bs:2.3,dr:3.2,bd:2.4,ob:2.2,ms:2.2}[ty]*sc;
+ return{g,gnd,sc,r,cy:(gnd?1.1:1.7)*sc,L:K.L,sd:i%2?1:-1,up:(t,mv)=>A.forEach(f=>f(t,mv))}}
+// ---- サムネイル ----
+const STH={};
+function sumThumb(i,w=170,h=210){const k=i+'_'+w;if(STH[k]!==undefined)return STH[k];STH[k]=null;
+ try{const b=buildSum(i),tg=new T.WebGLRenderTarget(w,h),cam=new T.PerspectiveCamera(30,w/h,.1,200),d=b.r*3.3;
+  b.g.position.set(70,0,0);b.g.rotation.y=.35;S.add(b.g);b.up(1.3,false);b.g.updateMatrixWorld(true);
+  cam.position.set(70+d*.3,b.cy+d*.1,d*.95);cam.lookAt(70,b.cy,0);
+  const bg=S.background,fg=S.fog;S.background=null;S.fog=null;R.setRenderTarget(tg);R.clear();R.render(S,cam);
+  const px=new Uint8Array(w*h*4);R.readRenderTargetPixels(tg,0,0,w,h,px);R.setRenderTarget(null);S.background=bg;S.fog=fg;S.remove(b.g);tg.dispose();b.L.forEach(([m])=>m.dispose());
+  const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d'),im=x.createImageData(w,h);for(let y=0;y<h;y++)im.data.set(px.subarray((h-1-y)*w*4,(h-y)*w*4),y*w*4);x.putImageData(im,0,0);STH[k]=c.toDataURL()}
+ catch(e){try{R.setRenderTarget(null)}catch(_){}}
+ return STH[k]}
+// ---- ついてくる召喚体 ----
+const SU={g:null,b:null,k:-1,first:1,f:1,pf:1,px:0,pz:0};
+const sumCam=()=>SU.b&&mode=='home'?Math.max(0,SU.b.sc-.8)*3.2:0;
+function sumTick(dt,t){const i=D.su;
+ if(i==null||i<0||!SMS[i]||!me||!me.parent||mode=='res'||mode=='trans'){if(SU.g&&SU.g.parent)SU.g.parent.remove(SU.g);return}
+ if(SU.k!=i||!SU.b){if(SU.g&&SU.g.parent)SU.g.parent.remove(SU.g);if(SU.b)SU.b.L.forEach(([m])=>m.dispose());SU.b=buildSum(i);SU.g=SU.b.g;SU.k=i;SU.first=1;SU.f=1;SU.pf=-1}
+ const par=me.parent,g=SU.g,b=SU.b;if(g.parent!==par){if(g.parent)g.parent.remove(g);par.add(g);SU.first=1}
+ const ry=me.rotation.y,s=b.sc,back=b.gnd?1.5+s*1.2:1.0+s*.9,side=(b.gnd?1.2+s*.9:.5+s*.6)*b.sd,
+  tx=me.position.x-Math.sin(ry)*back+Math.cos(ry)*side,tz=me.position.z-Math.cos(ry)*back-Math.sin(ry)*side;
+ if(SU.first){g.position.set(tx,0,tz);g.rotation.y=ry;SU.px=tx;SU.pz=tz;SU.first=0}
+ const k=Math.min(1,dt*(b.gnd?4:5)),ox=g.position.x,oz=g.position.z;g.position.x+=(tx-ox)*k;g.position.z+=(tz-oz)*k;
+ const sp=Math.hypot(g.position.x-ox,g.position.z-oz)/Math.max(dt,.001),mv=sp>.8;
+ const hd=b.gnd&&mv?Math.atan2(g.position.x-ox,g.position.z-oz):ry,dd=((hd-g.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;g.rotation.y+=dd*Math.min(1,dt*6);
+ g.position.y=b.gnd?Math.max(0,me.position.y)*.0:me.position.y+.15+Math.sin(t*1.6)*.1*s;
+ b.up(t,mv);
+ const cp=C.position,d=Math.hypot(cp.x-g.position.x,cp.y-(g.position.y+b.cy),cp.z-g.position.z),f=Math.max(.22,Math.min(1,(d-b.r*.45)/(b.r*.75)));
+ SU.f+=(f-SU.f)*Math.min(1,dt*6);if(Math.abs(SU.f-SU.pf)>.015){SU.pf=SU.f;b.L.forEach(([m,o])=>m.opacity=o*SU.f)}}
+// ---- ガチャ処理 ----
+const smPick=()=>{const a=smIds(4);return a[Math.floor((jst().getTime()+7*864e5)/(7*864e5))%a.length]};
+function sumDraw(k,pool){const res=[],pk=smPick();pool=pool.slice();
+ for(let n=0;n<k;n++){D.spy=(D.spy||0)+1;let want=0;
+  if(D.spy>=SMP&&pool.some(i=>SMS[i][2]==4))want=4;else if(k==10&&n==9&&!res.some(i=>SMS[i][2]>=3)&&pool.some(i=>SMS[i][2]>=3))want=3;
+  const cand=want?pool.filter(i=>SMS[i][2]>=want):pool,w=cand.map(i=>SMW[SMS[i][2]]*(i==pk?3:1));let r=Math.random()*w.reduce((a,b)=>a+b,0),j=0;while(j<w.length-1&&(r-=w[j])>=0)j++;
+  const id=cand[j];pool.splice(pool.indexOf(id),1);res.push(id);if(SMS[id][2]==4)D.spy=0}
+ return res}
+function sumPull(k){if(gcB)return;const pool=SMS.map((_,i)=>i).filter(i=>!D.sm.includes(i));if(!pool.length)return toast('召喚体は全種そろっています');k=Math.min(k,pool.length);
+ const cost=k==10?SMC*9:SMC*k;if(D.coin<cost)return toast('🪙 コインが足りません');
+ gcB=1;D.coin-=cost;const res=sumDraw(k,pool);D.sm.push(...res);if(D.su<0)D.su=res[0];mq('gacha',k);save();updInfo();sumFx(res,()=>{gcB=0;sdex()})}
+function sumFx(res,done){const v=$('gcv'),k=res.length,best=Math.max(...res.map(i=>SMS[i][2])),col=RC4[best];sh('gcv',1);
+ v.innerHTML=`<div class="gcbg"></div><div class="smc" style="--mc:${col}"></div><div class="gct">🌀 召喚中…！</div>`;
+ tn(90,1.8,'sawtooth',.08,0,900);noiseB(1.6,.1,150,3500);shake();
+ setTimeout(()=>{flash(best==4?'#ff9af0':'#ffffff');shake();confetti(best>=3?130:60);SE.lvl();tn(60,.6,'sine',.6,0,30);noiseB(.4,.3,3000,200);if(best==4)setTimeout(()=>{tn(200,1.2,'sawtooth',.12,0,800);flash('#ffe14d');confetti(80)},350);
+  const th=res.map(i=>sumThumb(i,k==1?220:150,k==1?270:190));
+  v.innerHTML=`<div class="gcbg on"></div><div class="gcrays"></div><div class="gcban">🌀 ${best==4?'👑UR ':''}召喚成功！${k>1?k+'体':''}</div><div class="gcg k${k==1?1:10}">${res.map((i,j)=>`<div class="gcc" style="animation-delay:${.25+j*.16}s;box-shadow:0 4px 0 #000,0 0 16px ${RC4[SMS[i][2]]}">${th[j]?`<img alt="" src="${th[j]}">`:`<div class="gce">${SMS[i][1]}</div>`}<div class="gcn" style="color:${RC4[SMS[i][2]]}">${RN4[SMS[i][2]]} ${esc(SMS[i][0])}</div></div>`).join('')}</div><div class="gcbt">${k==1?'<div class="btn grn" id="gceq">装備する</div>':''}<div class="btn" id="gcok">OK</div></div>`;
+  res.forEach((_,j)=>se(700+j*70,.1,'triangle',.1));
+  $('gcok').onclick=()=>{SE.btn();sh('gcv',0);v.innerHTML='';done&&done()};
+  if(k==1)$('gceq').onclick=()=>{D.su=res[0];save();toast('🌀 召喚！');$('gcok').click()}},1900)}
+function sumClaim(key){const cl=D.sc;if(cl.includes(key))return;let ok,coin;
+ if(key[0]=='m'){const m=SMM[+key.slice(1)];ok=D.sm.length>=m[0];coin=m[1]}else{const r=+key.slice(1);ok=smIds(r).every(i=>D.sm.includes(i));coin=SMB[r]}
+ if(!ok)return;cl.push(key);D.coin+=coin;save();updInfo();SE.lvl();burst();toast('🎁 +'+coin+' コイン');sdex()}
+function sdex(){const own=D.sm,n=own.length,left=SMN-n,cl=D.sc,pk=smPick(),im=sumThumb(pk,200,260);
+ let h=`<div class="dxt"><div class="dxb" data-dx="0"><i>📚</i>図鑑</div><div class="dxb" data-dx="1"><i>🎰</i>ガチャ</div><div class="dxb on" data-dx="2"><i>🌀</i>召喚</div></div>`;
+ h+=`<div id="gch" style="text-align:center;font-weight:900;margin:10px 0">🪙 ${D.coin}</div>`;
+ const cnt=[1,2,3,4].map(r=>`<span style="color:${RC4[r]}">${RN4[r]} ${smIds(r).filter(i=>own.includes(i)).length}/${smIds(r).length}</span>`).join('　');
+ h+=`<div class="card gcs mys"><div class="gcl"><div class="gcst">🌀 召喚ガチャ</div><div class="gcds">${left?'背後に付いてくる召喚体を呼び出そう！全'+SMN+'体、ハズレなし。UR(ウルトラレア)は特大サイズ！当たり判定は本人だけです。':'🎉 全種コンプリート！'}</div><div class="gcct">${cnt}</div><div class="gcct">🎯 UR確定まで あと<b>${Math.max(0,SMP-(D.spy||0))}</b>回</div><div class="gcct">⭐今週のピックアップ: ${SMS[pk][1]} <b>${esc(SMS[pk][0])}</b> (出やすい!)</div><div class="gcct">10連はSR以上が1体確定！</div><div class="gcbr"><div class="btn big${left?'':' dis'}" data-sg="1">1回召喚　🪙${SMC}</div><div class="btn big red${left?'':' dis'}" data-sg="10">10連召喚　🪙${SMC*9}</div></div></div><div class="gcim">${im?`<img alt="" src="${im}">`:`<div class="gce">🌀</div>`}</div></div>`;
+ const cur=SMS[D.su];
+ h+=`<div class="pill" style="justify-content:center;margin:8px auto;width:max-content;font-size:15px">召喚図鑑 ${n}/${SMN}</div><div class="bar"><i style="width:${n/SMN*100}%"></i></div><div class="small" style="text-align:center;margin:6px 0">${cur?`装備中: ${cur[1]} <b>${esc(cur[0])}</b>　<span class="btn xs gry" data-so="1">はずす</span>`:'装備なし(下の図鑑でタップして装備)'}</div>`;
+ h+=`<div class="sec" style="text-align:center">🎁 コンプ率報酬</div><div style="display:flex;gap:6px;margin:4px 0 8px;flex-wrap:wrap;justify-content:center">`+SMM.map((m,i)=>{const ok=n>=m[0],got=cl.includes('m'+i);return `<div class="btn xs ${got?'dis':ok?'grn':'gry'}" ${ok&&!got?`data-sm="m${i}"`:''}>${m[0]}体<br>🪙${m[1]}${got?' ✔':''}</div>`}).join('')+[1,2,3,4].map(r=>{const ok=smIds(r).every(i=>own.includes(i)),got=cl.includes('r'+r);return `<div class="btn xs ${got?'dis':ok?'grn':'gry'}" ${ok&&!got?`data-sm="r${r}"`:''} style="color:${RC4[r]}">${RN4[r]}全種<br>🪙${SMB[r]}${got?' ✔':''}</div>`}).join('')+'</div>';
+ h+=[4,3,2,1].map(r=>{const ids=smIds(r);return `<div class="sec" style="color:${RC4[r]}">${RN4[r]} ${ids.filter(i=>own.includes(i)).length}/${ids.length}</div><div class="dxg">`+ids.map(i=>{const o=own.includes(i),on=D.su==i;return `<div class="dxc${o?'':' lk'}" ${o?`data-sq="${i}"`:''} style="${o?'border-color:'+RC4[r]+';':''}${on?'box-shadow:0 0 0 3px #fff,0 0 14px '+RC4[r]:''}"><div class="dxe">${SMS[i][1]}</div><div class="dxn">${o?esc(SMS[i][0]):'???'}</div></div>`}).join('')+'</div>'}).join('');
+ modal('📚 図鑑 / 🎰 ガチャ',h)}
+$('mb').addEventListener('click',e=>{const g=e.target.closest('[data-sg]');if(g){sumPull(+g.dataset.sg);return}
+ const q=e.target.closest('[data-sq]');if(q){const i=+q.dataset.sq;D.su=D.su==i?-1:i;save();SE.btn();toast(D.su<0?'召喚体をはずしました':'🌀 '+SMS[i][0]+' を召喚！');sdex();return}
+ const m=e.target.closest('[data-sm]');if(m){sumClaim(m.dataset.sm);return}if(e.target.closest('[data-so]')){D.su=-1;save();SE.btn();sdex()}});
+
 camP.set(0,1.7,5.6);camL.set(-.3,1.3,0);
 evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{bbBonus();if(!stS().cl&&mode=='home')stamp()});
 })();
