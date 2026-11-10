@@ -638,7 +638,7 @@ i.rsp{position:absolute!important;bottom:-24px;pointer-events:none;font-style:no
 #crst{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 12px;max-width:100%;box-sizing:border-box;height:auto;padding:5px 12px;line-height:1.3;font-size:clamp(11px,3.5vw,15px)}
 #crst .crc{white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
 .exc.exday{background:linear-gradient(160deg,#7a5a10,#2a1a05)}.exc.exday .exi{font-size:32px}
-</style><style>.smc{width:190px;height:190px;border-radius:50%;border:4px dashed var(--mc,#b06aff);box-shadow:0 0 40px var(--mc,#b06aff),inset 0 0 40px var(--mc,#b06aff);animation:smsp 1.2s linear infinite;position:relative}.smc:before,.smc:after{content:'';position:absolute;inset:26px;border:3px solid var(--mc,#b06aff)}.smc:after{transform:rotate(45deg)}@keyframes smsp{to{transform:rotate(360deg)}}</style>
+</style><style>.smc{width:190px;height:190px;border-radius:50%;border:4px dashed var(--mc,#b06aff);box-shadow:0 0 40px var(--mc,#b06aff),inset 0 0 40px var(--mc,#b06aff);animation:smsp 1.2s linear infinite;position:relative}.smc:before,.smc:after{content:'';position:absolute;inset:26px;border:3px solid var(--mc,#b06aff)}.smc:after{transform:rotate(45deg)}@keyframes smsp{to{transform:rotate(360deg)}}#frnc{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 64px);transform:translateX(-50%);z-index:99999;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}.frn{background:linear-gradient(#2a8a4a,#14502a);color:#fff;border:3px solid #000;border-radius:14px;padding:7px 14px;font-weight:900;font-size:14px;box-shadow:0 4px 0 #000;text-shadow:0 1px 0 #000;animation:frin .35s both}@keyframes frin{from{transform:translateY(-16px) scale(.9);opacity:0}}</style>
 </head><body><div id="hzv"></div><div id="bbn"></div><canvas id="bbfx"></canvas><div id="rg"><div id="rgt"></div></div><div id="bbb"></div>
 <div id="ui">
 <div id="tb" data-m="h"><div id="tbl"><img id="fav" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><div id="tbi"><div id="pname"></div><div class="lvl"><b id="plv" class="lvb"></b><div class="bar"><i id="pxp"></i></div></div><div id="rkrow"><div id="pbest"></div><div id="rkp" class="pill"><span>🏆</span><b id="rk">--</b></div></div><div id="frb" class="btn">👥 フレンド</div></div></div><div id="tbm"></div></div>
@@ -2648,7 +2648,21 @@ $('mb').addEventListener('click',e=>{const g=e.target.closest('[data-sg]');if(g)
  const q=e.target.closest('[data-sq]');if(q){const i=+q.dataset.sq;D.su=D.su==i?-1:i;save();SE.btn();toast(D.su<0?'召喚体をはずしました':'🌀 '+SMS[i][0]+' を召喚！');sdex();return}
  const m=e.target.closest('[data-sm]');if(m){sumClaim(m.dataset.sm);return}if(e.target.closest('[data-so]')){D.su=-1;save();SE.btn();sdex()}});
 
+// ===== フレンドのオンライン通知 (ログイン時 + オンラインになった時) =====
+const FW={ids:[],ft:0,on:null,pr:{},busy:0,run:0};
+function frBanner(txt){let c=$('frnc');if(!c){c=document.createElement('div');c.id='frnc';document.body.appendChild(c)}const d=document.createElement('div');d.className='frn';d.textContent=txt;c.appendChild(d);try{SE.pon()}catch(e){}setTimeout(()=>d.remove(),4200)}
+async function frPoll(){if(FW.busy||document.hidden)return;FW.busy=1;
+ try{await auth();const me_=uid(),n=Date.now();
+  if(n-FW.ft>18e4){const rows=await sbf('/rest/v1/friendships?select=a,b&status=eq.accepted');FW.ids=[...new Set(rows.map(r=>r.a==me_?r.b:r.a))];FW.ft=n}
+  if(!FW.ids.length){FW.on=FW.on||new Set();return}
+  const ps=await sbf('/rest/v1/profiles?select=id,name,seen&id=in.('+FW.ids.join(',')+')'),now=new Set();
+  ps.forEach(p=>{FW.pr[p.id]=p.name;if(n-new Date(p.seen)<7e4)now.add(p.id)});
+  const nm=a=>a.map(i=>FW.pr[i]||'フレンド');
+  if(FW.on===null){const l=nm([...now]);if(l.length)frBanner('🟢 オンラインのフレンド: '+l.slice(0,3).join('、')+(l.length>3?' 他'+(l.length-3)+'人':''))}
+  else{[...now].filter(i=>!FW.on.has(i)).forEach(i=>frBanner('🟢 '+(FW.pr[i]||'フレンド')+' さんがオンラインになりました'))}
+  FW.on=now}catch(e){}finally{FW.busy=0}}
+function frWatchStart(){if(FW.run)return;FW.run=1;setTimeout(frPoll,2500);setInterval(frPoll,3e4)}
 camP.set(0,1.7,5.6);camL.set(-.3,1.3,0);
-evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{bbBonus();if(!stS().cl&&mode=='home')stamp()});
+evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{frWatchStart();bbBonus();if(!stS().cl&&mode=='home')stamp()});
 })();
 </script></body></html>
