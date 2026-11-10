@@ -1366,7 +1366,7 @@ const fr=new T.Mesh(new T.BoxGeometry(10.6,5.6,.3),new T.MeshPhongMaterial({colo
 const scr=new T.Mesh(new T.PlaneGeometry(10,5),new T.MeshBasicMaterial({map:new T.CanvasTexture(cv)}));scr.position.set(0,3.2,-14.33);
 
 // ===== ホテル生成 =====
-const NSZ=[12,16,22],CS=9,HH=7;let N=12,op,W=[];
+const NSZ=[12,16,22],CS=9,HH=9;let N=12,op,W=[];
 const nb=c=>{const i=c/N|0,j=c%N,r=[];if(i<N-1)r.push(c+N);if(i)r.push(c-N);if(j<N-1)r.push(c+1);if(j)r.push(c-1);return r};
 const ctr=c=>[(c/N|0)*CS+CS/2,(c%N)*CS+CS/2],cellOf=p=>Math.max(0,Math.min(N-1,p.x/CS|0))*N+Math.max(0,Math.min(N-1,p.z/CS|0));
 let opn=new Set(),WG=null;const BC=new Map();
@@ -1468,7 +1468,7 @@ function start(s){if(BB&&!s)s=2;
  bm(.4,3,.4,gm2,gx-1.4,1.5,gz-2.3);bm(.4,3,.4,gm2,gx+1.4,1.5,gz-2.3);bm(3.2,.4,.4,gm2,gx,3.1,gz-2.3);
  const gm=new T.Mesh(new T.CylinderGeometry(1.4,1.4,HH,16,1,true),new T.MeshBasicMaterial({color:0xff2222,transparent:true,opacity:.35,fog:false}));gm.position.set(gx,HH/2,gz);hotel.add(gm);
  const gl=new T.PointLight(0xff2222,2,16);gl.position.set(gx,2,gz);hotel.add(gl);
- for(let i=0;i<5;i++){const [x,z]=ctr(RN()*N*N|0),p=new T.PointLight(0xffe3a0,.65,26);p.position.set(x,5.5,z);hotel.add(p)}
+ for(let i=0;i<5;i++){const [x,z]=ctr(RN()*N*N|0),p=new T.PointLight(0xffe3a0,.65,26);p.position.set(x,7.2,z);hotel.add(p)}
  buildWG();mergeStatic(hotel,new Set([gm]));
  const [sx,sz]=ctr(sc);pos.set(sx,0,sz);stPos=[sx,sz];rvT=0;jy=vy=0;
  E=['Aki','Ren','Mio','Sora'].map((n,k)=>{const sk=(k*29+7)%NB,g=av(sk),[x0,z0]=ctr(sc),an_=k*Math.PI/2+Math.PI/4,x=x0+Math.cos(an_)*1.1,z=z0+Math.sin(an_)*1.1;label(g,n);hotel.add(g);return{n,sk,g,p:new T.Vector3(x,0,z),tg:null,w:0,hold:0,ma:0,sus:0,an:3,tw:0,sl:rnd(12,35),so:0,dead:0,go:rnd(25,70)}});
@@ -2582,7 +2582,8 @@ function buildSum(i){const s=SMS[i],rt=s[2],ty=s[3],o=s[7]||{},K=sMats(s),g=new 
  smDeco(body,K,rt,A,gnd?1.4:1.8,gnd?2.0:2.2);
  const sc=[0,.55,.72,.95,1.5][rt]*(o.big?1.25:1)*(ty=='cl'?1.15:1);body.scale.setScalar(sc);
  const r={sp:2.1,cl:2.4,bs:2.3,dr:3.2,bd:2.4,ob:2.2,ms:2.2}[ty]*sc;
- return{g,gnd,sc,r,cy:(gnd?1.1:1.7)*sc,L:K.L,sd:i%2?1:-1,up:(t,mv)=>A.forEach(f=>f(t,mv))}}
+ if(gnd){pp(body,gT(),K.c,0,.05,0,1.5).rotation.x=Math.PI/2;pp(body,gT(),K.c,0,.05,0,1.0).rotation.x=Math.PI/2}
+ return{g,gnd,sc,r,h:({sp:3.4,cl:3.4,bs:3.2,dr:3,bd:2.4,ob:3.2,ms:3.2}[ty])*sc,cy:(gnd?1.1:1.7)*sc,L:K.L,sd:i%2?1:-1,up:(t,mv)=>A.forEach(f=>f(t,mv))}}
 // ---- サムネイル ----
 const STH={};
 function sumThumb(i,w=170,h=210){const k=i+'_'+w;if(STH[k]!==undefined)return STH[k];STH[k]=null;
@@ -2606,7 +2607,7 @@ function sumStep(U,tg,par,i,dt,t){
  const k=Math.min(1,dt*(b.gnd?4:5)),ox=g.position.x,oz=g.position.z;g.position.x+=(tx-ox)*k;g.position.z+=(tz-oz)*k;
  const sp=Math.hypot(g.position.x-ox,g.position.z-oz)/Math.max(dt,.001),mv=sp>.8;
  const hd=b.gnd&&mv?Math.atan2(g.position.x-ox,g.position.z-oz):ry,dd=((hd-g.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;g.rotation.y+=dd*Math.min(1,dt*6);
- g.position.y=b.gnd?0:tg.position.y+.15+Math.sin(t*1.6)*.1*s;
+ const lift=b.gnd?.8+s*.8:1.3+s*1.1,mx=par===hotel?HH-.3-b.h:99;g.position.y=tg.position.y+Math.max(.1,Math.min(lift,mx))+Math.sin(t*1.6)*.1*s;
  b.up(t,mv);
  const cp=C.position,d=Math.hypot(cp.x-g.position.x,cp.y-(g.position.y+b.cy),cp.z-g.position.z),f=Math.max(.55,Math.min(1,(d-b.r*.3)/(b.r*.6)));
  U.f+=(f-U.f)*Math.min(1,dt*6);if(Math.abs(U.f-U.pf)>.015){U.pf=U.f;b.L.forEach(([m,o])=>m.opacity=o*U.f)}}
