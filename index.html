@@ -638,7 +638,8 @@ i.rsp{position:absolute!important;bottom:-24px;pointer-events:none;font-style:no
 #crst{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 12px;max-width:100%;box-sizing:border-box;height:auto;padding:5px 12px;line-height:1.3;font-size:clamp(11px,3.5vw,15px)}
 #crst .crc{white-space:nowrap;display:inline-flex;align-items:center;gap:3px}
 .exc.exday{background:linear-gradient(160deg,#7a5a10,#2a1a05)}.exc.exday .exi{font-size:32px}
-</style><style>.smc{width:190px;height:190px;border-radius:50%;border:4px dashed var(--mc,#b06aff);box-shadow:0 0 40px var(--mc,#b06aff),inset 0 0 40px var(--mc,#b06aff);animation:smsp 1.2s linear infinite;position:relative}.smc:before,.smc:after{content:'';position:absolute;inset:26px;border:3px solid var(--mc,#b06aff)}.smc:after{transform:rotate(45deg)}@keyframes smsp{to{transform:rotate(360deg)}}#frnc{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 64px);transform:translateX(-50%);z-index:99999;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}.frn{background:linear-gradient(#2a8a4a,#14502a);color:#fff;border:3px solid #000;border-radius:14px;padding:7px 14px;font-weight:900;font-size:14px;box-shadow:0 4px 0 #000;text-shadow:0 1px 0 #000;animation:frin .35s both}@keyframes frin{from{transform:translateY(-16px) scale(.9);opacity:0}}</style>
+</style><style>.smc{width:190px;height:190px;border-radius:50%;border:4px dashed var(--mc,#b06aff);box-shadow:0 0 40px var(--mc,#b06aff),inset 0 0 40px var(--mc,#b06aff);animation:smsp 1.2s linear infinite;position:relative}.smc:before,.smc:after{content:'';position:absolute;inset:26px;border:3px solid var(--mc,#b06aff)}.smc:after{transform:rotate(45deg)}@keyframes smsp{to{transform:rotate(360deg)}}#frnc{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 64px);transform:translateX(-50%);z-index:99999;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}.frn{background:linear-gradient(#2a8a4a,#14502a);color:#fff;border:3px solid #000;border-radius:14px;padding:7px 14px;font-weight:900;font-size:14px;box-shadow:0 4px 0 #000;text-shadow:0 1px 0 #000;animation:frin .35s both}@keyframes frin{from{transform:translateY(-16px) scale(.9);opacity:0}}.rktabs{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;padding:2px 2px 8px;max-width:100%;-webkit-overflow-scrolling:touch}.rktabs .btn{flex:0 0 auto}.bgd{font-style:normal;font-size:10px;padding:1px 6px;border-radius:8px;border:2px solid #000;margin-left:4px;white-space:nowrap;flex:none}.bgd.r1{background:linear-gradient(#ffe14d,#c98a00);color:#3a2400}.bgd.r2{background:linear-gradient(#e8eef8,#8a94a8);color:#1a2030}
+#ssn{position:fixed;inset:0;z-index:100000;background:radial-gradient(circle at 50% 30%,#3a1a7a,#0a0620 70%);display:flex;align-items:center;justify-content:center;animation:ssin .6s both;overflow:auto}@keyframes ssin{from{opacity:0}}.ssb{width:min(92vw,420px);text-align:center;color:#fff;padding:20px 0}.sst{font-size:22px;font-weight:900;margin-bottom:14px;text-shadow:0 3px 0 #000,0 0 18px #ffd93b}.ssr{display:flex;align-items:center;gap:8px;padding:8px 12px;margin:6px 0;border:3px solid #000;border-radius:14px;background:#2a1f66;font-weight:900;animation:ssp .5s both}.ssr.p1{background:linear-gradient(#ffd93b,#a8721a);color:#3a2400;font-size:20px;box-shadow:0 0 24px #ffd93b}.ssr.p2{background:linear-gradient(#e8eef8,#7a8498);color:#1a2030}.ssr.p3{background:linear-gradient(#e8a060,#7a4a1a)}.ssr.me{outline:3px solid #7affb0}.ssr em{margin-left:auto;font-style:normal}.ssr b{min-width:38px}.ssr span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@keyframes ssp{from{transform:translateY(24px) scale(.8);opacity:0}}.sst2{margin:12px 0;font-size:18px;font-weight:900;color:#ffe14d;text-shadow:0 2px 0 #000;animation:ssp .6s both}</style>
 </head><body><div id="hzv"></div><div id="bbn"></div><canvas id="bbfx"></canvas><div id="rg"><div id="rgt"></div></div><div id="bbb"></div>
 <div id="ui">
 <div id="tb" data-m="h"><div id="tbl"><img id="fav" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="><div id="tbi"><div id="pname"></div><div class="lvl"><b id="plv" class="lvb"></b><div class="bar"><i id="pxp"></i></div></div><div id="rkrow"><div id="pbest"></div><div id="rkp" class="pill"><span>🏆</span><b id="rk">--</b></div></div><div id="frb" class="btn">👥 フレンド</div></div></div><div id="tbm"></div></div>
@@ -666,11 +667,11 @@ let RN=Math.random,SEEDV=1;const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.im
 const $=i=>document.getElementById(i),T=THREE,sh=(i,v)=>$(i).classList.toggle('hide',!v),rnd=(a,b)=>a+RN()*(b-a),ri=(a,b)=>Math.floor(rnd(a,b+1)),dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z),esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 // ===== データ & Supabase =====
 const SB={u:'https://tgftgxbvoksvljfsqwye.supabase.co',k:'sb_publishable_mGzKef4AynwpdYJQ7Zyl9Q_XOJsJcw2'};
-const DEF={name:'Player'+(1000+ri(0,8999)),lv:1,xp:0,coin:0,skins:[0],skin:0,sm:[],su:-1,sc:[],spy:0,best:0,str:0,last:'',vol:.6,sens:1};
+const DEF={name:'Player'+(1000+ri(0,8999)),lv:1,xp:0,coin:0,skins:[0],skin:0,sm:[],su:-1,sc:[],spy:0,ap:0,se:null,sh:[],best:0,str:0,last:'',vol:.6,sens:1};
 let D=JSON.parse(JSON.stringify(DEF)),ses=null,sy='ローカル保存',pt;
 try{Object.assign(D,JSON.parse(localStorage.uf||'{}'));ses=JSON.parse(localStorage.ufs||'null')}catch(e){}
 delete D.fr;
-function nz(){const d=D;if(!d.sm)d.sm=[];if(d.su==null)d.su=-1;if(!d.sc)d.sc=[];if(d.spy==null)d.spy=0;if(d.tk==null)d.tk=0;if(d.np==null)d.np=0;if(!d.nc)d.nc=[];if(d.nk==null)d.nk='';if(d.lr==null)d.lr='';if(d.lx==null)d.lx=0;if(!d.pf)d.pf=['simple','polaroid'];if(!d.pb)d.pb=[0,1,2,3];if(!d.pt)d.pt=[];if(d.ph==null)d.ph=0;if(d.mp==null)d.mp=0;if(d.fg==null)d.fg=0;if(d.ob==null)d.ob=0;if(d.ti==null)d.ti='';if(!d.tw)d.tw={best:0,runs:0,med:0,day:'',wk:'',wb:0};if(!d.cr)d.cr={d:'',f:2};if(!d.nw)d.nw={};if(!d.rm)d.rm={own:{c13:1,c10:1,w1:1},pl:[{id:'c13',x:1,y:2,f:0},{id:'c10',x:3,y:1,f:0},{id:'w1',x:2,y:-1,f:0}],wl:0,fl:0,th:{w:[0,1],f:[0,1]},lc:Date.now()};if(!d.pe)d.pe={eggs:[{r:1,h:60,t:Date.now()}],pets:[],act:0,dex:[]}}
+function nz(){const d=D;if(d.ap==null)d.ap=0;if(!d.sh)d.sh=[];if(d.se===undefined)d.se=null;if(!d.sm)d.sm=[];if(d.su==null)d.su=-1;if(!d.sc)d.sc=[];if(d.spy==null)d.spy=0;if(d.tk==null)d.tk=0;if(d.np==null)d.np=0;if(!d.nc)d.nc=[];if(d.nk==null)d.nk='';if(d.lr==null)d.lr='';if(d.lx==null)d.lx=0;if(!d.pf)d.pf=['simple','polaroid'];if(!d.pb)d.pb=[0,1,2,3];if(!d.pt)d.pt=[];if(d.ph==null)d.ph=0;if(d.mp==null)d.mp=0;if(d.fg==null)d.fg=0;if(d.ob==null)d.ob=0;if(d.ti==null)d.ti='';if(!d.tw)d.tw={best:0,runs:0,med:0,day:'',wk:'',wb:0};if(!d.cr)d.cr={d:'',f:2};if(!d.nw)d.nw={};if(!d.rm)d.rm={own:{c13:1,c10:1,w1:1},pl:[{id:'c13',x:1,y:2,f:0},{id:'c10',x:3,y:1,f:0},{id:'w1',x:2,y:-1,f:0}],wl:0,fl:0,th:{w:[0,1],f:[0,1]},lc:Date.now()};if(!d.pe)d.pe={eggs:[{r:1,h:60,t:Date.now()}],pets:[],act:0,dex:[]}}
 function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=60+i*15});D.skins=[0];D.skin=0;D.sv=2}
  // v3: 一度だけ名前を初期の「Player」に戻す(レベル・コイン・スキン・記録などは一切変更しない)。sv=3 を保存するので2回目以降は実行されず、名前は自由に変更できる
  if((D.sv||0)<3){D.name='Player'+(1000+Math.floor(Math.random()*9000));D.sv=3;try{localStorage.uf=JSON.stringify(D)}catch(e){}}
@@ -679,9 +680,11 @@ function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=
 let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 async function sbf(p,m='GET',b,h={},na){const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));if(Array.isArray(j))j.forEach(decTag);return j}
 function decTag(o){if(!o||typeof o.name!='string')return;const k=o.name.indexOf('\u2063');if(k<0)return;const b=o.name.slice(k+1);o.name=o.name.slice(0,k);const sb=b.slice(0,10);if(sb.length==10){let v=0;for(const c of sb)v=v*2+(c=='\u200C'?1:0);if(o.skin==null)o.skin=v}
- if(b.length==15&&b[10]=='\u2064'){let f=0;for(const c of b.slice(11))f=f*4+Math.max(0,['\u200B','\u200C','\u200D','\u2060'].indexOf(c));o.tw=f}}
+ const Z=['\u200B','\u200C','\u200D','\u2060'],dz=q=>{let f=0;for(const c of q)f=f*4+Math.max(0,Z.indexOf(c));return f};let p=10;
+ if(b[p]=='\u2064'&&b.length>=p+5){o.tw=dz(b.slice(p+1,p+5));p+=5}
+ if(b[p]=='\u2061'&&b.length>=p+10){o.ap=dz(b.slice(p+1,p+6));const g=dz(b.slice(p+6,p+10));o.bg=g?{s:g>>2,r:g&3}:null}}
 var twOff=0;
-function pname(noTw){let t='\u2063';for(let b=9;b>=0;b--)t+=((D.skin>>b)&1)?'\u200C':'\u200B';const f=Math.min(255,(D.tw&&D.tw.best)||0);if(f>0&&!noTw&&!twOff){t+='\u2064';const Z=['\u200B','\u200C','\u200D','\u2060'];for(let b=6;b>=0;b-=2)t+=Z[(f>>b)&3]}return D.name+t}
+function pname(noTw){let t='\u2063';for(let b=9;b>=0;b--)t+=((D.skin>>b)&1)?'\u200C':'\u200B';const f=Math.min(255,(D.tw&&D.tw.best)||0);if(f>0&&!noTw&&!twOff){t+='\u2064';const Z=['\u200B','\u200C','\u200D','\u2060'];for(let b=6;b>=0;b-=2)t+=Z[(f>>b)&3]}const _ap=Math.min(1023,D.ap||0),_mb=myBadge(),_g=_mb?(((_mb.s&63)<<2)|_mb.r):0;if(_ap>0||_g){const Z2=['\u200B','\u200C','\u200D','\u2060'];t+='\u2061';for(let b=8;b>=0;b-=2)t+=Z2[(_ap>>b)&3];for(let b=6;b>=0;b-=2)t+=Z2[(_g>>b)&3]}return D.name+t}
 const uid=()=>ses&&ses.user&&ses.user.id;
 function setSes(x){ses=x;if(x)x.exp=Date.now()+(x.expires_in||3600)*1000-60000;try{localStorage.ufs=JSON.stringify(x)}catch(e){}}
 let authP=null;
@@ -1496,7 +1499,7 @@ function rsHTML(win,tt,gain){const gr=TW?(st>=15?'SS':st>=10?'S':st>=6?'A':st>=3
 function rsFx(win){const r=document.querySelector('#rs .rsx');if(!r)return;[250,380,500,900].forEach((d,j)=>setTimeout(()=>{if(mode=='res')se(480+j*120,.08,'square',.06)},d));for(let i=0;i<30;i++){const e=document.createElement('i');e.className='rsp';e.textContent=win?['⭐','🪙','✨','💫'][i%4]:['💀','🩸','💔'][i%3];e.style.left=Math.random()*100+'%';e.style.animationDelay=Math.random()*3+'s';e.style.fontSize=(14+Math.random()*18)+'px';r.appendChild(e)}if(win)[0,500,1000].forEach(d=>setTimeout(()=>{if(mode=='res')confetti(40)},d))}
 function result(win,quit){if(mode=='res')return;mode='res';if(!win)send({t:'dead',u:uid()});ambOn(0);sh('hud',0);sh('stick',0);win?(SE.clear(),confetti(90),flash(),shake()):SE.over();
  const tt=Math.round(sumT+tm),base=[30,50,80][df],nd=l=>l*50+50,gain=((quit&&(st<2||BB))?0:Math.round(win?(nd(D.lv)-D.xp)+nd(D.lv+1)+nd(D.lv+2)+ctb:BB?base+ctb:base*(.9+st*1.1)+tt*.4+ctb))*(evOn('mon')&&st>=2&&!BB?2:1);RSREC=win&&!BB&&(!D.best||tt<D.best);if(RSREC)D.best=tt;rsCn=win&&BB?BBR:0;if(win&&BB)D.coin+=BBR;
- rewardRun(win,quit,tt);$('rs').innerHTML=rsHTML(win,tt,gain);sh('rs',1);rsFx(win);
+ rewardRun(win,quit,tt);apAfter(win,quit);$('rs').innerHTML=rsHTML(win,tt,gain);sh('rs',1);rsFx(win);
  let cx=D.xp,cl=D.lv,left=gain;
  const iv=setInterval(()=>{const need=cl*50+50,a=Math.min(left,Math.max(1,need/14|0));cx+=a;left-=a;se(300+cx*3,.04,'square',.04);
   if(cx>=need){cx-=need;cl++;SE.lvl();D.coin+=50+cl*10;rsCn+=50+cl*10;if($('rsc')){sh('rscn',1);$('rsc').textContent=rsCn}burst();confetti(50);flash();shake();$('lvl').classList.remove('pop');void $('lvl').offsetWidth;$('lvl').classList.add('pop');setTimeout(updInfo,1100);$('lvl').textContent='Lv.'+cl+' UP!'}
@@ -1794,11 +1797,6 @@ async function frAct(a,id,c){if(a=='inv')return inviteFriend(id);if(a=='join'){s
  else{if(c&&!confirm('フレンドを削除しますか？'))return;await sbf('/rest/v1/friendships?id=eq.'+id,'DELETE');toast('削除しました')}if(cur=='n'){refreshFr();notif()}else friends()}catch(e){toast(/duplicate|unique/i.test(e.message)?'すでに申請済み/フレンドです':'失敗: '+e.message.slice(0,40))}}
 $('mb').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b){SE.btn();frAct(b.dataset.a,b.dataset.id,b.dataset.c)}const r=e.target.closest('[data-rk]');if(r){SE.btn();rank(r.dataset.rk)}});
 // ---- 世界ランキング ----
-async function rank(by){by=by||'best';modal('🏆 世界ランキング',`<div style="display:flex;gap:8px;justify-content:center"><div class="btn xs${by=='best'?'':' gry'}" data-rk="best">⏱ クリアタイム</div><div class="btn xs${by=='lv'?'':' gry'}" data-rk="lv">⭐ レベル</div><div class="btn xs${by=='tw'?'':' gry'}" data-rk="tw">🗼 タワー</div></div><div id="rkl" class="small" style="margin-top:8px">読み込み中…</div>`);
- try{await auth();const q=by=='best'?'best=gt.0&order=best.asc':by=='tw'?'order=seen.desc':'order=lv.desc';await pushProf().catch(()=>{});let ps=await sbf('/rest/v1/profiles?select=id,name,lv,best&'+q+'&limit='+(by=='tw'?500:50)),m=uid();
-  if(by=='tw'){ps.forEach(p=>{if(p.id==m)p.tw=(D.tw&&D.tw.best)||0});ps=ps.filter(p=>p.tw>0).sort((a,b)=>b.tw-a.tw||b.lv-a.lv).slice(0,50)}
-  $('rkl').outerHTML='<div id="rkl">'+(ps.map((p,i)=>`<div class="card rk${p.id==m?' me':''}${i<3?' t'+(i+1):''}"><b>${['🥇','🥈','🥉'][i]||i+1}</b>${rkIc(p)}${esc(p.name)}<span>${by=='best'?mmss(p.best):by=='tw'?p.tw+'階':'Lv.'+p.lv}</span></div>`).join('')||'<div class="small">まだ記録がありません</div>')+'<div class="small" style="margin-top:6px">'+(by=='tw'?'※🗼ふしぎタワーの最高とうたつ階です(新しいバージョンのプレイヤーから順に表示)':'※全3ステージ脱出の合計タイムが記録されます')+'</div><div class="small" style="margin-top:4px">🖼 アイコン取得 '+ps.filter(p=>p.skin!=null&&SKN[p.skin]).length+'/'+ps.length+'人 ・ 自分の送信 '+(iconSt=='ok'?'✅ 正常':'⚠ '+esc(iconSt||'未送信'))+'<br>※新しいバージョンを開いたプレイヤーから順にアイコンが表示されます</div></div>'}
- catch(e){$('rkl').textContent='取得失敗: '+e.message}}
 // ---- 設定/ガイド ----
 function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー名</div><div class="row" style="margin:2px 0"><input id="nm" maxlength="20" value="${esc(D.name)}"><div id="nms" class="btn xs grn">変更</div></div><div class="row">🔊 音量<input id="vo" type="range" min="0" max="1" step=".05" value="${D.vol}"></div><div class="row">🎮 操作感度<input id="ss" type="range" min=".5" max="1.5" step=".1" value="${D.sens}"></div><div class="card" style="padding:8px 12px;margin:10px 0;font-weight:900;font-size:13px">☁ この端末に自動保存＆クラウド同期　${sy}<div class="small">ログイン不要。データは端末に残ります</div></div><div style="text-align:center"><div id="rst" class="btn red">🗑 データ初期化</div></div>`);
  $('nms').onclick=()=>{const v=$('nm').value.trim().slice(0,20);if(!v)return toast('名前を入力してください');D.name=v;save();updInfo();SE.pon();beat();sendPos(1);toast('✅ 名前を「'+v+'」に変更')};
@@ -2232,10 +2230,10 @@ function mkCrane(){const o=mkOv('cr','🎪 ふしぎクレーン',`<div class="r
  $('crbuy').onclick=e=>{const b=e.target.closest('[data-cb]');if(!b)return;SE.btn();crStart(b.dataset.cb)};
  addEventListener('keydown',e=>{if($('cr').classList.contains('hide'))return;if(e.code=='ArrowLeft')CRG.dir=-1;else if(e.code=='ArrowRight')CRG.dir=1;else if(e.code=='Space'||e.code=='Enter')$('crd').click()});addEventListener('keyup',e=>{if(e.code=='ArrowLeft'&&CRG.dir==-1||e.code=='ArrowRight'&&CRG.dir==1)CRG.dir=0});return o}
 function crStart(k){if(CRG.st!='idle'||CRG.credit)return;const c=crDay();
- if(k=='free'){if(c.f<1)return;c.f--}else if(k=='coin'){if(D.coin<150)return toast('🪙 コインが足りません');D.coin-=150;D.crb=(D.crb||0)+1;updInfo()}else{if((D.tw.med||0)<10)return toast('🏅 メダルが足りません(🗼タワーでためよう)');D.tw.med-=10}
+ if(k=='free'){if(c.f<1)return;c.f--}else if(k=='coin'){if(D.coin<150)return toast('🪙 コインが足りません');D.coin-=150;D.crp=(D.crp||0)+.8;updInfo()}else{if((D.tw.med||0)<10)return toast('🏅 メダルが足りません(🗼タワーでためよう)');D.tw.med-=10}
  CRG.credit=1;D.crp=(D.crp||0)+1;CRG.x=200;save();crRender();toast('◀▶でうごかして「つかむ」！')}
-function crRender(){const c=crDay(),act=CRG.credit||CRG.st!='idle';$('crst').innerHTML=`<span class="crc">🪙 <b>${D.coin}</b></span><span class="crc">🏅 <b>${D.tw.med||0}</b></span><span class="crc">🎁 むりょう <b>${c.f}</b>回</span><span class="crc">💳 つかみ率ボーナス <b>+${Math.min(50,(D.crb||0)*2)}%</b></span><span class="crc">🛸 ジャックポット運 <b>${Math.min(100,Math.round((D.crp||0)/40*100))}%</b></span>`;
- $('crbuy').innerHTML=act?'<div class="small" style="text-align:center">あそび中…！</div>':`<div class="btn ${c.f>0?'grn':'dis'}" data-cb="free">🎁 むりょう (のこり${c.f})</div><div class="btn ${D.coin>=150?'':'dis'}" data-cb="coin">🪙 150 <small>(つかみ率+2%)</small></div><div class="btn ${(D.tw.med||0)>=10?'blu':'dis'}" data-cb="med">🏅 10</div>`;
+function crRender(){const c=crDay(),act=CRG.credit||CRG.st!='idle';$('crst').innerHTML=`<span class="crc">🪙 <b>${D.coin}</b></span><span class="crc">🏅 <b>${D.tw.med||0}</b></span><span class="crc">🎁 むりょう <b>${c.f}</b>回</span><span class="crc">🛸 ジャックポット運 <b>${Math.min(100,Math.round((D.crp||0)/40*100))}%</b></span>`;
+ $('crbuy').innerHTML=act?'<div class="small" style="text-align:center">あそび中…！</div>':`<div class="btn ${c.f>0?'grn':'dis'}" data-cb="free">🎁 むりょう (のこり${c.f})</div><div class="btn ${D.coin>=150?'':'dis'}" data-cb="coin">🪙 150 <small>(ジャックポット運+2%)</small></div><div class="btn ${(D.tw.med||0)>=10?'blu':'dis'}" data-cb="med">🏅 10</div>`;
  $('crd').classList.toggle('dis',!(CRG.credit&&CRG.st=='idle'));['crl','crr'].forEach(i=>$(i).classList.toggle('dis',!CRG.credit||CRG.st!='idle'))}
 function crUpd(dt){const G=CRG;
  if(G.st=='idle'){if(G.credit)G.x=Math.max(30,Math.min(340,G.x+G.dir*135*dt))}
@@ -2249,7 +2247,7 @@ const crTopP=p=>{let t=356;CRG.pr.forEach(q=>{if(Math.abs(q.x-p.x)<26)t=Math.min
 function crEval(){const G=CRG;let best=null,bd=99;G.pr.forEach(p=>{const d=Math.abs(p.x-G.x);if(d<bd&&p.y>=G.y-6){bd=d;best=p}});
  if(!best||bd>30){toast('くうぶり…！ もうすこし！');G.st='lift';G.slipDone=1;G.held=null;return}
  let ok=(.3+.7*(1-bd/30))*[1,1,.92,.78,.58][best.rt];if(best.rt==4){const pt=D.crp||0;ok=pt>=40?1:Math.min(.7,.015+pt*.012)*(.6+.4*(1-bd/30))}
- ok=Math.min(1,ok+Math.min(.5,(D.crb||0)*.02));if(Math.random()<ok){G.pr.splice(G.pr.indexOf(best),1);G.held=best;G.slipDone=0;G.slipY=140+Math.random()*120;G.slipP=best.rt==4?((D.crp||0)>=30?0:.4):(best.rt>=3?.22:.1)+bd/120;SE.pon();toast('つかんだ！')}else{toast('つかめなかった…！');if(best.rt==4){D.crp=(D.crp||0)+2;crRender()}G.held=null;G.slipDone=1}G.st='lift'}
+ if(Math.random()<ok){G.pr.splice(G.pr.indexOf(best),1);G.held=best;G.slipDone=0;G.slipY=140+Math.random()*120;G.slipP=best.rt==4?((D.crp||0)>=30?0:.4):(best.rt>=3?.22:.1)+bd/120;SE.pon();toast('つかんだ！')}else{toast('つかめなかった…！');if(best.rt==4){D.crp=(D.crp||0)+2;crRender()}G.held=null;G.slipDone=1}G.st='lift'}
 function crSlip(){const G=CRG;if(!G.held)return;toast('あっ！おちちゃった…');if(G.held.rt==4)D.crp=(D.crp||0)+2;G.fall={p:G.held,vy:0};G.held.x+=Math.random()*20-10;G.held=null;SE.trap()}
 function crEnd(ok,p){const G=CRG;G.credit=0;G.st='idle';G.cl=0;G.dir=0;mq('crane');if(ok&&p){crGive(p);crAdd(p.k=='jp')}else if(G.pr.length+(G.fall?1:0)<9)crAdd();if(!G.pr.some(q=>q.k=='jp')&&!G.fall)crAdd(1);save();crRender()}
 function crGive(p){let m='';if(p.k=='jp'){D.coin+=6000;D.tk=(D.tk||0)+5;D.tw.med=(D.tw.med||0)+50;giveEgg(2);D.crp=0;m='🛸 特大ジャックポット!!<br><small>🪙6000 🎫5 🏅50 🥚レア</small>';setTimeout(()=>{confetti(220);flash('#ffd93b')},300)}else if(p.k=='med'){D.tw.med=(D.tw.med||0)+p.v;m='🏅 メダル +'+p.v}else if(p.k=='fur'){rmGive(p.id);m=p.e+' '+p.n+'<br><small>マイルームに おけるよ！</small>'}else if(p.k=='coin'){D.coin+=p.v;m='💰 コイン +'+p.v}else if(p.k=='orb'){D.ob=(D.ob||0)+p.v;m='🔮 オーブ +'+p.v}else if(p.k=='egg'){giveEgg(p.r);m='🥚 '+p.n+'！<br><small>🐾ペットで孵化</small>'}else{D.tk=(D.tk||0)+1;m='🎫 ガチャチケット +1'}
@@ -2670,7 +2668,65 @@ async function frPoll(){if(FW.busy||document.hidden)return;FW.busy=1;
   else{[...now].filter(i=>!FW.on.has(i)).forEach(i=>frBanner('🟢 '+(FW.pr[i]||'フレンド')+' さんがオンラインになりました'))}
   FW.on=now}catch(e){}finally{FW.busy=0}}
 function frWatchStart(){if(FW.run)return;FW.run=1;setTimeout(frPoll,2500);setInterval(frPoll,3e4)}
+// ===== v11: AP / シーズン / バッジ =====
+const APC={win:20,cpu:6,close:3,lose:[-8,-6]},APM=1023;
+const curSeason=()=>{const j=jst();return(j.getUTCFullYear()-2026)*12+j.getUTCMonth()-9};
+const seasonLeft=()=>{const j=jst(),e=Date.UTC(j.getUTCFullYear(),j.getUTCMonth()+1,1);return Math.max(1,Math.ceil((e-j.getTime())/864e5))};
+const BGN={1:'元王者',2:'元準王者'};
+const myBadge=()=>{let b=null;(D.sh||[]).forEach(h=>{if(h.r<=2&&(!b||h.r<b.r||(h.r==b.r&&h.s>b.s)))b=h});return b};
+const bgHTML=g=>g&&BGN[g.r]?`<em class="bgd r${g.r}">${BGN[g.r]}</em>`:'';
+const apCmp=(a,b)=>(b.ap||0)-(a.ap||0)||((a.best>0?a.best:1e9)-(b.best>0?b.best:1e9))||(b.lv||0)-(a.lv||0)||(b.tw||0)-(a.tw||0);
+function apAfter(win,quit){if(TW)return;const cpu=!Object.keys(peers).length;let d;
+ if(win)d=cpu?APC.cpu:APC.win;else if(!quit&&st>=2)d=APC.close;else d=APC.lose[Math.min(1,st)];
+ const o=D.ap||0,n=Math.max(0,Math.min(APM,o+d));D.ap=n;save();
+ setTimeout(()=>{toast('🏆 AP '+(n-o>=0?'+':'')+(n-o)+'（合計 '+n+'）'+(win&&cpu?'　※CPUのみのクリアは獲得が少なめ':''));pushProf().catch(()=>{})},900)}
+async function apBoard(){await auth();await pushProf().catch(()=>{});const m=uid();
+ let ps=await sbf('/rest/v1/profiles?select=id,name,lv,best&order=seen.desc&limit=500');
+ ps=ps.filter(p=>typeof p.name=='string'&&p.name.slice(0,2)!='S|');
+ if(!ps.some(p=>p.id==m))ps.push({id:m,name:D.name});
+ ps.forEach(p=>{if(p.id==m){p.ap=D.ap||0;p.tw=(D.tw&&D.tw.best)||0;p.bg=myBadge();p.lv=D.lv;p.best=D.best||0;p.skin=D.skin}});
+ return ps.filter(p=>(p.ap||0)>0).sort(apCmp)}
+// ---- 世界ランキング(AP→クリアタイム→レベル→タワー / 40位まで) ----
+async function rank(by){by=by||'ap';const TB=[['ap','🏆 AP'],['best','⏱ クリアタイム'],['lv','⭐ レベル'],['tw','🗼 タワー']];
+ modal('🏆 世界ランキング',`<div class="rktabs">${TB.map(t=>`<div class="btn xs${by==t[0]?'':' gry'}" data-rk="${t[0]}">${t[1]}</div>`).join('')}<div class="btn xs blu" data-bdg="1">🏅 バッジ</div></div><div class="small" style="margin-top:6px;text-align:center">シーズン${curSeason()}・残り${seasonLeft()}日　あなたのAP <b>${D.ap||0}</b></div><div id="rkl" class="small" style="margin-top:8px">読み込み中…</div>`);
+ try{await auth();const m=uid();let ps;
+  if(by=='ap')ps=await apBoard();
+  else{await pushProf().catch(()=>{});const q=by=='best'?'best=gt.0&order=best.asc':by=='tw'?'order=seen.desc':'order=lv.desc';
+   ps=(await sbf('/rest/v1/profiles?select=id,name,lv,best&'+q+'&limit='+(by=='tw'?500:41))).filter(p=>typeof p.name=='string'&&p.name.slice(0,2)!='S|');
+   ps.forEach(p=>{if(p.id==m){p.tw=(D.tw&&D.tw.best)||0;p.bg=myBadge()}});
+   if(by=='tw')ps=ps.filter(p=>p.tw>0).sort((a,b)=>b.tw-a.tw||b.lv-a.lv)}
+  ps=ps.slice(0,40);
+  const nt=by=='ap'?'※AP(クリア・惜しい到達で上昇、ゲームオーバーで下降)の高い順。同点はクリアタイム→レベル→タワーの順':by=='tw'?'※🗼ふしぎタワーの最高とうたつ階です(新しいバージョンのプレイヤーから順に表示)':by=='best'?'※全3ステージ脱出の合計タイムが記録されます(シーズンごとにリセット)':'';
+  $('rkl').outerHTML='<div id="rkl">'+(ps.map((p,i)=>`<div class="card rk${p.id==m?' me':''}${i<3?' t'+(i+1):''}"><b>${['🥇','🥈','🥉'][i]||i+1}</b>${rkIc(p)}${esc(p.name)}${bgHTML(p.bg)}<span>${by=='best'?mmss(p.best):by=='tw'?p.tw+'階':by=='ap'?p.ap+' AP':'Lv.'+p.lv}</span></div>`).join('')||'<div class="small">まだ記録がありません</div>')+'<div class="small" style="margin-top:6px">'+nt+'</div><div class="small" style="margin-top:4px">※40位までを表示します</div><div class="small" style="margin-top:4px">🖼 アイコン取得 '+ps.filter(p=>p.skin!=null&&SKN[p.skin]).length+'/'+ps.length+'人 ・ 自分の送信 '+(iconSt=='ok'?'✅ 正常':'⚠ '+esc(iconSt||'未送信'))+'<br>※新しいバージョンを開いたプレイヤーから順にアイコンが表示されます</div></div>'}
+ catch(e){$('rkl').textContent='取得失敗: '+e.message}}
+// ---- バッジ欄 ----
+function badgeModal(){const sh=(D.sh||[]).slice().sort((a,b)=>b.s-a.s),tit=sh.filter(h=>h.r<=2);
+ modal('🏅 バッジ',`<div class="sec">🏅 称号バッジ</div>`+(tit.length?tit.map(h=>`<div class="card rk"><b>${h.r==1?'🥇':'🥈'}</b><em class="bgd r${h.r}">${BGN[h.r]}</em><span>シーズン${h.s}</span></div>`).join(''):'<div class="small">まだありません。シーズン1位・2位に入ると獲得できます</div>')+`<div class="sec">📜 シーズン入賞記録(5位以内)</div>`+(sh.length?sh.map(h=>`<div class="card rk"><b>${['🥇','🥈','🥉','4位','5位'][h.r-1]}</b>シーズン${h.s}<span>${h.r<=2?BGN[h.r]:''}</span></div>`).join(''):'<div class="small">まだ記録がありません</div>')+`<div class="small" style="margin-top:8px">ランキングのプロフに表示されるバッジ: ${bgHTML(myBadge())||'なし'}</div>`)}
+$('mb').addEventListener('click',e=>{if(e.target.closest('[data-bdg]')){SE.btn();badgeModal()}});
+// ---- シーズン結果発表(次シーズン初ログイン時に強制表示) ----
+const ssid=s=>'5ea50000-0000-4000-8000-'+String(s).padStart(12,'0');
+async function seasonBoard(fin){try{const r=await sbf('/rest/v1/profiles?select=id,name&id=eq.'+ssid(fin));if(r&&r[0]&&String(r[0].name).slice(0,2)=='S|')return JSON.parse(r[0].name.slice(2))}catch(e){}
+ const b=(await apBoard()).slice(0,5).map(p=>[p.id,String(p.name).slice(0,16),p.ap||0,p.skin==null?-1:p.skin]);
+ if(b.length)try{await sbf('/rest/v1/profiles?on_conflict=id','POST',{id:ssid(fin),name:'S|'+JSON.stringify(b),lv:0,best:0,seen:'2000-01-01T00:00:00Z'},MIN)}catch(e){}
+ return b}
+function seasonShow(fin,b,mi){return new Promise(res=>{const el=document.createElement('div'),me_=uid();el.id='ssn';
+ el.innerHTML=`<div class="ssb"><div class="sst">🏆 シーズン${fin} 結果発表 🏆</div><div id="ssl"></div><div id="ssx"></div></div>`;document.body.appendChild(el);
+ const L=el.querySelector('#ssl'),X=el.querySelector('#ssx'),order=[4,3,2,1,0].filter(i=>b[i]);let k=0;
+ try{tn(110,1.4,'sawtooth',.08,0,500);noiseB(1,.1,200,2000)}catch(e){}
+ const done=()=>{if(mi>=0&&mi<=1)X.innerHTML=`<div class="sst2">🏅 称号「${BGN[mi+1]}」を獲得！<br><small>ランキングのプロフにバッジが付きます</small></div>`;else if(mi>=0)X.innerHTML=`<div class="sst2">${mi+1}位入賞！おめでとう！</div>`;
+  X.innerHTML+='<div class="btn grn" id="ssok" style="margin-top:10px">OK</div>';try{if(mi>=0&&mi<=1){SE.lvl();confetti(100)}}catch(e){}el.querySelector('#ssok').onclick=()=>{SE.btn();el.remove();res()}};
+ const next=()=>{if(k>=order.length)return done();const i=order[k++],r=b[i],d=document.createElement('div');d.className='ssr p'+(i+1)+(r[0]==me_?' me':'');
+  d.innerHTML=`<b>${['🥇','🥈','🥉','4位','5位'][i]}</b>${rkIc({id:r[0],skin:r[3]>=0?r[3]:null})}<span>${esc(r[1])}</span><em>${r[2]} AP</em>`;L.appendChild(d);
+  try{if(i==0){SE.lvl();confetti(140);flash('#ffe14d');shake()}else if(i<3){SE.pon();confetti(40)}else se(480+i*70,.12,'triangle',.1)}catch(e){}
+  setTimeout(next,i==0?1500:i==1?2400:1300)};
+ setTimeout(next,1200)})}
+let ssBusy=0;
+async function seasonCheck(){if(ssBusy)return;ssBusy=1;try{const cur=curSeason();if(D.se==null||D.se>cur){D.se=cur;save();return}if(D.se>=cur)return;
+ await auth();const fin=cur-1,b=await seasonBoard(fin),mi=b.findIndex(r=>r[0]==uid());
+ if(b.length)await seasonShow(fin,b,mi);
+ if(mi>=0){D.sh=(D.sh||[]).filter(h=>h.s!=fin);D.sh.push({s:fin,r:mi+1})}
+ D.se=cur;D.best=0;save();updInfo();pushProf().catch(()=>{})}catch(e){}finally{ssBusy=0}}
 camP.set(0,1.7,5.6);camL.set(-.3,1.3,0);
-evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{frWatchStart();bbBonus();if(!stS().cl&&mode=='home')stamp()});
+evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{frWatchStart();setTimeout(seasonCheck,2500);bbBonus();if(!stS().cl&&mode=='home')stamp()});
 })();
 </script></body></html>
