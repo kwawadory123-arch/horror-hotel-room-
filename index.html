@@ -1865,12 +1865,12 @@ function joinRoom(r){if(!sbc)return;if(rch){try{sbc.removeChannel(rch)}catch(e){
 function send(o){if(rch)try{rch.send({type:'broadcast',event:'m',payload:o})}catch(e){}}
 function leaveRT(){send({t:'bye',u:uid()});if(room!=RID)joinRoom(RID);else clearPeers()}
 function sendPos(f){if(mode=='home')return;if(!f&&!Object.keys(peers).length&&room==RID)return;const L=mode=='lobby',m=L?'l':(mode=='game'||mode=='trans')?'g':'r',x=L?lp.x:pos.x,z=L?lp.z:pos.z;
- send({t:'p',pt:(a=>a?[a.sp,a.v,Math.min(a.lv,20)]:0)(petAct()),h:room==RID?1:0,f:df,u:uid(),n:D.name,s:D.skin,l:D.lv,m,st,x,z,r:me.rotation.y,j:jy,v:Math.hypot(x-px_,z-pz_)>.01?1:0});px_=x;pz_=z}
+ send({t:'p',pt:(a=>a?[a.sp,a.v,Math.min(a.lv,20)]:0)(petAct()),h:room==RID?1:0,f:df,u:uid(),n:D.name,s:D.skin,l:D.lv,m,st,x,z,r:me.rotation.y,j:jy,su:D.su,v:Math.hypot(x-px_,z-pz_)>.01?1:0});px_=x;pz_=z}
 function label(o,txt){const c=document.createElement('canvas');c.width=256;c.height=64;const x=c.getContext('2d');x.font='bold 34px sans-serif';x.textAlign='center';x.lineWidth=8;x.strokeStyle='#000';x.strokeText(txt,128,44);x.fillStyle='#fff';x.fillText(txt,128,44);
  const s=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),transparent:true,depthTest:false,fog:false}));s.scale.set(2,.5,1);s.position.y=2.4;s.renderOrder=9;if(o.userData.lb)o.remove(o.userData.lb);o.userData.lb=s;o.add(s)}
 function onMsg(m){if(!m)return;
  if(m.t=='p'){if(m.u==uid())return;let p=peers[m.u];if(!p){if(Object.keys(peers).length>=5)return;p=peers[m.u]={u:m.u,g:null,s:-1,d:0,first:1};toast('👥 '+m.n+' が参加しました');sendPos(1)}
-  const nch=p.g&&p.n&&p.n!=m.n;if(m.h&&room!=RID&&m.f!=null)df=m.f;Object.assign(p,{pt:m.pt,h:m.h,n:m.n,l:m.l,m:m.m,st:m.st,tx:m.x,tz:m.z,tr:m.r,j:m.j,v:m.v,t:performance.now()});
+  const nch=p.g&&p.n&&p.n!=m.n;if(m.h&&room!=RID&&m.f!=null)df=m.f;Object.assign(p,{su:m.su,pt:m.pt,h:m.h,n:m.n,l:m.l,m:m.m,st:m.st,tx:m.x,tz:m.z,tr:m.r,j:m.j,v:m.v,t:performance.now()});
   if(m.s!=p.s){p.s=m.s;if(p.g&&p.g.parent)p.g.parent.remove(p.g);p.g=av(SKN[m.s]?m.s:0);label(p.g,m.n);p.first=1}else if(nch&&p.g)label(p.g,m.n);if(m.m!='g')p.d=0}
  else if(m.t=='start'){if(mode=='lobby'&&room!=RID){SEEDV=m.seed;df=m.df;BB=m.bb?1:0;TW=m.tw?1:0;SE.btn();start(0)}}
  else if(m.t=='cs'){const p=peers[m.u];if(!p||room==RID||mode!='game'||m.st!=st)return;if(!p.h&&(!(m.u<uid())||Object.values(peers).some(q=>q.h&&q.m=='g'&&q.st==st)))return;lastCs=performance.now();const T=m.T!=null?m.T:performance.now()/1000;(m.e||[]).forEach((n,i)=>{if(E[i])netSet(E[i],n,0,T,n[6])});(m.f||[]).forEach(n=>{fkid=Math.max(fkid,n[0]);let f=FK.find(q=>q.id==n[0]);if(!f&&!n[4])f=spawnMon(n[0],n[1],n[2]);if(f)netSet(f,n,1,T,1)})}
@@ -1881,13 +1881,13 @@ function onMsg(m){if(!m)return;
  else if(m.t=='clear'){if(mode=='game'&&m.st==st)stageClear()}
  else if(m.t=='em'){const p=peers[m.u];if(p&&p.g&&p.g.parent)bubble(p.g,m.e);if(m.e=='📍'&&mode=='game'&&m.st==st){addPing(m.x,m.z);toast('📍 '+m.n+' がここを指しています')}}
  else if(m.t=='dead'){const p=peers[m.u];if(p)p.d=1}
- else if(m.t=='bye'){const p=peers[m.u];if(p){if(p.g&&p.g.parent)p.g.parent.remove(p.g);if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);delete peers[m.u];toast('👋 '+(p.n||'')+' が退出')}}}
+ else if(m.t=='bye'){const p=peers[m.u];if(p){if(p.g&&p.g.parent)p.g.parent.remove(p.g);if(p.sg&&p.sg.g&&p.sg.g.parent)p.sg.g.parent.remove(p.sg.g);if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);delete peers[m.u];toast('👋 '+(p.n||'')+' が退出')}}}
 function peersTick(dt,t){const now=performance.now();
- for(const k in peers){const p=peers[k];if(now-p.t>4000){if(p.g&&p.g.parent)p.g.parent.remove(p.g);if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);delete peers[k];toast('👋 '+p.n+' が退出');continue}if(!p.g)continue;
+ for(const k in peers){const p=peers[k];if(now-p.t>4000){if(p.g&&p.g.parent)p.g.parent.remove(p.g);if(p.sg&&p.sg.g&&p.sg.g.parent)p.sg.g.parent.remove(p.sg.g);if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);delete peers[k];toast('👋 '+p.n+' が退出');continue}if(!p.g)continue;
   const gp=p.m=='l'&&mode=='lobby'?lobby:p.m=='g'&&p.st==st&&(mode=='game'||mode=='trans')?hotel:null;
-  if(p.g.parent!=gp){if(p.g.parent)p.g.parent.remove(p.g);if(gp){gp.add(p.g);p.first=1}}if(!gp){if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);continue}
+  if(p.g.parent!=gp){if(p.g.parent)p.g.parent.remove(p.g);if(gp){gp.add(p.g);p.first=1}}if(!gp){if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);if(p.sg&&p.sg.g&&p.sg.g.parent)p.sg.g.parent.remove(p.sg.g);continue}
   const g=p.g;if(p.first){g.position.set(p.tx,0,p.tz);p.first=0}const q=Math.min(1,dt*10);g.position.x+=(p.tx-g.position.x)*q;g.position.z+=(p.tz-g.position.z)*q;g.position.y=p.j||0;g.rotation.y=p.tr;g.rotation.z=(p.d&&p.m=='g')?1.3:0;
-  anim(g,p.v&&!p.d,t);trail(g,dt,p.v&&!p.d);peerPet(p,gp,g,dt,t)}}
+  anim(g,p.v&&!p.d,t);trail(g,dt,p.v&&!p.d);peerPet(p,gp,g,dt,t);peerSum(p,gp,g,dt,t)}}
 function ping(fid,ev,pl){if(!sbc)return false;const c=sbc.channel('uf-u-'+fid);c.subscribe(s=>{if(s=='SUBSCRIBED'){c.send({type:'broadcast',event:ev,payload:pl});setTimeout(()=>c.send({type:'broadcast',event:ev,payload:pl}),500);setTimeout(()=>{try{sbc.removeChannel(c)}catch(e){}},1800)}});return true}
 function inviteFriend(fid){if(!ping(fid,'inv',{room,name:D.name}))return toast('オンライン接続中です。少し待ってからもう一度');toast('📨 招待を送りました(相手の🔔通知に届きます)')}
 function gotInvite(p){if(!p||!p.room||p.room==room)return;addInvite(p);SE.pon();lineNote('📨',p.name,'ルームに招待されました。タップして確認')}
@@ -2597,20 +2597,24 @@ function sumThumb(i,w=170,h=210){const k=i+'_'+w;if(STH[k]!==undefined)return ST
 // ---- ついてくる召喚体 ----
 const SU={g:null,b:null,k:-1,first:1,f:1,pf:1,px:0,pz:0};
 const sumCam=()=>SU.b&&mode=='home'?Math.max(0,SU.b.sc-.8)*3.2:0;
-function sumTick(dt,t){const i=D.su;
- if(i==null||i<0||!SMS[i]||!me||!me.parent||mode=='res'||mode=='trans'){if(SU.g&&SU.g.parent)SU.g.parent.remove(SU.g);return}
- if(SU.k!=i||!SU.b){if(SU.g&&SU.g.parent)SU.g.parent.remove(SU.g);if(SU.b)SU.b.L.forEach(([m])=>m.dispose());SU.b=buildSum(i);SU.g=SU.b.g;SU.k=i;SU.first=1;SU.f=1;SU.pf=-1}
- const par=me.parent,g=SU.g,b=SU.b;if(g.parent!==par){if(g.parent)g.parent.remove(g);par.add(g);SU.first=1}
- const ry=me.rotation.y,s=b.sc,back=b.gnd?1.5+s*1.2:1.0+s*.9,side=(b.gnd?1.2+s*.9:.5+s*.6)*b.sd,
-  tx=me.position.x-Math.sin(ry)*back+Math.cos(ry)*side,tz=me.position.z-Math.cos(ry)*back-Math.sin(ry)*side;
- if(SU.first){g.position.set(tx,0,tz);g.rotation.y=ry;SU.px=tx;SU.pz=tz;SU.first=0}
+function sumStep(U,tg,par,i,dt,t){
+ if(U.k!=i||!U.b){if(U.g&&U.g.parent)U.g.parent.remove(U.g);if(U.b)U.b.L.forEach(([m])=>m.dispose());U.b=buildSum(i);U.g=U.b.g;U.k=i;U.first=1;U.f=1;U.pf=-1}
+ const g=U.g,b=U.b;if(g.parent!==par){if(g.parent)g.parent.remove(g);par.add(g);U.first=1}
+ const ry=tg.rotation.y,s=b.sc,back=b.gnd?1.5+s*1.2:1.0+s*.9,side=(b.gnd?1.2+s*.9:.5+s*.6)*b.sd,
+  tx=tg.position.x-Math.sin(ry)*back+Math.cos(ry)*side,tz=tg.position.z-Math.cos(ry)*back-Math.sin(ry)*side;
+ if(U.first){g.position.set(tx,0,tz);g.rotation.y=ry;U.first=0}
  const k=Math.min(1,dt*(b.gnd?4:5)),ox=g.position.x,oz=g.position.z;g.position.x+=(tx-ox)*k;g.position.z+=(tz-oz)*k;
  const sp=Math.hypot(g.position.x-ox,g.position.z-oz)/Math.max(dt,.001),mv=sp>.8;
  const hd=b.gnd&&mv?Math.atan2(g.position.x-ox,g.position.z-oz):ry,dd=((hd-g.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;g.rotation.y+=dd*Math.min(1,dt*6);
- g.position.y=b.gnd?Math.max(0,me.position.y)*.0:me.position.y+.15+Math.sin(t*1.6)*.1*s;
+ g.position.y=b.gnd?0:tg.position.y+.15+Math.sin(t*1.6)*.1*s;
  b.up(t,mv);
  const cp=C.position,d=Math.hypot(cp.x-g.position.x,cp.y-(g.position.y+b.cy),cp.z-g.position.z),f=Math.max(.55,Math.min(1,(d-b.r*.3)/(b.r*.6)));
- SU.f+=(f-SU.f)*Math.min(1,dt*6);if(Math.abs(SU.f-SU.pf)>.015){SU.pf=SU.f;b.L.forEach(([m,o])=>m.opacity=o*SU.f)}}
+ U.f+=(f-U.f)*Math.min(1,dt*6);if(Math.abs(U.f-U.pf)>.015){U.pf=U.f;b.L.forEach(([m,o])=>m.opacity=o*U.f)}}
+function sumTick(dt,t){const i=D.su;
+ if(i==null||i<0||!SMS[i]||!me||!me.parent||mode=='res'||mode=='trans'){if(SU.g&&SU.g.parent)SU.g.parent.remove(SU.g);return}
+ sumStep(SU,me,me.parent,i,dt,t)}
+function peerSum(p,gp,g,dt,t){const i=p.su;if(i==null||i<0||!SMS[i]||(p.d&&p.m=='g')){if(p.sg&&p.sg.g&&p.sg.g.parent)p.sg.g.parent.remove(p.sg.g);return}
+ p.sg=p.sg||{g:null,b:null,k:-1,first:1,f:1,pf:1,px:0,pz:0};sumStep(p.sg,g,gp,i,dt,t)}
 // ---- ガチャ処理 ----
 const smPick=()=>{const a=smIds(4);return a[Math.floor((jst().getTime()+7*864e5)/(7*864e5))%a.length]};
 function sumDraw(k,pool){const res=[],pk=smPick();pool=pool.slice();
