@@ -715,7 +715,7 @@ const S=new T.Scene(),C=new T.PerspectiveCamera(60,1,.1,100);
 const rs=()=>{R.setSize(innerWidth,innerHeight);C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix()};addEventListener('resize',rs);rs();
 let prC=Math.min(devicePixelRatio,2),prNow=prC,prA=0,prN=0;
 function adaptPR(dt){prA+=dt;prN++;if(prA<1.6)return;const v=prA/prN;prA=0;prN=0;if(v>.034&&prNow>1.25){prNow=Math.max(1.25,prNow-.25);R.setPixelRatio(prNow);rs()}else if(v<.0195&&prNow<prC){prNow=Math.min(prC,prNow+.25);R.setPixelRatio(prNow);rs()}}
-const amb=new T.AmbientLight(0xffffff,.7),dl=new T.DirectionalLight(0xffffff,.8),pl=new T.PointLight(0xffe0a0,0,14);dl.position.set(3,6,4);S.add(amb,dl,pl);
+const amb=new T.AmbientLight(0xffffff,.7),dl=new T.DirectionalLight(0xffffff,.8),pl=new T.PointLight(0xffe0a0,0,28);dl.position.set(3,6,4);S.add(amb,dl,pl);
 const tex=(w,h,fn,rx=1,ry=1)=>{const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new T.CanvasTexture(c);t.wrapS=t.wrapT=T.RepeatWrapping;t.repeat.set(rx,ry);return t};
 // ===== アバター =====
 const CAT=['人物','和風','ホラー','動物','食べ物・植物','ロボ・物','ファンタジー','極レア','超レア','ミステリー','ヒストリー'];
@@ -1366,7 +1366,7 @@ const fr=new T.Mesh(new T.BoxGeometry(10.6,5.6,.3),new T.MeshPhongMaterial({colo
 const scr=new T.Mesh(new T.PlaneGeometry(10,5),new T.MeshBasicMaterial({map:new T.CanvasTexture(cv)}));scr.position.set(0,3.2,-14.33);
 
 // ===== ホテル生成 =====
-const NSZ=[12,16,22],CS=6;let N=12,op,W=[];
+const NSZ=[12,16,22],CS=9,HH=7;let N=12,op,W=[];
 const nb=c=>{const i=c/N|0,j=c%N,r=[];if(i<N-1)r.push(c+N);if(i)r.push(c-N);if(j<N-1)r.push(c+1);if(j)r.push(c-1);return r};
 const ctr=c=>[(c/N|0)*CS+CS/2,(c%N)*CS+CS/2],cellOf=p=>Math.max(0,Math.min(N-1,p.x/CS|0))*N+Math.max(0,Math.min(N-1,p.z/CS|0));
 let opn=new Set(),WG=null;const BC=new Map();
@@ -1424,8 +1424,8 @@ function toast(s){const t=$('toast');t.textContent=s;t.style.opacity=1;clearTime
 function note(s){const d=document.createElement('div');d.className='kf';d.textContent=(s[0]=='✨'?'':'💀 ')+s;$('nt').appendChild(d);setTimeout(()=>d.remove(),4500)}
 function setMode(m){mode=m;const h=m=='home',l=m=='lobby',g=m=='game';
  home.visible=h;lobby.visible=l;hotel.visible=g;sh('tb',h||l);$('tb').dataset.m=l?'l':'h';sh('hm',h);sh('lb',l);sh('stick',l||g);sh('hud',g);['shop','md','stm','emp','xx'].forEach(i=>sh(i,0));shown=0;
- S.background=h?null:new T.Color(l?0x0a1640:0x030302);S.fog=g?new T.FogExp2(0x050403,.075):null;document.body.style.background=h?'':'#0a1640';
- amb.intensity=g?.22:.9;dl.intensity=g?0:.8;pl.intensity=g?1.2:l?.6:0;pl.position.set(0,6,0);ambOn(g);
+ S.background=h?null:new T.Color(l?0x0a1640:0x030302);S.fog=g?new T.FogExp2(0x050403,.05):null;document.body.style.background=h?'':'#0a1640';
+ amb.intensity=g?.32:.9;dl.intensity=g?0:.8;pl.intensity=g?1.7:l?.6:0;C.fov=g?70:60;C.updateProjectionMatrix();pl.position.set(0,6,0);ambOn(g);
  playLbl();(h?home:l?lobby:hotel).add(me);me.rotation.z=0;me.scale.set(1,1,1);if(h){me.position.set(0,0,0);faceIcon()}if(l){me.position.copy(lp);lobbyMode()}['rm','cr'].forEach(i=>{if($(i)&&!$(i).classList.contains('hide'))ovClose(i)})}
 function start(s){if(BB&&!s)s=2;
  RN=rng(SEEDV+s*977);st=s;if(!s||BB)runBegin();if(!s||BB){sumT=0;ctb=0;resetTW();Object.values(peers).forEach(p=>p.d=0)}N=TW?twN(s):BB?NBB:NSZ[s];const L=N*CS;
@@ -1436,13 +1436,13 @@ function start(s){if(BB&&!s)s=2;
  const wp=tex(128,128,(x,w)=>{x.fillStyle='#9a8a45';x.fillRect(0,0,w,w);for(let i=0;i<8;i++){x.fillStyle=i%2?'#8c7d3c':'#a39350';x.fillRect(i*16,0,8,w)}x.fillStyle='rgba(60,40,10,.25)';for(let i=0;i<30;i++)x.fillRect(RN()*w,RN()*w,rnd(2,12),rnd(8,40));x.fillStyle='#4d4020';x.fillRect(0,w-12,w,12)});
  const ct=tex(64,64,(x,w)=>{x.fillStyle='#b9b08a';x.fillRect(0,0,w,w);x.strokeStyle='#7d7656';x.lineWidth=3;x.strokeRect(0,0,w,w)},L/2,L/2);
  const f=new T.Mesh(new T.PlaneGeometry(L,L),new T.MeshLambertMaterial({map:cp}));f.rotation.x=-Math.PI/2;f.position.set(L/2,0,L/2);hotel.add(f);
- const ce=new T.Mesh(new T.PlaneGeometry(L,L),new T.MeshLambertMaterial({map:ct}));ce.rotation.x=Math.PI/2;ce.position.set(L/2,3.5,L/2);hotel.add(ce);
+ const ce=new T.Mesh(new T.PlaneGeometry(L,L),new T.MeshLambertMaterial({map:ct}));ce.rotation.x=Math.PI/2;ce.position.set(L/2,HH,L/2);hotel.add(ce);
  const wm=new T.MeshLambertMaterial({map:wp});
- W.forEach(w=>{const lx=w[2]-w[0],lz=w[3]-w[1],g=new T.BoxGeometry(lx,3.5,lz),uv=g.attributes.uv,s=Math.max(lx,lz)/3;for(let i=0;i<uv.count;i++)uv.setX(i,uv.getX(i)*s);const m=new T.Mesh(g,wm);m.position.set((w[0]+w[2])/2,1.75,(w[1]+w[3])/2);hotel.add(m)});
+ W.forEach(w=>{const lx=w[2]-w[0],lz=w[3]-w[1],g=new T.BoxGeometry(lx,HH,lz),uv=g.attributes.uv,s=Math.max(lx,lz)/3;for(let i=0;i<uv.count;i++)uv.setX(i,uv.getX(i)*s);const m=new T.Mesh(g,wm);m.position.set((w[0]+w[2])/2,HH/2,(w[1]+w[3])/2);hotel.add(m)});
  // 天井の蛍光灯(ちらつく)
  pnl=[];PNI=null;{const pcs=[];for(let c=0;c<N*N;c++){const i=c/N|0,j=c%N;if((i+j)%2)continue;pcs.push(ctr(c))}
- if(T.InstancedMesh&&T.InstancedMesh.prototype.setColorAt&&pcs.length){const im=new T.InstancedMesh(new T.BoxGeometry(1.8,.05,.5),new T.MeshBasicMaterial({color:0xffffff}),pcs.length),mt4=new T.Matrix4(),c0=new T.Color().setScalar(.45);pcs.forEach(([x,z],i)=>{mt4.makeTranslation(x,3.47,z);im.setMatrixAt(i,mt4);im.setColorAt(i,c0)});im.frustumCulled=false;im.instanceMatrix.needsUpdate=true;im.instanceColor.needsUpdate=true;hotel.add(im);PNI={im,p:pcs,c:new T.Color()}}
- else{const pm=new T.MeshBasicMaterial({color:0xfff0b0});pcs.forEach(([x,z])=>{const o=new T.Mesh(new T.BoxGeometry(1.8,.05,.5),pm.clone());o.position.set(x,3.47,z);o.material.color.setScalar(.45);hotel.add(o);pnl.push(o)})}}
+ if(T.InstancedMesh&&T.InstancedMesh.prototype.setColorAt&&pcs.length){const im=new T.InstancedMesh(new T.BoxGeometry(1.8,.05,.5),new T.MeshBasicMaterial({color:0xffffff}),pcs.length),mt4=new T.Matrix4(),c0=new T.Color().setScalar(.45);pcs.forEach(([x,z],i)=>{mt4.makeTranslation(x,HH-.03,z);im.setMatrixAt(i,mt4);im.setColorAt(i,c0)});im.frustumCulled=false;im.instanceMatrix.needsUpdate=true;im.instanceColor.needsUpdate=true;hotel.add(im);PNI={im,p:pcs,c:new T.Color()}}
+ else{const pm=new T.MeshBasicMaterial({color:0xfff0b0});pcs.forEach(([x,z])=>{const o=new T.Mesh(new T.BoxGeometry(1.8,.05,.5),pm.clone());o.position.set(x,HH-.03,z);o.material.color.setScalar(.45);hotel.add(o);pnl.push(o)})}}
  // 装飾
  const IW=W.slice(4),dm=new T.MeshLambertMaterial({color:0x3a2210}),km=new T.MeshBasicMaterial({color:0xc9a24a}),lm=new T.MeshBasicMaterial({color:0xcdb980});
  const pt=[0,1,2].map(j=>new T.MeshLambertMaterial({map:tex(64,48,(x,w,hh)=>{x.fillStyle=['#2d4a6a','#6a4a2d','#3a5a3a'][j];x.fillRect(0,0,w,hh);x.fillStyle=['#d9c58a','#c25b3a','#cfd9a0'][j];x.beginPath();x.arc(w*(.3+j*.2),hh*.5,12,0,7);x.fill();x.fillStyle='#111';x.fillRect(0,hh-6,w,6)})}));
@@ -1466,9 +1466,9 @@ function start(s){if(BB&&!s)s=2;
  const [gx,gz]=ctr(goalC);goalP.set(gx,0,gz);const gm2=mt(0x333840);
  const gr2=new T.Mesh(new T.TorusGeometry(2.2,.08,8,40),new T.MeshBasicMaterial({color:0xff2222}));gr2.rotation.x=Math.PI/2;gr2.position.set(gx,.06,gz);hotel.add(gr2);
  bm(.4,3,.4,gm2,gx-1.4,1.5,gz-2.3);bm(.4,3,.4,gm2,gx+1.4,1.5,gz-2.3);bm(3.2,.4,.4,gm2,gx,3.1,gz-2.3);
- const gm=new T.Mesh(new T.CylinderGeometry(1.4,1.4,3.5,16,1,true),new T.MeshBasicMaterial({color:0xff2222,transparent:true,opacity:.35,fog:false}));gm.position.set(gx,1.75,gz);hotel.add(gm);
+ const gm=new T.Mesh(new T.CylinderGeometry(1.4,1.4,HH,16,1,true),new T.MeshBasicMaterial({color:0xff2222,transparent:true,opacity:.35,fog:false}));gm.position.set(gx,HH/2,gz);hotel.add(gm);
  const gl=new T.PointLight(0xff2222,2,16);gl.position.set(gx,2,gz);hotel.add(gl);
- for(let i=0;i<5;i++){const [x,z]=ctr(RN()*N*N|0),p=new T.PointLight(0xffe3a0,.45,11);p.position.set(x,3,z);hotel.add(p)}
+ for(let i=0;i<5;i++){const [x,z]=ctr(RN()*N*N|0),p=new T.PointLight(0xffe3a0,.65,26);p.position.set(x,5.5,z);hotel.add(p)}
  buildWG();mergeStatic(hotel,new Set([gm]));
  const [sx,sz]=ctr(sc);pos.set(sx,0,sz);stPos=[sx,sz];rvT=0;jy=vy=0;
  E=['Aki','Ren','Mio','Sora'].map((n,k)=>{const sk=(k*29+7)%NB,g=av(sk),[x0,z0]=ctr(sc),an_=k*Math.PI/2+Math.PI/4,x=x0+Math.cos(an_)*1.1,z=z0+Math.sin(an_)*1.1;label(g,n);hotel.add(g);return{n,sk,g,p:new T.Vector3(x,0,z),tg:null,w:0,hold:0,ma:0,sus:0,an:3,tw:0,sl:rnd(12,35),so:0,dead:0,go:rnd(25,70)}});
@@ -1504,9 +1504,9 @@ function result(win,quit){if(mode=='res')return;mode='res';if(!win)send({t:'dead
   if(left<=0){clearInterval(iv);D.xp=cx;D.lv=cl;save();setTimeout(()=>updRank(1),3500);setTimeout(()=>{sh('rb',1)},300)}},50);
  $('rs').onclick=e=>{if(e.target.id=='rb'){SE.btn();sh('rs',0);updInfo();setMode('lobby')}}}
 // ===== カメラ =====
-function camGame(){const d=3.6,cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.5;
- for(;s<=d;s+=.15){const x=pos.x+ux*s,z=pos.z+uz*s,y=ty+uy*s;if(y>3.25||y<.35)break;let b=0;for(const w of wnear(x,z))if(x>w[0]-.35&&x<w[2]+.35&&z>w[1]-.35&&z<w[3]+.35){b=1;break}if(b)break}
- s=Math.max(1.6,s-.3);tP.set(pos.x+ux*s,Math.min(3.25,Math.max(.4,ty+uy*s+(s<2.8?(2.8-s)*.45:0))),pos.z+uz*s);tL.set(pos.x,ty,pos.z)}
+function camGame(){const d=5.8,cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.5;
+ for(;s<=d;s+=.15){const x=pos.x+ux*s,z=pos.z+uz*s,y=ty+uy*s;if(y>HH-.3||y<.35)break;let b=0;for(const w of wnear(x,z))if(x>w[0]-.35&&x<w[2]+.35&&z>w[1]-.35&&z<w[3]+.35){b=1;break}if(b)break}
+ s=Math.max(2.6,s-.3);tP.set(pos.x+ux*s,Math.min(HH-.3,Math.max(.4,ty+uy*s+(s<4.2?(4.2-s)*.4:0))),pos.z+uz*s);tL.set(pos.x,ty,pos.z)}
 const gcount=()=>(!cap&&dist(pos,goalP)<2.4?1:0)+E.filter(e=>!e.dead&&!(e.ma>0)&&dist(e.p,goalP)<2.4).length+Object.values(peers).filter(p=>p.m=='g'&&p.st==st&&!p.d&&Math.hypot(p.tx-goalP.x,p.tz-goalP.z)<2.4).length;
 // ===== ゲーム更新 =====
 // ===== 怪物に狙われた時の恐怖演出(咆哮「ガー」+激しい連打音「ドドドド」) =====
@@ -2609,7 +2609,7 @@ function sumTick(dt,t){const i=D.su;
  const hd=b.gnd&&mv?Math.atan2(g.position.x-ox,g.position.z-oz):ry,dd=((hd-g.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;g.rotation.y+=dd*Math.min(1,dt*6);
  g.position.y=b.gnd?Math.max(0,me.position.y)*.0:me.position.y+.15+Math.sin(t*1.6)*.1*s;
  b.up(t,mv);
- const cp=C.position,d=Math.hypot(cp.x-g.position.x,cp.y-(g.position.y+b.cy),cp.z-g.position.z),f=Math.max(.22,Math.min(1,(d-b.r*.45)/(b.r*.75)));
+ const cp=C.position,d=Math.hypot(cp.x-g.position.x,cp.y-(g.position.y+b.cy),cp.z-g.position.z),f=Math.max(.55,Math.min(1,(d-b.r*.3)/(b.r*.6)));
  SU.f+=(f-SU.f)*Math.min(1,dt*6);if(Math.abs(SU.f-SU.pf)>.015){SU.pf=SU.f;b.L.forEach(([m,o])=>m.opacity=o*SU.f)}}
 // ---- ガチャ処理 ----
 const smPick=()=>{const a=smIds(4);return a[Math.floor((jst().getTime()+7*864e5)/(7*864e5))%a.length]};
