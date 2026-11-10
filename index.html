@@ -1821,7 +1821,7 @@ async function notif(){cur='n';ntfClean();modal('🔔 通知','<div id="nb">読�
  catch(e){fr='<div class="small">フレンド申請を取得できません('+esc(e.message)+')</div>'}
  if($('nb'))$('nb').innerHTML=((inv?'<div class="sec">📨 ルーム招待</div>'+inv:'')+(fr?'<div class="sec">🙋 フレンド申請</div>'+fr:''))||'<div class="small" style="text-align:center;padding:20px">新しい通知はありません</div>'}
 // ===== 図鑑 & ガチャ =====
-const MS=[[10,100],[25,300],[40,600],[55,1000],[70,3000],[100,5000],[120,6000],[150,8000],[200,10000],[240,12000],[270,14000],[300,16000],[310,17000],[350,20000],[390,25000]],GC=200;let gcB=0;
+const MS=[[10,50],[25,150],[40,300],[55,500],[70,1500],[100,2500],[120,3000],[150,4000],[200,5000],[240,6000],[270,7000],[300,8000],[310,8500],[350,10000],[390,12500]],GC=200;let gcB=0;
 function dex(tab){if(tab==2)return sdex();const n=D.skins.length,cl=D.cl=D.cl||[];
  let h=`<div class="dxt"><div class="dxb${tab?'':' on'}" data-dx="0"><i>📚</i>図鑑</div><div class="dxb${tab==1?' on':''}" data-dx="1"><i>🎰</i>ガチャ</div><div class="dxb" data-dx="2"><i>🌀</i>召喚</div></div>`;
  if(!tab){h+=`<div class="pill" style="justify-content:center;margin:8px auto;width:max-content;font-size:15px">コンプ率 ${n}/${NS}</div><div class="bar"><i style="width:${n/NS*100}%"></i></div><div class="sec" style="text-align:center">🎁 達成報酬</div><div style="display:flex;gap:6px;margin:4px 0 8px;flex-wrap:wrap;justify-content:center">`+MS.map((m,i)=>{const ok=n>=m[0],got=cl.includes(i);return `<div class="btn xs ${got?'dis':ok?'grn':'gry'}" ${ok&&!got?`data-ms="${i}"`:''}>${m[0]}種<br>🪙${m[1]}${got?' ✔':''}</div>`}).join('')+'</div>';
@@ -2403,7 +2403,7 @@ function loop(){requestAnimationFrame(loop);if(mode!='game'&&hzOn)hzUpd(0,0);con
  C.position.copy(camP);C.lookAt(camL);R.render(S,C)}
 // ===== v10: 召喚ガチャ (後ろに付いてくる召喚体 80体 / 500コイン / 図鑑報酬) =====
 const SMC=600,SMP=30,SMW={1:100,2:60,3:30,4:10};
-const SMM=[[5,300],[10,600],[20,1200],[30,1800],[40,2500],[50,3500],[60,5000],[70,7000],[80,15000]],SMB=[0,1500,3000,5000,10000];
+const SMM=[[5,150],[10,300],[20,600],[30,900],[40,1200],[50,1800],[60,2500],[70,3500],[80,8000]],SMB=[0,750,1500,2500,5000];
 // [名前,絵文字,レア度(1N 2R 3SR 4UR),型,メイン色,サブ色,発光色,オプション]
 const SMS=[
 ['影の従者','👤',1,'sp',0x2a2a3a,0x7a5aff,0xb89aff,{h:1}],
