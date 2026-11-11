@@ -3059,7 +3059,7 @@ function modClear(id){if(room!=RID||modGuest)return;const cl=mdClr();if(cl.inclu
 // ===== 🦑 MOD「A kraken wanders the abyss」 =====
 // 円筒形の深海(半径160=ステージ3の約2倍の面積)。クラーケン本体は横幅198(ステージ3と同じ)・縦396(その2倍)。
 // 足は1本あたり約230(UR召喚体の20倍以上)。10本の足が地につくと衝撃波→ジャンプでかわす。CP6個を1人で通過。
-const KR_R=160,KR_YH=150,KR_N=10,KR_SEG=14,KR_CP=6,KR_CYC=9;
+const KR_R=160,KR_YH=150,KR_N=10,KR_SEG=14,KR_CP=6,KR_CYC=12;
 let krOn=0,KR=null,krPit=.14,krLY=0,krFar=0;
 const krAp=(v,t,s)=>v<t?Math.min(t,v+s):Math.max(t,v-s);
 const krSeg=(px,py,pz,ax,ay,az,bx,by,bz)=>{const vx=bx-ax,vy=by-ay,vz=bz-az,l2=vx*vx+vy*vy+vz*vz||1,t=Math.max(0,Math.min(1,((px-ax)*vx+(py-ay)*vy+(pz-az)*vz)/l2));return Math.hypot(px-(ax+vx*t),py-(ay+vy*t),pz-(az+vz*t))};
@@ -3133,10 +3133,11 @@ function krCam(){const a=krOn?pit:0,ty=1.5+jy*.6,sy=Math.sin(yaw),cy=Math.cos(ya
  else{tP.set(pos.x+sy*s,ty+.3,pos.z+cy*s);const b=-a,cb=Math.cos(b);tL.set(tP.x-sy*cb*60,tP.y+Math.sin(b)*60,tP.z-cy*cb*60)}}
 function krInit(){
  krOn=1;krBuild();E.forEach(e=>{try{hotel.remove(e.g)}catch(x){}});E=[];FK=[];TR=[];trL=0;buildTeam();
+ KR.dash=0;KR.bar=0;KR.barCd=0;dsE=100;dsT=0;{const bm=new T.Mesh(new T.SphereGeometry(1.7,20,14),new T.MeshBasicMaterial({color:0x7affff,transparent:true,opacity:.3,side:T.DoubleSide,depthWrite:false,fog:false}));bm.visible=false;hotel.add(bm);KR.bm=bm}
  krPit=.14;pit=.14;yaw=0;krLY=0;pos.set(KR.sx,0,KR.sz);jy=vy=0;me.position.set(pos.x,0,pos.z);goalP.set(KR.cps[0].x,0,KR.cps[0].z);
  try{$('mm').style.display='none'}catch(e){}
  krCam();camP.copy(tP);camL.copy(tL);
- toast('🦑 クラーケンが深海を彷徨う…ジャンプで衝撃波をかわし、6つのCPへ！(視点: 画面ドラッグ / R・Tキーで上下)')}
+ toast('🦑 クラーケンが深海を彷徨う…ジャンプで衝撃波をかわし、6つのCPへ！(視点: ドラッグ/R・T　⚡ダッシュ　📣バリア)')}
 function krTick(dt,t){
  const K=KR;if(!K)return;
  if(intro>0){introTick(dt,t);return}
@@ -3144,8 +3145,11 @@ function krTick(dt,t){
  // --- 自分の移動(速度5)・ジャンプ ---
  const ix=mv.x*D.sens+((keys.KeyD||keys.ArrowRight)?1:0)-((keys.KeyA||keys.ArrowLeft)?1:0),iz=mv.y*D.sens+((keys.KeyS||keys.ArrowDown)?1:0)-((keys.KeyW||keys.ArrowUp)?1:0),sy_=Math.sin(yaw),cy_=Math.cos(yaw);
  const x=ix*cy_+iz*sy_,z=iz*cy_-ix*sy_,l=Math.hypot(x,z),ox=pos.x,oz=pos.z;
- if(l>.1){const k=Math.min(1,l)/l*5*dt;pos.x+=x*k;pos.z+=z*k;me.rotation.y=Math.atan2(x,z)}
- if(jreq){jreq=0;if(jy==0){vy=6.5;SE.jump();mq('jump')}}jy+=vy*dt;vy-=18*dt;if(jy<=0){jy=0;vy=0}
+ if(l>.1){const k=Math.min(1,l)/l*5*dt*(K.dash?1.7:1);pos.x+=x*k;pos.z+=z*k;me.rotation.y=Math.atan2(x,z)}
+ if(K.dash){dsE-=25*dt;if(dsE<=0){dsE=0;K.dash=0}}else dsE=Math.min(100,dsE+12*dt);
+ if(K.bar>0)K.bar-=dt;if(K.barCd>0)K.barCd-=dt;const inv=K.bar>0;K.bm.visible=inv;K.bm.position.set(pos.x,jy+.9,pos.z);K.bm.scale.setScalar(1+Math.sin(Tm*12)*.05);
+ {const f=$('dsf');if(f)f.style.width=dsE+'%';$('dash').classList.toggle('lo',dsE<15&&!K.dash);const sp=$('come').querySelector('span');if(sp)sp.textContent=K.bar>0?'バリア中':K.barCd>0?Math.ceil(K.barCd)+'秒':'バリア'}
+ if(jreq){jreq=0;if(jy==0){vy=9.5;SE.jump();mq('jump')}}jy+=vy*dt;vy-=18*dt;if(jy<=0){jy=0;vy=0}
  krClampR(pos,R-1.6);
  for(const o of K.obs){const ax=pos.x-o.x,az=pos.z-o.z,d=Math.hypot(ax,az),m=o.r+.45;if(d<m&&d>1e-4){pos.x=o.x+ax/d*m;pos.z=o.z+az/d*m}}
  const mvg=Math.hypot(pos.x-ox,pos.z-oz)>1e-4;
@@ -3158,8 +3162,8 @@ function krTick(dt,t){
  // --- 足の周期: 待機→予告→10本ドン!→衝撃波 ---
  const cyc=Math.floor(Tm/KR_CYC),ct=Tm-cyc*KR_CYC;
  if(cyc!=K.cyc){K.cyc=cyc;K.winded=0;K.slammed=0;const rr=rng(SEEDV+777+cyc),sh_=rr()*3|0,off=(rr()-.5)*.6;K.legs.forEach((L,i)=>{L.rad=[26,40,54][(i+sh_)%3]+(rr()*4-2);L.ang=i/KR_N*6.2832+off})}
- const wind=ct>=3.6&&ct<5,slam=ct>=5&&ct<6.6;
- if(ct>=3.6&&!K.winded){K.winded=1;K.legs.forEach(L=>{const p={x:kc.x+Math.cos(L.ang)*L.rad,z:kc.z+Math.sin(L.ang)*L.rad};krClampR(p,R-4);L.gx=p.x;L.gz=p.z})}
+ const wind=ct>=6.6&&ct<8,slam=ct>=8&&ct<9.6;
+ if(ct>=6.6&&!K.winded){K.winded=1;K.legs.forEach(L=>{const p={x:kc.x+Math.cos(L.ang)*L.rad,z:kc.z+Math.sin(L.ang)*L.rad};krClampR(p,R-4);L.gx=p.x;L.gz=p.z})}
  let near=1e9;
  K.legs.forEach((L,i)=>{
   if(slam){L.ty=Math.max(0,L.ty-900*dt);L.tx=L.gx;L.tz=L.gz}
@@ -3167,14 +3171,14 @@ function krTick(dt,t){
   else{const p={x:kc.x+Math.cos(L.ang+Math.sin(Tm*.5+i)*.08)*L.rad,z:kc.z+Math.sin(L.ang+Math.sin(Tm*.5+i)*.08)*L.rad};krClampR(p,R-4);L.ty=krAp(L.ty,45+Math.sin(Tm*1.2+i)*10,60*dt);const k=Math.min(1,dt*3);L.tx+=(p.x-L.tx)*k;L.tz+=(p.z-L.tz)*k}
   krLeg(L,kc,Tm);near=Math.min(near,Math.hypot(L.tx-pos.x,L.tz-pos.z));
   const tm_=K.tel[i];tm_.visible=wind||(slam&&!K.slammed);if(tm_.visible){const s=6+Math.sin(Tm*14)*.6;tm_.position.x=L.gx;tm_.position.z=L.gz;tm_.scale.set(s,1,s);tm_.material.opacity=.25+.2*Math.sin(Tm*14)}});
- if(ct>=5.14&&!K.slammed){K.slammed=1;SE.thump();if(near<110)shake();
-  for(const L of K.legs){krRing(K,L.gx,L.gz);if(Math.hypot(pos.x-L.gx,pos.z-L.gz)<5.5){pn(D.name+' がクラーケンの足に踏みつぶされた');return die()}}}
+ if(ct>=8.14&&!K.slammed){K.slammed=1;SE.thump();if(near<110)shake();
+  for(const L of K.legs){krRing(K,L.gx,L.gz);if(!inv&&Math.hypot(pos.x-L.gx,pos.z-L.gz)<5.5){pn(D.name+' がクラーケンの足に踏みつぶされた');return die()}}}
  // --- 衝撃波: 速度15で広がる。ジャンプ中(高さ0.6以上)はかわせる ---
  for(const o of K.rings){if(!o.on)continue;o.r+=15*dt;if(o.r>95){o.on=0;o.w.visible=o.f.visible=false;continue}
   o.w.scale.set(o.r,1,o.r);o.f.scale.set(o.r,1,o.r);o.wm.opacity=.15+.5*(1-o.r/95);o.fm.opacity=.2+.6*(1-o.r/95);
-  if(Math.abs(Math.hypot(pos.x-o.x,pos.z-o.z)-o.r)<1.5&&jy<.6){pn(D.name+' が衝撃波に飲まれた');return die()}}
+  if(Math.abs(Math.hypot(pos.x-o.x,pos.z-o.z)-o.r)<1.5&&jy<.6&&!inv){pn(D.name+' が衝撃波に飲まれた');return die()}}
  // --- レーザー(27秒おき・予告2.2秒→発射6秒) ---
- const lp=Tm-10;let ls=0;if(lp>=0){const ph=lp%27;ls=ph<2?1:ph<8?2:0}
+ const lp=Tm-10;let ls=0;if(lp>=0){const ph=lp%30;ls=ph<2?1:ph<8?2:0}
  if(ls!=K.ls){if(ls==1){const bd=K.nl<3?22:10,fx=Math.sin(me.rotation.y),fz=Math.cos(me.rotation.y),q={x:pos.x-fx*bd,z:pos.z-fz*bd};krClampR(q,KR_R-3);K.lb.x=q.x;K.lb.z=q.z;K.nl++;se(200,.5,'sawtooth',.1,300)}
   if(ls!=1)K.cue.forEach(m=>{m.material.color.setHex(0x4ad0b0);m.material.emissive.setHex(0x180510)});if(ls==2){toast('🔥 レーザー発射！走れ！');shake();se(90,1.2,'sawtooth',.14,-30)}K.ls=ls}
  if(ls){const dx=pos.x-K.lb.x,dz=pos.z-K.lb.z,d=Math.hypot(dx,dz);if(d>.05){const s=Math.min(d,2.2*dt);K.lb.x+=dx/d*s;K.lb.z+=dz/d*s}
@@ -3182,7 +3186,7 @@ function krTick(dt,t){
   const oy=KR_YH-36,vx=K.lb.x-kc.x,vy2=-oy,vz=K.lb.z-kc.z,len=Math.hypot(vx,vy2,vz),rad=ls==2?2.4:.35*(1+.4*Math.sin(Tm*20));
   _ka.set(vx/len,vy2/len,vz/len);for(const b of [K.beam,K.bcore]){b.visible=ls==2;b.position.set(kc.x+vx/2,oy/2,kc.z+vz/2);b.quaternion.setFromUnitVectors(_ku,_ka);b.scale.set(b===K.beam?rad:rad*.45,len,b===K.beam?rad:rad*.45)}
   K.bimp.visible=ls==2;K.bimp.position.x=K.lb.x;K.bimp.position.z=K.lb.z;K.bimp.scale.set(rad*2.6,1,rad*2.6);
-  if(ls==2&&krSeg(pos.x,jy+.9,pos.z,kc.x,oy,kc.z,K.lb.x,0,K.lb.z)<3){pn(D.name+' がレーザーに焼かれた');return die()}}
+  if(ls==2&&!inv&&krSeg(pos.x,jy+.9,pos.z,kc.x,oy,kc.z,K.lb.x,0,K.lb.z)<3){pn(D.name+' がレーザーに焼かれた');return die()}}
  else{K.beam.visible=K.bcore.visible=K.bimp.visible=false}
  // --- チェックポイント(1人で通れる) ---
  if(K.done<KR_CP){const cp=K.cps[K.done];if(Math.hypot(pos.x-cp.x,pos.z-cp.z)<3.4){K.done++;krCol();SE.clear();confetti(20);flash('#66ffcc');
@@ -3190,13 +3194,15 @@ function krTick(dt,t){
  // --- HUD ---
  try{hudUpd(t)}catch(e){}
  const cp=K.cps[Math.min(K.done,KR_CP-1)];
- $('md2').textContent='🦑 CP '+K.done+'/'+KR_CP+'　次まで '+Math.round(Math.hypot(cp.x-pos.x,cp.z-pos.z))+'m'+(K.ls==1?'　⚠赤く光るトゲ→2秒後レーザー！':K.ls==2?'　🔥レーザー発射中！':'')+(ct>=3.6&&ct<5.2?'　⚠足が来るぞ！':'');
+ $('md2').textContent='🦑 CP '+K.done+'/'+KR_CP+'　次まで '+Math.round(Math.hypot(cp.x-pos.x,cp.z-pos.z))+'m'+(K.ls==1?'　⚠赤く光るトゲ→2秒後レーザー！':K.ls==2?'　🔥レーザー発射中！':'')+(ct>=6.6&&ct<8.2?'　⚠足が来るぞ！':'');
  camGame()}
 {const g0=game;game=function(dt,t){if(!krOn)return g0.apply(this,arguments);try{krTick(dt,t)}catch(e){console.error(e)}}}
 {const c0=camGame;camGame=function(){return krOn?krCam():c0.apply(this,arguments)}}
 {const s1=start;start=function(s){const r=s1.apply(this,arguments);krOn=0;if(modRun=='kraken'&&!TW){try{krInit()}catch(e){console.error(e);krOn=0}}return r}}
-{const m0=setMode;setMode=function(m){if(krFar&&m!='game'&&m!='trans'){krFar=0;C.far=100;C.updateProjectionMatrix();try{$('mm').style.display=''}catch(e){}}return m0.apply(this,arguments)}}
+{const m0=setMode;setMode=function(m){if(krFar&&m!='game'&&m!='trans'){krFar=0;C.far=100;C.updateProjectionMatrix();try{$('mm').style.display='';const sp=$('come').querySelector('span');if(sp)sp.textContent='カモン';$('dash').classList.remove('lo')}catch(e){}}return m0.apply(this,arguments)}}
 {const r1=result;result=function(){const r=r1.apply(this,arguments);krOn=0;return r}}
+$('dash').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagation();const K=KR;if(!K||mode!='game'||intro>0)return;if(K.dash){K.dash=0;return}if(dsE<15)return toast('⚡ ダッシュ回復中…');K.dash=1;SE.come();flash('#66ffee')},true);
+$('come').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagation();const K=KR;if(!K||mode!='game'||intro>0||K.bar>0)return;if(K.barCd>0)return toast('🛡 バリア回復中… '+Math.ceil(K.barCd)+'秒');K.bar=3;K.barCd=12;SE.come();flash('#9affff');toast('🛡 バリア展開！(3秒)')},true);
 cvs.addEventListener('pointerdown',e=>{krLY=e.clientY});
 cvs.addEventListener('pointermove',e=>{if(!krOn||mode!='game'||!dp||e.pointerId!=dp.id)return;krPit=Math.max(-1.25,Math.min(1.2,krPit+(e.clientY-krLY)*.005));krLY=e.clientY;pit=krPit});
 
