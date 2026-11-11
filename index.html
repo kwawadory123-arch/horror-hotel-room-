@@ -1559,7 +1559,7 @@ function rsHTML(win,tt,gain){const gr=TW?(st>=15?'SS':st>=10?'S':st>=6?'A':st>=3
  ${RSX}<div id="lvl" class="st" style="font-size:22px;margin:8px 0">Lv.${D.lv}</div><div class="bar" style="height:22px"><i id="gf" style="width:${D.xp/(D.lv*50+50)*100}%"></i></div><div id="rb" class="btn big hide" style="margin-top:14px">ロビーへ</div></div>`}
 function rsFx(win){const r=document.querySelector('#rs .rsx');if(!r)return;[250,380,500,900].forEach((d,j)=>setTimeout(()=>{if(mode=='res')se(480+j*120,.08,'square',.06)},d));for(let i=0;i<30;i++){const e=document.createElement('i');e.className='rsp';e.textContent=win?['⭐','🪙','✨','💫'][i%4]:['💀','🩸','💔'][i%3];e.style.left=Math.random()*100+'%';e.style.animationDelay=Math.random()*3+'s';e.style.fontSize=(14+Math.random()*18)+'px';r.appendChild(e)}if(win)[0,500,1000].forEach(d=>setTimeout(()=>{if(mode=='res')confetti(40)},d))}
 function result(win,quit){if(mode=='res')return;mode='res';if(MG)BB=1;if(!win)send({t:'dead',u:uid()});ambOn(0);sh('hud',0);sh('stick',0);win?(SE.clear(),confetti(90),flash(),shake()):SE.over();
- const tt=Math.round(sumT+tm),base=[30,50,80][df],nd=l=>l*50+50,gain=((quit&&(st<2||BB))?0:Math.round(win?(nd(D.lv)-D.xp)+nd(D.lv+1)+nd(D.lv+2)+ctb:BB?base+ctb:base*(.9+st*1.1)+tt*.4+ctb))*(evOn('mon')&&st>=2&&!BB?2:1);RSREC=win&&!BB&&(!D.best||tt<D.best);if(RSREC)D.best=tt;if(win&&BB&&!MG&&(!D.bbt||D.bbt.k!=bbKey()||tt<D.bbt.t))D.bbt={k:bbKey(),t:tt};rsCn=win&&BB&&!MG?BBR:0;if(win&&BB&&!MG)D.coin+=BBR;if(MG)mgGrant();
+ const tt=Math.round(sumT+tm),base=[30,50,80][df],nd=l=>l*50+50,gain=((quit&&(st<2||BB))?0:Math.round(win?(nd(D.lv)-D.xp)+nd(D.lv+1)+nd(D.lv+2)+ctb:BB?base+ctb:base*(.9+st*1.1)+tt*.4+ctb))*(evOn('mon')&&st>=2&&!BB?2:1);RSREC=win&&!BB&&!modRun&&(!D.best||tt<D.best);if(RSREC)D.best=tt;if(win&&BB&&!MG&&(!D.bbt||D.bbt.k!=bbKey()||tt<D.bbt.t))D.bbt={k:bbKey(),t:tt};rsCn=win&&BB&&!MG?BBR:0;if(win&&BB&&!MG)D.coin+=BBR;if(MG)mgGrant();
  rewardRun(win,quit,tt);apAfter(win,quit);$('rs').innerHTML=mgFix(rsHTML(win,tt,gain));sh('rs',1);rsFx(win);
  let cx=D.xp,cl=D.lv,left=gain;
  const iv=setInterval(()=>{const need=cl*50+50,a=Math.min(left,Math.max(1,need/14|0));cx+=a;left-=a;se(300+cx*3,.04,'square',.04);
@@ -2903,7 +2903,7 @@ function bgInfo(r,s){const x=$('bgx');if(x)x.remove();const o=document.createEle
  document.body.appendChild(o);o.onclick=e=>{if(e.target===o||e.target.id=='bgxo'){SE.btn();o.remove()}}}
 document.addEventListener('click',e=>{const b=e.target&&e.target.closest?e.target.closest('.bgd[data-r]'):null;if(!b)return;e.stopPropagation();e.preventDefault();SE.btn();bgInfo(+b.dataset.r,+b.dataset.s)},true);
 const apCmp=(a,b)=>(b.ap||0)-(a.ap||0)||((a.best>0?a.best:1e9)-(b.best>0?b.best:1e9))||(b.lv||0)-(a.lv||0)||(b.tw||0)-(a.tw||0);
-function apAfter(win,quit){if(TW)return;const cpu=!Object.keys(peers).length;let d;
+function apAfter(win,quit){if(TW||modRun)return;const cpu=!Object.keys(peers).length;let d;
  if(win)d=cpu?APC.cpu:APC.win;else if(!quit&&st>=2&&!BB)d=APC.close;else if(quit)d=0;else d=APC.lose[Math.min(1,st)];
  const o=D.ap||0,n=Math.max(0,Math.min(APM,o+d));D.ap=n;save();updInfo();
  setTimeout(()=>{if(win||!quit)toast('🏆 AP '+(n-o>=0?'+':'')+(n-o)+'（合計 '+n+'）'+(win&&cpu?'　※CPUのみのクリアは獲得が少なめ':''));pushProf().catch(()=>{})},900)}
@@ -3089,12 +3089,12 @@ function krBuild(){
   const bc=new T.Mesh(new T.CylinderGeometry(1.5,1.5,300,14,1,true),bm);bc.position.y=150;
   const sp=nspr(String(k+1));sp.position.y=8;g.add(ring,bc,sp);g.position.set(p.x,0,p.z);hotel.add(g);return{rm,bm}});
  // 障害物
- const obs=[],oc=[0x35505e,0x2c4658,0x4a3a5a],cc=[0xd0508a,0xff9a4a,0x4ad0b0];
+ const cue=[],obs=[],oc=[0x35505e,0x2c4658,0x4a3a5a],cc=[0xd0508a,0xff9a4a,0x4ad0b0];
  for(let n=0,g=0;n<52&&g<800;g++){const a=r()*PI2,d=Math.sqrt(r())*(R-12),x=Math.cos(a)*d,z=Math.sin(a)*d;
   if(Math.hypot(x-sx,z-sz)<18||cps.some(q=>Math.hypot(x-q.x,z-q.z)<12)||obs.some(o=>Math.hypot(x-o.x,z-o.z)<o.r+9))continue;
   const k=n%3,rad=k==0?2+r()*2:k==1?3+r()*3:4+r()*4;let m;
   if(k==0){const h=16+r()*30;m=new T.Mesh(new T.CylinderGeometry(rad*.8,rad,h,9),mt(oc[(n/3|0)%3],0x050a10));m.position.y=h/2}
-  else if(k==1){const h=8+r()*14;m=new T.Mesh(new T.ConeGeometry(rad,h,8),mt(cc[(n/3|0)%3],0x180510));m.position.y=h/2}
+  else if(k==1){const h=8+r()*14;m=new T.Mesh(new T.ConeGeometry(rad,h,8),mt(cc[(n/3|0)%3],0x180510));m.position.y=h/2;if((n/3|0)%3==2)cue.push(m)}
   else{m=new T.Mesh(new T.SphereGeometry(rad,12,9),mt(0x3a5a68,0x050a10));m.scale.y=.8;m.position.y=rad*.5}
   m.position.x=x;m.position.z=z;hotel.add(m);obs.push({x,z,r:rad});n++}
  // クラーケン本体(横幅198・縦396)
@@ -3118,7 +3118,7 @@ function krBuild(){
  const bG=new T.CylinderGeometry(1,1,1,14,1,true),bMat=c=>new T.MeshBasicMaterial({color:c,transparent:true,opacity:.75,blending:T.AdditiveBlending,depthWrite:false,fog:false});
  const beam=new T.Mesh(bG,bMat(0xff4030)),bcore=new T.Mesh(bG,bMat(0xffffff)),iG=new T.CircleGeometry(1,32);iG.rotateX(-Math.PI/2);const bimp=new T.Mesh(iG,bMat(0xff7040));bimp.position.y=.12;
  beam.visible=bcore.visible=bimp.visible=false;hotel.add(beam,bcore,bimp);
- KR={t:0,kc:{x:0,z:20},cyc:-1,winded:0,slammed:0,rot:0,legs,rings,tel,beam,bcore,bimp,cps,cpv,obs,done:0,lb:{x:0,z:0},ls:0,kg,sx,sz,stp:0,amb:6};
+ KR={t:0,kc:{x:0,z:20},cyc:-1,winded:0,slammed:0,rot:0,legs,rings,tel,beam,bcore,bimp,cps,cpv,obs,cue,nl:0,cf:0,done:0,lb:{x:0,z:0},ls:0,kg,sx,sz,stp:0,amb:6};
  krCol();
 }
 function krCol(){const K=KR;K.cpv.forEach((v,k)=>{const c=k<K.done?0x40ff80:k==K.done?0xff3030:0x3a8cff;v.rm.color.setHex(c);v.bm.color.setHex(c);v.bm.opacity=k==K.done?.5:.25})}
@@ -3174,12 +3174,14 @@ function krTick(dt,t){
   o.w.scale.set(o.r,1,o.r);o.f.scale.set(o.r,1,o.r);o.wm.opacity=.15+.5*(1-o.r/95);o.fm.opacity=.2+.6*(1-o.r/95);
   if(Math.abs(Math.hypot(pos.x-o.x,pos.z-o.z)-o.r)<1.5&&jy<.6){pn(D.name+' が衝撃波に飲まれた');return die()}}
  // --- レーザー(27秒おき・予告2.2秒→発射6秒) ---
- const lp=Tm-10;let ls=0;if(lp>=0){const ph=lp%27;ls=ph<2.2?1:ph<8.2?2:0}
- if(ls!=K.ls){if(ls==1){K.lb.x=pos.x;K.lb.z=pos.z;se(200,.5,'sawtooth',.1,300)}if(ls==2){toast('🔥 レーザー発射！走れ！');shake();se(90,1.2,'sawtooth',.14,-30)}K.ls=ls}
- if(ls){const dx=pos.x-K.lb.x,dz=pos.z-K.lb.z,d=Math.hypot(dx,dz);if(d>.05){const s=Math.min(d,3.6*dt);K.lb.x+=dx/d*s;K.lb.z+=dz/d*s}
+ const lp=Tm-10;let ls=0;if(lp>=0){const ph=lp%27;ls=ph<2?1:ph<8?2:0}
+ if(ls!=K.ls){if(ls==1){const bd=K.nl<3?22:10,fx=Math.sin(me.rotation.y),fz=Math.cos(me.rotation.y),q={x:pos.x-fx*bd,z:pos.z-fz*bd};krClampR(q,KR_R-3);K.lb.x=q.x;K.lb.z=q.z;K.nl++;se(200,.5,'sawtooth',.1,300)}
+  if(ls!=1)K.cue.forEach(m=>{m.material.color.setHex(0x4ad0b0);m.material.emissive.setHex(0x180510)});if(ls==2){toast('🔥 レーザー発射！走れ！');shake();se(90,1.2,'sawtooth',.14,-30)}K.ls=ls}
+ if(ls){const dx=pos.x-K.lb.x,dz=pos.z-K.lb.z,d=Math.hypot(dx,dz);if(d>.05){const s=Math.min(d,2.2*dt);K.lb.x+=dx/d*s;K.lb.z+=dz/d*s}
+  if(ls==1){const on=Math.floor(Tm*6)%2==0;K.cue.forEach(m=>{m.material.color.setHex(on?0xff2020:0x4ad0b0);m.material.emissive.setHex(on?0xff0000:0x180510)})}
   const oy=KR_YH-36,vx=K.lb.x-kc.x,vy2=-oy,vz=K.lb.z-kc.z,len=Math.hypot(vx,vy2,vz),rad=ls==2?2.4:.35*(1+.4*Math.sin(Tm*20));
-  _ka.set(vx/len,vy2/len,vz/len);for(const b of [K.beam,K.bcore]){b.visible=true;b.position.set(kc.x+vx/2,oy/2,kc.z+vz/2);b.quaternion.setFromUnitVectors(_ku,_ka);b.scale.set(b===K.beam?rad:rad*.45,len,b===K.beam?rad:rad*.45)}
-  K.bimp.visible=true;K.bimp.position.x=K.lb.x;K.bimp.position.z=K.lb.z;K.bimp.scale.set(rad*2.6,1,rad*2.6);
+  _ka.set(vx/len,vy2/len,vz/len);for(const b of [K.beam,K.bcore]){b.visible=ls==2;b.position.set(kc.x+vx/2,oy/2,kc.z+vz/2);b.quaternion.setFromUnitVectors(_ku,_ka);b.scale.set(b===K.beam?rad:rad*.45,len,b===K.beam?rad:rad*.45)}
+  K.bimp.visible=ls==2;K.bimp.position.x=K.lb.x;K.bimp.position.z=K.lb.z;K.bimp.scale.set(rad*2.6,1,rad*2.6);
   if(ls==2&&krSeg(pos.x,jy+.9,pos.z,kc.x,oy,kc.z,K.lb.x,0,K.lb.z)<3){pn(D.name+' がレーザーに焼かれた');return die()}}
  else{K.beam.visible=K.bcore.visible=K.bimp.visible=false}
  // --- チェックポイント(1人で通れる) ---
@@ -3188,7 +3190,7 @@ function krTick(dt,t){
  // --- HUD ---
  try{hudUpd(t)}catch(e){}
  const cp=K.cps[Math.min(K.done,KR_CP-1)];
- $('md2').textContent='🦑 CP '+K.done+'/'+KR_CP+'　次まで '+Math.round(Math.hypot(cp.x-pos.x,cp.z-pos.z))+'m'+(K.ls==1?'　⚠レーザー充填！':K.ls==2?'　🔥レーザー発射中！':'')+(ct>=3.6&&ct<5.2?'　⚠足が来るぞ！':'');
+ $('md2').textContent='🦑 CP '+K.done+'/'+KR_CP+'　次まで '+Math.round(Math.hypot(cp.x-pos.x,cp.z-pos.z))+'m'+(K.ls==1?'　⚠赤く光るトゲ→2秒後レーザー！':K.ls==2?'　🔥レーザー発射中！':'')+(ct>=3.6&&ct<5.2?'　⚠足が来るぞ！':'');
  camGame()}
 {const g0=game;game=function(dt,t){if(!krOn)return g0.apply(this,arguments);try{krTick(dt,t)}catch(e){console.error(e)}}}
 {const c0=camGame;camGame=function(){return krOn?krCam():c0.apply(this,arguments)}}
