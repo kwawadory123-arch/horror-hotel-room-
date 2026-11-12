@@ -798,10 +798,10 @@ function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=
  // v3: 一度だけ名前を初期の「Player」に戻す(レベル・コイン・スキン・記録などは一切変更しない)。sv=3 を保存するので2回目以降は実行されず、名前は自由に変更できる
  if((D.sv||0)<3){D.name='Player'+(1000+Math.floor(Math.random()*9000));D.sv=3;try{localStorage.uf=JSON.stringify(D)}catch(e){}}
  // v5: このアップデートで初めてログインした人だけ、コイン6万以上なら4万にする(sv=5を保存するので一度きり)
- if((D.sv||0)<5){if((D.coin||0)>=60000)D.coin=40000;D.sv=5;try{localStorage.uf=JSON.stringify(D)}catch(e){}}}migrate();
+ if((D.sv||0)<5){if((D.coin||0)>=60000)D.coin=40000;D.sv=5;try{localStorage.uf=JSON.stringify(D)}catch(e){}}try{D.skins=(D.skins||[0]).filter(i=>SKN[i]);if(!SKN[D.skin])D.skin=0}catch(e){}}migrate();
 let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 // ===== アップデートのお知らせ(既読・✕で消す・端末に保存) =====
-const UPD=[{id:'u1112bf',d:'11/12',t:'🎰 クレーンに「ガチャセンター」登場！',l:['🎪 ふしぎクレーン画面を下にスクロールすると、新しい🎰ガチャセンターがあります','⚡ 「バフガチャ」は1回 🪙500 ／ 10連 🪙4500(SR以上1つ確定)。30回でSR以上確定のてんじょうつき','⏱ 出たバフは1時間つづきます。✨経験値・🪙コイン報酬・🛣️ネオンpt・👟スピード・⚡ダッシュ・🎪クレーンつかみ率のどれかがアップ！','💎 N・R・SR・URとレア度が上がるほど効果が特大に(UR最大 +100〜+120%)','📋 図鑑ではなく、リストでバフ一覧と出現率を見られます。同じバフは強いほうが残ります','🛸 ジャックポットのコインが 🪙16000 に増えました！']},{id:'u1112dp',d:'11/12',t:'🌊 新ルールMOD「The Deep Secrets of the Undersea City」登場！',l:['🧩 MODショップに「🌊 The Deep Secrets of the Undersea City」が登場！ 🪙160000','🏙 苔の生えた白い家がそびえる海底の大都市。ステージ3の約3倍の広さで、毎回ランダムに生成されます','🔔 30秒ごとに鐘が鳴り、大きな魚の怪物が東西南北のどれかから街を一気に通過！来る方向は教えてもらえません','🏠 魚の来る方向と反対側の、家の側面にかくれられれば当たりません。近づくほど画面が震え、最後は画面が見えないほど！','🔵 ゴールは遠くで青く光っています。歩いた跡がずっと残るので、道に迷っても安心','📦 家のそばのチェストで、コイン・ダッシュ回復・🫧バブルのバリアなどをゲット！場所は外に出られないよう境界線があります']},{id:'u1112iv',d:'11/12',t:'📨 新機能「友だち招待」登場！',l:['📨 ホームの「招待」ボタンから、LINEで友だちに招待リンクを送れます','🎁 リンクからはじめた友だちが Lv2 になると、あなたに報酬！ 2人・3人・5人・7人・10人の達成ごとに受け取れます','🪙 最大の10人達成で 🪙150000 ＋ 🏅100！ 2人:🪙10000 / 3人:🪙20000＋🏅10 / 5人:🪙40000＋🏅30 / 7人:🪙70000＋🏅50','🔐 参加の通知は暗号化されて届きます。同じ友だちは1回だけ数えられ、自分のリンクは使えません','📶 反映はお互いがオンラインのときです。友だちがLv2になったとき、あなたがアプリを開いていなくても、友だちのアプリが何度か再送します']},{id:'u1112mv',d:'11/12',t:'🔁 新機能「データ移行・入れ替え」登場！',l:['📱 Safari・Chrome・ホーム画面に追加したアプリは、それぞれデータが別々です。そのデータを、ボタンだけで移せるようになりました','🆔 設定画面に、この端末のプレイヤーID(10文字)が表示されます','🔁 データを受け取りたい側で、⚙️設定ボタンを10秒長押し → 古い側のIDを入れて「リクエストを送る」','🔔 古い側の通知に「承認」ボタンが届きます。承認だけでOK、コード入力は不要です。お互い同時にオンラインでなくても進みます','📥 コピー移行(相手のデータをコピー)と、🔁 入れ替え(おたがいのデータを交換)をえらべます','🛟 移行前のデータは24時間バックアップされ、入れ替え画面から戻せます','⚠ 自分の別の端末・ブラウザ以外からのリクエストは「拒否」してください']},{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙16000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
+const UPD=[{id:'u1112bz',d:'11/12',t:'🏛️ レジェンド90体が「ブロックキャラ」にリニューアル！',l:['🧱 神々・英雄90体が、小さなブロックでできた姿に生まれ変わりました(名前・レア度・持っているスキンは そのまま)','📐 体型は6タイプ(のっぽ・がっしり・ちびっこ・すらり・ごつい・ふっくら)。頭の大きさや手足の長さもキャラごとにちがいます','🪽 翼・リボン・しっぽ・光輪・オーラ・やり・宝珠・武器・盾も、小ブロックでできていて、歩くと動きます','🦊 動物モチーフのキャラは、耳・角・くちばし・たてがみなどで見分けやすくなりました','🚶 歩く・すべる・うかぶなど、キャラの形にあわせた動き方になります。登場と反応のときだけ短い光が出ます']},{id:'u1112bf',d:'11/12',t:'🎰 クレーンに「ガチャセンター」登場！',l:['🎪 ふしぎクレーン画面を下にスクロールすると、新しい🎰ガチャセンターがあります','⚡ 「バフガチャ」は1回 🪙500 ／ 10連 🪙4500(SR以上1つ確定)。30回でSR以上確定のてんじょうつき','⏱ 出たバフは1時間つづきます。✨経験値・🪙コイン報酬・🛣️ネオンpt・👟スピード・⚡ダッシュ・🎪クレーンつかみ率のどれかがアップ！','💎 N・R・SR・URとレア度が上がるほど効果が特大に(UR最大 +100〜+120%)','📋 図鑑ではなく、リストでバフ一覧と出現率を見られます。同じバフは強いほうが残ります','🛸 ジャックポットのコインが 🪙16000 に増えました！']},{id:'u1112dp',d:'11/12',t:'🌊 新ルールMOD「The Deep Secrets of the Undersea City」登場！',l:['🧩 MODショップに「🌊 The Deep Secrets of the Undersea City」が登場！ 🪙160000','🏙 苔の生えた白い家がそびえる海底の大都市。ステージ3の約3倍の広さで、毎回ランダムに生成されます','🔔 30秒ごとに鐘が鳴り、大きな魚の怪物が東西南北のどれかから街を一気に通過！来る方向は教えてもらえません','🏠 魚の来る方向と反対側の、家の側面にかくれられれば当たりません。近づくほど画面が震え、最後は画面が見えないほど！','🔵 ゴールは遠くで青く光っています。歩いた跡がずっと残るので、道に迷っても安心','📦 家のそばのチェストで、コイン・ダッシュ回復・🫧バブルのバリアなどをゲット！場所は外に出られないよう境界線があります']},{id:'u1112iv',d:'11/12',t:'📨 新機能「友だち招待」登場！',l:['📨 ホームの「招待」ボタンから、LINEで友だちに招待リンクを送れます','🎁 リンクからはじめた友だちが Lv2 になると、あなたに報酬！ 2人・3人・5人・7人・10人の達成ごとに受け取れます','🪙 最大の10人達成で 🪙150000 ＋ 🏅100！ 2人:🪙10000 / 3人:🪙20000＋🏅10 / 5人:🪙40000＋🏅30 / 7人:🪙70000＋🏅50','🔐 参加の通知は暗号化されて届きます。同じ友だちは1回だけ数えられ、自分のリンクは使えません','📶 反映はお互いがオンラインのときです。友だちがLv2になったとき、あなたがアプリを開いていなくても、友だちのアプリが何度か再送します']},{id:'u1112mv',d:'11/12',t:'🔁 新機能「データ移行・入れ替え」登場！',l:['📱 Safari・Chrome・ホーム画面に追加したアプリは、それぞれデータが別々です。そのデータを、ボタンだけで移せるようになりました','🆔 設定画面に、この端末のプレイヤーID(10文字)が表示されます','🔁 データを受け取りたい側で、⚙️設定ボタンを10秒長押し → 古い側のIDを入れて「リクエストを送る」','🔔 古い側の通知に「承認」ボタンが届きます。承認だけでOK、コード入力は不要です。お互い同時にオンラインでなくても進みます','📥 コピー移行(相手のデータをコピー)と、🔁 入れ替え(おたがいのデータを交換)をえらべます','🛟 移行前のデータは24時間バックアップされ、入れ替え画面から戻せます','⚠ 自分の別の端末・ブラウザ以外からのリクエストは「拒否」してください']},{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙16000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
 const UN=()=>{const u=D.un||(D.un={});if(!u.r)u.r=[];if(!u.x)u.x=[];return u};
 const unU=()=>{const u=UN();return UPD.filter(x=>!u.x.includes(x.id)&&!u.r.includes(x.id)).length};
 async function sbf(p,m='GET',b,h={},na){if(window.ufRL)throw new Error('ネットワークに接続できません');const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));if(Array.isArray(j))j.forEach(decTag);if(m=='GET'&&Array.isArray(j)&&/^\/rest\/v1\/profiles\?/.test(p))j=nfApply(p,j);return ufDedupe(p,m,j)}
@@ -1618,7 +1618,364 @@ LD.forEach(([n,e,rt,a,b,c,rc,sk],i)=>{const A=parseInt(a,16),Bb=parseInt(b,16),C
    else if(k=='E')arms(v||1,A);else if(k=='O')orb(v||3,.2,C,1.7,2.6);else if(k=='F')rise(8,C,.07,1.2,4.6,1);
    else if(k=='o')shield(Bb,C);else if(WP[k]){const g=mkG(1.1,0,.4);WP[k](g,A,C);FX.push((t,m)=>{g.rotation.z=Math.sin(t*1.5)*.04-(m?.12:0)})}});
   if(rt==4)rise(6,C,.06,1.4,4.4,1)}})});
+const vlB=SKN.length-LD.length;LD.forEach((r,k)=>{const P=SKN[vlB+k];P.nh=P.nt=P.na=P.nl=1;P.vl=1;P.x=()=>vlBuild(r,vlB+k,k)});
 }
+
+// ===== 🧱 レジェンド ブロックキャラ(小ブロック集合 / パーツ別ピボット / 形別モーション) =====
+// 形状: 小さなブロック(ボクセル)を 球・角丸箱・カプセル・ドーナツ の式で敷き詰め、足す/抜く/塗るで輪郭を作る
+// 結合: 1パーツ=1メッシュに結合(内部の面は消す)。角にはAO陰影を焼き込み、継ぎ目の見えない一体感にする
+const VXC={},VXD={appear:1.25,react:1.35,carry:1.6},VXK=(x,y,z)=>(x+1024)*4194304+(y+1024)*2048+(z+1024);
+let VXG=null,VXMt=null;
+const vE=(c,r,col,op=0)=>({k:0,c,r:Array.isArray(r)?r:[r,r,r],col,op}),
+ vB=(c,h,rr,col,op=0)=>({k:1,c,h,rr,col,op}),
+ vC=(a,b,r0,col,r1,op=0)=>({k:2,a,b,r0,r1:r1==null?r0:r1,col,op,c:a}),
+ vT=(c,R,r,col,ax=0,op=0)=>({k:3,c,R,r,ax,col,op}),
+ vP=(c,r,col)=>vE(c,r,col,2);
+// op: 0=足す 1=抜く 2=塗る(既存ブロックのみ) 3=足して塗る
+const vxS=(s,x,y,z)=>{const c=s.c,dx=x-c[0],dy=y-c[1],dz=z-c[2];
+ if(s.k==0){const r=s.r;return Math.hypot(dx/r[0],dy/r[1],dz/r[2])-1}
+ if(s.k==1){const h=s.h,q=s.rr,ax=Math.abs(dx)-h[0]+q,ay=Math.abs(dy)-h[1]+q,az=Math.abs(dz)-h[2]+q;return Math.hypot(Math.max(ax,0),Math.max(ay,0),Math.max(az,0))+Math.min(Math.max(ax,ay,az),0)-q}
+ if(s.k==2){const a=s.a,b=s.b,bx=b[0]-a[0],by=b[1]-a[1],bz=b[2]-a[2],px=x-a[0],py=y-a[1],pz=z-a[2],t=Math.max(0,Math.min(1,(px*bx+py*by+pz*bz)/(bx*bx+by*by+bz*bz||1))),r=s.r0+(s.r1-s.r0)*t;return Math.hypot(px-bx*t,py-by*t,pz-bz*t)-r}
+ return s.ax?Math.hypot(Math.hypot(dx,dy)-s.R,dz)-s.r:Math.hypot(Math.hypot(dx,dz)-s.R,dy)-s.r};
+const vxBB=s=>{let e;if(s.k==0)e=s.r;else if(s.k==1)e=s.h;else if(s.k==3)e=s.ax?[s.R+s.r,s.R+s.r,s.r]:[s.R+s.r,s.r,s.R+s.r];
+ if(s.k==2){const m=Math.max(s.r0,s.r1);return[[0,1,2].map(i=>Math.min(s.a[i],s.b[i])-m),[0,1,2].map(i=>Math.max(s.a[i],s.b[i])+m)]}
+ return[[0,1,2].map(i=>s.c[i]-e[i]),[0,1,2].map(i=>s.c[i]+e[i])]};
+function vxVox(P){const vs=P.vs||.1,S=P.sh;S.forEach(s=>s.bb=vxBB(s));
+ const lo=[1e9,1e9,1e9],hi=[-1e9,-1e9,-1e9];
+ S.forEach(s=>{if(s.op==1||s.op==2)return;for(let i=0;i<3;i++){lo[i]=Math.min(lo[i],s.bb[0][i]);hi[i]=Math.max(hi[i],s.bb[1][i])}});
+ const a=lo.map(v=>Math.floor(v/vs)),b=hi.map(v=>Math.ceil(v/vs)),M=new Map(),X=[],Y=[],Z=[],C=[];
+ for(let x=a[0];x<b[0];x++)for(let y=a[1];y<b[1];y++)for(let z=a[2];z<b[2];z++){
+  const px=(x+.5)*vs,py=(y+.5)*vs,pz=(z+.5)*vs;let on=0,col=0;
+  for(let i=0;i<S.length;i++){const s=S[i],bb=s.bb;
+   if(px<bb[0][0]||px>bb[1][0]||py<bb[0][1]||py>bb[1][1]||pz<bb[0][2]||pz>bb[1][2])continue;
+   if(s.op==2&&!on)continue;if(vxS(s,px,py,pz)>=0)continue;
+   if(s.op==1)on=0;else{on=1;col=typeof s.col=='function'?s.col([px,py,pz]):s.col}}
+  if(on){M.set(VXK(x,y,z),X.length);X.push(x);Y.push(y);Z.push(z);C.push(col)}}
+ return{M,X,Y,Z,C,vs}}
+const VXN=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],VXU=[[0,1,0],[0,1,0],[0,0,1],[0,0,1],[1,0,0],[1,0,0]],VXV=[[0,0,1],[0,0,1],[1,0,0],[1,0,0],[0,1,0],[0,1,0]],VXAO=[.56,.72,.87,1];
+function vxMesh(V,pv){const{M,X,Y,Z,C,vs}=V,pos=[],nor=[],col=[],opos=[],idx=[],occ=(x,y,z)=>M.has(VXK(x,y,z))?1:0;let nv=0;
+ for(let i=0;i<X.length;i++){const x=X[i],y=Y[i],z=Z[i],h=((x*73856093)^(y*19349663)^(z*83492791))>>>0,j=1+((h%997)/997-.5)*.07,c=C[i],r=(c>>16&255)/255*j,g=(c>>8&255)/255*j,b=(c&255)/255*j;
+  for(let d=0;d<6;d++){const n=VXN[d];if(occ(x+n[0],y+n[1],z+n[2]))continue;const u=VXU[d],v=VXV[d],ao=[],
+   cx=(x+.5+n[0]*.5)*vs-pv[0],cy=(y+.5+n[1]*.5)*vs-pv[1],cz=(z+.5+n[2]*.5)*vs-pv[2];
+   for(let q=0;q<4;q++){const su=(q==1||q==2)?1:-1,sv=q>=2?1:-1,bx=x+n[0],by=y+n[1],bz=z+n[2],
+    s1=occ(bx+su*u[0],by+su*u[1],bz+su*u[2]),s2=occ(bx+sv*v[0],by+sv*v[1],bz+sv*v[2]),cc=occ(bx+su*u[0]+sv*v[0],by+su*u[1]+sv*v[1],bz+su*u[2]+sv*v[2]),
+    a=(s1&&s2)?0:3-(s1+s2+cc);ao.push(a);
+    const px=cx+(su*u[0]+sv*v[0])*vs/2,py=cy+(su*u[1]+sv*v[1])*vs/2,pz=cz+(su*u[2]+sv*v[2])*vs/2,sh=VXAO[a];
+    pos.push(px,py,pz);opos.push(px+n[0]*.035,py+n[1]*.035,pz+n[2]*.035);nor.push(n[0],n[1],n[2]);col.push(r*sh,g*sh,b*sh)}
+   const sg=(u[1]*v[2]-u[2]*v[1])*n[0]+(u[2]*v[0]-u[0]*v[2])*n[1]+(u[0]*v[1]-u[1]*v[0])*n[2];
+   let q=(ao[0]+ao[2]>ao[1]+ao[3])?[1,2,3,1,3,0]:[0,1,2,0,2,3];if(sg<0)q=q.reverse();
+   for(const k of q)idx.push(nv+k);nv+=4}}
+ return{pos:new Float32Array(pos),nor:new Float32Array(nor),col:new Float32Array(col),opos:new Float32Array(opos),idx:nv>65000?new Uint32Array(idx):new Uint16Array(idx),n:X.length}}
+const vxM=()=>VXMt||(VXMt=new T.MeshPhongMaterial({vertexColors:true,shininess:28,emissive:0x1a1a1a}));
+function vxBuild(d,ci){
+ let C=VXC[ci];if(!C)C=VXC[ci]=d.parts.map(P=>vxMesh(vxVox(P),P.p));
+ if(!VXG)VXG=new T.BoxGeometry(1,1,1);
+ const cy=d.cy||1.5,root=new T.Group(),piv=new T.Group(),body=new T.Group(),parts={},pp={},list=[];
+ piv.position.y=cy;body.position.y=-cy;root.add(piv);piv.add(body);
+ d.parts.forEach((P,i)=>{const g=new T.Group(),par=P.par?parts[P.par]:body,pv=P.par?pp[P.par]:[0,0,0],m=C[i],geo=new T.BufferGeometry();
+  g.position.set(P.p[0]-pv[0],P.p[1]-pv[1],P.p[2]-pv[2]);par.add(g);parts[P.n]=g;pp[P.n]=P.p;
+  geo.setAttribute('position',new T.BufferAttribute(m.pos,3));geo.setAttribute('normal',new T.BufferAttribute(m.nor,3));geo.setAttribute('color',new T.BufferAttribute(m.col,3));geo.setIndex(new T.BufferAttribute(m.idx,1));
+  g.add(new T.Mesh(geo,vxM()));
+  if(P.ol!==0){const og=new T.BufferGeometry();og.setAttribute('position',new T.BufferAttribute(m.opos,3));og.setIndex(new T.BufferAttribute(m.idx,1));g.add(new T.Mesh(og,OL))}
+  list.push({g,P,x:g.position.x,y:g.position.y,z:g.position.z})});
+ return{d,root,piv,body,parts,list,once:null,mt:0,t:0,lt:null,wk:0,wo:null,f:1,ex:0,fold:0,shock:0,q:{tuck:0},fxg:new T.Group(),fx:[],loop:0,nx:null,fl:0,f0:0,lph:0,ev:0,tr:0,vox:C.reduce((a,b)=>a+b.n,0)}}
+// ---- 動き ----
+const vxEase=a=>a<=0?0:a>=1?1:a*a*(3-2*a);
+function vxBase(c,t,wk,f,B){const mo=c.d.mo,q=c.q,tp=(mo.tempo||1)*f,L=mo.loc,e0=Math.sin(t*3.6);
+ const I=[(Math.sin(t*1.8)*.5+.5)*(mo.bob||.06),0,Math.sin(t*.8)*.05,Math.sin(t*1.1)*(mo.sway||.04),1-e0*.012,1+e0*.018,1-e0*.012];let W=I;q.tuck=0;
+ if(L=='legs'){const s=Math.sin(t*7*tp);W=[Math.abs(s)*(mo.hop||.1),.06,0,s*(mo.sway||.06)*1.4,1,1+Math.cos(t*14*tp)*.025,1]}
+ else if(L=='hop'){const ph=(t*1.5*tp)%1;if(c.lph>ph&&wk>.3)c.ev|=1;c.lph=ph;let dy=0,sx=1,sy=1,tk=0;
+  if(ph<.18){const u=Math.sin(ph/.18*Math.PI);sy=1-.22*u;sx=1+.12*u}else{const a=(ph-.18)/.82,u=Math.sin(a*Math.PI);dy=(mo.hop||.8)*4*a*(1-a);sy=1+.14*u;sx=1-.06*u;tk=u}
+  W=[dy,0,0,Math.sin(ph*6.2832)*.05,sx,sy,sx];q.tuck=tk*wk}
+ else if(L=='slide'){const r=6*tp,s=Math.sin(t*r),sq=(mo.sq||.05)*Math.cos(t*r*2);W=[Math.abs(Math.sin(t*r*.5))*.05,.1,s*(mo.yaw||.3),Math.sin(t*r+1)*.1,1-sq*.5,1+sq,1-sq*.5]}
+ else if(L=='roll'){const ph=(t*.9*tp)%1;W=[Math.sin(Math.min(1,ph/.7)*Math.PI)*(mo.hop||.15),ph<.7?vxEase(ph/.7)*6.2832:0,0,0,1,1,1]}
+ else if(L=='hover'){W=[.35+Math.sin(t*3.2*tp)*.1,.16,0,Math.sin(t*1.6)*.08,1,1,1]}
+ B.dy=I[0]+(W[0]-I[0])*wk;B.rx=I[1]+(W[1]-I[1])*wk;B.ry=I[2]+(W[2]-I[2])*wk;B.rz=I[3]+(W[3]-I[3])*wk;B.sx=I[4]+(W[4]-I[4])*wk;B.sy=I[5]+(W[5]-I[5])*wk;B.sz=I[6]+(W[6]-I[6])*wk}
+// パーツの役割(role)ごとに動かし方を変える: leg arm wing tail ant eye head prop
+function vxPart(c,P,t,wk,f,ex,o){o.fill(0);o[6]=o[7]=o[8]=1;const mo=c.d.mo,s=P.side||1,ph=P.ph||0,r=P.role,L=mo.loc;
+ if(r=='leg'){const st=Math.sin(t*7*(mo.tempo||1)*f+ph)*(mo.stride||.7)*s;o[0]=(L=='legs'?wk*st:0)-(L=='hop'?c.q.tuck*.7:0)+Math.sin(t*1.3+ph)*.03+ex*.2*Math.sin(t*20+ph)}
+ else if(r=='arm'){const sw=Math.sin(t*7*(mo.tempo||1)*f+ph)*s;o[2]=s*(.15+.08*Math.sin(t*1.7+ph)+ex*2.3+(L=='hop'?c.q.tuck*.5:0));o[0]=(L=='legs'?-wk*sw*(mo.armSw||.6):0)}
+ else if(r=='wing'){const fw=(P.fw||mo.fw||3),a=(P.amp||.3)*(1+wk*.5+ex*.6);o[2]=s*((P.open==null?.35:P.open)+Math.sin(t*fw*f*(1+wk*1.2)+ph)*a+ex*.5-c.fold*1.4)}
+ else if(r=='tail'){const i=P.idx||0;o[1]=Math.sin(t*3*f*(1+ex)-i*.7)*(mo.wag||.3)*(1+wk*.4+ex*.8);o[0]=Math.sin(t*2.2*f-i*.5)*.1}
+ else if(r=='ant'){const k=1+ex*1.5;o[0]=Math.sin(t*4*f+ph)*.22*k+ex*.3;o[2]=Math.cos(t*3.3*f+ph)*.2*k}
+ else if(r=='eye'){const bt=(t+ph*3)%3.6,bl=bt>3.45?Math.sin((bt-3.45)/.15*Math.PI):0,z=1+c.shock*.35;o[6]=o[8]=z;o[7]=z*(1-.92*bl)}
+ else if(r=='head'){o[0]=Math.sin(t*1.5+ph)*.05+wk*Math.sin(t*14*f+ph)*.03;o[2]=Math.sin(t*9+ph)*.14*ex;o[7]=1+Math.sin(t*3.6+ph)*.02}
+ else if(r=='prop'){const sp=(P.spin||1.5)*f*(1+ex*2);if(P.ax=='z')o[2]=t*sp;else o[1]=t*sp;o[4]=Math.sin(t*2+ph)*.05}}
+function vxPlay(c,name,opt){c.once=name=='idle'||name=='auto'?null:name;c.mt=0;c.fl=0;c.f0=0;c.wo=null;c.loop=opt&&opt.loop?1:0;c.nx=opt&&opt.nx||null}
+const vxOf=o=>{const g=o&&o.children&&o.children[0];return g&&g.userData&&g.userData.vx};
+function vxOnce(c,once,k,B){const mo=c.d.mo,rt=c.d.rt;
+ if(once=='appear'){const ap=mo.ap||'drop';c.fold=1-vxEase(k/.55);
+  const settle=(L,amp)=>{if(!c.fl){c.fl=1;vxEmit(c,'land')}const u=(k-L)/(1-L),s=Math.exp(-4.5*u)*Math.cos(u*15);B.sy=1-amp*s;B.sx=B.sz=1/Math.sqrt(B.sy)};
+  if(ap=='drop'){const L=.45;if(k<L){const a=k/L;B.dy=3.4*(1-a*a);B.ry=(1-a)*12.5;B.sy=1+.28*(1-a);B.sx=B.sz=1/Math.sqrt(B.sy)}else settle(L,.36)}
+  else if(ap=='spin'){const L=.6;if(k<L){const a=k/L,e=1-Math.pow(1-a,3);B.sx=B.sy=B.sz=Math.max(.02,e);B.dy=Math.sin(a*Math.PI)*1.1;B.ry=(1-e)*9}else settle(L,.24)}
+  else{const L=.5;if(k<L){const a=k/L,e=vxEase(a);B.sy=Math.max(.02,e*(1+.18*Math.sin(a*Math.PI)));B.sx=B.sz=.55+.45*e}else settle(L,.28)}}
+ else if(once=='react'){const rc=mo.rc||'joy',env=Math.sin(Math.PI*Math.min(1,k));c.ex=env;
+  if(!c.f0){c.f0=1;vxEmit(c,'spark')}
+  if(rc=='joy'){B.dy+=Math.abs(Math.sin(k*Math.PI*2))*(mo.rj||.85)*(k<.9?1:0);B.ry=vxEase((k-.55)/.4)*6.2832;B.sy*=1+.1*Math.cos(k*Math.PI*4);B.sx*=1-.05*Math.cos(k*Math.PI*4);if(k>.5&&!c.fl){c.fl=1;vxEmit(c,'spark')}}
+  else if(rc=='shock'){if(k<.12){const a=k/.12;B.dy+=.55*Math.sin(a*Math.PI/2);B.sy*=1+.22*a;B.sx*=1/Math.sqrt(1+.22*a);B.rx=-.2*a}else{const u=(k-.12)/.88;B.dy+=.55*Math.max(0,1-u*4);B.rz+=Math.sin(u*70)*.13*(1-u);B.rx=-.2*Math.max(0,1-u*3)}c.shock=Math.max(0,1-k*1.2)}
+  else{B.rz+=Math.sin(k*55)*.2*(1-k*k)*(k<.75?1:0);B.sx*=1+Math.sin(k*55)*.04;if(k>.75){const u=(k-.75)/.25;B.dy+=Math.sin(u*Math.PI)*.8;B.ry=u*6.2832;if(!c.fl){c.fl=1;vxEmit(c,'spark')}}}}
+ else if(once=='carry'){c.f=2;c.wo=1;
+  if(k<.2){const a=k/.2;B.sy=1-.26*Math.sin(a*Math.PI/2);B.sx=B.sz=1+.1*a;B.rx=-.12*a;c.wo=0}
+  else if(k<.86){const a=(k-.2)/.66;B.dx=3.6*vxEase(a);B.sx=1.28;B.sy=.9;B.sz=.9;B.rz=-.22;c.tr-=.016;if(c.tr<=0){c.tr=.06;vxEmit(c,'trail')}}
+  else{const u=(k-.86)/.14,s=Math.max(.02,1-vxEase(u));B.dx=3.6;B.sx=s*1.28;B.sy=s*.9;B.sz=s*.9;B.rz=-.22;if(!c.fl){c.fl=1;vxEmit(c,'poof')}}}}
+// ---- エフェクト(登場・反応・持ち去りの瞬間だけ。常時は出さない) ----
+function vxEmit(c,kind){if(c.fx.length>44)return;const d=c.d,rt=d.rt,pal=d.fxc||[0xffe14a,0xff6ad0,0x6ae8ff],x0=c.root.position.x,cy=d.cy||1.5;
+ const add=(px,py,pz,vx,vy,vz,L,s,col,g,sx=1,sy=1,sz=1)=>{const m=new T.Mesh(VXG||(VXG=new T.BoxGeometry(1,1,1)),new T.MeshBasicMaterial({color:col,transparent:true}));m.position.set(px,py,pz);m.scale.set(s*sx,s*sy,s*sz);c.fxg.add(m);c.fx.push({m,v:[vx,vy,vz],l:L,L,g,s,sx,sy,sz})};
+ if(kind=='land'){for(let i=0;i<12;i++){const a=i/12*6.2832;add(x0+Math.cos(a)*.6,.07,Math.sin(a)*.6,Math.cos(a)*2.6,.25,Math.sin(a)*2.6,.45,rt>=3?.15:.11,i%2?0xffffff:pal[0],0)}if(rt>=3)vxEmit(c,'spark')}
+ else if(kind=='spark'){const n=rt>=4?12:rt>=3?9:6;for(let i=0;i<n;i++){const a=Math.random()*6.2832,o=1+Math.random()*1.2;add(x0+Math.cos(a)*.4,cy+Math.random()*.8,Math.sin(a)*.4,Math.cos(a)*o,2.2+Math.random()*1.2,Math.sin(a)*o,.7,.1+Math.random()*.07,pal[i%pal.length],5)}}
+ else if(kind=='trail'){for(let i=0;i<3;i++)add(x0-.5,cy-.5+i*.5,(i-1)*.25,0,0,0,.35,.1,pal[0],0,8,1,1)}
+ else if(kind=='dust'){for(let i=0;i<4;i++){const a=i*1.57+.4;add(x0+Math.cos(a)*.3,.08,Math.sin(a)*.3,Math.cos(a)*.9,.5,Math.sin(a)*.9,.35,.08,0xf0e8d8,2)}}
+ else if(kind=='poof'){for(let i=0;i<10;i++){const a=i/10*6.2832;add(x0,cy,0,Math.cos(a)*2.2,Math.sin(a*2)*1.2,Math.sin(a)*2.2,.5,.13,i%2?0xffffff:pal[1%pal.length],0)}}}
+function vxFxTick(c,dt){for(let i=c.fx.length-1;i>=0;i--){const p=c.fx[i];p.l-=dt;if(p.l<=0){c.fxg.remove(p.m);p.m.material.dispose();c.fx.splice(i,1);continue}
+ p.v[1]-=p.g*dt;p.m.position.x+=p.v[0]*dt;p.m.position.y=Math.max(.03,p.m.position.y+p.v[1]*dt);p.m.position.z+=p.v[2]*dt;const k=p.l/p.L;p.m.material.opacity=Math.min(1,k*1.6);const s=p.s*(p.g==5?k:1);p.m.scale.set(s*p.sx,s*p.sy,s*p.sz)}}
+const vxO=new Array(9);
+function vxTick(c,tt,m){let dt=c.lt==null?.016:tt-c.lt;if(!(dt>0&&dt<.25))dt=.016;c.lt=tt;
+ const d=c.d,t=(c.t+=dt),B={dx:0,dy:0,rx:0,ry:0,rz:0,sx:1,sy:1,sz:1};
+ c.wk+=((m?1:0)-c.wk)*Math.min(1,dt*9);c.f=1;c.ex=0;c.fold=0;c.shock=0;c.wo=null;
+ vxBase(c,t,c.wk,1,B);
+ if(c.once){c.mt+=dt;let k=c.mt/VXD[c.once];if(k>=1){const nx=c.nx;if(c.loop){c.mt=0;c.fl=0;c.f0=0;k=0}else{c.once=null;c.mt=0;c.nx=null;if(nx)vxPlay(c,nx);k=-1}}
+  if(c.once&&k>=0){if(c.once=='carry')vxBase(c,t,c.wk,2,B);vxOnce(c,c.once,k,B)}}
+ const wk=c.wo!=null?c.wo:c.wk;
+ if(c.ev&1){c.ev&=~1;vxEmit(c,'dust')}
+ c.root.position.set(B.dx,B.dy,0);c.root.rotation.y=B.ry;c.root.scale.set(B.sx,B.sy,B.sz);c.piv.rotation.set(B.rx,0,B.rz);
+ const o=vxO;for(let i=0;i<c.list.length;i++){const e=c.list[i];vxPart(c,e.P,t,wk,c.f,c.ex,o);e.g.rotation.set(o[0],o[1],o[2]);e.g.position.set(e.x+o[3],e.y+o[4],e.z+o[5]);e.g.scale.set(o[6],o[7],o[8])}
+ if(c.fx.length)vxFxTick(c,dt)}
+// ---- 目(まばたき・驚きで大きくなる) ----
+const vEye=(par,s,x,y,z,sz,pc=0x111111)=>({n:par+'e'+(s>0?'R':'L'),p:[s*x,y,z],par,role:'eye',vs:.05,ph:s*.3,ol:0,sh:[vE([s*x,y,z],[sz,sz*1.15,sz*.6],0xffffff),vP([s*x*.97,y-sz*.1,z+sz*.35],[sz*.55,sz*.7,sz*.4],pc),vP([s*x*.97+sz*.22,y+sz*.25,z+sz*.55],[sz*.2,sz*.2,sz*.15],0xffffff)]});
+
+// ===== ブロックキャラ12体 (体型・パーツ数・動かし方をキャラごとに別設計) =====
+// parts: n=名前 p=回転中心 par=親 role=動き方 side=左右 vs=ブロックの大きさ(小さいほど細かい) sh=形(足す/抜く/塗る)
+// mo.loc=移動の型(legs歩く hop跳ねる slide滑る roll転がる hover浮く) ap=登場 rc=反応
+const vxH=(x,y,z)=>((x*73856093)^(y*19349663)^(z*83492791))>>>0,vxHP=(p,k,m)=>vxH(Math.floor(p[0]*k),Math.floor(p[1]*k),Math.floor(p[2]*k))%m;
+const eP=(c,r,n)=>{const l=Math.hypot(n[0],n[1],n[2]);return[c[0]+r[0]*n[0]/l,c[1]+r[1]*n[1]/l,c[2]+r[2]*n[2]/l]};
+const VXR=[0xff4a4a,0xffa63a,0xffe14a,0x4ad87a,0x4a8aff];
+const VXDEF=[
+// ---------- UR ----------
+{n:'にじいろプテラ・ポテト',e:'🥔',rt:4,c1:0xd8a45a,c2:0xff6ad0,cy:1.7,head:[0,1.95,.5],fxc:[0xff4a4a,0xffe14a,0x4ad87a,0x4a8aff,0xb06aff],
+ mo:{loc:'hover',tempo:1,bob:.1,sway:.05,fw:4,wag:.35,ap:'spin',rc:'joy'},
+ parts:[
+ {n:'body',p:[0,1.7,0],role:'body',vs:.12,sh:[vE([0,1.7,0],[1,.9,.85],p=>vxHP(p,5,11)==0?0xb8843a:0xd8a45a),vP([0,1.35,.4],[.66,.55,.5],0xf4dcaa),vP([-.58,1.62,.6],[.17,.12,.3],0xff8aa8),vP([.58,1.62,.6],[.17,.12,.3],0xff8aa8),vP([0,1.4,.7],[.14,.05,.2],0x6a2a2a)]},
+ vEye('body',-1,.32,1.95,.75,.2),vEye('body',1,.32,1.95,.75,.2),
+ ...[-1,1].map(s=>({n:'wing'+s,p:[s*.8,2.1,-.2],par:'body',role:'wing',side:s,fw:4,amp:.32,vs:.1,sh:[0,1,2,3,4].map(j=>{const a=.1+j*.3,dr=[s*Math.cos(a),Math.sin(a),0],L=2.4-j*.15,h=[s*.8,2.1,-.2];return vC([h[0]+dr[0]*.2,h[1]+dr[1]*.2,h[2]],[h[0]+dr[0]*L,h[1]+dr[1]*L,h[2]],.2,VXR[j],.08)})})),
+ ...[-1,1].map(s=>({n:'leg'+s,p:[s*.4,.75,.1],par:'body',role:'leg',side:s,vs:.08,sh:[vC([s*.4,.7,.1],[s*.4,.14,.15],.17,0xff9a2a,.14),vE([s*.4,.1,.3],[.28,.1,.38],0xff7a1a)]})),
+ {n:'t0',p:[0,1.2,-.8],par:'body',role:'tail',idx:0,vs:.08,sh:[vE([0,1.2,-1],[.28,.28,.4],0xff6ad0)]},
+ {n:'t1',p:[0,1.2,-1.35],par:'t0',role:'tail',idx:1,vs:.08,sh:[vE([0,1.2,-1.6],[.24,.24,.35],0xffa0e0)]},
+ {n:'t2',p:[0,1.2,-1.9],par:'t1',role:'tail',idx:2,vs:.08,sh:[vE([0,1.2,-2.1],[.3,.3,.3],0xffe14a)]},
+ ...[-1,1].map(s=>({n:'ant'+s,p:[s*.25,2.45,0],par:'body',role:'ant',ph:s,vs:.06,sh:[vC([s*.25,2.45,0],[s*.35,3,.05],.07,0x4ab04a),vE([s*.6,3.05,.05],[.3,.08,.16],0x6ad86a),vE([s*.35,3.1,.05],.1,0xffe14a)]}))]},
+{n:'ドリルマンボウ・ポセイド',e:'🐟',rt:4,c1:0x3a9aff,c2:0xffd24a,cy:1.9,head:[0,2.1,.5],fxc:[0x6ae8ff,0xffffff,0xffd24a],
+ mo:{loc:'slide',tempo:1,bob:.12,sway:.07,fw:5,wag:.35,yaw:.25,sq:.04,ap:'spin',rc:'shock'},
+ parts:[
+ {n:'body',p:[0,1.9,0],role:'body',vs:.12,sh:[vE([0,1.9,0],[1.4,1.35,.6],p=>p[1]<1.55?0xeaf4ff:p[1]<2.2?0x5ac8ff:0x2a8aff),vP([-.85,1.75,.5],[.2,.14,.3],0xff9ac8),vP([.85,1.75,.5],[.2,.14,.3],0xff9ac8),vP([0,1.45,.45],[.2,.1,.3],0x2a3a8a)]},
+ vEye('body',-1,.6,2.2,.5,.24),vEye('body',1,.6,2.2,.5,.24),
+ {n:'drill',p:[0,2.95,.35],par:'body',role:'prop',spin:4,vs:.08,sh:[vC([0,2.85,.35],[0,4.05,.35],.45,p=>(((Math.floor(p[1]*6+Math.atan2(p[0],p[2]-.35)*2.2))%2)+2)%2?0xffd24a:0xff7a2a,.03)]},
+ {n:'fin',p:[0,3.1,0],par:'body',role:'tail',idx:0,vs:.1,sh:[vE([0,3.35,-.05],[.45,.5,.12],0x2a6aff)]},
+ ...[-1,1].map(s=>({n:'pf'+s,p:[s*1.25,1.8,0],par:'body',role:'wing',side:s,fw:5,amp:.4,open:.1,vs:.08,sh:[vE([s*1.75,1.8,0],[.55,.28,.1],0x7ad8ff)]})),
+ {n:'ta',p:[0,1.9,-.55],par:'body',role:'tail',idx:0,vs:.1,sh:[vE([0,1.9,-.9],[.9,.9,.12],p=>(Math.floor(p[1]*5)%2)?0x5ac8ff:0x2a8aff)]},
+ {n:'tb',p:[0,1.9,-1],par:'ta',role:'tail',idx:1,vs:.1,sh:[vE([0,1.9,-1.2],[.6,.6,.1],0x9ad8ff)]}]},
+{n:'ひょろ長バナナ神',e:'🍌',rt:4,c1:0xffe14a,c2:0xff5a2a,cy:2.2,head:[-.15,2.7,.4],fxc:[0xffe14a,0xffffff,0xff9a2a],
+ mo:{loc:'legs',tempo:1,stride:.9,armSw:.9,bob:.05,sway:.06,hop:.12,ap:'drop',rc:'joy',rj:.9},
+ parts:[
+ {n:'body',p:[0,1.2,0],role:'body',vs:.1,sh:[vC([.25,1.15,0],[-.05,1.9,.05],.42,p=>p[1]<1.05?0x7a5a2a:0xffe14a,.48),vC([-.05,1.9,.05],[-.25,2.7,.1],.48,0xffe14a,.46),vC([-.25,2.7,.1],[-.05,3.45,0],.46,p=>p[1]>3.3?0x6a4a1a:0xffe14a,.36),vP([-.12,1.9,.45],[.2,.9,.3],0xfff0a0)]},
+ vEye('body',-1,.3,2.6,.42,.2),vEye('body',1,.1,2.6,.42,.2),
+ ...[-1,1].map(s=>({n:'arm'+s,p:[s*.5,2.35,0],par:'body',role:'arm',side:s,vs:.07,sh:[vC([s*.5,2.35,0],[s*.75,1.2,.2],.1,0xf0b000),vE([s*.78,1.1,.2],.2,0xffffff)]})),
+ ...[-1,1].map(s=>({n:'leg'+s,p:[s*.25,1.2,0],par:'body',role:'leg',side:s,vs:.07,sh:[vC([s*.25,1.2,0],[s*.28,.3,0],.1,0xf0b000),vE([s*.28,.18,.2],[.3,.18,.45],0xff5a2a)]})),
+ {n:'halo',p:[-.05,4.15,0],par:'body',role:'prop',spin:1.5,vs:.06,sh:[vT([-.05,4.15,0],.6,.09,0xffd24a)]}]},
+// ---------- SR ----------
+{n:'タマゴ・ケルベロス',e:'🥚',rt:3,c1:0xfff0d6,c2:0xffd84a,cy:1.3,head:[0,2.6,.5],fxc:[0xffd84a,0x7ae8c0,0xff9ad0],
+ mo:{loc:'hop',tempo:1.1,hop:.8,bob:.08,sway:.05,ap:'rise',rc:'shake'},
+ parts:[
+ {n:'body',p:[0,1.2,0],role:'body',vs:.1,sh:[vE([0,1.25,0],[1.05,1.2,.95],p=>vxHP(p,7,9)==0?0xb08a5a:0xfff0d6),vB([0,3,0],[2,.9,2],0,0,1),vT([0,2.1,0],.84,.12,0xfff0d0)]},
+ {n:'hc',p:[0,2.1,.05],par:'body',role:'head',ph:0,vs:.08,sh:[vE([0,2.55,.1],[.58,.55,.52],0xffd84a),vC([0,2.5,.55],[0,2.45,.85],.13,0xff8a2a,.05)]},
+ vEye('hc',-1,.22,2.65,.52,.12),vEye('hc',1,.22,2.65,.52,.12),
+ {n:'hl',p:[-.75,2,0],par:'body',role:'head',ph:2,vs:.08,sh:[vE([-.8,2.45,.05],[.42,.4,.4],0x7ae8c0),vC([-.8,2.4,.4],[-.8,2.35,.65],.1,0xff8a2a,.04)]},
+ vEye('hl',-1,.8,2.55,.38,.1),vEye('hl',1,.62,2.55,.38,.1),
+ {n:'hr',p:[.75,2,0],par:'body',role:'head',ph:4,vs:.08,sh:[vE([.8,2.45,.05],[.42,.4,.4],0xff9ad0),vC([.8,2.4,.4],[.8,2.35,.65],.1,0xff8a2a,.04)]},
+ vEye('hr',-1,.62,2.55,.38,.1),vEye('hr',1,.8,2.55,.38,.1),
+ ...[['ac',0,3.05,.1,0],['al',-.8,2.85,.05,1],['ar',.8,2.85,.05,2]].map(([n,x,y,z,ph])=>({n,p:[x,y,z],par:n=='ac'?'hc':n=='al'?'hl':'hr',role:'ant',ph,vs:.05,sh:[vC([x,y,z],[x+.1,y+.4,z],.05,0xffb02a),vE([x+.12,y+.45,z],.09,0xff6a2a)]})),
+ ...[-1,1].map(s=>({n:'leg'+s,p:[s*.4,.45,.2],par:'body',role:'leg',side:s,vs:.07,sh:[vC([s*.4,.5,.2],[s*.4,.1,.3],.12,0xff8a2a,.1),vE([s*.4,.08,.45],[.22,.08,.3],0xff8a2a)]}))]},
+{n:'まるまるヘルメス',e:'👟',rt:3,c1:0x3ad8c8,c2:0xff4a5a,cy:1.5,head:[0,1.7,.9],fxc:[0xffffff,0x3ad8c8,0xffe14a],
+ mo:{loc:'roll',tempo:1,hop:.25,bob:.05,fw:8,ap:'spin',rc:'joy'},
+ parts:[
+ {n:'body',p:[0,1.5,0],role:'body',vs:.12,sh:[vE([0,1.5,0],1.35,p=>p[1]>1.5?0x3ad8c8:0x2aa8b8),vP([0,.95,.5],[.9,.55,.9],0xe8fff8),vP([0,1.25,1.1],[.3,.08,.3],0x3a2a2a)]},
+ vEye('body',-1,.45,1.7,1.2,.24),vEye('body',1,.45,1.7,1.2,.24),
+ {n:'cap',p:[0,2.7,0],par:'body',role:'head',vs:.08,sh:[vE([0,2.85,0],[.8,.5,.8],0xff4a5a),vE([0,2.62,.2],[.95,.1,.95],0xff4a5a),vC([0,3.2,0],[0,3.5,0],.06,0xffd24a)]},
+ {n:'orb',p:[0,3.5,0],par:'cap',role:'ant',vs:.05,sh:[vE([0,3.58,0],.12,0xffe14a)]},
+ ...[-1,1].map(s=>({n:'hw'+s,p:[s*.75,2.85,0],par:'cap',role:'wing',side:s,fw:8,amp:.35,open:.2,vs:.06,sh:[vC([s*.7,2.85,0],[s*1.5,3.35,0],.14,0xffffff,.06),vC([s*.7,2.8,0],[s*1.45,2.95,0],.12,0xe0f0ff,.05)]})),
+ ...[-1,1].map(s=>({n:'ft'+s,p:[s*.6,.4,.7],par:'body',role:'leg',side:s,vs:.07,sh:[vE([s*.6,.3,.75],[.28,.18,.42],0xffd24a)]})),
+ ...[-1,1].map(s=>({n:'fw'+s,p:[s*.85,.5,.6],par:'body',role:'wing',side:s,fw:12,amp:.5,open:.3,vs:.05,sh:[vC([s*.8,.45,.6],[s*1.3,.85,.45],.08,0xffffff,.04)]}))]},
+{n:'ナマズ・ゼウス',e:'⚡',rt:3,c1:0x4a6a9a,c2:0xffe14a,cy:1.1,head:[0,1.4,1.3],fxc:[0xfff08a,0xffe14a,0xffffff],
+ mo:{loc:'slide',tempo:1.2,yaw:.5,sq:.03,bob:.07,sway:.05,wag:.4,ap:'drop',rc:'shake'},
+ parts:[
+ {n:'body',p:[0,1,0],role:'body',vs:.1,sh:[vE([0,1.05,.2],[.95,.8,1.5],p=>p[1]<.8?0xd8e8f0:0x4a6a9a),vE([0,.95,1.55],[.85,.5,.5],0x5a7aaa),vP([0,.8,1.9],[.7,.07,.25],0x1a1a3a)]},
+ vEye('body',-1,.5,1.45,1.3,.17),vEye('body',1,.5,1.45,1.3,.17),
+ {n:'dor',p:[0,1.6,0],par:'body',role:'tail',idx:0,vs:.1,sh:[vE([0,1.9,-.3],[.12,.45,.6],0x2a3a6a)]},
+ ...[-1,1].map(s=>({n:'pf'+s,p:[s*.9,.9,.6],par:'body',role:'wing',side:s,fw:4,amp:.4,open:.1,vs:.08,sh:[vE([s*1.35,.8,.6],[.5,.1,.3],0x6a8aba)]})),
+ ...[-1,1].flatMap(s=>[0,1].map(j=>({n:'wh'+s+j,p:[s*(.7-j*.2),.9-j*.2,1.8],par:'body',role:'ant',ph:s+j,vs:.05,ol:0,sh:[vC([s*(.7-j*.2),.9-j*.2,1.8],[s*(1.8-j*.4),.7-j*.4,2.3],.05,0x2a3a6a,.03),vC([s*(1.8-j*.4),.7-j*.4,2.3],[s*(2.6-j*.5),.3-j*.2,2],.04,0x2a3a6a,.025)]}))),
+ {n:'b0',p:[0,1,-1.4],par:'body',role:'tail',idx:0,vs:.08,sh:[vC([0,1,-1.4],[0,1.5,-2],.2,0xffe14a,.17)]},
+ {n:'b1',p:[0,1.5,-2],par:'b0',role:'tail',idx:1,vs:.08,sh:[vC([0,1.5,-2],[0,.9,-2.6],.17,0xffd000,.15)]},
+ {n:'b2',p:[0,.9,-2.6],par:'b1',role:'tail',idx:2,vs:.08,sh:[vC([0,.9,-2.6],[0,1.4,-3.2],.14,0xfff08a,.06)]},
+ {n:'zap',p:[0,2.1,.9],par:'body',role:'prop',spin:3,vs:.06,sh:[vE([0,2.1,.9],.22,0xfff08a)]}]},
+// ---------- R ----------
+{n:'ペンギン・アトラス',e:'🐧',rt:2,c1:0x2a3a6a,c2:0xffa020,cy:1.3,head:[0,1.95,.7],fxc:[0x4ad8ff,0xffd24a,0xffffff],
+ mo:{loc:'legs',tempo:1.15,stride:.45,armSw:1.1,sway:.14,bob:.03,hop:.08,ap:'drop',rc:'joy'},
+ parts:[
+ {n:'body',p:[0,1.3,0],role:'body',vs:.12,sh:[vE([0,1.3,0],[1.15,1.3,1],0x2a3a6a),vP([0,1.1,.55],[.8,.95,.7],0xffffff),vC([0,1.7,.85],[0,1.65,1.35],.18,0xffa020,.05)]},
+ vEye('body',-1,.4,1.95,.82,.2),vEye('body',1,.4,1.95,.82,.2),
+ ...[-1,1].map(s=>({n:'arm'+s,p:[s*1.05,1.9,0],par:'body',role:'arm',side:s,vs:.08,sh:[vE([s*1.35,1.4,0],[.2,.75,.45],0x1a2a5a)]})),
+ ...[-1,1].map(s=>({n:'leg'+s,p:[s*.45,.5,.3],par:'body',role:'leg',side:s,vs:.07,sh:[vC([s*.45,.5,.2],[s*.45,.2,.4],.15,0xffa020),vE([s*.45,.12,.55],[.4,.12,.55],0xffa020)]})),
+ {n:'planet',p:[0,3.2,0],par:'body',role:'prop',spin:1.2,vs:.07,sh:[vE([0,3.2,0],.62,p=>Math.floor(p[1]*7)%2?0x4ad8ff:0x2a8aff),vT([0,3.2,0],.95,.07,0xffd24a)]}]},
+{n:'キノコ・ミダス',e:'🍄',rt:2,c1:0xff4a4a,c2:0xffd24a,cy:1.5,head:[0,1.5,.5],fxc:[0xffd24a,0xfff08a,0xffffff],
+ mo:{loc:'legs',tempo:1.2,stride:.8,armSw:.6,sway:.1,hop:.1,bob:.07,ap:'rise',rc:'shake'},
+ parts:[
+ {n:'body',p:[0,1.1,0],role:'body',vs:.1,sh:[vE([0,1.1,0],[.65,1.1,.6],0xfff0d0),vP([-.4,1.3,.45],[.14,.1,.2],0xff9a9a),vP([.4,1.3,.45],[.14,.1,.2],0xff9a9a),vP([0,1.2,.55],[.15,.05,.15],0x7a3a2a)]},
+ vEye('body',-1,.25,1.5,.5,.17),vEye('body',1,.25,1.5,.5,.17),
+ {n:'cap',p:[0,2.2,0],par:'body',role:'head',vs:.1,sh:[vE([0,2.3,0],[1.45,1.2,1.4],0xff4a4a),vB([0,1.55,0],[2,.65,2],0,0,1),vT([0,2.25,0],1.3,.12,0xffd24a),...[[.5,.85,.3,.34],[-.6,.7,-.25,.3],[.1,1,-.55,.3],[-.35,.75,.6,.28],[.75,.45,-.4,.26],[.1,.7,.8,.26]].map(q=>vP(eP([0,2.3,0],[1.45,1.2,1.4],q),q[3],0xffd24a))]},
+ {n:'coin',p:[0,3.85,0],par:'cap',role:'prop',spin:3,vs:.05,sh:[vE([0,3.85,0],[.3,.3,.06],0xffd24a)]},
+ ...[-1,1].map(s=>({n:'arm'+s,p:[s*.62,1.4,0],par:'body',role:'arm',side:s,vs:.06,sh:[vC([s*.62,1.4,0],[s*.85,.95,.1],.1,0xfff0d0),vE([s*.87,.9,.1],.14,0xffd24a)]})),
+ ...[-1,1].map(s=>({n:'leg'+s,p:[s*.3,.4,.1],par:'body',role:'leg',side:s,vs:.06,sh:[vC([s*.3,.4,.1],[s*.3,.1,.2],.12,0xd8a050),vE([s*.3,.08,.3],[.2,.08,.3],0xffd24a)]}))]},
+{n:'サボテン・アポロ',e:'🌵',rt:2,c1:0x3aa84a,c2:0xffc83a,cy:1.5,head:[0,2.1,.4],fxc:[0xff6ab8,0xffc83a,0x6ae86a],
+ mo:{loc:'hop',tempo:1,hop:1,bob:.05,sway:.03,ap:'rise',rc:'joy'},
+ parts:[
+ {n:'body',p:[0,1.5,0],role:'body',vs:.1,sh:[vC([0,.6,0],[0,2.6,0],.7,p=>(((Math.floor(Math.atan2(p[0],p[2])*2.5))%2)+2)%2?0x3aa84a:0x2a8a3a,.62),vB([0,.35,0],[.8,.35,.8],.1,0xd8683a),vP([0,1.95,.5],[.2,.06,.3],0x2a4a2a)]},
+ vEye('body',-1,.28,2.15,.55,.17),vEye('body',1,.28,2.15,.55,.17),
+ ...[-1,1].map(s=>({n:'arm'+s,p:[s*.65,1.7,0],par:'body',role:'arm',side:s,vs:.08,sh:[vC([s*.65,1.7,0],[s*1.2,1.7,0],.26,0x3aa84a),vC([s*1.2,1.7,0],[s*1.2,2.5,0],.26,0x3aa84a)]})),
+ {n:'flower',p:[0,2.7,0],par:'body',role:'ant',vs:.05,sh:[0,1,2,3,4].map(j=>vE([Math.cos(j*1.2566)*.28,2.98,Math.sin(j*1.2566)*.28],.17,0xff6ab8)).concat([vE([0,2.98,0],.18,0xffe14a)])},
+ {n:'sun',p:[0,2.2,-.7],par:'body',role:'prop',ax:'z',spin:1,vs:.07,ol:0,sh:[vE([0,2.2,-.7],[.8,.8,.1],0xffe14a)].concat([0,1,2,3,4,5,6,7,8,9].map(j=>{const a=j*.6283;return vC([Math.cos(a)*.95,2.2+Math.sin(a)*.95,-.7],[Math.cos(a)*1.45,2.2+Math.sin(a)*1.45,-.7],.1,0xffc83a,.04)}))}]},
+// ---------- N ----------
+{n:'ドーナツ・ヒュプノス',e:'🍩',rt:1,c1:0xff8ac8,c2:0x6a7aff,cy:1.55,head:[0,2.4,.5],fxc:[0xff8ac8,0x9ad8ff,0xffffff],
+ mo:{loc:'roll',tempo:.9,hop:.15,bob:.1,ap:'spin',rc:'shake'},
+ parts:[
+ {n:'body',p:[0,1.55,0],role:'body',vs:.1,sh:[vT([0,1.55,0],.9,.55,p=>{const gl=p[2]>.05+.08*Math.sin(Math.atan2(p[0],p[1]-1.55)*7);return gl?(vxHP(p,9,17)==0?[0xffe14a,0x6ae8ff,0xffffff,0x6aff8a][vxHP(p,5,4)]:0xff8ac8):0xe0a050},1),vP([-.32,2.45,.4],[.16,.04,.3],0x3a2a4a),vP([.32,2.45,.4],[.16,.04,.3],0x3a2a4a),vP([0,2.15,.45],[.1,.1,.25],0x7a2a4a)]},
+ ...[0,1].map(j=>({n:'z'+j,p:[.9+j*.35,3.1+j*.45,.2],par:'body',role:'ant',ph:j*2,vs:.05,ol:0,sh:[vB([.9+j*.35,3.28+j*.45,.2],[.14-j*.03,.03,.03],0,0x9ad8ff),vC([.9+j*.35+.12,3.25+j*.45,.2],[.9+j*.35-.12,3.0+j*.45,.2],.03,0x9ad8ff),vB([.9+j*.35,2.98+j*.45,.2],[.14-j*.03,.03,.03],0,0x9ad8ff)]})),
+ {n:'c0',p:[0,2.95,0],par:'body',role:'tail',idx:0,vs:.07,sh:[vC([0,2.95,0],[-.3,3.45,0],.4,0x6a7aff,.28)]},
+ {n:'c1',p:[-.3,3.45,0],par:'c0',role:'tail',idx:1,vs:.07,sh:[vC([-.3,3.45,0],[-.7,3.55,0],.28,0x6a7aff,.2)]},
+ {n:'c2',p:[-.7,3.55,0],par:'c1',role:'tail',idx:2,vs:.06,sh:[vE([-.9,3.5,0],.22,0xffffff)]},
+ ...[-1,1].map(s=>({n:'ft'+s,p:[s*.4,.45,.3],par:'body',role:'leg',side:s,vs:.06,sh:[vE([s*.4,.3,.35],[.25,.15,.3],0xffd24a)]}))]},
+{n:'エビフライ・トール',e:'🍤',rt:1,c1:0xe8b04a,c2:0xff5a2a,cy:1.2,head:[0,1.4,1.3],fxc:[0xffd24a,0xff7a3a,0xffffff],
+ mo:{loc:'hop',tempo:1.25,hop:.9,bob:.06,sway:.04,wag:.4,ap:'drop',rc:'joy'},
+ parts:[
+ {n:'body',p:[0,1.2,0],role:'body',vs:.1,sh:[vC([0,1,-.9],[0,1.4,0],.68,p=>vxHP(p,8,7)==0?0xd89a3a:0xe8b04a,.74),vC([0,1.4,0],[0,1.1,.95],.74,p=>vxHP(p,8,7)==0?0xd89a3a:0xe8b04a,.66),vP([0,1.05,1.45],[.22,.08,.3],0x7a3a2a),vP([-.5,1.25,1.2],[.14,.1,.3],0xff8a6a),vP([.5,1.25,1.2],[.14,.1,.3],0xff8a6a)]},
+ vEye('body',-1,.3,1.45,1.38,.2),vEye('body',1,.3,1.45,1.38,.2),
+ {n:'t0',p:[0,1,-.95],par:'body',role:'tail',idx:0,vs:.08,sh:[vE([0,1.05,-1.4],[.25,.55,.55],0xff5a2a)]},
+ {n:'t1',p:[0,1,-1.7],par:'t0',role:'tail',idx:1,vs:.08,sh:[vE([0,1.05,-2.1],[.22,.8,.5],0xff7a3a)]},
+ {n:'t2',p:[0,1,-2.4],par:'t1',role:'tail',idx:2,vs:.08,sh:[vE([0,1.05,-2.75],[.18,1.0,.38],0xff9a4a)]},
+ ...[-1,1].map(s=>({n:'an'+s,p:[s*.25,1.85,1.15],par:'body',role:'ant',ph:s,vs:.06,ol:0,sh:[vC([s*.25,1.85,1.15],[s*.55,2.45,1.35],.1,0xff5a2a,.07),vE([s*.6,2.5,1.38],.13,0xff3a1a)]})),
+ ...[-1,1].map(s=>({n:'lg'+s,p:[s*.45,.7,.7],par:'body',role:'leg',side:s,vs:.07,sh:[vC([s*.45,.7,.7],[s*.5,.12,.8],.14,0xff7a3a),vE([s*.5,.1,.9],[.2,.1,.28],0xff5a2a)]}))]},
+{n:'ジェリー・ネメシス',e:'🍮',rt:1,c1:0xe86ad8,c2:0x4a1a5a,cy:1,head:[0,1.3,.9],fxc:[0xff8ad8,0xffffff,0xff2a4a],
+ mo:{loc:'slide',tempo:1,yaw:.2,sq:.12,bob:.08,sway:.06,ap:'rise',rc:'shock'},
+ parts:[
+ {n:'body',p:[0,1,0],role:'body',vs:.1,sh:[vB([0,1,0],[1,.9,.95],.4,p=>p[1]>1.4?0xff8ad8:p[1]>.8?0xe86ad8:0xc84ac8),vP([-.5,1.65,.75],[.25,.12,.3],0xffd0f0),vC([-.62,1.78,.92],[-.12,1.62,.92],.07,0x4a1a5a,.07,3),vC([.62,1.78,.92],[.12,1.62,.92],.07,0x4a1a5a,.07,3),vB([0,.95,.95],[.35,.06,.05],0,0x3a1a4a,3)]},
+ vEye('body',-1,.38,1.25,.92,.2,0x2a0a3a),vEye('body',1,.38,1.25,.92,.2,0x2a0a3a),
+ {n:'cherry',p:[0,1.9,0],par:'body',role:'ant',vs:.05,sh:[vE([0,2.15,0],.28,0xff2a4a),vC([0,2.35,0],[.12,2.7,0],.04,0x4a7a2a)]},
+ ...[-1,1].map(s=>({n:'arm'+s,p:[s*1,1.1,.2],par:'body',role:'arm',side:s,vs:.07,sh:[vE([s*1.2,1,.25],[.22,.25,.22],0xe86ad8)]}))]}
+];
+
+// ---- スキン登録(既存90体のあとに追加。保存データの番号はずれない) ----
+// 【保留中】VXDEFの12体(キューブ系)は、神話ガチャに合わないため図鑑・ガチャ結果には出さない。
+// 定義(VXDEF)・ビューア(vxViewer)・登録処理はこのまま残してある。出したくなったら vxEnable() を1回呼ぶだけで登録される。
+const vxEnable=()=>VXDEF.forEach((d,ci)=>SKN.push({n:d.n,e:d.e,c:11,g:1,lg:1,vx:1,rt:d.rt,k:d.c1,t:d.c1,l:d.c1,s:d.c2,a:d.c1,h:d.c1,nh:1,nt:1,na:1,nl:1,ef:d.rt==4?6:null,
+ x(){const c=vxBuild(d,ci);G.add(c.root);G.add(c.fxg);G.userData.vx=c;HD.position.set(d.head[0],d.head[1],d.head[2]);FX.push((t,m)=>vxTick(c,t,m))}}));
+// ===== 元レジェンド90体: 小ブロック化(体型6種+トークンでパーツ・動きを組み立てる) =====
+const VLC={};
+function vlBuild(r,si,k){const d=VLC[si]||(VLC[si]=vlDef(r,k)),c=vxBuild(d,100+k);
+ G.add(c.root);G.add(c.fxg);G.userData.vx=c;HD.position.set(d.head[0],d.head[1],d.head[2]);FX.push((t,m)=>vxTick(c,t,m))}
+function vlDef(r,k){
+ const[n,e,rt,a,b,c,rc,sk]=r,A=parseInt(a,16),B=parseInt(b,16),C=parseInt(c,16),tk=rc.split(' '),has=l=>tk.some(q=>q[0]==l),num=l=>{const q=tk.find(q=>q[0]==l);return q?(+q.slice(1)||0):0};
+ const TNs=[0xffd9a0,0xf0c090,0xd8a070,0xc08050,0x8a5a3a,0xf5dcc8],gd=0xffd24a,dk=0x2a2a33,
+  lt=x=>(((((x>>16)&255)+255)>>1)<<16)|(((((x>>8)&255)+255)>>1)<<8)|(((x&255)+255)>>1);
+ const AM={'🐺':'pt','🦊':'pt','🐱':'pt','🐯':'pt','🐵':'rd','🐒':'rd','🐻':'rd','🐘':'tr','🦇':'bt','🦅':'bk','🦉':'bk','🦜':'bk','🐥':'bk','🦁':'mn','🐉':'hn','🐲':'hn','🍶':'hn'};
+ const hk=Object.keys(AM).find(q=>e.includes(q)),ty=hk?AM[hk]:null,an=!!ty;
+ // 体型6種: 脚の長さ/胴の高さ・太さ/頭の大きさ/腕の長さ
+ let ai=has('P')?4:has('D')?3:(rt==1?(k%2?2:5):k%6);
+ const S=[{lg:1.5,th:1.3,tr:.5,hr:.5,al:1.2},{lg:.9,th:1.2,tr:.75,hr:.62,al:1},{lg:.7,th:.9,tr:.6,hr:.85,al:.8},{lg:1.4,th:1.4,tr:.42,hr:.48,al:1.3},{lg:1.1,th:1.4,tr:.85,hr:.55,al:1.1},{lg:.9,th:1.1,tr:.7,hr:.7,al:.9}][ai];
+ const hip=S.lg,tw=S.tr,sh=hip+S.th-.1,hr=S.hr,hy=sh+hr*.85,K=has('K'),D=has('D'),
+  skin=sk??TNs[k%6],face=an?A:skin,tc=an?B:A,hair=an?A:B,P=[];
+ const ax=tw*.95+.05,tipY=hy+hr*1.6;
+ // ---- 胴(+台座/ドレス/肩) ----
+ const bs=[vE([0,hip+S.th/2,0],[tw,S.th/2+.12,tw*.72],p=>p[1]<hip+.3?B:tc),vE([0,hip+.32,0],[tw+.08,.09,tw*.72+.08],gd,2),vP([0,hip+S.th*.7,tw*.7],[.2,.2,.15],C)];
+ if(ai==4)bs.push(vE([0,sh-.2,0],[tw*1.3,.36,tw*.75],tc));
+ if(D)bs.push(vC([0,.12,0],[0,hip+.45,0],tw*1.7,p=>p[1]<.4?B:tc,tw*.85));
+ if(K){bs.push(vB([0,hip-.22,.05],[tw*1.35,.16,tw*1.15],.05,gd),vB([0,sh+.55,-tw*.9],[tw*1.3,1.35,.12],.05,B),vC([0,sh+1.9,-tw*.9],[0,sh+2.7,-tw*.9],.4,gd,.05),vE([0,sh+2.85,-tw*.9],.18,C));
+  [-1,1].forEach(s=>bs.push(vB([s*tw*1.35,hip+.2,.1],[.14,.1,.7],.04,gd)))}
+ P.push({n:'body',p:[0,hip,0],role:'body',vs:D?.12:.1,sh:bs});
+ // ---- 頭(髪/動物の耳・角・たてがみ) ----
+ const hs=[];
+ if(ty=='mn')hs.push(vT([0,hy,-.15],hr*1.05,hr*.38,B,1));
+ hs.push(vE([0,hy,0],[hr,hr*.95,hr],face));
+ if(!an){hs.push(vE([0,hy+hr*.28,-hr*.12],[hr*1.07,hr*.85,hr*1.06],hair),vE([0,hy-hr*.08,hr*.4],[hr*.86,hr*.78,hr*.66],skin))}
+ if(ty=='pt'||ty=='bt')[-1,1].forEach(s=>{const L=ty=='bt'?1.5:1.1;hs.push(vC([s*hr*.55,hy+hr*.7,0],[s*hr*.8,hy+hr*.7+L*hr*1.3,-.05],ty=='bt'?.34:.26,A,.04))});
+ if(ty=='rd'||ty=='mn')[-1,1].forEach(s=>hs.push(vE([s*hr*.85,hy+hr*.75,-.05],hr*.3,A)));
+ if(ty=='tr'){[-1,1].forEach(s=>hs.push(vE([s*hr*1.05,hy,-.1],[.1,hr*.75,hr*.6],A)));hs.push(vC([0,hy-.1,hr*.85],[0,hy-hr*1.05,hr*1.3],.2,A,.1))}
+ if(ty=='bk')hs.push(vC([0,hy-.05,hr*.85],[0,hy-.18,hr*1.5],.22,0xffb02a,.03));
+ if(ty=='hn')[-1,1].forEach(s=>hs.push(vC([s*hr*.45,hy+hr*.8,0],[s*hr*.75,hy+hr*1.7,-.1],.13,0xf5e8c8,.03)));
+ if(an&&ty!='tr'&&ty!='bk')hs.push(vE([0,hy-hr*.3,hr*.72],[hr*.5,hr*.34,hr*.42],lt(A)));
+ hs.push(vP([0,hy-hr*.42,hr*.9],[hr*.2,hr*.07,hr*.2],0x7a2a2a),vP([-hr*.55,hy-hr*.2,hr*.8],[hr*.16,hr*.1,hr*.2],0xff9a9a),vP([hr*.55,hy-hr*.2,hr*.8],[hr*.16,hr*.1,hr*.2],0xff9a9a));
+ const R=has('R')?num('R'):-1,rg=(x,y)=>{};
+ if(R==0){hs.push(vT([0,hy+hr*.8,0],hr*.68,.07,gd));for(let j=0;j<5;j++){const x=(j-2)*hr*.3;hs.push(vC([x,hy+hr*.85,0],[x,hy+hr*.85+.35+(j%2)*.3,0],.09,gd,.03),vE([x,hy+hr*.85+.4+(j%2)*.3,0],.07,C))}}
+ else if(R==1)[-1,1].forEach(s=>{let p0=[s*hr*.6,hy+hr*.5,0];for(let j=0;j<3;j++){const p1=[s*(hr*.95+j*.3),hy+hr*(.8+j*.45)-j*.1,0];hs.push(vC(p0,p1,.17-j*.04,0xf5e8c8,.13-j*.04));p0=p1}});
+ else if(R==2)[-1,1].forEach(s=>{hs.push(vC([s*hr*.4,hy+hr*.8,0],[s*hr*.9,hy+hr*2.2,0],.07,0xd8c090,.05));[0,1,2].forEach(i=>hs.push(vC([s*hr*(.55+i*.12),hy+hr*(1.1+i*.3),0],[s*hr*(1.1+i*.28),hy+hr*(1.5+i*.34),0],.05,0xd8c090,.03)))});
+ else if(R==3)for(let j=0;j<9;j++){const an2=(j-4)*.3;hs.push(vC([Math.sin(an2)*hr*.7,hy+hr*.7+Math.cos(an2)*hr*.2,-.1],[Math.sin(an2)*hr*1.9,hy+hr*.7+Math.cos(an2)*hr*1.5,-.1],.11,VXR[j%5],.04))}
+ else if(R==5){[-1,1].forEach(s=>hs.push(vC([s*hr*.4,hy+hr*.8,0],[s*hr*.7,hy+hr*2,0],.1,gd,.03)));hs.push(vE([0,hy+hr*.8,hr*.7],.16,C),vT([0,hy+hr*.8,0],hr*.68,.05,gd))}
+ P.push({n:'head',p:[0,sh,0],par:'body',role:'head',vs:.09,sh:hs});
+ P.push(vEye('head',-1,hr*.38,hy+hr*.05,hr*.9,hr*.3),vEye('head',1,hr*.38,hy+hr*.05,hr*.9,hr*.3));
+ if(R==4)P.push({n:'flame',p:[0,hy+hr*.8,0],par:'head',role:'ant',vs:.06,sh:[0,1,2,3,4,5].map(j=>vC([(j-2.5)*hr*.25,hy+hr*.8,0],[(j-2.5)*hr*.3,hy+hr*.8+.7+(j%3)*.35,0],.13,j%2?C:gd,.03))});
+ // ---- 腕(+肩当て・武器・盾) ----
+ const wl=['s','p','q','y','h','b','f','x'].find(has);
+ const wpn=H=>{const[x,y,z]=H;switch(wl){
+  case's':return[vC(H,[x,y+.55,z],.07,gd),vB([x,y+.6,z],[.42,.06,.07],.02,gd),vB([x,y+1.95,z],[.12,1.35,.04],.02,C),vC([x,y+3.3,z],[x,y+3.8,z],.12,C,.01)];
+  case'p':return[vC([x,y-.8,z],[x,y+4.4,z],.06,gd),vC([x,y+4.4,z],[x,y+5.2,z],.17,C,.02),vB([x-.28,y+4.4,z],[.22,.05,.04],.01,C),vB([x+.28,y+4.4,z],[.22,.05,.04],.01,C)];
+  case'q':return[vC([x,y-.8,z],[x,y+4,z],.06,gd),vB([x,y+4.1,z],[.45,.06,.06],.02,gd),...[-.4,0,.4].map(q=>vC([x+q,y+4.1,z],[x+q,y+4.9+(q?0:.4),z],.08,C,.02))];
+  case'y':return[vC([x,y-.8,z],[x,y+4.4,z],.07,0x4a3a2a),vE([x-.5,y+4.5,z],[.55,.28,.05],C)];
+  case'h':return[vC([x,y-.8,z],[x,y+3.2,z],.08,0x4a3a2a),vB([x,y+3.5,z],[.6,.4,.4],.1,A),vB([x-.7,y+3.5,z],[.1,.45,.45],.03,gd),vB([x+.7,y+3.5,z],[.1,.45,.45],.03,gd)];
+  case'b':{const o=[],cy=y+1.6,pt=t=>[x,cy+1.5*Math.sin(t),z+.65*(Math.cos(t)-.5)];for(let j=0;j<8;j++){const t0=-1.2+j*.3,t1=t0+.3;o.push(vC(pt(t0),pt(t1),.07,gd,.07))}o.push(vC(pt(-1.2),pt(1.2),.025,0xffffff,.025));return o}
+  case'f':return[vC([x,y-.8,z],[x,y+4.2,z],.07,gd),vE([x,y+4.6,z],.42,C),vT([x,y+4.6,z],.7,.05,gd,1)];
+  case'x':return[vC([x,y-.8,z],[x,y+3.4,z],.07,gd),vE([x-.65,y+3.4,z],[.55,.7,.06],C),vE([x+.65,y+3.4,z],[.55,.7,.06],C)]}return[]};
+ [-1,1].forEach(s=>{const sx=s*ax,end=[s*(tw*.95+.3),sh-.1-S.al,.2],as=[vC([sx,sh-.1,0],end,.17,tc,.14),vE([end[0],end[1]-.05,end[2]+.05],.2,face)];
+  if(has('P')){as.push(vE([s*(tw+.1),sh,0],[.5,.38,.5],gd));[0,1,2].forEach(j=>as.push(vC([s*(tw+.2+j*.15),sh+.1,0],[s*(tw+.5+j*.18),sh+.3+j*.12,0],.09,B,.02)))}
+  if(s==1&&wl)as.push(...wpn(end));
+  if(s==-1&&has('o'))as.push(vE([end[0]-.25,end[1]+1,.45],[.85,.85,.12],A),vT([end[0]-.25,end[1]+1,.45],.85,.07,gd,1),vE([end[0]-.25,end[1]+1,.6],.22,C));
+  P.push({n:'arm'+s,p:[sx,sh-.1,0],par:'body',role:'arm',side:s,vs:.09,sh:as})});
+ // 追加の腕 E
+ for(let q=0;q<num('E');q++)[-1,1].forEach(s=>{const y=sh-.15-q*.4,st=[s*ax,y,0],en=[s*(tw+1.1),y-.5,.3+q*.1];P.push({n:'ea'+q+s,p:st,par:'body',role:'arm',side:s,ph:q+1,vs:.07,sh:[vC(st,en,.14,tc,.12),vE([en[0],en[1]-.05,en[2]],.18,face)]})});
+ // ---- 脚(ドレス・玉座のときは別表現) ----
+ if(!D)[-1,1].forEach(s=>{const x=s*tw*.45;P.push(K?{n:'leg'+s,p:[x,hip-.1,0],par:'body',role:'leg',side:s,vs:.07,sh:[vC([x,hip-.1,0],[x,hip-.25,.9],.17,B),vE([x,hip-.25,1.05],[.24,.14,.3],dk)]}:{n:'leg'+s,p:[x,hip,0],par:'body',role:'leg',side:s,vs:.07,sh:[vC([x,hip,0],[x,.2,.03],.2,B,.17),vE([x,.12,.2],[.26,.12,.34],dk)]})});
+ // ---- 翼 W / リボン C / 尻尾 T / 光輪 H / オーラ A / 槍 G / 宝珠 O ----
+ for(let q=0;q<num('W');q++)[-1,1].forEach(s=>{const o=[s*.35,sh-.1-q*.35,-.35];P.push({n:'wg'+q+s,p:o,par:'body',role:'wing',side:s,ph:q*.8,fw:4+q,amp:.28,open:.3+q*.12,vs:.11,sh:[0,1,2,3,4].map(j=>{const an2=.15+j*.3+q*.12,dr=[s*Math.cos(an2),Math.sin(an2),-.1],L=(2.3-j*.18)*(1-q*.15)*1.15;return vC([o[0]+dr[0]*.2,o[1]+dr[1]*.2,o[2]],[o[0]+dr[0]*L,o[1]+dr[1]*L,o[2]-.1*L],.16-j*.01,j%2?C:A,.07)})})});
+ const nc=Math.min(num('C'),4);for(let i=0;i<nc;i++){const x=(i-(nc-1)/2)*.45,y=sh-.3-(i%2)*.4;[0,1,2].forEach(j=>{const z0=-.45-j*.9;P.push({n:'rb'+i+j,p:[x,y,z0],par:j?'rb'+i+(j-1):'body',role:'tail',idx:j,vs:.06,ol:0,sh:[vB([x,y,z0-.45],[.2,.04,.5],.02,[A,B,C][j])]})})}
+ const nt=Math.min(num('T'),9);for(let i=0;i<nt;i++){const an2=(i-(nt-1)/2)*(nt>4?.25:.5),dx=Math.sin(an2),dz=-Math.cos(an2),p0=[0,hip+.2,-tw*.6],p1=[dx*.8,p0[1]+.5,p0[2]+dz*.8],p2=[dx*1.7,p1[1]+.5,p1[2]+dz*.8],p3=[dx*2.4,p2[1]+.3,p2[2]+dz*.7],cs=[[p0,p1,.3,.28,A],[p1,p2,.28,.22,A],[p2,p3,.22,.1,C]];
+  cs.forEach((q,j)=>P.push({n:'tl'+i+j,p:q[0],par:j?'tl'+i+(j-1):'body',role:'tail',idx:j,vs:.11,sh:[vC(q[0],q[1],q[2],q[4],q[3])]}))}
+ if(has('H')){const c0=[0,hy,-.7],sp=[];sp.push(vT(c0,hr*1.8,.07,gd,1));for(let j=0;j<10;j++){const t=j*.6283;sp.push(vC([c0[0]+Math.cos(t)*hr*2,c0[1]+Math.sin(t)*hr*2,c0[2]],[c0[0]+Math.cos(t)*hr*2.7,c0[1]+Math.sin(t)*hr*2.7,c0[2]],.06,C,.03))}P.push({n:'halo',p:c0,par:'body',role:'prop',ax:'z',spin:.5,vs:.09,sh:sp})}
+ if(has('A')){const c0=[0,sh-.3,-1],sp=[vT(c0,2.1,.09,gd,1)];for(let j=0;j<12;j++){const t=j*.5236;sp.push(vC([c0[0]+Math.cos(t)*2.4,c0[1]+Math.sin(t)*2.4,c0[2]],[c0[0]+Math.cos(t)*3.2,c0[1]+Math.sin(t)*3.2,c0[2]],.08,gd,.03))}P.push({n:'aura',p:c0,par:'body',role:'prop',ax:'z',spin:.3,vs:.13,sh:sp})}
+ for(let i=0;i<Math.min(num('G'),6);i++){const q=i-(Math.min(num('G'),6)-1)/2,x=q*.9,y=tipY+.9-Math.abs(q)*.35;P.push({n:'gl'+i,p:[x,y,-1],par:'body',role:'ant',ph:i,vs:.09,sh:[vC([x,y-1.4,-1],[x,y+1.2,-1],.1,gd,.1),vC([x,y+1.2,-1],[x,y+1.9,-1],.16,C,.01),vB([x,y-1.3,-1],[.25,.05,.05],.01,gd)]})}
+ if(has('O')){const nO=Math.max(2,num('O')),sp=[];for(let j=0;j<nO;j++){const t=j/nO*6.2832;sp.push(vE([Math.cos(t)*1.7,sh+.3,Math.sin(t)*1.7],.22,j%2?C:gd))}P.push({n:'orbs',p:[0,sh+.3,0],par:'body',role:'prop',spin:1.2,vs:.09,sh:sp})}
+ // ---- 動き: 体型別に歩き方を変える。ドレス=滑る/玉座・翼2枚以上=浮く ----
+ const mA=[{t:.95,s:.8,w:.8,b:.03,y:.05,h:.06},{t:1.25,s:.45,w:.5,b:.04,y:.14,h:.1},{t:1.6,s:.6,w:1.1,b:.05,y:.1,h:.22},{t:1,s:.7,w:.9,b:.03,y:.08,h:.07},{t:.85,s:.5,w:.6,b:.03,y:.12,h:.07},{t:1.3,s:.55,w:.8,b:.04,y:.1,h:.15}][ai];
+ const mo={loc:'legs',tempo:mA.t,stride:mA.s,armSw:mA.w,bob:mA.b,sway:mA.y,hop:mA.h,wag:.35,fw:4,ap:['drop','spin','rise'][k%3],rc:['joy','shock','shake'][(k>>1)%3]};
+ if(D){mo.loc='slide';mo.yaw=.15;mo.sq=.05;mo.bob=.07}else if(K||num('W')>=2){mo.loc='hover';mo.bob=.08}
+ return{n,e,rt,c1:A,c2:B,cy:hip+S.th/2,head:[0,hy,.5],fxc:[C,gd,0xffffff],mo,parts:P}}
+
+// ---- ブロックキャラ ビューア(待機/歩行/登場/反応/持ち去りを1つずつ再生) ----
+const VXLN={legs:'歩く',hop:'跳ねる',slide:'滑る',roll:'転がる',hover:'浮かぶ'},VXAN={drop:'落下→着地',spin:'回転して出現',rise:'せり上がる'},VXRN={joy:'ジャンプで喜ぶ',shock:'びっくり',shake:'ぷるぷる→ポン'};
+function vxViewer(start){const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].vx);if(!ids.length)return;
+ let cur=ids.includes(start)?start:ids[0],vm='idle',dead=0,O=null,pt=0,aft=0,last=performance.now()/1000;
+ const ML=[['idle','待機'],['walk','歩行'],['appear','登場'],['react','反応'],['carry','持ち去り']];
+ if(window.__vxs)window.__vxs();window.__vxs=()=>{dead=1};
+ modal('🧱 ブロックキャラ ビューア',`<div style="text-align:center"><canvas id="vxcv" width="320" height="300" style="width:100%;max-width:340px;border-radius:14px;background:radial-gradient(circle at 50% 35%,#5a4aa8,#1a1050)"></canvas></div><div id="vxin" style="text-align:center;font-size:13px;font-weight:800;margin:6px 0;min-height:36px"></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 0">${ML.map(([k,n])=>`<div class="btn xs" data-vxm="${k}">${n}</div>`).join('')}</div><div id="vxch" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px">${ids.map(i=>`<div class="btn xs ${D.skins.includes(i)?'':'gry'}" data-vxc="${i}">${SKN[i].e} ${'★'.repeat(SKN[i].rt)}</div>`).join('')}</div>`);
+ const cv=document.getElementById('vxcv');if(!cv)return;
+ const rd=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true});rd.setPixelRatio(Math.min(2,window.devicePixelRatio||1));rd.setSize(320,300,false);
+ const sc=new T.Scene(),cam=new T.PerspectiveCamera(30,320/300,.1,60);cam.position.set(0,2.4,12.5);cam.lookAt(0,1.4,0);
+ sc.add(new T.AmbientLight(0xffffff,.8));const dl=new T.DirectionalLight(0xffffff,.8);dl.position.set(3,6,5);sc.add(dl);
+ const fl=new T.Mesh(new T.CircleGeometry(2.8,40),new T.MeshBasicMaterial({color:0x7a6ad8,transparent:true,opacity:.35}));fl.rotation.x=-Math.PI/2;fl.position.set(.4,.01,0);sc.add(fl);
+ const info=()=>{const q=SKN[cur],d=VXDEF[cur-ids[0]],v=vxOf(O);document.getElementById('vxin').innerHTML=`${q.e} ${esc(q.n)} <span style="color:${RC4[q.rt]}">${RN4[q.rt]}</span>${D.skins.includes(cur)?'':' (未所持・プレビュー)'}<br><small>ブロック${v?v.vox.toLocaleString():'-'}個 / 動くパーツ${v?v.list.length:'-'} / 移動:${VXLN[d.mo.loc]} / 登場:${VXAN[d.mo.ap]} / 反応:${VXRN[d.mo.rc]}</small>`};
+ const play=()=>{const v=vxOf(O);if(!v)return;aft=0;pt=.8;vxPlay(v,vm==='idle'||vm==='walk'?'idle':vm)};
+ const load=()=>{if(O){sc.remove(O);O.traverse(m=>{if(m.geometry)m.geometry.dispose()})}O=av(cur);O.position.x=-.8;O.rotation.y=.3;sc.add(O);play();info()};
+ $('mb').onclick=e=>{const m=e.target.closest('[data-vxm]'),c=e.target.closest('[data-vxc]');if(m){SE.btn();vm=m.dataset.vxm;play()}else if(c){SE.btn();cur=+c.dataset.vxc;load()}};
+ const loop=()=>{if(dead||!cv.isConnected){rd.dispose();try{rd.forceContextLoss()}catch(e){}if($('mb'))$('mb').onclick=null;return}
+  if(cv.offsetParent===null){last=performance.now()/1000;return requestAnimationFrame(loop)}
+  const t=performance.now()/1000,v=vxOf(O);anim(O,vm==='walk',t);
+  if(v&&!v.once&&(vm==='appear'||vm==='react'||vm==='carry')){pt+=t-last;if(pt>1.1){pt=0;if(vm==='carry'&&!aft){aft=1;vxPlay(v,'appear')}else{aft=0;vxPlay(v,vm)}}}
+  last=t;rd.render(sc,cam);requestAnimationFrame(loop)};
+ load();requestAnimationFrame(loop)}
 
 const NB=SKN.filter(q=>!q.g).length,NS=SKN.length,skN=i=>SKN[i].n,price=i=>i?(SKN[i].pr||60+i*10):0,emo=i=>SKN[i].e;
 function av(i){
@@ -1626,7 +1983,7 @@ function av(i){
  const k=P.k??0xffd9a0,tc=P.t??0x3a6bd0;
  if(!P.nh){hx(.8,.8,.8,k,0,0,0,1);eyes();hx(.28,.05,.02,0x772222,0,-.2,.41);if(P.r!=null){hx(.86,.26,.86,P.r,0,.42,0);hx(.86,.5,.14,P.r,0,.2,-.36)}}
  if(!P.nt){bx(1,1.2,.5,tc,0,1.8,0,1);if(!P.nb)bx(1.04,.14,.54,B(0x222222),0,1.3,0)}
- P.x&&P.x();if(P.u){HD.position.y=1.5;const au=sp(1.75,new T.MeshBasicMaterial({color:hsv(i*.137,.85,.55),transparent:true,opacity:.12,depthWrite:false,blending:T.AdditiveBlending}),0,1.5,0);cy(1.1,1.1,.02,new T.MeshBasicMaterial({color:0,transparent:true,opacity:.35}),0,.03,0);FX.push(t=>{au.scale.setScalar(1+Math.sin(t*2)*.05)})}if((P.g||P.rg)&&!P.m){const rg=tr(1.15,.05,B(0xffd24a),0,.06,0);rg.rotation.x=Math.PI/2;FX.push(t=>{rg.rotation.z=t*2;rg.scale.setScalar(1+Math.sin(t*3)*.05)});rise(5,0xfff0a0,.05,.95,3.8,1)}const g0=G,h0=HD,F0=FX;
+ P.x&&P.x();if(P.u){HD.position.y=1.5;const au=sp(1.75,new T.MeshBasicMaterial({color:hsv(i*.137,.85,.55),transparent:true,opacity:.12,depthWrite:false,blending:T.AdditiveBlending}),0,1.5,0);cy(1.1,1.1,.02,new T.MeshBasicMaterial({color:0,transparent:true,opacity:.35}),0,.03,0);FX.push(t=>{au.scale.setScalar(1+Math.sin(t*2)*.05)})}if((P.g||P.rg)&&!P.m&&!P.vx){const rg=tr(1.15,.05,B(0xffd24a),0,.06,0);rg.rotation.x=Math.PI/2;FX.push(t=>{rg.rotation.z=t*2;rg.scale.setScalar(1+Math.sin(t*3)*.05)});rise(5,0xfff0a0,.05,.95,3.8,1)}const g0=G,h0=HD,F0=FX;
  const lb=(w,l,top,bot,x,y)=>{const p=new T.Group();p.position.set(x,y,0);G.add(p);bx(w,l*.7,w,top,0,-l*.35,0,1,p);bx(w*.94,l*.32,w*.94,bot,0,-l*.84,0,0,p);return p};
  const am=P.a??tc,hd_=P.h??k,lg=P.l??0x2a3a8a,sh_=P.s??0x2a2a33;
  const aL=lb(.4,1.2,am,hd_,-.7,2.35),aR=lb(.4,1.2,am,hd_,.7,2.35),lL=lb(.45,1.2,lg,sh_,-.25,1.2),lR=lb(.45,1.2,lg,sh_,.25,1.2);
@@ -1642,7 +1999,7 @@ function trail(o,dt,mv){const u=o.userData,e=u.ef;if(e==null||!o.parent||!mv)ret
  o.parent.add(m);const L=e==3?2.5:e==2?1.6:e==6?1.2:.7;TRL.push({m,l:L,L,e})}
 function trlTick(dt){for(let i=TRL.length-1;i>=0;i--){const x=TRL[i];x.l-=dt;x.m.material.opacity=Math.max(0,x.l/x.L);if(x.e==5||x.e==6)x.m.position.y+=dt*1.2;if(x.l<=0){if(x.m.parent)x.m.parent.remove(x.m);x.m.material.dispose();TRL.splice(i,1)}}}
 let me;const home=new T.Group(),lobby=new T.Group(),hotel=new T.Group();S.add(home,lobby,hotel);
-function setSkin(i){const p=me&&me.parent;if(p)p.remove(me);const q=i==null?D.skin:i;me=av(SKN[q]?q:0);if(p)p.add(me);if(q==D.skin)faceIcon();if(!humanFace.d){humanFace.d=1;humanFace()}}
+function setSkin(i){const p=me&&me.parent;if(p)p.remove(me);const q=i==null?D.skin:i;me=av(SKN[q]?q:0);try{const vv=vxOf(me);if(vv)vxPlay(vv,'appear')}catch(e){}if(p)p.add(me);if(q==D.skin)faceIcon();if(!humanFace.d){humanFace.d=1;humanFace()}}
 const base=new T.Mesh(new T.CylinderGeometry(1.5,1.7,.25,40),new T.MeshPhongMaterial({color:0x2a4bff,emissive:0x1a2bd0,emissiveIntensity:.6}));base.position.set(-1.4,-.12,0);home.add(base);
 const ring=new T.Mesh(new T.TorusGeometry(1.5,.05,8,48),new T.MeshBasicMaterial({color:0xffe600}));ring.rotation.x=Math.PI/2;ring.position.y=.14;base.add(ring);
 for(let j=0;j<8;j++){const a=j*.785,m=new T.Mesh(new T.BoxGeometry(.25,.08,.25),new T.MeshBasicMaterial({color:0x9ff3ff}));m.position.set(Math.cos(a)*1.3,.15,Math.sin(a)*1.3);base.add(m)}
@@ -1710,7 +2067,7 @@ let fvt=null;
 function humanFace(){try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const o=av(0),cam=new T.PerspectiveCamera(32,1,.1,50);o.position.set(40,0,0);S.add(o);o.updateMatrixWorld(true);const hp=new T.Vector3();o.userData.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+1.5);cam.lookAt(hp);const bg=S.background,fg=S.fog;S.background=null;S.fog=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;S.fog=fg;S.remove(o);const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fi1').src=$('fi2').src=c.toDataURL()}catch(e){}}
 
 function faceIcon(){if(mode!='home'||!me||!me.parent)return;try{if(!fvt)fvt=new T.WebGLRenderTarget(128,128);const cam=new T.PerspectiveCamera(32,1,.1,50),u=me.userData,ry=me.rotation.y,hy=u.hd.rotation.y,pv_=pts.visible,dv=disc.visible;me.rotation.y=0;u.hd.rotation.y=0;pts.visible=disc.visible=false;const _sv=SU.g?SU.g.visible:true;if(SU.g)SU.g.visible=false;me.updateMatrixWorld(true);const hp=new T.Vector3();u.hd.getWorldPosition(hp);cam.position.set(hp.x,hp.y+.02,hp.z+([1.5,3.4,5][u.big|0]));cam.lookAt(hp.x,hp.y,hp.z);const bg=S.background;S.background=null;R.setRenderTarget(fvt);R.clear();R.render(S,cam);const b=new Uint8Array(65536);R.readRenderTargetPixels(fvt,0,0,128,128,b);R.setRenderTarget(null);S.background=bg;me.rotation.y=ry;u.hd.rotation.y=hy;pts.visible=pv_;disc.visible=dv;if(SU.g)SU.g.visible=_sv;const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),im=x.createImageData(128,128);for(let y=0;y<128;y++)im.data.set(b.subarray((127-y)*512,(128-y)*512),y*512);x.putImageData(im,0,0);$('fav').src=c.toDataURL()}catch(e){}}
-const GP={g:{n:'極レアガチャ',pick:'ゴールドナイト',icon:'👑',d:'かっこいい極レアスキンが出るガチャ！必ず未所持のスキンが出ます。',cls:'gold'},u:{n:'超レアガチャ',pick:'ブラックボール',icon:'⚫',d:'ブラックボールなど、ふしぎで個性的な超レアキャラが出るガチャ！必ず未所持が出ます。',cls:'neo'},h:{n:'ヒストリーガチャ',icon:'📜',d:'古代勇者とその仲間たち、個性豊かな全80体！10連はSR以上が1体確定。必ず未所持が出ます。',cls:'his'},m:{n:'ミステリーガチャ',icon:'🔮',d:'ふしぎでかわいい全80体！トリオ(3体セット)や映えスキンも。必ず未所持が出ます。',cls:'mys'},l:{n:'レジェンドガチャ',icon:'🏛️',d:'神話の神々と英雄 全90体！巨大な翼・黄金の玉座・自分より大きな武器をまとう人型スキン。UR25体は出現率ひくめ。10連はSR以上が1体確定。必ず未所持が出ます。',cls:'lgd'}},GT={};
+const GP={g:{n:'極レアガチャ',pick:'ゴールドナイト',icon:'👑',d:'かっこいい極レアスキンが出るガチャ！必ず未所持のスキンが出ます。',cls:'gold'},u:{n:'超レアガチャ',pick:'ブラックボール',icon:'⚫',d:'ブラックボールなど、ふしぎで個性的な超レアキャラが出るガチャ！必ず未所持が出ます。',cls:'neo'},h:{n:'ヒストリーガチャ',icon:'📜',d:'古代勇者とその仲間たち、個性豊かな全80体！10連はSR以上が1体確定。必ず未所持が出ます。',cls:'his'},m:{n:'ミステリーガチャ',icon:'🔮',d:'ふしぎでかわいい全80体！トリオ(3体セット)や映えスキンも。必ず未所持が出ます。',cls:'mys'},l:{n:'レジェンドガチャ',icon:'🏛️',d:'神話の神々と英雄90体＋🧱ブロックキャラ12体の全102体！小さなブロックでできた丸い・細長い・平たい不思議なキャラは、跳ねる・滑る・転がる・浮かぶで動くよ。UR28体は出現率ひくめ。10連はSR以上が1体確定。必ず未所持が出ます。',cls:'lgd'}},GT={};
 const skT=q=>!q.g?'':q.lg?'l':q.hs?'h':q.m?'m':q.u?'u':'g',gpool=t=>SKN.map((_,i)=>i).filter(i=>skT(SKN[i])==t&&!D.skins.includes(i)),gall=t=>SKN.filter(q=>skT(q)==t).length,gimg=t=>{const i=t=='l'?legPick():t=='m'?mysPick():t=='h'?hisPick():SKN.findIndex(q=>q.n==GP[t].pick),k=t+i;if(GT[k]===undefined)GT[k]=i<0?null:skinThumb(i,200,300,SKN[i].lg?13:SKN[i].kd==2?8.8:6.2);return GT[k]};
 const thTs={};
 function skinThumb(i,w=160,h=w,d=7.6){try{const k=w+'x'+h,tg=thTs[k]||(thTs[k]=new T.WebGLRenderTarget(w,h)),o=av(i),cam=new T.PerspectiveCamera(30,w/h,.1,60);o.position.set(60,0,0);S.add(o);o.userData.fx.forEach(f=>f(.8,false));o.updateMatrixWorld(true);cam.position.set(60,1.3,d);cam.lookAt(60,1.2,0);const bg=S.background,fg=S.fog;S.background=null;S.fog=null;R.setRenderTarget(tg);R.clear();R.render(S,cam);const b=new Uint8Array(w*h*4);R.readRenderTargetPixels(tg,0,0,w,h,b);R.setRenderTarget(null);S.background=bg;S.fog=fg;S.remove(o);o.traverse(m=>{if(m.geometry)m.geometry.dispose()});const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d'),im=x.createImageData(w,h);for(let y=0;y<h;y++)im.data.set(b.subarray((h-1-y)*w*4,(h-y)*w*4),y*w*4);x.putImageData(im,0,0);return c.toDataURL()}catch(e){try{R.setRenderTarget(null)}catch(_){}return null}}
@@ -2133,7 +2490,7 @@ function gachaFx(res,done,t){const nm=t=='g'?'極レア':'超レア';const v=$('
   $('gcok').onclick=()=>{SE.btn();sh('gcv',0);v.innerHTML='';done&&done()};
   if(k==1)$('gceq').onclick=()=>{act(res[0]);toast('装備しました');$('gcok').click()}},1750)}
 function claim(i){const cl=D.cl=D.cl||[];if(D.skins.length<MS[i][0]||cl.includes(i))return;cl.push(i);D.coin+=MS[i][1];save();updInfo();SE.lvl();burst();toast('🎁 +'+MS[i][1]+' コイン');dex(0)}
-$('mb').addEventListener('click',e=>{const d=e.target.closest('[data-dx]');if(d){SE.btn();dex(+d.dataset.dx)}const g=e.target.closest('[data-gc]');if(g)gachaPull(+g.dataset.gc,g.dataset.gt,g.dataset.tk);const m=e.target.closest('[data-ms]');if(m)claim(+m.dataset.ms);const q=e.target.closest('[data-gq]');if(q){act(+q.dataset.gq);toast('装備しました')}});
+$('mb').addEventListener('click',e=>{const vv=e.target.closest('[data-vxv]');if(vv){SE.btn();vxViewer(0);return}const d=e.target.closest('[data-dx]');if(d){SE.btn();dex(+d.dataset.dx)}const g=e.target.closest('[data-gc]');if(g)gachaPull(+g.dataset.gc,g.dataset.gt,g.dataset.tk);const m=e.target.closest('[data-ms]');if(m)claim(+m.dataset.ms);const q=e.target.closest('[data-gq]');if(q){act(+q.dataset.gq);toast('装備しました')}});
 const MI=[['👕','スキン',()=>shop(1)],['🛒','ショップ',()=>shop(0)],['📚','図鑑',()=>dex(0)],['🔔','通知',notif],['📮','スタンプ',stamp],['📋','ミッション',missions],['🛣️','ネオンロード',road],['🎡','ルーレット',roulette],['🐾','ペット',petRoom],['🗼','ふしぎタワー',towerGo],['🧭','探検隊',()=>ovOpen('ex')],['🎪','クレーン',()=>ovOpen('cr')],['👥','フレンド',friends],['🏆','ランキング',()=>rank('best')],['⚙️','設定',settings],['📖','ガイド',guide]];
 const MIF={};
 MI.forEach((a,k)=>{if(a[1]=='フレンド'||a[1]=='ふしぎタワー')return;const nav=['スキン','ショップ','図鑑','ランキング'].includes(a[1]),b=document.createElement('div');b.className='btn '+(nav?'nvb n'+k:'icb');b.title=a[1];b.innerHTML=(nav?`<span class="ti">${a[0]}</span><span class="tx">${a[1]=='図鑑'?'図鑑・🎰ガチャ':a[1]}</span>`:`<span class="ii">${a[0]}</span><span class="ic2">${a[1]}</span>`)+(({'スタンプ':'<i id="bdg" class="bdg"></i>','通知':'<i id="bdgn" class="bdg num hide"></i>','図鑑':'<i id="bdgd" class="bdg"></i>','ミッション':'<i id="bdgm" class="bdg"></i>','ネオンロード':'<i id="bdgr" class="bdg"></i>','ルーレット':'<i id="bdgl" class="bdg"></i>','ペット':'<i id="bdgp" class="bdg"></i>','クレーン':'<i id="bdgc" class="bdg"></i>','探検隊':'<i id="bdgx" class="bdg hide"></i>'})[a[1]]||'');b.onclick=()=>{SE.btn();a[2]()};MIF[a[1]]=a[2];$(nav?'nv':(['ペット','通知','設定','ガイド','クレーン'].includes(a[1])?'ic2':'ic')).appendChild(b)});
