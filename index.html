@@ -756,7 +756,7 @@ function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=
  if((D.sv||0)<5){if((D.coin||0)>=60000)D.coin=40000;D.sv=5;try{localStorage.uf=JSON.stringify(D)}catch(e){}}}migrate();
 let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 // ===== アップデートのお知らせ(既読・✕で消す・端末に保存) =====
-const UPD=[{id:'u1112iv',d:'11/12',t:'📨 新機能「友だち招待」登場！',l:['📨 ホームの「招待」ボタンから、LINEで友だちに招待リンクを送れます','🎁 リンクからはじめた友だちが Lv2 になると、あなたに報酬！ 2人・3人・5人・7人・10人の達成ごとに受け取れます','🪙 最大の10人達成で 🪙150000 ＋ 🏅100！ 2人:🪙10000 / 3人:🪙20000＋🏅10 / 5人:🪙40000＋🏅30 / 7人:🪙70000＋🏅50','🔐 参加の通知は暗号化されて届きます。同じ友だちは1回だけ数えられ、自分のリンクは使えません','📶 反映はお互いがオンラインのときです。友だちがLv2になったとき、あなたがアプリを開いていなくても、友だちのアプリが何度か再送します']},{id:'u1112mv',d:'11/12',t:'🔁 新機能「プレイヤー入れ替え(データ移行)」登場！',l:['🆔 設定画面に、あなたのプレイヤーID(10文字)が表示されるようになりました','🔁 ホームの ⚙️設定ボタンを10秒長押しすると、入れ替え画面が開きます(ふつうにタップすると今までの設定です)','🤝 相手のIDを入れて開始 → 相手が承認して8けたのコードを伝える → あなたが入力すると、お互いのプレイヤーが入れ替わります。あなたのプレイヤーは相手の端末へ移ります','📶 お互いオンラインで、ホーム画面を開いておいてください。オフラインのときは、データ保護のため始まりません','🛟 もし途中で失敗しても、10分以内なら入れ替え画面の「元に戻す」「未完了の入れ替えを確定」で復旧をためせます','⚠ 知らない人とは入れ替えないでください。承認コードは、相手にだけ伝えてください']},{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙13000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
+const UPD=[{id:'u1112iv',d:'11/12',t:'📨 新機能「友だち招待」登場！',l:['📨 ホームの「招待」ボタンから、LINEで友だちに招待リンクを送れます','🎁 リンクからはじめた友だちが Lv2 になると、あなたに報酬！ 2人・3人・5人・7人・10人の達成ごとに受け取れます','🪙 最大の10人達成で 🪙150000 ＋ 🏅100！ 2人:🪙10000 / 3人:🪙20000＋🏅10 / 5人:🪙40000＋🏅30 / 7人:🪙70000＋🏅50','🔐 参加の通知は暗号化されて届きます。同じ友だちは1回だけ数えられ、自分のリンクは使えません','📶 反映はお互いがオンラインのときです。友だちがLv2になったとき、あなたがアプリを開いていなくても、友だちのアプリが何度か再送します']},{id:'u1112mv',d:'11/12',t:'🔁 新機能「データ移行・入れ替え」登場！',l:['📱 Safari・Chrome・ホーム画面に追加したアプリは、それぞれデータが別々です。そのデータを、ボタンだけで移せるようになりました','🆔 設定画面に、この端末のプレイヤーID(10文字)が表示されます','🔁 データを受け取りたい側で、⚙️設定ボタンを10秒長押し → 古い側のIDを入れて「リクエストを送る」','🔔 古い側の通知に「承認」ボタンが届きます。承認だけでOK、コード入力は不要です。お互い同時にオンラインでなくても進みます','📥 コピー移行(相手のデータをコピー)と、🔁 入れ替え(おたがいのデータを交換)をえらべます','🛟 移行前のデータは24時間バックアップされ、入れ替え画面から戻せます','⚠ 自分の別の端末・ブラウザ以外からのリクエストは「拒否」してください']},{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙13000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
 const UN=()=>{const u=D.un||(D.un={});if(!u.r)u.r=[];if(!u.x)u.x=[];return u};
 const unU=()=>{const u=UN();return UPD.filter(x=>!u.x.includes(x.id)&&!u.r.includes(x.id)).length};
 async function sbf(p,m='GET',b,h={},na){if(window.ufRL)throw new Error('ネットワークに接続できません');const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));if(Array.isArray(j))j.forEach(decTag);return ufDedupe(p,m,j)}
@@ -1883,7 +1883,7 @@ $('exit').onclick=()=>{if(mode=='game'&&confirm(st>=2?'ゲームから退出し�
 let capMax=1,shown=0,shO=0,shC=-1,pv=null,EX=new Set(),pings=[];
 const td=()=>new Date().toDateString(),yd=()=>new Date(Date.now()-864e5).toDateString(),RW=[60,80,100,120,160,200,300];
 const stS=()=>{const cl=D.last==td();return{cl,day:cl?(D.str-1)%7+1:(D.last==yd()?D.str:0)%7+1}};
-function updBadge(){newBadges();const b=$('bdg');if(b)b.classList.toggle('hide',stS().cl);const n=$('bdgn');if(n){const c=NTF.length+frN+unU();n.textContent=c;n.classList.toggle('hide',!c)}const d=$('bdgd');if(d){const cl=D.cl||[];d.classList.toggle('hide',!(MS.some((m,i)=>D.skins.length>=m[0]&&!cl.includes(i))||sumClaimable()))}}
+function updBadge(){newBadges();const b=$('bdg');if(b)b.classList.toggle('hide',stS().cl);const n=$('bdgn');if(n){const c=NTF.length+frN+unU()+(window.xfN||0);n.textContent=c;n.classList.toggle('hide',!c)}const d=$('bdgd');if(d){const cl=D.cl||[];d.classList.toggle('hide',!(MS.some((m,i)=>D.skins.length>=m[0]&&!cl.includes(i))||sumClaimable()))}}
 const modal=(t,h)=>{$('mt').textContent=t;$('mb').innerHTML=h;sh('md',1)};
 var teamK='';
 function buildTeam(){teamK=Object.keys(peers).join();$('team').innerHTML=`<div class="tc me" id="t0">${esc(D.name[0]||'?')}</div>`+Object.values(peers).map(p=>`<div class="tc fr" data-u="${esc(p.u)}" title="${esc(p.n||'')}">${esc((p.n||'?')[0])}</div>`).join('')+E.map((e,i)=>`<div class="tc" id="t${i+1}">${e.n[0]}</div>`).join('')}
@@ -2068,7 +2068,8 @@ async function notif(){cur='n';ntfClean();modal('🔔 通知','<div id="nb">読�
   if(rows.length){const ps=await sbf('/rest/v1/profiles?select=id,name,lv&id=in.('+rows.map(r=>r.a).join(',')+')'),pm={};ps.forEach(p=>pm[p.id]=p);
    fr=rows.map(r=>{const p=pm[r.a]||{name:'(不明)',lv:'?'};return `<div class="lnr"><div class="lni">🙋</div><div class="lnt"><div class="lnn">${esc(p.name)} <span class="lnlv">Lv.${p.lv}</span></div><div class="lnm">フレンド申請が届いています</div></div><div class="lnx"><div class="lnbt"><div class="btn xs grn" data-a="ok" data-id="${r.id}">承認</div><div class="btn xs red" data-a="del" data-id="${r.id}">拒否</div></div></div></div>`}).join('')}}
  catch(e){fr='<div class="small">フレンド申請を取得できません('+esc(e.message)+')</div>'}
- if($('nb'))$('nb').innerHTML=((fr?'<div class="sec">🙋 フレンド申請</div>'+fr:'')+(inv?'<div class="sec">📨 ルーム招待</div>'+inv:'')+(ups?'<div class="sec">📢 アプデ通知</div>'+ups:''))||'<div class="small" style="text-align:center;padding:20px">新しい通知はありません</div>'}
+ let xfh='';try{xfh=await xfHtml()}catch(e){}
+ if($('nb'))$('nb').innerHTML=((fr?'<div class="sec">🙋 フレンド申請</div>'+fr:'')+(inv?'<div class="sec">📨 ルーム招待</div>'+inv:'')+(xfh?'<div class="sec">🔁 データ移行</div>'+xfh:'')+(ups?'<div class="sec">📢 アプデ通知</div>'+ups:''))||'<div class="small" style="text-align:center;padding:20px">新しい通知はありません</div>'}
 // ===== 図鑑 & ガチャ =====
 const MS=[[10,50],[25,150],[40,300],[55,500],[70,1500],[100,2500],[120,3000],[150,4000],[200,5000],[240,6000],[270,7000],[300,8000],[310,8500],[350,10000],[390,12500]],GC=200;let gcB=0;
 function dex(tab){if(tab==2)return sdex();const n=D.skins.length,cl=D.cl=D.cl||[];
@@ -2139,67 +2140,129 @@ function peersTick(dt,t){const now=performance.now();
   if(p.g.parent!=gp){if(p.g.parent)p.g.parent.remove(p.g);if(gp){gp.add(p.g);p.first=1}}if(!gp){if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);if(p.sg&&p.sg.g&&p.sg.g.parent)p.sg.g.parent.remove(p.sg.g);continue}
   const g=p.g;if(p.first){g.position.set(p.tx,0,p.tz);p.first=0}const q=Math.min(1,dt*10);g.position.x+=(p.tx-g.position.x)*q;g.position.z+=(p.tz-g.position.z)*q;g.position.y=p.j||0;g.rotation.y=p.tr;g.rotation.z=(p.d&&p.m=='g')?1.3:0;
   anim(g,p.v&&!p.d,t);trail(g,dt,p.v&&!p.d);peerPet(p,gp,g,dt,t);peerSum(p,gp,g,dt,t)}}
-// ===== 🔁 プレイヤー入れ替え (設定ボタン10秒長押し) =====
+// ===== 🔁 データ移行 / プレイヤー入れ替え (設定ボタン10秒長押し / サーバー経由・承認ボタンのみ) =====
 const upid=()=>{const u=uid();return u?u.replace(/-/g,'').slice(0,10).toUpperCase():''};
-let swCh=null,SW={},swSeen=new Set();
+let swCh=null,swSeen=new Set();
 const swUuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,swSid=/^[0-9A-F]{10}$/;
-function swInit(){try{if(swCh&&sbc)sbc.removeChannel(swCh)}catch(e){}swCh=null;const s=upid();if(!sbc||!s)return;swCh=sbc.channel('uf-sw-'+s,{config:{broadcast:{self:false}}}).on('broadcast',{event:'sw'},p=>{swOn(p.payload).catch(()=>{})}).subscribe();setTimeout(()=>{ivTry().catch(()=>{})},4000)}
+function swInit(){try{if(swCh&&sbc)sbc.removeChannel(swCh)}catch(e){}swCh=null;const s=upid();if(!sbc||!s)return;swCh=sbc.channel('uf-sw-'+s,{config:{broadcast:{self:false}}}).on('broadcast',{event:'sw'},p=>{swOn(p.payload).catch(()=>{})}).subscribe();setTimeout(()=>{ivTry().catch(()=>{})},4000);setTimeout(()=>{xfPoll().catch(()=>{})},3000)}
 function swTx(to,o){if(!sbc||!swSid.test(to||''))return false;o.to=to;o.from=upid();o.k=(o.rid||'')+Math.random().toString(36).slice(2,9);const c=sbc.channel('uf-sw-'+to,{config:{broadcast:{self:false}}});c.subscribe(s=>{if(s=='SUBSCRIBED'){const f=()=>{try{c.send({type:'broadcast',event:'sw',payload:o})}catch(e){}};f();setTimeout(f,600);setTimeout(f,1500);setTimeout(()=>{try{sbc.removeChannel(c)}catch(e){}},3500)}});return true}
 const swB64=u=>{let s='';const a=new Uint8Array(u);for(let i=0;i<a.length;i+=8192)s+=String.fromCharCode.apply(null,a.subarray(i,i+8192));return btoa(s)};
 const swUnB64=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0));
 async function swKey(code,rid){const e=new TextEncoder(),km=await crypto.subtle.importKey('raw',e.encode(code),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:e.encode('uf-sw-'+rid),iterations:120000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 async function swEnc(key,o){const iv=crypto.getRandomValues(new Uint8Array(12)),ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(o)));return swB64(iv)+'.'+swB64(ct)}
 async function swDec(key,s){const [a,b]=String(s).split('.');const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:swUnB64(a)},key,swUnB64(b));return JSON.parse(new TextDecoder().decode(pt))}
-const swOkSes=x=>x&&typeof x.access_token=='string'&&typeof x.refresh_token=='string'&&x.user&&swUuid.test(x.user.id||'')&&x.user.id!=uid();
-const swRnd=()=>String(crypto.getRandomValues(new Uint32Array(1))[0]%1e8).padStart(8,'0');
-function swReset(){clearTimeout(SW.tm);clearTimeout(SW.tm2);SW={}}
-const swSt=m=>{const e=$('sws');if(e)e.textContent=m};
-async function swFlush(){clearTimeout(pt);try{await auth();await push()}catch(e){}return sy=='☁ 同期OK'}
-function swApply(x){if(!x||!x.user)return;SWP=1;clearTimeout(pt);try{localStorage.uf_swp_ts=String(Date.now());localStorage.ufs=JSON.stringify(x);localStorage.ufu=x.user.id;document.cookie='ufb='+encodeURIComponent(x.refresh_token)+';max-age=31536000;path=/;SameSite=Lax';localStorage.uf_swp_pend='1';localStorage.removeItem('uf');localStorage.removeItem('ufn');localStorage.removeItem('uf_swp_in')}catch(e){}toast('🔁 入れ替え完了！再読み込みします');setTimeout(()=>{window.ufRL=1;location.reload()},900)}
-function swBackup(){try{localStorage.ufs_bak=JSON.stringify(ufLs()||ses);localStorage.uf_swp_ts=String(Date.now())}catch(e){}}
 async function swOn(m){
  if(!m||m.to!=upid()||typeof m.rid!='string'||typeof m.k!='string'||swSeen.has(m.k))return;swSeen.add(m.k);if(swSeen.size>200)swSeen=new Set([...swSeen].slice(-100));
  if(m.t=='ivj'){await ivJoin(m);return}
  if(m.t=='iva'){await ivAck(m);return}
- if(m.t=='req'){
-  if(!swSid.test(m.from||'')||m.from==upid())return;
-  if(mode!='home'||(SW.rid&&SW.rid!=m.rid&&Date.now()-SW.t<90000))return void swTx(m.from,{t:'rej',rid:m.rid,why:'相手は今リクエストを受けられません(ホーム画面で開いてください)'});
-  swReset();SW={rid:m.rid,role:'B',peer:m.from,code:swRnd(),t:Date.now(),fails:0,ap:0};SW.fl=swFlush();
-  SW.tm=setTimeout(()=>{if(SW.rid==m.rid){swReset();sh('md',0);toast('⌛ 入れ替えリクエストが時間切れになりました')}},90000);
-  modal('🔁 入れ替えリクエスト',`<div class="card" style="padding:10px;margin:6px 0;font-weight:900"><b>${esc(String(m.name||'?').slice(0,20))}</b> (Lv.${+m.lv||'?'} / ID ${esc(m.from)}) があなたとの入れ替えを希望しています。<div class="small">承認すると、あなたのプレイヤーは相手の端末へ移り、あなたの端末は相手のプレイヤーになります。知らない人なら「拒否」してください。</div></div><div style="text-align:center;font-weight:900">🔐 承認コード (相手に伝えてください)<div style="font-size:30px;letter-spacing:3px;margin:6px 0">${SW.code.slice(0,4)} ${SW.code.slice(4)}</div></div><div style="text-align:center"><div id="swap" class="btn grn">✅ 承認</div> <div id="swrj" class="btn gry">✖ 拒否</div></div><div id="sws" class="small" style="text-align:center;margin-top:6px"></div>`);
-  $('swrj').onclick=()=>{swTx(m.from,{t:'rej',rid:m.rid,why:'相手が拒否しました'});swReset();sh('md',0)};
-  $('swap').onclick=async()=>{if(SW.rid!=m.rid||SW.ap)return;swSt('データを保存中…');const ok=await SW.fl;if(SW.rid!=m.rid)return;if(!ok){swSt('⚠ オフラインのため中止しました(データ保護)');swTx(m.from,{t:'rej',rid:m.rid,why:'相手がオフラインです'});swReset();return}SW.ap=1;swSt('✅ 承認しました。相手がコードを入力するのを待っています…');swTx(m.from,{t:'wait',rid:m.rid});if(SW.pp)swOn(SW.pp)};
-  return}
- if(m.rid!=SW.rid||m.from!=SW.peer)return;
- if(m.t=='wait'&&SW.role=='A'){SW.t=Date.now();clearTimeout(SW.tm);SW.tm=setTimeout(()=>{if(SW.rid==m.rid){swSt('⌛ 時間切れです');swReset()}},120000);
-  const b=$('swbox');if(b)b.innerHTML='<div style="font-weight:900;text-align:center">相手の画面に出ている8けたのコードを入力</div><div class="row" style="justify-content:center"><input id="swc" inputmode="numeric" maxlength="8" style="width:150px;text-align:center;font-size:20px"><div id="swok" class="btn xs grn">確認</div></div>';
-  $('swok').onclick=async()=>{const c=($('swc').value||'').replace(/\D/g,'');if(c.length!=8)return swSt('8けた入力してください');if(!(window.crypto&&crypto.subtle))return swSt('⚠ この環境は暗号機能が使えないため中止しました');swSt('確認中…(数秒かかります)');try{SW.key=await swKey(c,SW.rid);swTx(SW.peer,{t:'proof',rid:SW.rid,p:await swEnc(SW.key,{ok:SW.rid})})}catch(e){swSt('⚠ 失敗しました')}};return}
- if(m.t=='rej'){swSt('✖ '+String(m.why||'中止されました').slice(0,60));toast('✖ 入れ替えは行われませんでした');swReset();return}
- if(m.t=='bad'&&SW.role=='A'){swSt('❌ コードが違います。もう一度入力してください');return}
- if(m.t=='proof'&&SW.role=='B'){
-  if(!SW.ap){SW.pp=m;return}
-  if(SW.sent)return;
-  try{const k=await swKey(SW.code,SW.rid);const o=await swDec(k,m.p);if(!o||o.ok!=SW.rid)throw 0;SW.key=k;SW.sent=1;await auth();const me_=ufLs()||ses;if(!(me_&&me_.access_token&&me_.refresh_token&&me_.user&&me_.user.id))throw new Error('ses');swTx(SW.peer,{t:'sesB',rid:SW.rid,d:await swEnc(k,{ses:me_})});swSt('🔁 データを交換中…')}
-  catch(e){SW.pp=null;SW.fails=(SW.fails||0)+1;if(SW.fails>=3){swTx(SW.peer,{t:'rej',rid:SW.rid,why:'コードを3回まちがえたため中止しました'});swSt('✖ 中止しました');swReset()}else swTx(SW.peer,{t:'bad',rid:SW.rid})}
-  return}
- if(m.t=='sesB'&&SW.role=='A'&&SW.key&&!SW.got){
-  try{const o=await swDec(SW.key,m.d);if(!swOkSes(o.ses))throw 0;SW.got=1;SW.in=o.ses;try{localStorage.uf_swp_in=JSON.stringify(o.ses)}catch(e){}swBackup();const mine=ufLs()||ses;swTx(SW.peer,{t:'sesA',rid:SW.rid,d:await swEnc(SW.key,{ses:mine})});swSt('🔁 相手の完了を待っています…');clearTimeout(SW.tm2);SW.tm2=setTimeout(()=>{if(SW.rid==m.rid&&!SWP)swSt('⚠ 相手の完了を確認できません。下の「未完了の入れ替えを確定」か「元に戻す」を使ってください。')},25000);swUiRestore()}catch(e){swSt('⚠ データを受け取れませんでした');swReset()}
-  return}
- if(m.t=='sesA'&&SW.role=='B'&&SW.key&&!SW.done){
-  try{const o=await swDec(SW.key,m.d);if(!swOkSes(o.ses))throw 0;SW.done=1;swBackup();swTx(SW.peer,{t:'done',rid:SW.rid});swSt('✅ 入れ替え中…');SWP=1;clearTimeout(pt);setTimeout(()=>swApply(o.ses),2500)}catch(e){swSt('⚠ データを受け取れませんでした');swReset()}
-  return}
- if(m.t=='done'&&SW.role=='A'&&SW.in){SWP=1;swApply(SW.in)}
+ if(m.t=='xfn'){xfPoll(1).catch(()=>{})}
 }
-function swUiRestore(){const b=$('swres');if(!b)return;let h='';try{if(localStorage.uf_swp_in)h+='<div id="swfix" class="btn xs blu">📥 未完了の入れ替えを確定</div> '}catch(e){}try{if(localStorage.ufs_bak)h+='<div id="swbk" class="btn xs gry">↩ 入れ替え前のプレイヤーに戻す</div>'}catch(e){}b.innerHTML=h;const f=$('swfix'),k=$('swbk');if(f)f.onclick=()=>{if(confirm('相手の端末で入れ替えが完了している場合だけ押してください。確定しますか？'))try{swApply(JSON.parse(localStorage.uf_swp_in))}catch(e){toast('失敗しました')}};if(k)k.onclick=()=>{if(confirm('入れ替え前のプレイヤーに戻します(10分以内のみ有効)。相手がすでに入れ替え済みの場合は戻せないことがあります。続けますか？'))try{swApply(JSON.parse(localStorage.ufs_bak))}catch(e){toast('失敗しました')}}}
-function swapUI(){
+// ---- データ移行本体: 依頼はサーバー(transfers表)に預かる。相手がオフラインでも、次に開いたとき通知される ----
+const XF={rows:[],off:0,busy:0,noted:{},done:{},n:0,err:''};
+try{XF.done=JSON.parse(localStorage.uf_xfdone||'{}')}catch(e){}
+try{if(localStorage.uf_xfbak_ts&&Date.now()-(+localStorage.uf_xfbak_ts)>864e5){localStorage.removeItem('uf_xfbak');localStorage.removeItem('uf_xfbak_ts')}}catch(e){}
+const xfMark=id=>{XF.done[id]=Date.now();const k=Object.keys(XF.done);if(k.length>30){k.sort((a,b)=>XF.done[a]-XF.done[b]);delete XF.done[k[0]]}try{localStorage.uf_xfdone=JSON.stringify(XF.done)}catch(e){}};
+const xfLbl=m=>m=='swap'?'🔁 入れ替え':'📥 コピー移行';
+const xfDel=id=>sbf('/rest/v1/transfers?id=eq.'+id,'DELETE').catch(()=>{});
+const xfPatch=(id,b)=>sbf('/rest/v1/transfers?id=eq.'+id,'PATCH',b,{Prefer:'return=minimal'});
+function xfUa(){const u=navigator.userAgent||'';let sa=false;try{sa=!!(navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches))}catch(e){}
+ const b=/Edg/.test(u)?'Edge':/FxiOS|Firefox/.test(u)?'Firefox':/CriOS|Chrome/.test(u)?'Chrome':/Safari/.test(u)?'Safari':'ブラウザ';
+ const os=/iPhone|iPad|iPod/.test(u)?'iPhone/iPad':/Android/.test(u)?'Android':/Mac/.test(u)?'Mac':/Windows/.test(u)?'Windows':'';
+ return (sa?'ホーム画面アプリ':b)+(os?' ('+os+')':'')}
+function xfBadge(){window.xfN=XF.n||0;try{updBadge()}catch(e){}}
+async function xfPoll(force){
+ if(XF.busy||SWP)return;if(XF.off&&!force&&Date.now()<XF.off)return;
+ XF.busy=1;
+ try{await auth();const s=upid(),u=uid();if(!s||!u)throw new Error('接続待ち');
+  const rows=await sbf('/rest/v1/transfers?select=*&order=created_at.desc&limit=20&or=(to_sid.eq.'+s+',from_uid.eq.'+u+')');
+  XF.off=0;XF.err='';XF.rows=Array.isArray(rows)?rows:[];await xfStep()}
+ catch(e){XF.err=String(e.message||e);if(/schema cache|does not exist|PGRST205|HTTP 404/i.test(XF.err))XF.off=Date.now()+6e5}
+ finally{XF.busy=0}
+ xfBadge()}
+async function xfStep(){const s=upid(),u=uid(),now=Date.now();let n=0;
+ for(const r of XF.rows){
+  if(now-new Date(r.created_at).getTime()>6048e5){await xfDel(r.id);continue}
+  const mine=r.from_uid==u,tgt=!mine&&r.to_sid==s;
+  if(tgt&&r.status=='pending'){n++;if(!XF.noted[r.id]){XF.noted[r.id]=1;try{SE.pon();lineNote('🔁',r.from_name||'?','データ移行のリクエストが届きました。タップして確認')}catch(e){}}}
+  else if(tgt&&r.status=='approved'&&r.to_uid==u&&r.mode=='swap'&&r.r_payload&&!XF.done[r.id]){if(mode=='home'){await xfTgtApply(r);return}}
+  else if(mine&&r.status=='rejected'){await xfDel(r.id);try{toast('✖ 相手がデータ移行を拒否しました')}catch(e){}}
+  else if(mine&&r.status=='approved'&&!XF.done[r.id]){
+   if(r.mode=='swap'&&r.r_payload){if(r.t_payload&&mode=='home'){await xfRecvApply(r);return}}
+   else{n++;if(!XF.noted['a'+r.id]){XF.noted['a'+r.id]=1;try{SE.pon();lineNote('✅','データ移行','承認されました。タップして「実行」を押してください')}catch(e){}}}
+  }}
+ XF.n=n}
+async function xfApplyData(d){
+ SWP=1;clearTimeout(pt);
+ try{localStorage.uf_xfbak=JSON.stringify(D);localStorage.uf_xfbak_ts=String(Date.now())}catch(e){}
+ const nd=JSON.parse(JSON.stringify(DEF));Object.assign(nd,d);delete nd.fr;nd.ts=Date.now();
+ try{localStorage.uf=JSON.stringify(nd)}catch(e){}
+ D=nd;SWP=0;try{await auth();await push()}catch(e){}
+ try{toast('🔁 データを移しました。再読み込みします')}catch(e){}
+ setTimeout(()=>{window.ufRL=1;location.reload()},1200)}
+async function xfTgtApply(r){
+ try{const k=await swKey(r.k,r.id),o=await swDec(k,r.r_payload);if(!o||!o.d||typeof o.d!='object')throw new Error('payload');
+  if(!r.t_payload)await xfPatch(r.id,{t_payload:await swEnc(k,{d:D})});
+  xfMark(r.id);swTx(r.from_sid,{t:'xfn',rid:String(r.id).slice(0,8)});await xfApplyData(o.d)}
+ catch(e){try{toast('⚠ データ移行に失敗しました。あとで自動で再試行します')}catch(_){}}}
+async function xfRecvApply(r){
+ try{const k=await swKey(r.k,r.id),o=await swDec(k,r.t_payload);if(!o||!o.d||typeof o.d!='object')throw new Error('payload');
+  xfMark(r.id);xfDel(r.id);await xfApplyData(o.d)}
+ catch(e){try{toast('⚠ データ移行に失敗しました。あとで自動で再試行します')}catch(_){}}}
+async function xfOk(id){const r=XF.rows.find(x=>x.id==id);if(!r||r.status!='pending'||r.to_sid!=upid())return;
+ if(!confirm('🔁 '+xfLbl(r.mode)+'を承認しますか？\n相手: '+(r.from_name||'?')+' / '+(r.from_ua||'')+' / ID '+r.from_sid+'\n\n'+(r.mode=='swap'?'あなたのデータと相手のデータが入れ替わります。':'あなたの今のデータのコピーが相手に渡ります(あなたのデータはそのまま)。')+'\n自分の別のブラウザ・端末からのリクエストではない場合は、承認しないでください。'))return;
+ try{const body={status:'approved',to_uid:uid()};if(r.mode=='copy')body.t_payload=await swEnc(await swKey(r.k,r.id),{d:D});
+  await xfPatch(id,body);swTx(r.from_sid,{t:'xfn',rid:String(id).slice(0,8)});toast('✅ 承認しました')}
+ catch(e){toast('⚠ 失敗しました: '+String(e.message).slice(0,40))}
+ await xfPoll(1);try{notif()}catch(e){}}
+async function xfNo(id){const r=XF.rows.find(x=>x.id==id);if(!r||r.to_sid!=upid())return;try{await xfPatch(id,{status:'rejected'});swTx(r.from_sid,{t:'xfn',rid:String(id).slice(0,8)});toast('拒否しました')}catch(e){toast('⚠ 失敗しました')}await xfPoll(1);try{notif()}catch(e){}}
+async function xfGo(id){const r=XF.rows.find(x=>x.id==id);if(!r||r.from_uid!=uid()||r.status!='approved')return;if(mode!='home')return toast('ホーム画面で行ってください');
+ try{const k=await swKey(r.k,r.id);
+  if(r.mode=='copy'){if(!r.t_payload)return toast('相手のデータがまだ届いていません');if(!confirm('相手のデータをこの端末に移します。\nいまのデータは24時間バックアップされます。よろしいですか？'))return;const o=await swDec(k,r.t_payload);if(!o||!o.d)throw new Error('payload');xfMark(id);xfDel(id);await xfApplyData(o.d);return}
+  if(!r.r_payload){if(!confirm('いまのデータを相手に送り、入れ替えを始めます。\n相手のアプリが反映するまで、ゲームは進めないでください(進めた分は反映されません)。よろしいですか？'))return;
+   await xfPatch(id,{r_payload:await swEnc(k,{d:D})});swTx(r.to_sid,{t:'xfn',rid:String(id).slice(0,8)});toast('📤 送りました。相手が反映すると入れ替わります')}
+  await xfPoll(1);try{if($('xfl'))xferList();else notif()}catch(e){}}
+ catch(e){toast('⚠ 失敗しました: '+String(e.message).slice(0,40))}}
+async function xfCx(id){const r=XF.rows.find(x=>x.id==id);if(!r||r.from_uid!=uid())return;if(r.r_payload&&!confirm('すでにデータを送っています。取り消しますか？'))return;await xfDel(id);toast('取り消しました');await xfPoll(1);try{xferList()}catch(e){}}
+async function xfHtml(){await xfPoll(1);const s=upid(),u=uid();let h='';
+ XF.rows.forEach(r=>{const mine=r.from_uid==u;
+  if(!mine&&r.to_sid==s&&r.status=='pending')h+=`<div class="lnr"><div class="lni">🔁</div><div class="lnt"><div class="lnn">${esc(r.from_name||'?')} <span class="lnlv">Lv.${+r.from_lv||'?'}</span></div><div class="lnm">${xfLbl(r.mode)}のリクエスト<br>${esc(r.from_ua||'')} / ID ${esc(r.from_sid)}<br>⚠ 自分の別の端末・ブラウザ以外なら「拒否」してください</div></div><div class="lnx"><div class="lnbt"><div class="btn xs grn" data-xf="ok" data-id="${r.id}">承認</div><div class="btn xs red" data-xf="no" data-id="${r.id}">拒否</div></div></div></div>`;
+  else if(mine&&r.status=='approved'&&!XF.done[r.id]&&!(r.mode=='swap'&&r.r_payload))h+=`<div class="lnr"><div class="lni">✅</div><div class="lnt"><div class="lnn">データ移行が承認されました</div><div class="lnm">${xfLbl(r.mode)} / 相手ID ${esc(r.to_sid)}</div></div><div class="lnx"><div class="lnbt"><div class="btn xs grn" data-xf="go" data-id="${r.id}">実行</div></div></div></div>`});
+ return h}
+$('mb').addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-xf]');if(!b)return;e.stopPropagation();SE.btn();const a=b.dataset.xf,id=b.dataset.id;if(a=='ok')xfOk(id);else if(a=='no')xfNo(id);else if(a=='go')xfGo(id);else if(a=='cx')xfCx(id)});
+setInterval(()=>{xfPoll().catch(()=>{})},45000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(()=>{xfPoll().catch(()=>{})},800)});
+function xferList(){const el=$('xfl');if(!el)return;const u=uid();let h='';
+ XF.rows.filter(r=>r.from_uid==u).forEach(r=>{let st,bt='';
+  if(r.status=='pending'){st='⏳ 承認待ち(相手の🔔通知に届いています)';bt=`<div class="btn xs gry" data-xf="cx" data-id="${r.id}">取消</div>`}
+  else if(r.status=='approved'){if(r.mode=='swap'&&r.r_payload){st='📤 送信済み。相手がアプリを開くと完了します'}else{st='✅ 承認されました';bt=`<div class="btn xs grn" data-xf="go" data-id="${r.id}">実行</div>`}}
+  else st='✖ 拒否されました';
+  h+=`<div class="card" style="padding:6px 10px;margin:4px 0;display:flex;align-items:center;gap:8px;font-weight:900"><div style="flex:1">${xfLbl(r.mode)} → ID ${esc(r.to_sid)}<div class="small">${st}</div></div>${bt}</div>`});
+ if(XF.off)h+='<div class="small" style="text-align:center">⚠ サーバー側の準備(transfer.sql)がまだ実行されていません</div>';
+ el.innerHTML=h||'<div class="small" style="text-align:center">送信中のリクエストはありません</div>'}
+function xferUI(){
  if(mode!='home')return toast('ホーム画面で行ってください');
- const me_=upid();swReset();
- modal('🔁 プレイヤー入れ替え',`<div class="card" style="padding:8px 12px;font-weight:900">🆔 あなたのID<div style="font-size:22px;letter-spacing:2px">${me_||'(接続待ち…少し待ってもう一度)'}</div></div><div class="sec">入れ替えたい相手のID</div><div class="row" style="margin:2px 0"><input id="swid" maxlength="10" placeholder="相手のID(10文字)" style="text-transform:uppercase"><div id="swgo" class="btn xs grn">開始</div></div><div class="small">お互いにオンラインで、ホーム画面を開いておいてください。相手が承認し、コードを入力すると、お互いのプレイヤーが入れ替わります。</div><div id="swbox" style="margin:8px 0"></div><div id="sws" class="small" style="text-align:center;font-weight:900"></div><div id="swres" style="text-align:center;margin-top:6px"></div>`);
- swUiRestore();
- $('swgo').onclick=async()=>{const to=($('swid').value||'').trim().toUpperCase();if(!swSid.test(to))return swSt('IDは英数字10文字です');if(to==upid())return swSt('自分のIDです');if(!upid()||!swCh)return swSt('接続中です。少し待ってください');if(!(window.crypto&&crypto.subtle))return swSt('⚠ この環境は暗号機能が使えないため中止しました');
-  swSt('データを保存中…');const ok=await swFlush();if(!ok)return swSt('⚠ オフラインのため中止しました(データ保護)');
-  const rid=crypto.getRandomValues(new Uint32Array(2)).join('-');swReset();SW={rid,role:'A',peer:to,t:Date.now()};SW.tm=setTimeout(()=>{if(SW.rid==rid){swSt('⌛ 相手の応答がありません');swReset()}},90000);
-  if(!swTx(to,{t:'req',rid,name:D.name,lv:D.lv}))return swSt('送信できませんでした');swSt('📨 リクエストを送りました。相手の承認を待っています…(90秒)')}}
+ const me=upid();let xm='copy';let bak='';try{bak=localStorage.uf_xfbak||''}catch(e){}
+ modal('🔁 データ移行・入れ替え',`<div class="card" style="padding:8px 12px;font-weight:900">🆔 この端末のID<div class="row" style="margin:4px 0"><input id="xfme" readonly value="${me||'(接続待ち…)'}" style="width:170px;font-size:18px;letter-spacing:2px"><div id="xfcp" class="btn xs gry">コピー</div></div></div>
+ <div class="small" style="margin:6px 0">📱 Safari・Chrome・ホーム画面アプリは、それぞれデータが別々です。データを<b>受け取りたい側</b>でこの画面を開き、データが入っている<b>古い側</b>のID(古い側の設定画面に表示)を入れて送ってください。古い側の🔔通知に<b>承認ボタン</b>が届きます。お互い同時にオンラインでなくてもOKです。</div>
+ <div class="sec">相手のID</div><div class="row" style="margin:2px 0"><input id="xfid" maxlength="10" placeholder="古い側のID(10文字)" style="text-transform:uppercase"></div>
+ <div style="text-align:center;margin:6px 0"><div id="xfm1" class="btn xs grn">📥 コピー移行</div> <div id="xfm2" class="btn xs gry">🔁 入れ替え</div></div>
+ <div id="xfmd" class="small" style="text-align:center"></div>
+ <div style="text-align:center;margin:6px 0"><div id="xfgo" class="btn grn">📨 リクエストを送る</div></div>
+ <div id="xfs" class="small" style="text-align:center;font-weight:900"></div>
+ <div class="sec">送ったリクエスト</div><div id="xfl"></div>
+ ${bak?'<div style="text-align:center;margin-top:8px"><div id="xfrs" class="btn xs gry">↩ 移行前のデータに戻す(24時間以内)</div></div>':''}`);
+ const xs=m=>{const e=$('xfs');if(e)e.textContent=m},md=()=>{$('xfm1').className='btn xs '+(xm=='copy'?'grn':'gry');$('xfm2').className='btn xs '+(xm=='swap'?'grn':'gry');$('xfmd').textContent=xm=='copy'?'相手のデータを、この端末にコピーします(相手のデータはそのまま)':'おたがいのデータを交換します'};
+ md();$('xfm1').onclick=()=>{xm='copy';md()};$('xfm2').onclick=()=>{xm='swap';md()};
+ $('xfcp').onclick=async()=>{let ok=0;try{await navigator.clipboard.writeText(me);ok=1}catch(e){}if(!ok){try{$('xfme').select();ok=document.execCommand('copy')}catch(e){}}xs(ok?'📋 コピーしました':'IDを長押ししてコピーしてください')};
+ $('xfgo').onclick=async()=>{const to=($('xfid').value||'').trim().toUpperCase();if(!swSid.test(to))return xs('IDは英数字10文字です');if(to==me)return xs('この端末のIDです');if(!(window.crypto&&crypto.subtle))return xs('⚠ この環境では使えません');
+  if(XF.off)return xs('⚠ サーバー側の準備(transfer.sql)が未実行です');xs('送信中…');
+  try{await auth();const k=Array.from(crypto.getRandomValues(new Uint8Array(24)),x=>IVA[x%IVA.length]).join('');
+   await sbf('/rest/v1/transfers','POST',{from_sid:upid(),to_sid:to,mode:xm,from_name:D.name,from_lv:D.lv,from_ua:xfUa(),k},{Prefer:'return=minimal'});
+   swTx(to,{t:'xfn',rid:Math.random().toString(36).slice(2,10)});xs('📨 送りました。相手の🔔通知に承認ボタンが届きます');await xfPoll(1);xferList()}
+  catch(e){const m=String(e.message||'');if(/schema cache|does not exist|PGRST205|HTTP 404/i.test(m)){XF.off=Date.now()+6e5;xs('⚠ サーバー側の準備(transfer.sql)が未実行です')}else xs(/duplicate|unique|23505/i.test(m)?'すでにリクエスト済みです':'⚠ 失敗: '+m.slice(0,50))}};
+ const rs=$('xfrs');if(rs)rs.onclick=()=>{if(!confirm('移行前のデータに戻します。よろしいですか？'))return;try{xfApplyData(JSON.parse(localStorage.uf_xfbak))}catch(e){toast('失敗しました')}};
+ xferList();xfPoll(1).then(()=>xferList()).catch(()=>{})}
+function swapUI(){xferUI()}
 // ===== 📨 友だち招待 (LINE共有リンク + 暗号つき参加通知 + 段階報酬) =====
 const IVR=[[2,10000,0],[3,20000,10],[5,40000,30],[7,70000,50],[10,150000,100]];
 const IVA='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789',ivRe=/^([0-9A-F]{10})-([0-9A-Za-z]{12})$/;
@@ -3682,7 +3745,7 @@ function ufDedupe(p,m,j){if(m!='GET'||!Array.isArray(j)||j.length<2||!/^\/rest\/
 // ===== 🔮 おわびオーブ(一度だけ・通知なし) =====
 {const p0=pull;pull=async function(){const r=await p0.apply(this,arguments);if(!D.og8&&sy!='オフライン'){D.og8=1;D.ob=(D.ob||0)+8;save()}return r}}
 camP.set(0,1.7,5.6);camL.set(-.3,1.3,0);
-evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{try{ivApply()}catch(e){}frWatchStart();setTimeout(seasonCheck,2500);bbBonus();mgBonus();if(!stS().cl&&mode=='home')stamp()});
+evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{try{ivApply()}catch(e){}try{xfPoll().catch(()=>{})}catch(e){}frWatchStart();setTimeout(seasonCheck,2500);bbBonus();mgBonus();if(!stS().cl&&mode=='home')stamp()});
 setTimeout(()=>{try{if(unU())lineNote('📢','アップデートのお知らせ','新しいお知らせが届きました。タップして確認')}catch(e){}},4000);
 // 裏に回して3分以上たってから戻ってきたら、ホーム画面のときだけ自動リロード(最新版を読み込む)
 {let hid=0;document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='hidden'){hid=Date.now();return}
