@@ -756,7 +756,7 @@ function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=
  if((D.sv||0)<5){if((D.coin||0)>=60000)D.coin=40000;D.sv=5;try{localStorage.uf=JSON.stringify(D)}catch(e){}}}migrate();
 let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 // ===== アップデートのお知らせ(既読・✕で消す・端末に保存) =====
-const UPD=[{id:'u1112iv',d:'11/12',t:'📨 新機能「友だち招待」登場！',l:['📨 ホームの「招待」ボタンから、LINEで友だちに招待リンクを送れます','🎁 リンクからはじめた友だちが Lv2 になると、あなたに報酬！ 2人・3人・5人・7人・10人の達成ごとに受け取れます','🪙 最大の10人達成で 🪙150000 ＋ 🏅100！ 2人:🪙10000 / 3人:🪙20000＋🏅10 / 5人:🪙40000＋🏅30 / 7人:🪙70000＋🏅50','🔐 参加の通知は暗号化されて届きます。同じ友だちは1回だけ数えられ、自分のリンクは使えません','📶 反映はお互いがオンラインのときです。友だちがLv2になったとき、あなたがアプリを開いていなくても、友だちのアプリが何度か再送します']},{id:'u1112mv',d:'11/12',t:'🔁 新機能「データ移行・入れ替え」登場！',l:['📱 Safari・Chrome・ホーム画面に追加したアプリは、それぞれデータが別々です。そのデータを、ボタンだけで移せるようになりました','🆔 設定画面に、この端末のプレイヤーID(10文字)が表示されます','🔁 データを受け取りたい側で、⚙️設定ボタンを10秒長押し → 古い側のIDを入れて「リクエストを送る」','🔔 古い側の通知に「承認」ボタンが届きます。承認だけでOK、コード入力は不要です。お互い同時にオンラインでなくても進みます','📥 コピー移行(相手のデータをコピー)と、🔁 入れ替え(おたがいのデータを交換)をえらべます','🛟 移行前のデータは24時間バックアップされ、入れ替え画面から戻せます','⚠ 自分の別の端末・ブラウザ以外からのリクエストは「拒否」してください']},{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙13000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
+const UPD=[{id:'u1112bf',d:'11/12',t:'🎰 クレーンに「ガチャセンター」登場！',l:['🎪 ふしぎクレーン画面を下にスクロールすると、新しい🎰ガチャセンターがあります','⚡ 「バフガチャ」は1回 🪙500 ／ 10連 🪙4500(SR以上1つ確定)。30回でSR以上確定のてんじょうつき','⏱ 出たバフは1時間つづきます。✨経験値・🪙コイン報酬・🛣️ネオンpt・👟スピード・⚡ダッシュ・🎪クレーンつかみ率のどれかがアップ！','💎 N・R・SR・URとレア度が上がるほど効果が特大に(UR最大 +100〜+120%)','📋 図鑑ではなく、リストでバフ一覧と出現率を見られます。同じバフは強いほうが残ります','🛸 ジャックポットのコインが 🪙16000 に増えました！']},{id:'u1112dp',d:'11/12',t:'🌊 新ルールMOD「The Deep Secrets of the Undersea City」登場！',l:['🧩 MODショップに「🌊 The Deep Secrets of the Undersea City」が登場！ 🪙160000','🏙 苔の生えた白い家がそびえる海底の大都市。ステージ3の約3倍の広さで、毎回ランダムに生成されます','🔔 30秒ごとに鐘が鳴り、大きな魚の怪物が東西南北のどれかから街を一気に通過！来る方向は教えてもらえません','🏠 魚の来る方向と反対側の、家の側面にかくれられれば当たりません。近づくほど画面が震え、最後は画面が見えないほど！','🔵 ゴールは遠くで青く光っています。歩いた跡がずっと残るので、道に迷っても安心','📦 家のそばのチェストで、コイン・ダッシュ回復・🫧バブルのバリアなどをゲット！場所は外に出られないよう境界線があります']},{id:'u1112iv',d:'11/12',t:'📨 新機能「友だち招待」登場！',l:['📨 ホームの「招待」ボタンから、LINEで友だちに招待リンクを送れます','🎁 リンクからはじめた友だちが Lv2 になると、あなたに報酬！ 2人・3人・5人・7人・10人の達成ごとに受け取れます','🪙 最大の10人達成で 🪙150000 ＋ 🏅100！ 2人:🪙10000 / 3人:🪙20000＋🏅10 / 5人:🪙40000＋🏅30 / 7人:🪙70000＋🏅50','🔐 参加の通知は暗号化されて届きます。同じ友だちは1回だけ数えられ、自分のリンクは使えません','📶 反映はお互いがオンラインのときです。友だちがLv2になったとき、あなたがアプリを開いていなくても、友だちのアプリが何度か再送します']},{id:'u1112mv',d:'11/12',t:'🔁 新機能「データ移行・入れ替え」登場！',l:['📱 Safari・Chrome・ホーム画面に追加したアプリは、それぞれデータが別々です。そのデータを、ボタンだけで移せるようになりました','🆔 設定画面に、この端末のプレイヤーID(10文字)が表示されます','🔁 データを受け取りたい側で、⚙️設定ボタンを10秒長押し → 古い側のIDを入れて「リクエストを送る」','🔔 古い側の通知に「承認」ボタンが届きます。承認だけでOK、コード入力は不要です。お互い同時にオンラインでなくても進みます','📥 コピー移行(相手のデータをコピー)と、🔁 入れ替え(おたがいのデータを交換)をえらべます','🛟 移行前のデータは24時間バックアップされ、入れ替え画面から戻せます','⚠ 自分の別の端末・ブラウザ以外からのリクエストは「拒否」してください']},{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙16000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
 const UN=()=>{const u=D.un||(D.un={});if(!u.r)u.r=[];if(!u.x)u.x=[];return u};
 const unU=()=>{const u=UN();return UPD.filter(x=>!u.x.includes(x.id)&&!u.r.includes(x.id)).length};
 async function sbf(p,m='GET',b,h={},na){if(window.ufRL)throw new Error('ネットワークに接続できません');const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));if(Array.isArray(j))j.forEach(decTag);return ufDedupe(p,m,j)}
@@ -1745,7 +1745,7 @@ function rsHTML(win,tt,gain){const gr=TW?(st>=15?'SS':st>=10?'S':st>=6?'A':st>=3
  ${RSX}<div id="lvl" class="st" style="font-size:22px;margin:8px 0">Lv.${D.lv}</div><div class="bar" style="height:22px"><i id="gf" style="width:${D.xp/(D.lv*50+50)*100}%"></i></div><div id="rb" class="btn big hide" style="margin-top:14px">ロビーへ</div></div>`}
 function rsFx(win){const r=document.querySelector('#rs .rsx');if(!r)return;[250,380,500,900].forEach((d,j)=>setTimeout(()=>{if(mode=='res')se(480+j*120,.08,'square',.06)},d));for(let i=0;i<30;i++){const e=document.createElement('i');e.className='rsp';e.textContent=win?['⭐','🪙','✨','💫'][i%4]:['💀','🩸','💔'][i%3];e.style.left=Math.random()*100+'%';e.style.animationDelay=Math.random()*3+'s';e.style.fontSize=(14+Math.random()*18)+'px';r.appendChild(e)}if(win)[0,500,1000].forEach(d=>setTimeout(()=>{if(mode=='res')confetti(40)},d))}
 function result(win,quit){if(mode=='res')return;mode='res';if(MG)BB=1;if(!win)send({t:'dead',u:uid()});ambOn(0);sh('hud',0);sh('stick',0);win?(SE.clear(),confetti(90),flash(),shake()):SE.over();
- const tt=Math.round(sumT+tm),base=[30,50,80][df],nd=l=>l*50+50,gain=((quit&&(st<2||BB))?0:Math.round(win?(nd(D.lv)-D.xp)+nd(D.lv+1)+nd(D.lv+2)+ctb:BB?base+ctb:base*(.9+st*1.1)+tt*.4+ctb))*(evOn('mon')&&st>=2&&!BB?2:1);RSREC=win&&!BB&&!modRun&&(!D.best||tt<D.best);if(RSREC)D.best=tt;if(win&&BB&&!MG&&(!D.bbt||D.bbt.k!=bbKey()||tt<D.bbt.t))D.bbt={k:bbKey(),t:tt};rsCn=win&&BB&&!MG?BBR:0;if(win&&BB&&!MG)D.coin+=BBR;if(MG)mgGrant();
+ const tt=Math.round(sumT+tm),base=[30,50,80][df],nd=l=>l*50+50,gain=Math.round(((quit&&(st<2||BB))?0:Math.round(win?(nd(D.lv)-D.xp)+nd(D.lv+1)+nd(D.lv+2)+ctb:BB?base+ctb:base*(.9+st*1.1)+tt*.4+ctb))*(evOn('mon')&&st>=2&&!BB?2:1)*bfM('xp'));RSREC=win&&!BB&&!modRun&&(!D.best||tt<D.best);if(RSREC)D.best=tt;if(win&&BB&&!MG&&(!D.bbt||D.bbt.k!=bbKey()||tt<D.bbt.t))D.bbt={k:bbKey(),t:tt};rsCn=win&&BB&&!MG?BBR:0;if(win&&BB&&!MG)D.coin+=BBR;if(MG)mgGrant();
  rewardRun(win,quit,tt);apAfter(win,quit);$('rs').innerHTML=mgFix(rsHTML(win,tt,gain));sh('rs',1);rsFx(win);
  let cx=D.xp,cl=D.lv,left=gain;
  const iv=setInterval(()=>{const need=cl*50+50,a=Math.min(left,Math.max(1,need/14|0));cx+=a;left-=a;se(300+cx*3,.04,'square',.04);
@@ -1804,7 +1804,7 @@ function game(dt,t){
  tm+=dt;
  const ix=mv.x*D.sens+((keys.KeyD||keys.ArrowRight)?1:0)-((keys.KeyA||keys.ArrowLeft)?1:0),iz=mv.y*D.sens+((keys.KeyS||keys.ArrowDown)?1:0)-((keys.KeyW||keys.ArrowUp)?1:0),sy_=Math.sin(yaw),cy_=Math.cos(yaw);
  const x=ix*cy_+iz*sy_,z=iz*cy_-ix*sy_,l=Math.hypot(x,z),ox=pos.x,oz=pos.z;
- if(!cap&&l>.1){const k=Math.min(1,l)/l*5*dt*(dsT>0?1.7:1)*(1+TWP.spd*.07);pos.x+=x*k;pos.z+=z*k;hit(pos,.4);me.rotation.y=Math.atan2(x,z)}
+ if(!cap&&l>.1){const k=Math.min(1,l)/l*5*dt*(dsT>0?1.7:1)*(1+TWP.spd*.07)*bfM('spd');pos.x+=x*k;pos.z+=z*k;hit(pos,.4);me.rotation.y=Math.atan2(x,z)}
  if(jreq){jreq=0;if(jy==0&&!cap){vy=6.5;SE.jump();mq('jump')}}jy+=vy*dt;vy-=18*dt;if(jy<=0){jy=0;vy=0}
  for(const o of [...E,...FK]){if(o.dead||o.ma>=1)continue;const d=dist(o.p,pos);if(d<.9&&d>1e-3){const k=(.9-d)/d;pos.x+=(pos.x-o.p.x)*k;pos.z+=(pos.z-o.p.z)*k}}hit(pos,.4);
  const dx=pos.x-ox,dz=pos.z-oz,mvg=Math.hypot(dx,dz)>1e-4;
@@ -1992,7 +1992,7 @@ function evBuild(){evDay=jd();const sl=[['bb',evPB()],['mg',evPMG()],['sum',evPS
 function evSet(){document.querySelectorAll('#evs .evsl').forEach((e,i)=>e.classList.toggle('on',i==evI));document.querySelectorAll('#evd i').forEach((e,i)=>e.classList.toggle('on',i==evI))}
 function evRk(){if(!evR||!$('evn1'))return;const ei=(id,p,d)=>{const e=$(id);if(!e)return;if(p&&p.skin!=null&&SKN[p.skin]){const f=faceOf(p.skin);if(f)e.innerHTML='<img alt="" src="'+f+'">';else e.textContent=emo(p.skin)}else e.textContent=d};ei('evi1',evR.b,'👑');ei('evi2',evR.l,'⭐');$('evn1').textContent=evR.b?evR.b.name:'まだいません';$('evt1').textContent=evR.b?mmss(evR.b.best):'--:--';$('evn2').textContent=evR.l?evR.l.name:'---';$('evl2').textContent=evR.l?'Lv.'+evR.l.lv:'Lv.--'}
 async function evRank(){try{await auth();const[b,l]=await Promise.all([sbf('/rest/v1/profiles?select=id,name,best&best=gt.0'+bbSeen()+'&order=best.asc&limit=1'),sbf('/rest/v1/profiles?select=id,name,lv&order=lv.desc&limit=1')]);evR={b:b&&b[0],l:l&&l[0]};evRk()}catch(e){}}
-function evInfo(){SE.btn();const it=[['🧩','MOD','','MODショップで買って、所持MODから▶プレイ！招待された人は1試合 🪙5000。MODをはじめてクリアするとホストは報酬スキン3つ(招待された人はもらえません)。'],['🗼','ふしぎタワー','','怪物がどんどん強くなる無限モード！1階クリアごとに3つから1つパワーアップをえらぼう。5階ごとに特大ボーナスチェスト。🗼終了ボタンで今の階をクリア扱いにして報酬とAPをもらえます。ホームの🗼かロビーで選べます。'],['⚔️','ペットバトル','','ペットを5体まで出して自動で戦う！勝つとペットが成長してボスもどんどん強く。オートで連戦もOK。'],['🧭','ペット探検隊','','ペットを探検に出して放置でごほうび＆経験値！時間が長いほど大きなお宝。'],['🎪','ふしぎクレーン','','◀▶でねらって「つかむ」！むりょうは1日2回、🗼タワーの🏅メダルや🪙300でもあそべます。🪙であそぶたび🛸ジャックポット運が+2%、🏅メダルなら+1%！ジャックポットは🪙13000＋🏅300！'],['🔮','ミステリーガチャ','',`ふしぎでかわいい全80体が登場！3体セットのトリオと映えスキンも。10連はSR以上確定、30回でUR確定。ミッションのチケットでも引けます。`],['🌀','召喚ガチャ','','図鑑の「召喚」タブから！1000コイン(10連9500)で、背後に付いてくる召喚体が仲間に。全80体・ハズレなし・URは特大！コンプ率報酬もあります。「😈魔界」では🪄マジックフェスで集めたマジックパーツ70個で、全120体の魔界ガチャが引けます！'],['🪄','マジックフェス','mg','毎月13〜16日。ステージ2の広さの丸いステージで、スタート時にマジック🪄を発動！最初は怪物3体、1体倒すごとに1体、30秒倒せないと1体、0体になると2体湧く。罠25個で合計20体倒せばクリア(10体から報酬)。最大🪙1000とマジックパーツ10個(魔界ガチャ用)。今月はじめてのログインで🪙2000！'],['🏆','AP・シーズン','','APはクリアや惜しい到達で上昇、ゲームオーバーで下降(CPUのみのクリアは少なめ)。ランキングはAP→クリアタイム→レベル→タワーの順で40位まで。毎月、前シーズンの1〜5位が発表され、1・2位に称号バッジ！'],['📋','新要素！','','デイリーミッション・ネオンロード・ふしぎオーブ＆ダッシュ(F/Shift)・ふしぎペット育成・ラッキールーレット・🪄マジックフェス・😈魔界ガチャ(全120体)・🎪クレーンのジャックポット運が追加！'],['💥','ビッグバンフェス','bb','毎月27日〜末日に開催！通常試合のかわりに、ステージ3の約3倍の特大ステージが1つだけ。怪物は常に2体。2人でゴールを見つけると報酬(経験値＋1500コイン)。その月はじめてログインすると4000コイン！この期間だけランキングの⏱がビッグバンタイムに入れかわります。スタート時は大爆発の演出つき！ロビーはネオンに輝き、光のくずが降ります。'],['🐺','怪物祭','mon','月・木・金に開催！ステージ2の怪物が2体に。そのかわり、ステージ2をクリアしたあとは経験値が2倍(ステージ3でやられても退出しても2倍)。'],['🪙','コイン祭','coin','土・日・火に開催！ログインスタンプでもらえるコインが2倍。'],['🗡️','裏切りイベント','bet','火曜日に開催！仲間のCPUが怪物に変身する確率が大幅アップ。'],['🎰','超レアガチャ','',`新しい超レアキャラ${SKN.filter(q=>q.u).length}体が、ガチャ限定で登場！ブラックボールなど個性的な仲間が出ます。`],['👑','ランキング1位発表','','クリアタイムとレベルの現在の1位を発表中。']];
+function evInfo(){SE.btn();const it=[['🧩','MOD','','MODショップで買って、所持MODから▶プレイ！招待された人は1試合 🪙5000。MODをはじめてクリアするとホストは報酬スキン3つ(招待された人はもらえません)。'],['🗼','ふしぎタワー','','怪物がどんどん強くなる無限モード！1階クリアごとに3つから1つパワーアップをえらぼう。5階ごとに特大ボーナスチェスト。🗼終了ボタンで今の階をクリア扱いにして報酬とAPをもらえます。ホームの🗼かロビーで選べます。'],['⚔️','ペットバトル','','ペットを5体まで出して自動で戦う！勝つとペットが成長してボスもどんどん強く。オートで連戦もOK。'],['🧭','ペット探検隊','','ペットを探検に出して放置でごほうび＆経験値！時間が長いほど大きなお宝。'],['🎪','ふしぎクレーン','','◀▶でねらって「つかむ」！むりょうは1日2回、🗼タワーの🏅メダルや🪙300でもあそべます。🪙であそぶたび🛸ジャックポット運が+2%、🏅メダルなら+1%！ジャックポットは🪙16000＋🏅300！'],['🔮','ミステリーガチャ','',`ふしぎでかわいい全80体が登場！3体セットのトリオと映えスキンも。10連はSR以上確定、30回でUR確定。ミッションのチケットでも引けます。`],['🌀','召喚ガチャ','','図鑑の「召喚」タブから！1000コイン(10連9500)で、背後に付いてくる召喚体が仲間に。全80体・ハズレなし・URは特大！コンプ率報酬もあります。「😈魔界」では🪄マジックフェスで集めたマジックパーツ70個で、全120体の魔界ガチャが引けます！'],['🪄','マジックフェス','mg','毎月13〜16日。ステージ2の広さの丸いステージで、スタート時にマジック🪄を発動！最初は怪物3体、1体倒すごとに1体、30秒倒せないと1体、0体になると2体湧く。罠25個で合計20体倒せばクリア(10体から報酬)。最大🪙1000とマジックパーツ10個(魔界ガチャ用)。今月はじめてのログインで🪙2000！'],['🏆','AP・シーズン','','APはクリアや惜しい到達で上昇、ゲームオーバーで下降(CPUのみのクリアは少なめ)。ランキングはAP→クリアタイム→レベル→タワーの順で40位まで。毎月、前シーズンの1〜5位が発表され、1・2位に称号バッジ！'],['📋','新要素！','','デイリーミッション・ネオンロード・ふしぎオーブ＆ダッシュ(F/Shift)・ふしぎペット育成・ラッキールーレット・🪄マジックフェス・😈魔界ガチャ(全120体)・🎪クレーンのジャックポット運が追加！'],['💥','ビッグバンフェス','bb','毎月27日〜末日に開催！通常試合のかわりに、ステージ3の約3倍の特大ステージが1つだけ。怪物は常に2体。2人でゴールを見つけると報酬(経験値＋1500コイン)。その月はじめてログインすると4000コイン！この期間だけランキングの⏱がビッグバンタイムに入れかわります。スタート時は大爆発の演出つき！ロビーはネオンに輝き、光のくずが降ります。'],['🐺','怪物祭','mon','月・木・金に開催！ステージ2の怪物が2体に。そのかわり、ステージ2をクリアしたあとは経験値が2倍(ステージ3でやられても退出しても2倍)。'],['🪙','コイン祭','coin','土・日・火に開催！ログインスタンプでもらえるコインが2倍。'],['🗡️','裏切りイベント','bet','火曜日に開催！仲間のCPUが怪物に変身する確率が大幅アップ。'],['🎰','超レアガチャ','',`新しい超レアキャラ${SKN.filter(q=>q.u).length}体が、ガチャ限定で登場！ブラックボールなど個性的な仲間が出ます。`],['👑','ランキング1位発表','','クリアタイムとレベルの現在の1位を発表中。']];
  modal('🎉 開催イベント',it.map(([e,n,k,d])=>`<div class="card" style="margin:6px 0;text-align:left"><div style="font-size:17px;font-weight:900">${e} ${n}${k?(evOn(k)?' <span class="evon" style="position:static;display:inline-block">開催中!</span>':` <span class="small">(${evDays(k)})</span>`):''}</div><div class="small" style="margin-top:3px">${d}</div></div>`).join(''))}
 const SUPMS=20*60*1000,SUPC=60;
 function supUpd(){const b=$('sup');if(!b)return;if((D.sup||0)>Date.now())D.sup=Date.now();const r=(D.sup||0)+SUPMS-Date.now();if(r<=0){b.className='btn xs rdy';b.textContent='🎁 +'+SUPC+'🪙 受取!'}else{b.className='btn xs';b.textContent='🎁 補給まで '+mmss(Math.ceil(r/1000))}}
@@ -2410,11 +2410,11 @@ function orbTick(dt,t,mvg){if(twInv>0)twInv-=dt;if(rvT>0)rvT-=dt;
  for(let i=OB.length-1;i>=0;i--){const o=OB[i];o.m.position.y=1.2+Math.sin(t*3+o.ph)*.15;if(TWP.mag){const dd=dist(pos,o.p),rg=2.5+TWP.mag*2.2;if(dd<rg&&dd>.05){const kk=Math.min(1,dt*(3+(rg-dd)*2));o.p.x+=(pos.x-o.p.x)*kk;o.p.z+=(pos.z-o.p.z)*kk;o.m.position.x=o.p.x;o.m.position.z=o.p.z}}o.ring.rotation.x=t*2+o.ph;o.ring.rotation.y=t*1.5;
   if(dist(pos,o.p)<1.05&&jy<1.8){hotel.remove(o.m);OB.splice(i,1);runOrb++;runOrbS++;dsE=Math.min(100,dsE+14);mq('orb');se(900+Math.min(runOrb,30)*35,.09,'sine',.12);se(1500+Math.min(runOrb,30)*35,.07,'triangle',.07);if(runOrb%10==0){toast('🔮 '+runOrb+'こ！ ナイス！');confetti(14)}}}
  if(Math.floor(t*10)!=orbX){orbX=Math.floor(t*10);updOrb();twhUpd()}}
-$('dash').onclick=()=>{if(mode!='game'||cap||intro>0||dsT>0)return;if(dsE<50)return toast('⚡ エネルギーが足りない！🔮オーブを集めよう');dsE-=50;dsT=2.2*(smF()?smF().dash:1);mq('dash');SE.come();tn(300,.3,'sawtooth',.08,0,900);flash('#66ffee');updOrb()};
+$('dash').onclick=()=>{if(mode!='game'||cap||intro>0||dsT>0)return;if(dsE<50)return toast('⚡ エネルギーが足りない！🔮オーブを集めよう');dsE-=50;dsT=2.2*(smF()?smF().dash:1)*bfM('dash');mq('dash');SE.come();tn(300,.3,'sawtooth',.08,0,900);flash('#66ffee');updOrb()};
 // ---------- 結果ボーナス(オーブ・ネオンpt・なかよし) ----------
-function rewardRun(win,quit,tt){RSX='';nrEnsure();const bb=BB?1:0,oc=Math.min(runOrb,40);let np=0,rows='';
+function rewardRun(win,quit,tt){RSX='';nrEnsure();const bb=BB?1:0,oc=Math.round(Math.min(runOrb,40)*bfM('coin'));let np=0,rows='';
  if(!(quit&&!win&&st<1))np=win?(bb?80:40):(bb?30:10+st*6);
- if(runFr&&np)np=Math.round(np*1.5);
+ if(runFr&&np)np=Math.round(np*1.5);if(np)np=Math.round(np*bfM('np'));
  if(oc){D.coin+=oc;D.ob=(D.ob||0)+runOrb;rows+=rr_('🔮 ふしぎオーブ ×'+runOrb,'🪙 +'+oc)}
  if(np){D.np+=np;rows+=rr_('🛣️ ネオンロード'+(runFr?' <small>なかよし×1.5</small>':''),'✨ +'+np+'pt')}
  if(runFr&&!(quit&&!win&&st<1)){const fc=win?30:10;D.coin+=fc;D.fg=(D.fg||0)+1;rows+=rr_('👥 なかよしボーナス','🪙 +'+fc);if(D.fg%5==0){D.tk=(D.tk||0)+1;rows+=rr_('👥 なかよし5回達成！','🎫 +1')}}
@@ -2573,7 +2573,7 @@ function twWUpd(first){const o=$('twp');if(!o)return;const f=twWf,d=twDn[f]||{},
  else{$('twwl').innerHTML=rows;const c=$('twwc');if(c)c.textContent=(n-w)+'/'+n}}
 function twhUpd(){let b_=$('twe');if(!b_){b_=document.createElement('div');b_.id='twe';b_.className='btn xs grn';b_.innerHTML='<b>🗼</b><small>終了</small>';b_.onclick=()=>{SE.btn();twEnd()};$('hud').appendChild(b_)}b_.classList.toggle('hide',!TW||mode!='game'||st<5);let e=$('twh');if(!e){e=document.createElement('div');e.id='twh';e.className='pill';$('hud').appendChild(e)}e.classList.toggle('hide',!TW);if(!TW)return;e.innerHTML='🗼 <b>'+(st+1)+'階</b> '+Object.keys(TWD).filter(k=>TWP[k]>0).map(k=>TWD[k][0]+TWP[k]).join(' ')}
 function twReward(quit){const clear=st,rows=[];if(clear<=0&&quit)return'';const best=Math.max(D.tw.best||0,clear),nb=clear>(D.tw.best||0);D.tw.best=best;D.tw.runs=(D.tw.runs||0)+1;
- let coins=0;for(let i=1;i<=clear;i++)coins+=20+i*4;coins=Math.round(coins*(1+.25*TWP.coin));D.coin+=coins;const first=D.tw.day!=td_();let med=clear+(first&&clear>0?3:0);D.tw.med=(D.tw.med||0)+med;if(first)D.tw.day=td_();
+ let coins=0;for(let i=1;i<=clear;i++)coins+=20+i*4;coins=Math.round(coins*(1+.25*TWP.coin)*bfM('coin'));D.coin+=coins;const first=D.tw.day!=td_();let med=clear+(first&&clear>0?3:0);D.tw.med=(D.tw.med||0)+med;if(first)D.tw.day=td_();
  npAdd(clear*6);if(clear>0)mq('tw');
  let h=rr_('🗼 クリアした階',clear+'階'+(nb?' <small>🏆NEW!</small>':''))+rr_('💰 タワー報酬','🪙 +'+coins)+rr_('🏅 メダル','+'+med+(first&&clear>0?' <small>(はじめてボーナス+3)</small>':''));
  const pk=Object.keys(TWD).filter(k=>TWP[k]>0).map(k=>TWD[k][0]+TWP[k]).join(' ');if(pk)h+=rr_('✨ パワーアップ',pk);if(TWAP){h+=rr_('🏆 AP','+'+TWAP);TWAP=0}if(TWBX){h+=rr_('🎁 ボーナスチェスト',TWBX);TWBX=''}return h}
@@ -2672,8 +2672,8 @@ function crMake(f){if(f)return{k:'jp',e:'🛸',rt:4,n:'特大ジャックポッ�
 function crAdd(f){let x,n=0;do{x=104+Math.random()*232;n++}while(CRG.pr.some(p=>Math.abs(p.x-x)<30)&&n<40);const p=crMake(f);p.x=x;p.y=356-Math.random()*14;p.rot=Math.random()*.6-.3;CRG.pr.push(p);return p}
 function crInit(){CRG.pr=[];for(let i=0;i<8;i++)crAdd();crAdd(1);CRG.x=200;CRG.y=70;CRG.cl=0;CRG.st='idle';CRG.credit=0;CRG.held=null;CRG.fall=null;CRG.dir=0}
 const crTop=x=>{let t=372;CRG.pr.forEach(p=>{if(Math.abs(p.x-x)<32)t=Math.min(t,p.y-26)});return t};
-function mkCrane(){const o=mkOv('cr','🎪 ふしぎクレーン',`<div class="rmtop"><div class="pill" id="crst"></div></div><canvas id="crc" width="360" height="400"></canvas><div class="crctl"><div class="btn blu crb" id="crl">◀</div><div class="btn red crb crd" id="crd">▼ つかむ！</div><div class="btn blu crb" id="crr">▶</div></div><div class="crbuy" id="crbuy"></div><div class="small" style="text-align:center;margin:6px 8px">◀▶でうごかして ねらいを合わせて「つかむ」！ まん中に合わせるほど つかみやすい。🛸特大ジャックポットはめったに取れない…でも🪙コインで2%、🏅メダルで1%、あそぶたびに運がたまる！</div><div id="crp" class="crp hide"></div>`);
- OVO.cr={open(){crDay();crInit();CRG.run=1;crRender();requestAnimationFrame(crLoop)},close(){CRG.run=0}};
+function mkCrane(){const o=mkOv('cr','🎪 ふしぎクレーン',`<div class="rmtop"><div class="pill" id="crst"></div></div><canvas id="crc" width="360" height="400"></canvas><div class="crctl"><div class="btn blu crb" id="crl">◀</div><div class="btn red crb crd" id="crd">▼ つかむ！</div><div class="btn blu crb" id="crr">▶</div></div><div class="crbuy" id="crbuy"></div><div class="small" style="text-align:center;margin:6px 8px">◀▶でうごかして ねらいを合わせて「つかむ」！ まん中に合わせるほど つかみやすい。🛸特大ジャックポットはめったに取れない…でも🪙コインで2%、🏅メダルで1%、あそぶたびに運がたまる！</div><div id="gcs" class="gcc"></div><div id="bfr" class="bfr hide"></div><div id="crp" class="crp hide"></div>`);
+ OVO.cr={open(){crDay();crInit();CRG.run=1;crRender();bfOpen();requestAnimationFrame(crLoop)},close(){CRG.run=0;bfClose()}};
  const hold=(id,d)=>{const e=$(id);e.addEventListener('pointerdown',ev=>{ev.preventDefault();CRG.dir=d;try{e.setPointerCapture(ev.pointerId)}catch(_){}});['pointerup','pointercancel','pointerleave'].forEach(n=>e.addEventListener(n,()=>{if(CRG.dir==d)CRG.dir=0}))};hold('crl',-1);hold('crr',1);
  $('crd').onclick=()=>{if(CRG.st=='idle'&&CRG.credit){CRG.st='drop';SE.btn()}else if(!CRG.credit)toast('下のボタンで あそぼう！')};
  $('crbuy').onclick=e=>{const b=e.target.closest('[data-cb]');if(!b)return;SE.btn();crStart(b.dataset.cb)};
@@ -2695,11 +2695,11 @@ function crUpd(dt){const G=CRG;
 const crTopP=p=>{let t=356;CRG.pr.forEach(q=>{if(Math.abs(q.x-p.x)<26)t=Math.min(t,q.y-20)});return t};
 function crEval(){const G=CRG;let best=null,bd=99;G.pr.forEach(p=>{const d=Math.abs(p.x-G.x);if(d<bd&&p.y>=G.y-6){bd=d;best=p}});
  if(!best||bd>30){toast('くうぶり…！ もうすこし！');G.st='lift';G.slipDone=1;G.held=null;return}
- let ok=(.3+.7*(1-bd/30))*[1,1,.92,.78,.58][best.rt];if(best.rt==4){const pt=D.crp||0;ok=pt>=40?1:Math.min(.7,.015+pt*.012)*(.6+.4*(1-bd/30))}
+ let ok=(.3+.7*(1-bd/30))*[1,1,.92,.78,.58][best.rt]*bfM('crn');if(best.rt==4){const pt=D.crp||0;ok=pt>=40?1:Math.min(.7,.015+pt*.012)*(.6+.4*(1-bd/30))}
  if(Math.random()<ok){G.pr.splice(G.pr.indexOf(best),1);G.held=best;G.slipDone=0;G.slipY=140+Math.random()*120;G.slipP=best.rt==4?((D.crp||0)>=30?0:.4):(best.rt>=3?.22:.1)+bd/120;SE.pon();toast('つかんだ！')}else{toast('つかめなかった…！');G.held=null;G.slipDone=1}G.st='lift'}
 function crSlip(){const G=CRG;if(!G.held)return;toast('あっ！おちちゃった…');G.fall={p:G.held,vy:0};G.held.x+=Math.random()*20-10;G.held=null;SE.trap()}
 function crEnd(ok,p){const G=CRG;G.credit=0;G.st='idle';G.cl=0;G.dir=0;mq('crane');if(ok&&p){crGive(p);crAdd(p.k=='jp')}else if(G.pr.length+(G.fall?1:0)<9)crAdd();if(!G.pr.some(q=>q.k=='jp')&&!G.fall)crAdd(1);save();crRender()}
-function crGive(p){let m='';if(p.k=='jp'){D.coin+=13000;D.tk=(D.tk||0)+5;D.tw.med=(D.tw.med||0)+300;giveEgg(2);D.crp=0;m='🛸 特大ジャックポット!!<br><small>🪙13000 🎫5 🏅300 🥚レア</small>';setTimeout(()=>{confetti(220);flash('#ffd93b')},300)}else if(p.k=='med'){D.tw.med=(D.tw.med||0)+p.v;m='🏅 メダル +'+p.v}else if(p.k=='fur'){rmGive(p.id);m=p.e+' '+p.n+'<br><small>マイルームに おけるよ！</small>'}else if(p.k=='coin'){D.coin+=p.v;m='💰 コイン +'+p.v}else if(p.k=='orb'){D.ob=(D.ob||0)+p.v;m='🔮 オーブ +'+p.v}else if(p.k=='egg'){giveEgg(p.r);m='🥚 '+p.n+'！<br><small>🐾ペットで孵化</small>'}else{D.tk=(D.tk||0)+1;m='🎫 ガチャチケット +1'}
+function crGive(p){let m='';if(p.k=='jp'){D.coin+=16000;D.tk=(D.tk||0)+5;D.tw.med=(D.tw.med||0)+300;giveEgg(2);D.crp=0;m='🛸 特大ジャックポット!!<br><small>🪙16000 🎫5 🏅300 🥚レア</small>';setTimeout(()=>{confetti(220);flash('#ffd93b')},300)}else if(p.k=='med'){D.tw.med=(D.tw.med||0)+p.v;m='🏅 メダル +'+p.v}else if(p.k=='fur'){rmGive(p.id);m=p.e+' '+p.n+'<br><small>マイルームに おけるよ！</small>'}else if(p.k=='coin'){const cv=Math.round(p.v*bfM('coin'));D.coin+=cv;m='💰 コイン +'+cv}else if(p.k=='orb'){D.ob=(D.ob||0)+p.v;m='🔮 オーブ +'+p.v}else if(p.k=='egg'){giveEgg(p.r);m='🥚 '+p.n+'！<br><small>🐾ペットで孵化</small>'}else{D.tk=(D.tk||0)+1;m='🎫 ガチャチケット +1'}
  updInfo();SE.lvl();confetti(40+p.rt*25);if(p.rt>=3)flash(rarC_[p.rt]);const e=$('crp');e.innerHTML=`<div class="crpc" style="--rc:${rarC_[p.rt]}"><div class="crpe">${p.e}</div><div class="crpr">${rar_[p.rt]}</div><div class="crpt">${m}</div><div class="small">ゲット！</div></div>`;e.classList.remove('hide');CRG.pop=1;setTimeout(()=>{e.classList.add('hide');CRG.pop=0},p.k=='jp'?3600:1900)}
 function crLoop(ts){if(!CRG.run||$('cr').classList.contains('hide')){CRG.run=0;return}const dt=Math.min(.05,(ts-(crLoop.l||ts))/1000||.016);crLoop.l=ts;crUpd(dt);crDraw(ts/1000);requestAnimationFrame(crLoop)}
 function crDraw(t){const c=$('crc'),x=c.getContext('2d'),G=CRG,W=360,H=400;
@@ -2827,7 +2827,7 @@ nwTag();
 // NEWタグそのものをタップしたら、ボタンは押さずNEWだけ外す
 document.addEventListener('click',e=>{const b=e.target&&e.target.closest?e.target.closest('.isnew'):null;if(!b)return;const r=b.getBoundingClientRect();if(e.clientX-r.left>38||e.clientY-r.top>16)return;
  const k=b.id=='twb'?'tw':b.id=='rmb'?'bs':b.title=='クレーン'?'cr':null;if(!k)return;e.stopPropagation();e.preventDefault();SE.btn();nwDone(k)},true);
-[['cr','crh','🎪 ◀▶でねらって「つかむ」！🛸特大ジャックポットは超むずかしい…でも🪙コインであそぶたびに「運」が2%、🏅メダルでは1%たまる！むりょうは1日2回、🏅メダルでもあそべる。'],['bs','bsh','⚔️ ペットが自動で戦う！ペットを5体までえらんで「しゅつげき」。オートONで連戦、🔥ひっさつは好きなときに。勝つとペットが成長してボスも強くなる。'],['ex','exh','🧭 ペットを5体まで たんけんに出そう！放置でごほうび＆ペットが成長。時間が長いほど大きなお宝。']].forEach(([id,k,tx])=>{const o=$(id),h=document.createElement('div');h.className='ovhelp'+(D.nw[k]?' hide':'');h.innerHTML='<span>'+tx+'</span><b>OK</b>';h.querySelector('b').onclick=()=>{SE.btn();D.nw[k]=1;h.classList.add('hide');save()};o.insertBefore(h,o.querySelector('.ovh').nextSibling)});
+[['cr','crh','🎪 ◀▶でねらって「つかむ」！🛸特大ジャックポットは超むずかしい…でも🪙コインであそぶたびに「運」が2%、🏅メダルでは1%たまる！むりょうは1日2回、🏅メダルでもあそべる。下にスクロールすると🎰ガチャセンター(バフガチャ)があるよ！'],['bs','bsh','⚔️ ペットが自動で戦う！ペットを5体までえらんで「しゅつげき」。オートONで連戦、🔥ひっさつは好きなときに。勝つとペットが成長してボスも強くなる。'],['ex','exh','🧭 ペットを5体まで たんけんに出そう！放置でごほうび＆ペットが成長。時間が長いほど大きなお宝。']].forEach(([id,k,tx])=>{const o=$(id),h=document.createElement('div');h.className='ovhelp'+(D.nw[k]?' hide':'');h.innerHTML='<span>'+tx+'</span><b>OK</b>';h.querySelector('b').onclick=()=>{SE.btn();D.nw[k]=1;h.classList.add('hide');save()};o.insertBefore(h,o.querySelector('.ovh').nextSibling)});
 
 ['trap','jmp','come','emo','dash'].forEach(id=>{const b=$(id),o=b.onclick;b.addEventListener('pointerdown',e=>{e.preventDefault();b._t=performance.now();o()});b.onclick=ev=>{if(ev&&ev.isTrusted&&performance.now()-(b._t||0)<800)return;o()}});
 setInterval(async()=>{try{await auth();if(sbc&&ses)sbc.realtime.setAuth(ses.access_token);else initRT();beat()}catch(e){}},20000);
@@ -3391,7 +3391,8 @@ const MPAY=5000;
 // ★MODの追加: ここに {id,n,d,pr,c:[色3つ],rw:[報酬スキンID×3(省略可)],onStart(){}} を足すだけ
 const MODS=[
  {id:'kraken',n:'🦑 A kraken wanders the abyss',d:'深海に巨大クラーケン！10本の足の衝撃波をジャンプでかわし、6つのチェックポイントを1人で突破せよ。レーザーにも注意！',pr:90000,c:['#1ec8ff','#ff3a6a','#041a33'],rw:[]},
- {id:'sphere',n:'🌐 3D Sphere Maze',d:'迷路が球の内側に！上も横も迷路の神秘的な世界。ゴールの赤い光は中心を貫いて長くのびる。迷路はステージ3の約3倍、ランダム生成。怪物4体が周回し、CPU4人と一緒に、2人でゴールしよう！天井はないよ。',pr:115000,c:['#b86bff','#ff3a6a','#0a0430'],rw:[]}
+ {id:'sphere',n:'🌐 3D Sphere Maze',d:'迷路が球の内側に！上も横も迷路の神秘的な世界。ゴールの赤い光は中心を貫いて長くのびる。迷路はステージ3の約3倍、ランダム生成。怪物4体が周回し、CPU4人と一緒に、2人でゴールしよう！天井はないよ。',pr:115000,c:['#b86bff','#ff3a6a','#0a0430'],rw:[]},
+ {id:'deep',n:'🌊 The Deep Secrets of the Undersea City',d:'苔むした白い家が聳える海底の大都市(ステージ3の約3倍・ランダム)。30秒ごとに鐘が鳴り、大魚の怪物がどこかの方向から街を通過！家の側面にかくれてやりすごそう。ゴールは遠くの青い光。歩いた跡が残り、怪物が近づくほど画面が震える。チェストで報酬！',pr:160000,c:['#27c8ff','#1b5cff','#031a3a'],rw:[]}
 ];
 let modSel=0,modRun=0,modGuest=0,modChk=null,modBusy=0,modFT=0,modTab=0,mpc=0;
 const mdOwn=()=>D.mods||(D.mods=[]),mdClr=()=>D.modc||(D.modc=[]);
@@ -3707,6 +3708,227 @@ $('come').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagatio
 cvs.addEventListener('pointerdown',e=>{krLY=e.clientY});
 cvs.addEventListener('pointermove',e=>{if(!krOn||mode!='game'||!dp||e.pointerId!=dp.id)return;krPit=Math.max(-1.25,Math.min(1.2,krPit+(e.clientY-krLY)*.005));krLY=e.clientY;pit=krPit});
 
+
+// ===== 🌊 MOD「The Deep Secrets of the Undersea City」(海底都市・30秒ごとの大魚) =====
+const DP_L=340,DP_P=34,DP_THK=50,DP_SPD=62,DP_EVERY=30,DPX=[0,0,1,-1],DPZ=[1,-1,0,0];
+let deepOn=0,DP=null;
+const _dm=new T.Matrix4(),_dp=new T.Vector3(),_dq=new T.Quaternion(),_ds=new T.Vector3(),_dy=new T.Vector3(0,1,0),_dc=new T.Color();
+const deepNear=(x,z)=>DP.gr.get(Math.floor(x/17)*100+Math.floor(z/17))||[];
+function deepInHouse(x,z,m,y){for(const h of deepNear(x,z))if(y<h[4]&&x>h[0]-m&&x<h[2]+m&&z>h[1]-m&&z<h[3]+m)return 1;return 0}
+// 来る方向と逆側に家があれば隠れられる(家は46m以内・横幅の範囲内)
+function deepExposed(px,pz,dir){const sx=-DPX[dir],sz=-DPZ[dir];
+ for(const h of DP.hs){if(sx){if(pz<h[1]-.3||pz>h[3]+.3)continue;if(sx>0?(h[0]>=px-.3&&h[0]<=px+46):(h[2]<=px+.3&&h[2]>=px-46))return 0}
+  else{if(px<h[0]-.3||px>h[2]+.3)continue;if(sz>0?(h[1]>=pz-.3&&h[1]<=pz+46):(h[3]<=pz+.3&&h[3]>=pz-46))return 0}}
+ return 1}
+function deepBell(){try{[523,784,1046,1568].forEach((q,j)=>{for(let i=0;i<3;i++)tn(q,1.7-j*.25,'sine',.3/(j+1),i*.6)})}catch(e){}}
+function deepFish(){const g=new T.Group(),m=new T.MeshLambertMaterial({color:0x1c5aa8,emissive:0x082a5a}),m2=new T.MeshLambertMaterial({color:0x7ad0ff,emissive:0x1a5a8a}),wh=new T.MeshBasicMaterial({color:0xffffff});
+ const b=new T.Mesh(new T.SphereGeometry(1,32,20),m);b.scale.set(210,50,25);b.position.y=26;g.add(b);
+ const bl=new T.Mesh(new T.SphereGeometry(1,28,14),m2);bl.scale.set(200,30,24);bl.position.y=12;g.add(bl);
+ [-1,1].forEach(s=>{const e=new T.Mesh(new T.SphereGeometry(17,16,12),new T.MeshBasicMaterial({color:0xfff2a0}));e.position.set(s*115,38,20);g.add(e);const p=new T.Mesh(new T.SphereGeometry(8,12,10),new T.MeshBasicMaterial({color:0}));p.position.set(s*115,38,34);g.add(p);
+  const f=new T.Mesh(new T.ConeGeometry(18,70,6),m);f.position.set(s*80,78,-4);f.rotation.x=-.5;g.add(f)});
+ for(let i=-14;i<=14;i++){const c=new T.Mesh(new T.ConeGeometry(3.2,15,6),wh);c.rotation.x=Math.PI/2;c.position.set(i*13.5,16,26+(i&1)*2);g.add(c)}
+ [-150,0,150].forEach(x=>{const c=new T.Mesh(new T.ConeGeometry(34,100,4),m);c.rotation.x=-Math.PI/2;c.position.set(x,26,-70);g.add(c)});
+ {const n=600,a=new Float32Array(n*3);for(let i=0;i<n;i++){a[i*3]=(Math.random()*2-1)*230;a[i*3+1]=Math.random()*95;a[i*3+2]=-50+Math.random()*130}const q=new T.BufferGeometry();q.setAttribute('position',new T.BufferAttribute(a,3));g.add(new T.Points(q,new T.PointsMaterial({color:0xd8f8ff,size:3.4,transparent:true,opacity:.8,depthWrite:false,blending:T.AdditiveBlending})))}
+ return g}
+function deepBuild(){
+ const r=rng(SEEDV+7777),L=DP_L,P=DP_P,B=26,hs=[],gr=new Map(),keep=me;
+ hotel.children.slice().forEach(c=>{if(c!==keep){c.traverse(o=>{if(o.geometry)o.geometry.dispose()});hotel.remove(c)}});
+ E.forEach(e=>{try{hotel.remove(e.g)}catch(x){}});E=[];FK=[];TR=[];trL=0;buildTeam();
+ S.background=new T.Color(0x0b3a66);S.fog=new T.FogExp2(0x0b3a66,.0068);C.far=1500;C.updateProjectionMatrix();krFar=1;
+ hotel.add(new T.HemisphereLight(0xbdf0ff,0x16507a,1.3));const dl=new T.DirectionalLight(0xdff8ff,.75);dl.position.set(80,200,60);hotel.add(dl);
+ // 海底の床(石畳)と外の海
+ const ft=tex(128,128,(x,w)=>{x.fillStyle='#2c78a6';x.fillRect(0,0,w,w);for(let i=0;i<500;i++){x.fillStyle=`rgba(${120+r()*70|0},${190+r()*50|0},255,${.05+r()*.12})`;x.fillRect(r()*w,r()*w,2,2)}x.strokeStyle='rgba(10,50,90,.45)';x.lineWidth=2;for(let i=0;i<=4;i++){x.beginPath();x.moveTo(i*32,0);x.lineTo(i*32,w);x.stroke();x.beginPath();x.moveTo(0,i*32);x.lineTo(w,i*32);x.stroke()}},L/8,L/8);
+ const fl=new T.Mesh(new T.PlaneGeometry(L,L),new T.MeshLambertMaterial({map:ft}));fl.rotation.x=-Math.PI/2;fl.position.set(L/2,0,L/2);hotel.add(fl);
+ const of=new T.Mesh(new T.PlaneGeometry(3000,3000),new T.MeshBasicMaterial({color:0x082a4a}));of.rotation.x=-Math.PI/2;of.position.set(L/2,-.08,L/2);hotel.add(of);
+ // ボーダーライン(地面の光る線+半透明の壁)
+ const bm=new T.MeshBasicMaterial({color:0xaaf4ff,fog:false}),wm=new T.MeshBasicMaterial({color:0x55d8ff,transparent:true,opacity:.22,side:T.DoubleSide,depthWrite:false,blending:T.AdditiveBlending,fog:false});
+ [[L/2,.6,L,1.2],[L/2,L-.6,L,1.2],[.6,L/2,1.2,L],[L-.6,L/2,1.2,L]].forEach(q=>{const s=new T.Mesh(new T.BoxGeometry(q[2],.12,q[3]),bm);s.position.set(q[0],.07,q[1]);hotel.add(s)});
+ [[L/2,0,0],[L/2,L,0],[0,L/2,Math.PI/2],[L,L/2,Math.PI/2]].forEach(q=>{const w=new T.Mesh(new T.PlaneGeometry(L,60),wm);w.position.set(q[0],30,q[1]);w.rotation.y=q[2];hotel.add(w)});
+ // 家(四角形・青い苔)
+ const add=(x0,z0,x1,z1)=>{const a=Math.min(x0,x1),c=Math.max(x0,x1),b=Math.min(z0,z1),d=Math.max(z0,z1);hs.push([a,b,c,d,15+((r()*18)|0)])};
+ for(let i=0;i<10;i++)for(let j=0;j<10;j++){const bx=i*P+4,bz=j*P+4,k=r();
+  if(k<.1){}
+  else if(k<.3){const w=16+r()*8,d=16+r()*8;add(bx+(B-w)*r(),bz+(B-d)*r(),0,0);const h=hs[hs.length-1];h[2]=h[0]+w;h[3]=h[1]+d}
+  else if(k<.55){const a=10+r()*1.5;add(bx,bz,bx+a,bz+a);add(bx+B-a,bz,bx+B,bz+a);add(bx,bz+B-a,bx+a,bz+B);add(bx+B-a,bz+B-a,bx+B,bz+B)}
+  else if(k<.8){const s=(r()*4)|0,db=8+r()*2,ds=14+r()*2,wl=8+r()*1.2,wr=8+r()*1.2,M=(u0,v0,u1,v1)=>s==0?add(bx+u0,bz+v0,bx+u1,bz+v1):s==1?add(bx+u0,bz+B-v0,bx+u1,bz+B-v1):s==2?add(bx+v0,bz+u0,bx+v1,bz+u1):add(bx+B-v0,bz+u0,bx+B-v1,bz+u1);
+   M(0,0,B,db);M(0,db,wl,db+ds);M(B-wr,db,B,db+ds)}
+  else{const h=r()<.5,w=11+r()*3;if(h){add(bx,bz,bx+w,bz+B);add(bx+B-w,bz,bx+B,bz+B)}else{add(bx,bz,bx+B,bz+w);add(bx,bz+B-w,bx+B,bz+B)}}}
+ hs.forEach(h=>{for(let a=Math.floor((h[0]-3)/17);a<=Math.floor((h[2]+3)/17);a++)for(let b=Math.floor((h[1]-3)/17);b<=Math.floor((h[3]+3)/17);b++){const k=a*100+b;if(!gr.has(k))gr.set(k,[]);gr.get(k).push(h)}});
+ const wt=tex(128,128,(x,w)=>{x.fillStyle='#eef7ff';x.fillRect(0,0,w,w);for(let i=0;i<40;i++){x.fillStyle=`rgba(190,215,235,${.15+r()*.2})`;x.fillRect(r()*w,r()*w,10+r()*30,6+r()*20)}for(let i=0;i<26;i++){const px=r()*w,py=w*(.45+r()*.55),q=6+r()*20;x.fillStyle=`rgba(${30+r()*40|0},${150+r()*60|0},${200+r()*50|0},${.35+r()*.4})`;x.beginPath();x.arc(px,py,q,0,7);x.fill()}x.fillStyle='rgba(30,150,200,.55)';x.fillRect(0,w*.88,w,w*.12)}),
+ hm=new T.InstancedMesh(new T.BoxGeometry(1,1,1),new T.MeshLambertMaterial({map:wt}),hs.length),rm=new T.InstancedMesh(new T.BoxGeometry(1,1,1),new T.MeshLambertMaterial({color:0xffffff,emissive:0x0a3a5a}),hs.length),bmm=new T.InstancedMesh(new T.BoxGeometry(1,1,1),new T.MeshLambertMaterial({color:0xffffff,emissive:0x0a3a5a}),hs.length),win=[];
+ hs.forEach((h,i)=>{const w=h[2]-h[0],d=h[3]-h[1],ht=h[4],cx=(h[0]+h[2])/2,cz=(h[1]+h[3])/2;
+  _dq.identity();hm.setMatrixAt(i,_dm.compose(_dp.set(cx,ht/2,cz),_dq,_ds.set(w,ht,d)));
+  rm.setMatrixAt(i,_dm.compose(_dp.set(cx,ht+.7,cz),_dq,_ds.set(w+.9,1.5,d+.9)));rm.setColorAt(i,_dc.setHSL(.5+r()*.1,.75,.42));
+  bmm.setMatrixAt(i,_dm.compose(_dp.set(cx,1.2,cz),_dq,_ds.set(w+.6,2.4,d+.6)));bmm.setColorAt(i,_dc.setHSL(.52+r()*.08,.7,.4));
+  [[0,1,w,cz+d/2+.06,cx],[Math.PI,-1,w,cz-d/2-.06,cx],[Math.PI/2,1,d,cx+w/2+.06,cz],[-Math.PI/2,-1,d,cx-w/2-.06,cz]].forEach((s,k)=>{const n=Math.max(1,Math.floor(s[2]/8));for(let q=0;q<n;q++){const o=(q+.5)/n*s[2]-s[2]/2;for(let row=0;row<(ht>24?2:1);row++){const y=ht*(row?.72:.4);win.push(k<2?[s[4]+o,y,s[3],s[0]]:[s[3],y,s[4]+o,s[0]])}}})});
+ [hm,rm,bmm].forEach(o=>{o.instanceMatrix.needsUpdate=true;if(o.instanceColor)o.instanceColor.needsUpdate=true;o.frustumCulled=false;hotel.add(o)});
+ const wi=new T.InstancedMesh(new T.PlaneGeometry(2.2,2.8),new T.MeshBasicMaterial({color:0x9be8ff,side:T.DoubleSide}),win.length);win.forEach((q,i)=>{_dq.setFromAxisAngle(_dy,q[3]);wi.setMatrixAt(i,_dm.compose(_dp.set(q[0],q[1],q[2]),_dq,_ds.set(1,1,1)))});wi.instanceMatrix.needsUpdate=true;wi.frustumCulled=false;hotel.add(wi);
+ // スタートとゴール(青く光る・遠い)
+ const sc=[1,9],sa=sc[(r()*2)|0]*P,sb=sc[(r()*2)|0]*P,cand=[];for(let a=1;a<=9;a++)for(let b=1;b<=9;b++)if(Math.hypot(a*P-sa,b*P-sb)>=270)cand.push([a*P,b*P]);const gp=cand[(r()*cand.length)|0];
+ const gm=(c,o)=>new T.MeshBasicMaterial({color:c,transparent:true,opacity:o,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,fog:false});
+ [[3.4,.4,0x3aa8ff],[1.1,.9,0xbff4ff]].forEach(q=>{const c=new T.Mesh(new T.CylinderGeometry(q[0],q[0],70,14,1,true),gm(q[2],q[1]));c.position.set(gp[0],35,gp[1]);hotel.add(c)});
+ const rg=new T.Mesh(new T.TorusGeometry(3.4,.25,8,36),new T.MeshBasicMaterial({color:0x55c8ff,fog:false}));rg.rotation.x=Math.PI/2;rg.position.set(gp[0],.3,gp[1]);hotel.add(rg);
+ const gl=new T.PointLight(0x55c8ff,2.4,40);gl.position.set(gp[0],3,gp[1]);hotel.add(gl);
+ const orb=new T.Mesh(new T.SphereGeometry(1.1,16,12),new T.MeshBasicMaterial({color:0xdaf8ff,fog:false}));orb.position.set(gp[0],2.4,gp[1]);hotel.add(orb);
+ // チェスト(家のそば)
+ const ch=[],cm=new T.MeshLambertMaterial({color:0x2a8aa8,emissive:0x0a3a50}),gd=new T.MeshBasicMaterial({color:0xffe27a});
+ for(let g=0;ch.length<30&&g<900;g++){const h=hs[(r()*hs.length)|0],sd=(r()*4)|0,u=r();let x,z;
+  if(sd<2){x=h[0]+2+u*(h[2]-h[0]-4);z=sd?h[3]+1.8:h[1]-1.8}else{z=h[1]+2+u*(h[3]-h[1]-4);x=sd==2?h[2]+1.8:h[0]-1.8}
+  if(x<3||z<3||x>L-3||z>L-3||deepInHouse2(hs,x,z,1.2)||Math.hypot(x-sa,z-sb)<8||Math.hypot(x-gp[0],z-gp[1])<8||ch.some(c=>Math.hypot(c.x-x,c.z-z)<12))continue;
+  const o=new T.Group(),bd=new T.Mesh(new T.BoxGeometry(1.5,.9,1),cm),ld=new T.Mesh(new T.BoxGeometry(1.5,.35,1.05),cm),bn=new T.Mesh(new T.BoxGeometry(.25,1.3,1.1),gd),ga=new T.Mesh(new T.SphereGeometry(1,12,8),gm(0x66e0ff,.25));
+  bd.position.y=.45;ld.position.y=1.07;bn.position.y=.65;ga.position.y=.7;o.add(bd,ld,bn,ga);o.position.set(x,0,z);o.rotation.y=sd<2?0:Math.PI/2;hotel.add(o);ch.push({x,z,o,got:0})}
+ // 水色の光(舞う)・足あと
+ const mk=(n,c,s)=>{const a=new Float32Array(n*3);for(let i=0;i<n;i++){a[i*3]=(r()-.5)*L;a[i*3+1]=1+r()*50;a[i*3+2]=(r()-.5)*L}const q=new T.BufferGeometry();q.setAttribute('position',new T.BufferAttribute(a,3));const p=new T.Points(q,new T.PointsMaterial({color:c,size:s,transparent:true,opacity:.75,depthWrite:false,blending:T.AdditiveBlending,fog:false})),g=new T.Group();g.position.set(L/2,0,L/2);g.add(p);hotel.add(g);return g};
+ const fp=new T.InstancedMesh(new T.CircleGeometry(.27,10).rotateX(-Math.PI/2),new T.MeshBasicMaterial({color:0xcff8ff,transparent:true,opacity:.8,fog:false,depthWrite:false}),6000);fp.count=0;fp.frustumCulled=false;hotel.add(fp);
+ const fish=deepFish();fish.visible=false;hotel.add(fish);
+ const bub=new T.Mesh(new T.SphereGeometry(1.6,16,12),new T.MeshBasicMaterial({color:0x9ae8ff,transparent:true,opacity:.35,depthWrite:false}));bub.visible=false;hotel.add(bub);
+ return{hs,gr,gp,sa,sb,ch,fp,fpn:0,fl:[mk(700,0x9ff0ff,1.3),mk(500,0x6fb8ff,1.9)],fish,bub,gm}}
+function deepInHouse2(hs,x,z,m){return hs.some(h=>x>h[0]-m&&x<h[2]+m&&z>h[1]-m&&z<h[3]+m)}
+function deepInit(){
+ const B=deepBuild();deepOn=1;
+ DP=Object.assign(B,{t:0,nb:DP_EVERY,n:0,f:null,k:0,sh:0,dash:0,stp:0,amb:5,rb:0,lx:B.sa,lz:B.sb,ft:0,opened:0,hit:0});
+ pos.set(B.sa,0,B.sb);stPos=[B.sa,B.sb];jy=vy=0;dsE=100;dsT=0;pit=.14;yaw=Math.atan2(-(DP_L/2-B.sa),-(DP_L/2-B.sb));goalP.set(B.gp[0],0,B.gp[1]);
+ try{$('mm').style.display='none';$('arr').style.visibility='hidden';const m=document.querySelector('#mis .mt');if(m)m.textContent='🌊 青く光るゴールへ'}catch(e){}
+ deepCam();camP.copy(tP);camL.copy(tL);
+ toast('🌊 海底都市へ…30秒ごとに鐘が鳴る。家の陰にかくれて大魚をやりすごせ！青い光がゴール')}
+function deepCam(){const K=DP;if(!K)return;const cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.6;
+ for(;s<=6.2;s+=.25){const x=pos.x+ux*s,z=pos.z+uz*s,y=ty+uy*s;if(y<.4||y>60||deepInHouse(x,z,.5,y))break}
+ s=Math.max(2.2,s-.35);tP.set(pos.x+ux*s,Math.max(.5,ty+uy*s+(s<4?(4-s)*.35:0)),pos.z+uz*s);tL.set(pos.x,ty,pos.z);
+ const k=K.k,a=k*k*3.4,R_=()=>Math.random()-.5;
+ if(k>.02){tP.x+=R_()*a;tP.y+=R_()*a*.8;tP.z+=R_()*a;tL.x+=R_()*a*.7;tL.y+=R_()*a*.7;tL.z+=R_()*a*.7}
+ try{if(k>.05){const q=k*k;cvs.style.transform=`translate(${R_()*q*60}px,${R_()*q*60}px) rotate(${R_()*q*7}deg) scale(${1.04+q*.12})`;cvs.style.filter=`blur(${q*3.5}px)`}else if(K.cs){cvs.style.transform='';cvs.style.filter=''}K.cs=k>.05}catch(e){}}
+function deepReset(){try{cvs.style.transform='';cvs.style.filter='';$('arr').style.visibility='';const m=document.querySelector('#mis .mt');if(m&&/青く光る/.test(m.textContent))m.textContent='🎯 2人で出口へ'}catch(e){}}
+function deepTick(dt,t){const K=DP;if(!K)return;
+ if(intro>0){introTick(dt,t);return}
+ tm+=dt;K.t+=dt;const L=DP_L;
+ const ix=mv.x*D.sens+((keys.KeyD||keys.ArrowRight)?1:0)-((keys.KeyA||keys.ArrowLeft)?1:0),iz=mv.y*D.sens+((keys.KeyS||keys.ArrowDown)?1:0)-((keys.KeyW||keys.ArrowUp)?1:0),sy_=Math.sin(yaw),cy_=Math.cos(yaw);
+ const x=ix*cy_+iz*sy_,z=iz*cy_-ix*sy_,l=Math.hypot(x,z),ox=pos.x,oz=pos.z;
+ if(l>.1){const k=Math.min(1,l)/l*5*dt*(K.dash?1.7:1);pos.x+=x*k;pos.z+=z*k;me.rotation.y=Math.atan2(x,z)}
+ if(K.dash){dsE-=25*dt;if(dsE<=0){dsE=0;K.dash=0}}else dsE=Math.min(100,dsE+12*dt);
+ if(jreq){jreq=0;if(jy==0){vy=7;SE.jump();mq('jump')}}jy+=vy*dt;vy-=18*dt;if(jy<=0){jy=0;vy=0}
+ for(let it=0;it<2;it++)for(const h of deepNear(pos.x,pos.z)){const cx=Math.max(h[0],Math.min(pos.x,h[2])),cz=Math.max(h[1],Math.min(pos.z,h[3])),dx=pos.x-cx,dz=pos.z-cz,d=Math.hypot(dx,dz);if(d<.5&&d>1e-4){pos.x+=dx/d*(.5-d);pos.z+=dz/d*(.5-d)}}
+ pos.x=Math.max(1.4,Math.min(L-1.4,pos.x));pos.z=Math.max(1.4,Math.min(L-1.4,pos.z));
+ const mvg=Math.hypot(pos.x-ox,pos.z-oz)>1e-4;
+ if(keys.KeyR)pit=Math.max(-1.25,pit-1.4*dt);if(keys.KeyT)pit=Math.min(1.2,pit+1.4*dt);
+ me.position.set(pos.x,jy,pos.z);anim(me,mvg,t);pl.position.set(pos.x,2.6,pos.z);trail(me,dt,mvg&&jy<.3);
+ if(mvg&&jy==0){K.stp-=dt;if(K.stp<0){K.stp=.3;SE.step()}}K.amb-=dt;if(K.amb<0){K.amb=rnd(4,9);SE.creak()}
+ {const f=$('dsf');if(f)f.style.width=dsE+'%';$('dash').classList.toggle('lo',dsE<15&&!K.dash);const sp=$('come').querySelector('span');if(sp)sp.textContent='🫧×'+K.sh}
+ // 歩いた跡(ずっと残る)
+ if(Math.hypot(pos.x-K.lx,pos.z-K.lz)>.9&&jy<.3){K.lx=pos.x;K.lz=pos.z;K.ft^=1;const s=K.ft?.2:-.2,i=K.fpn%6000;K.fp.setMatrixAt(i,_dm.makeTranslation(pos.x+Math.cos(me.rotation.y)*s,.05,pos.z-Math.sin(me.rotation.y)*s));K.fpn++;K.fp.count=Math.min(K.fpn,6000);K.fp.instanceMatrix.needsUpdate=true}
+ // 舞う水色の光
+ K.fl[0].rotation.y=t*.03;K.fl[0].position.y=Math.sin(t*.4)*1.5;K.fl[1].rotation.y=-t*.02;K.fl[1].position.y=Math.cos(t*.3)*2;
+ // チェスト
+ for(const c of K.ch){if(c.got)continue;c.o.rotation.y+=dt*.6;c.o.children[3].scale.setScalar(.9+Math.sin(t*3+c.x)*.12);
+  if(Math.hypot(pos.x-c.x,pos.z-c.z)<1.9){c.got=1;hotel.remove(c.o);K.opened++;const q=Math.random();let m;
+   if(q<.4){const a=100+(Math.random()*9|0)*100;D.coin+=a;save();updInfo();m='🪙 +'+a+' コイン！'}
+   else if(q<.5){D.coin+=3000;save();updInfo();m='💎 大当たり！ 🪙 +3000'}
+   else if(q<.75){K.sh++;m='🫧 バブルのバリアをゲット！(魚を1回だけ防ぐ)'}
+   else{dsE=100;K.dash=0;m='⚡ ダッシュ全回復！'}
+   SE.coin();confetti(14);flash('#9aeaff');toast('📦 チェスト: '+m)}}
+ // 🔔 30秒ごとの鐘 → 大魚(方向は誰にも教えない)
+ if(K.t>=K.nb){K.nb+=DP_EVERY;K.n++;const d=(rng(SEEDV+555+K.n)()*4)|0;K.f={d,q:-DP_THK-200,used:0,done:0};K.fish.visible=true;K.fish.rotation.y=Math.atan2(DPX[d],DPZ[d]);deepBell();shake();toast('🔔 鐘が鳴った…！家のかげにかくれろ！')}
+ let k=0;const f=K.f;
+ if(f){f.q+=DP_SPD*dt;const d=f.d,sg=DPX[d]+DPZ[d]>0?1:-1,a=sg>0?f.q-DP_THK/2:L-(f.q-DP_THK/2);
+  if(DPX[d])K.fish.position.set(a,0,L/2);else K.fish.position.set(L/2,0,a);
+  // 揺れは「魚がどれだけ街に近づいたか」だけで決まる(方向のヒントにならない)
+  k=Math.max(0,Math.min(1,(f.q+200)/(L/2+200)));k=k*k*(3-2*k);
+  const pa=DPX[d]?pos.x:pos.z,pq=sg>0?pa:L-pa;
+  if(f.q>=pq-.2&&f.q-DP_THK<=pq+.2&&!f.used){if(deepExposed(pos.x,pos.z,d)){if(K.sh>0){K.sh--;f.used=1;flash('#9aeaff');SE.come();toast('🫧 バブルが身代わりに！')}else{pn(D.name+' が大魚に飲み込まれた');return die()}}}
+  if(f.q-DP_THK>pq+8)k*=Math.max(0,1-(f.q-DP_THK-pq-8)/60);
+  if(f.q-DP_THK>L+120){K.f=null;K.fish.visible=false;k=0}}
+ K.k+=(k-K.k)*Math.min(1,dt*10);
+ if(K.k>.12){K.rb-=dt;if(K.rb<=0){K.rb=.3;tn(44+K.k*34,.45,'sine',.22*K.k,0,28);noiseB(.4,.16*K.k,320,90)}}
+ K.bub.visible=K.sh>0;K.bub.position.set(pos.x,jy+1,pos.z);K.bub.scale.setScalar(1+Math.sin(t*6)*.05);
+ // ゴール
+ if(Math.hypot(pos.x-K.gp[0],pos.z-K.gp[1])<3.4){SE.clear();confetti(120);flash('#7ad8ff');return result(true)}
+ try{hudUpd(t)}catch(e){}
+ $('md2').textContent='🌊 次の鐘まで '+Math.max(0,Math.ceil(K.nb-K.t))+'秒　📦 '+K.opened+'/'+K.ch.length+'　🫧×'+K.sh;
+ deepCam()}
+{const g=game;game=function(dt,t){if(!deepOn)return g.apply(this,arguments);try{deepTick(dt,t)}catch(e){console.error(e)}}}
+{const c=camGame;camGame=function(){return deepOn?deepCam():c.apply(this,arguments)}}
+{const s=start;start=function(q){const r=s.apply(this,arguments);deepOn=0;if(modRun=='deep'&&!TW){try{deepInit()}catch(e){console.error(e);deepOn=0}}return r}}
+{const m=setMode;setMode=function(x){if(deepOn&&x!='game'&&x!='trans'){deepOn=0;deepReset()}return m.apply(this,arguments)}}
+{const r=result;result=function(){const o=r.apply(this,arguments);deepOn=0;deepReset();return o}}
+$('dash').addEventListener('click',e=>{if(!deepOn)return;e.stopImmediatePropagation();const K=DP;if(!K||mode!='game'||intro>0)return;if(K.dash){K.dash=0;return}if(dsE<15)return toast('⚡ ダッシュ回復中…');K.dash=1;SE.come();flash('#66ccff')},true);
+$('come').addEventListener('click',e=>{if(!deepOn)return;e.stopImmediatePropagation();if(DP)toast('🫧 バブルのバリア '+DP.sh+'個：大魚に当たっても1回助かる(チェストで手に入る)')},true);
+
+// ===== 🎰 ガチャセンター(バフガチャ: 1時間のバフ・リスト形式・コレクションなし) =====
+const BFK=[['xp','✨','経験値アップ','ゲーム終了時にもらえる経験値',[10,20,40,80]],['coin','🪙','コイン報酬アップ','オーブ・タワー・クレーンのコイン',[10,25,50,100]],['np','🛣️','ネオンptアップ','ネオンロードのポイント',[15,30,60,100]],['spd','👟','スピードアップ','ふだんの歩く速さ',[4,8,14,22]],['dash','⚡','ダッシュ長持ち','ダッシュできる時間',[15,30,60,120]],['crn','🎪','つかみ率アップ','クレーンのつかみやすさ(ジャックポット除く)',[8,15,25,40]]];
+const BFR=[52,30,14,4],BFC=500,BFC10=4500,BFMS=36e5,BFPITY=30;
+let bfT=0,bfBusy=0,bfCan=0;
+const bfK=k=>BFK.find(q=>q[0]==k);
+function bfM(k){try{const b=D.bf&&D.bf[k];if(b&&b.e>Date.now())return 1+bfK(k)[4][b.t-1]/100}catch(e){}return 1}
+function bfRoll(g){let r=Math.random()*100,t=r<52?1:r<82?2:r<96?3:4;if((D.bfp||0)>=BFPITY-1&&t<3)t=3;if(g&&t<3)t=3;D.bfp=t>=3?0:(D.bfp||0)+1;return{k:BFK[(Math.random()*BFK.length)|0][0],t}}
+function bfApply(x){const n=Date.now(),B=D.bf||(D.bf={}),o=B[x.k];B[x.k]=o&&o.e>n&&o.t>x.t?{t:o.t,e:Math.max(o.e,n+BFMS)}:{t:x.t,e:n+BFMS}}
+const bfCapSvg=(c,w)=>`<svg viewBox="0 0 60 90" width="${w||110}"><defs><linearGradient id="bfg${c.slice(1)}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".25" stop-color="${c}"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></linearGradient></defs><g class="cb"><path d="M4 45h52a26 26 0 0 1-52 0z" fill="#f4f6ff" stroke="#1a1a50" stroke-width="3"/><path d="M12 56a20 20 0 0 0 10 12" stroke="#fff" stroke-width="3" fill="none" opacity=".7" stroke-linecap="round"/></g><g class="ct"><path d="M4 45a26 26 0 0 1 52 0z" fill="url(#bfg${c.slice(1)})" stroke="#1a1a50" stroke-width="3"/><ellipse cx="19" cy="28" rx="6" ry="3.5" fill="#fff" opacity=".75" transform="rotate(-35 19 28)"/></g><rect x="3" y="43" width="54" height="4" rx="2" fill="#1a1a50"/></svg>`;
+const bfCard=(x,mini)=>{const q=bfK(x.k),c=rarC_[x.t];return `<div class="bfcard${mini?' mini':''}" style="--rc:${c}"><div class="bfrar">${rar_[x.t]}</div><div class="bfic">${q[1]}</div><div class="bfnm">${q[2]}</div><div class="bfpc">+${q[4][x.t-1]}%</div>${mini?'':'<div class="bfdu">⏱ 1時間</div>'}</div>`};
+function bfMachine(){const cs=['#ff6a8a','#ffd93b','#4ad0ff','#7dffa0','#ff5ad8','#9a7bff','#ff9a4a','#4ad0ff','#ffd93b'],ps=[[38,38],[60,30],[82,38],[30,56],[52,52],[74,56],[92,54],[44,70],[68,70]];
+ return `<svg viewBox="0 0 120 158"><defs><linearGradient id="bfm1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a7a"/><stop offset="1" stop-color="#b01a46"/></linearGradient><radialGradient id="bfm2" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#e8fbff" stop-opacity=".95"/><stop offset="1" stop-color="#7ad8ff" stop-opacity=".5"/></radialGradient><clipPath id="bfm3"><circle cx="60" cy="52" r="42"/></clipPath></defs>
+ <ellipse cx="60" cy="152" rx="46" ry="5" fill="#000" opacity=".35"/><rect x="22" y="76" width="76" height="70" rx="14" fill="url(#bfm1)" stroke="#2a0a30" stroke-width="3"/><rect x="28" y="82" width="64" height="8" rx="4" fill="#fff" opacity=".25"/>
+ <circle cx="60" cy="52" r="42" fill="url(#bfm2)" stroke="#2a0a30" stroke-width="3"/><g clip-path="url(#bfm3)">${ps.map((p,i)=>`<g><circle cx="${p[0]}" cy="${p[1]}" r="9" fill="${cs[i]}" stroke="#1a1a50" stroke-width="2"/><path d="M${p[0]-9} ${p[1]}h18" stroke="#fff" stroke-width="2.4" opacity=".85"/><circle cx="${p[0]-3}" cy="${p[1]-4}" r="2" fill="#fff" opacity=".9"/></g>`).join('')}</g>
+ <path d="M30 34a36 36 0 0 1 22-20" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/><rect x="14" y="68" width="92" height="12" rx="6" fill="#ffd93b" stroke="#2a0a30" stroke-width="3"/>
+ <rect x="34" y="94" width="52" height="26" rx="7" fill="#2a0a3a" stroke="#ffd93b" stroke-width="2"/><rect x="54" y="98" width="12" height="3" rx="1.5" fill="#ffd93b"/><text x="60" y="114" text-anchor="middle" font-size="11" font-weight="900" fill="#ffd93b" font-family="sans-serif">500</text>
+ <g class="gk"><circle cx="38" cy="132" r="9" fill="#ffe45a" stroke="#2a0a30" stroke-width="2.5"/><rect x="35" y="124" width="6" height="16" rx="3" fill="#ff8a1a" stroke="#2a0a30" stroke-width="1.5"/></g>
+ <rect x="56" y="126" width="30" height="16" rx="7" fill="#1a0828" stroke="#2a0a30" stroke-width="2.5"/><g class="gst"><path d="M104 20l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fff"/><path d="M12 108l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#ffe45a"/></g></svg>`}
+function bfAct(){const n=Date.now(),a=BFK.filter(q=>D.bf&&D.bf[q[0]]&&D.bf[q[0]].e>n);
+ $('bfact').innerHTML=a.length?a.map(q=>{const b=D.bf[q[0]],l=b.e-n,m=Math.floor(l/6e4),s=Math.floor(l/1e3)%60;return `<div class="bfa" style="--rc:${rarC_[b.t]}"><div class="bfai">${q[1]}</div><div class="bfat"><b>${q[2]}</b><span>+${q[4][b.t-1]}%　<i>${rar_[b.t]}</i></span><div class="bfbar"><u style="width:${Math.min(100,l/BFMS*100)}%"></u></div></div><div class="bfat2">${m}:${String(s).padStart(2,'0')}</div></div>`}).join(''):'<div class="small" style="text-align:center;padding:10px">いま効いているバフはありません。ガチャをまわそう！</div>'}
+function bfRender(){const can1=D.coin>=BFC,can10=D.coin>=BFC10,left=Math.max(0,BFPITY-(D.bfp||0));
+ $('gcs').innerHTML=`<div class="gsign"><b>🎰 ガチャセンター</b><small>1時間つづく ゆうえきバフが出る！</small><div class="gbulb">${'<i></i>'.repeat(12)}</div></div>
+ <div class="gmain"><div class="gmach" id="gmach">${bfMachine()}</div><div class="gbtns"><div class="gtt">⚡ バフガチャ</div><div class="gcoin">🪙 <b>${D.coin}</b></div><div class="btn ${can1?'grn':'dis'}" data-bf="1">1回　🪙${BFC}</div><div class="btn ${can10?'':'dis'}" data-bf="10">10連　🪙${BFC10}<small>SR以上1つ確定</small></div><div class="small" style="text-align:center">てんじょう: あと<b>${left}</b>回でSR以上</div></div></div>
+ <div class="gsec">🔥 いま効いているバフ</div><div id="bfact" class="gact"></div>
+ <div class="gsec">🎲 出現率</div><div class="grate">${BFR.map((p,i)=>`<div style="flex:${p};--rc:${rarC_[i+1]}"><b>${rar_[i+1]}</b><span>${p}%</span></div>`).join('')}</div>
+ <div class="gsec">📋 バフ一覧 <small>(レア度ごとの効果)</small></div><div class="glist">${BFK.map(q=>`<div class="gli"><div class="glh"><span class="gle">${q[1]}</span><div><b>${q[2]}</b><small>${q[3]}</small></div></div><div class="glv">${q[4].map((v,i)=>`<div style="--rc:${rarC_[i+1]}"><i>${rar_[i+1]}</i>+${v}%</div>`).join('')}</div></div>`).join('')}</div>
+ <div class="small" style="text-align:center;margin:8px 0 14px">どれも🕐1時間。同じバフは強いほうが残り、時間はリセット。図鑑には入りません。</div>`;bfAct()}
+function bfShow(res){bfBusy=1;bfCan=0;const o=$('bfr'),best=Math.max(...res.map(r=>r.t)),c=rarC_[best];o.style.setProperty('--rc',c);
+ if(res.length==1){o.innerHTML=`<div class="bfs"><div class="bfrays"></div><div class="bfburst"></div><div class="bfcap">${bfCapSvg(c)}</div>${bfCard(res[0])}<div class="bfhint">タップでとじる</div></div>`;setTimeout(()=>{try{SE.lvl();confetti(20+best*25);if(best>=3)flash(c)}catch(e){}},1050);setTimeout(()=>{bfCan=1},1500)}
+ else{o.innerHTML=`<div class="bfs ten"><div class="bfrays"></div><div class="bftt">🎰 10連けっか</div><div class="bfgrid">${res.map((x,i)=>`<div style="animation-delay:${.12+i*.16}s">${bfCard(x,1)}</div>`).join('')}</div><div class="bfhint">タップでとじる</div></div>`;res.forEach((x,i)=>setTimeout(()=>{try{SE.pon()}catch(e){}},120+i*160));setTimeout(()=>{try{SE.lvl();confetti(30+best*25);if(best>=3)flash(c)}catch(e){}},1900);setTimeout(()=>{bfCan=1},2100)}
+ o.classList.remove('hide')}
+function bfPull(n){if(bfBusy)return;const cost=n==10?BFC10:BFC;if(D.coin<cost)return toast('🪙 コインが足りません');
+ D.coin-=cost;const res=[];for(let i=0;i<n;i++)res.push(bfRoll(0));if(n==10&&!res.some(r=>r.t>=3))res[9]={k:res[9].k,t:3},D.bfp=0;res.forEach(bfApply);try{mq('gacha',n)}catch(e){}save();updInfo();
+ const m=$('gmach');if(m){m.classList.remove('spin');void m.offsetWidth;m.classList.add('spin')}SE.btn();try{tn(520,.25,'triangle',.1,0,880)}catch(e){}
+ bfBusy=1;setTimeout(()=>{bfShow(res);try{crRender();bfRender()}catch(e){}},520)}
+function bfOpen(){bfRender();$('gcs').onclick=e=>{const b=e.target.closest('[data-bf]');if(!b)return;if(b.classList.contains('dis'))return toast('🪙 コインが足りません');bfPull(+b.dataset.bf)};
+ $('bfr').onclick=()=>{if(!bfCan)return;bfCan=0;bfBusy=0;$('bfr').classList.add('hide')};clearInterval(bfT);bfT=setInterval(()=>{if($('cr').classList.contains('hide'))return bfClose();bfAct()},1000)}
+function bfClose(){clearInterval(bfT);bfBusy=0;try{$('bfr').classList.add('hide')}catch(e){}}
+{const st=document.createElement('style');st.textContent=`
+.gcc{flex:none;margin:16px 2px 8px;position:relative}
+.gsign{position:relative;margin:0 0 12px;text-align:center;padding:11px 8px 10px;border-radius:20px;background:linear-gradient(135deg,#ff3fa4,#7a3cff 55%,#2ab7ff);box-shadow:0 0 0 3px #ffffff40,0 8px 22px #0009,inset 0 0 20px #ffffff55}
+.gsign b{display:block;font-size:23px;letter-spacing:2px;color:#fff;text-shadow:0 0 8px #fff,0 0 18px #ff7ae8,0 3px 0 #4a1480;animation:gneon 2.4s ease-in-out infinite}
+.gsign small{display:block;color:#ffe9ff;font-size:11px;margin-top:2px}
+.gbulb{display:flex;justify-content:space-between;margin:8px 4px 0}.gbulb i{width:9px;height:9px;border-radius:50%;background:#ffe45a;box-shadow:0 0 8px #ffe45a;animation:gbl 1.2s infinite}.gbulb i:nth-child(2n){animation-delay:.6s}
+@keyframes gneon{0%,100%{opacity:1}50%{opacity:.8}}@keyframes gbl{0%,100%{opacity:1}50%{opacity:.2}}
+.gmain{display:flex;gap:10px;align-items:center;background:linear-gradient(#2c2c92,#181860);border:3px solid #6f6fff;border-radius:22px;padding:12px;box-shadow:0 6px 0 #0b0b40}
+.gmach{width:116px;flex:none}.gmach svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 8px #0008)}.gk,.gst{transform-box:fill-box;transform-origin:center}.gst{animation:gtw 1.6s ease-in-out infinite}
+.gmach.spin .gk{animation:gspin .6s ease-in-out}.gmach.spin svg{animation:gjig .5s}
+@keyframes gspin{to{transform:rotate(540deg)}}@keyframes gjig{0%,100%{transform:none}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}@keyframes gtw{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.gbtns{flex:1;display:flex;flex-direction:column;gap:7px;min-width:0}.gtt{font-weight:900;font-size:17px;color:#ffe45a;text-shadow:0 2px 0 #000}.gcoin{font-size:13px;color:#cfe}
+.gbtns .btn{font-size:15px;padding:9px 6px;text-align:center}.gbtns .btn small{display:block;font-size:10px;opacity:.9}
+.gsec{margin:16px 2px 7px;font-weight:900;color:#fff;font-size:15px;text-shadow:0 2px 0 #000;display:flex;align-items:center;gap:6px}.gsec small{font-weight:700;font-size:11px;color:#bcd}
+.gact{display:grid;grid-template-columns:1fr 1fr;gap:7px}.gact>.small{grid-column:1/3}
+.bfa{display:flex;align-items:center;gap:7px;padding:7px;border-radius:14px;background:linear-gradient(#26267a,#14144c);border:2.5px solid var(--rc);box-shadow:0 0 12px color-mix(in srgb,var(--rc) 45%,transparent);min-width:0}
+.bfai{font-size:24px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0006;flex:none}.bfat{flex:1;min-width:0;font-size:11px;line-height:1.25}.bfat b{display:block;font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bfat span{color:var(--rc);font-weight:900}.bfat i{font-style:normal;background:var(--rc);color:#000;border-radius:5px;padding:0 4px;font-size:10px}
+.bfbar{height:5px;border-radius:3px;background:#0007;margin-top:3px;overflow:hidden}.bfbar u{display:block;height:100%;background:var(--rc);border-radius:3px}.bfat2{font-size:11px;color:#fff;font-variant-numeric:tabular-nums;flex:none}
+.grate{display:flex;gap:4px;height:42px}.grate>div{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(color-mix(in srgb,var(--rc) 85%,#fff),var(--rc));color:#10103a;font-weight:900;font-size:11px;min-width:34px;box-shadow:inset 0 -3px 0 #0003}.grate b{font-size:13px}
+.glist{display:flex;flex-direction:column;gap:7px}.gli{background:linear-gradient(#22226e,#14144a);border:2px solid #4a4ad0;border-radius:14px;padding:8px}.glh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.glh b{display:block;color:#fff;font-size:13px}.glh small{display:block;color:#aab;font-size:10px}.gle{font-size:22px;width:36px;height:36px;border-radius:10px;background:#0006;display:flex;align-items:center;justify-content:center;flex:none}
+.glv{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.glv>div{text-align:center;border-radius:8px;padding:3px 0;font-size:12px;font-weight:900;color:var(--rc);background:#0005;border:1.5px solid var(--rc)}.glv i{display:block;font-style:normal;font-size:9px;color:#000;background:var(--rc);border-radius:5px 5px 0 0;margin:-3px 0 2px}
+.bfr{position:fixed;inset:0;z-index:80;background:radial-gradient(circle,#10104acc,#02021aee);display:flex;align-items:center;justify-content:center;overflow:hidden}.bfr.hide{display:none}
+.bfs{position:relative;width:min(88vw,330px);height:400px;display:flex;align-items:center;justify-content:center}.bfs.ten{height:auto;flex-direction:column;padding:10px 0}
+.bfrays{position:absolute;inset:-70px;background:repeating-conic-gradient(var(--rc) 0 7deg,transparent 7deg 24deg);-webkit-mask:radial-gradient(circle,#000,transparent 66%);mask:radial-gradient(circle,#000,transparent 66%);opacity:0;animation:brot 16s linear infinite,bfd .5s 1s forwards}.bfs.ten .bfrays{animation:brot 16s linear infinite,bfd .5s 1.8s forwards}
+@keyframes brot{to{transform:rotate(360deg)}}@keyframes bfd{to{opacity:.5}}
+.bfcap{position:absolute;animation:bdrop .35s ease-in both,bwob .7s .35s ease-in-out both}.bfcap .ct,.bfcap .cb{transform-box:fill-box;transform-origin:center}.bfcap .ct{animation:bup .45s 1.02s ease-out forwards}.bfcap .cb{animation:bdn .45s 1.02s ease-out forwards}
+@keyframes bdrop{from{transform:translateY(-260px)}to{transform:none}}@keyframes bwob{0%{transform:rotate(0)}15%{transform:rotate(-16deg)}30%{transform:rotate(14deg)}45%{transform:rotate(-12deg)}60%{transform:rotate(10deg) scale(1.08)}80%{transform:rotate(-6deg) scale(1.15)}100%{transform:scale(1.22)}}
+@keyframes bup{to{transform:translateY(-130px) rotate(-50deg);opacity:0}}@keyframes bdn{to{transform:translateY(130px) rotate(40deg);opacity:0}}
+.bfburst{position:absolute;width:40px;height:40px;border-radius:50%;border:7px solid var(--rc);opacity:0;animation:bbu .7s 1.02s ease-out}@keyframes bbu{0%{opacity:1;transform:scale(.4)}100%{opacity:0;transform:scale(10)}}
+.bfcard{position:relative;width:190px;padding:14px 10px 12px;text-align:center;border-radius:22px;background:linear-gradient(#35359a,#15154f);border:4px solid var(--rc);box-shadow:0 0 34px var(--rc),inset 0 0 22px color-mix(in srgb,var(--rc) 35%,transparent);opacity:0;transform:scale(.3);animation:bpop .55s 1.05s cubic-bezier(.2,1.6,.4,1) forwards;color:#fff}
+@keyframes bpop{to{opacity:1;transform:none}}
+.bfrar{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--rc);color:#10103a;font-weight:900;border-radius:12px;padding:1px 16px;font-size:17px;box-shadow:0 3px 0 #0006}
+.bfic{font-size:54px;width:92px;height:92px;margin:8px auto 6px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#fff3,#0006);border:3px solid var(--rc);box-shadow:0 0 18px var(--rc)}
+.bfnm{font-weight:900;font-size:16px}.bfpc{font-size:34px;font-weight:900;color:var(--rc);text-shadow:0 0 14px var(--rc),0 3px 0 #000;line-height:1.15}.bfdu{font-size:12px;color:#cde;margin-top:2px}
+.bfcard.mini{width:auto;padding:12px 2px 6px;border-width:3px;border-radius:14px;opacity:0;animation:bpop .4s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:inherit}
+.bfcard.mini .bfrar{font-size:11px;padding:0 8px;top:-9px}.bfcard.mini .bfic{font-size:24px;width:40px;height:40px;margin:4px auto 2px;border-width:2px}.bfcard.mini .bfnm{font-size:9px;white-space:nowrap}.bfcard.mini .bfpc{font-size:15px}
+.bfgrid{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:12px 6px;width:100%;margin:10px 0}.bfgrid>div{animation:none}.bftt{position:relative;font-size:20px;font-weight:900;color:#fff;text-shadow:0 0 12px var(--rc),0 3px 0 #000}
+.bfhint{position:absolute;bottom:-4px;left:0;right:0;text-align:center;color:#cde;font-size:12px;opacity:0;animation:bfd2 .4s 1.6s forwards}.bfs.ten .bfhint{position:relative;animation-delay:2.1s}@keyframes bfd2{to{opacity:.9}}
+`;document.head.appendChild(st)}
 
 // ===== 🪙 コインおくり(フレンドタブ) =====
 // オンラインのフレンドへ送る。相手が受け取った返事(ack)が届いてから、自分のコインが減る(届かなければ減らない)
