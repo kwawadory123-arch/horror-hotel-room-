@@ -3651,6 +3651,7 @@ function sphInit(){
  try{$('mm').style.display='none'}catch(e){}
  sphCam();camP.copy(tP);camL.copy(tL);
  toast('🌐 球の内側の迷路！上も横も迷路…2人で赤い光のゴールへ！(視点: ドラッグ/R・T　⚡ダッシュ　📣CPUをよぶ)')}
+function sphFix(){try{me.quaternion.identity();me.rotation.set(0,0,0);me.scale.set(1,1,1);C.up.set(0,1,0)}catch(e){}}
 function sphCam(){const K=SP,up=K.up,a=pit,s=6.2;
  if(a>=0){const ca=Math.cos(a);tP.copy(K.P).addScaledVector(K.CF,-ca*s).addScaledVector(up,2+Math.sin(a)*s);tL.copy(K.P).addScaledVector(up,1.6)}
  else{tP.copy(K.P).addScaledVector(K.CF,-s*.8).addScaledVector(up,2.1);const b=-a;tL.copy(tP).addScaledVector(K.CF,Math.cos(b)*60).addScaledVector(up,Math.sin(b)*60)}
@@ -3697,9 +3698,9 @@ function sphTick(dt,t){const K=SP;if(!K)return;
  sphCam()}
 {const g1=game;game=function(dt,t){if(!sphOn)return g1.apply(this,arguments);try{sphTick(dt,t)}catch(e){console.error(e)}}}
 {const c1=camGame;camGame=function(){return sphOn?(SP&&sphCam()):c1.apply(this,arguments)}}
-{const s2=start;start=function(s){const r=s2.apply(this,arguments);sphOn=0;if(modRun=='sphere'&&!TW){try{sphInit()}catch(e){console.error(e);sphOn=0}}return r}}
-{const m1=setMode;setMode=function(m){if(sphOn&&m!='game'&&m!='trans'){sphOn=0;try{C.up.set(0,1,0);const ar=$('arr');if(ar)ar.style.transform=''}catch(e){}}return m1.apply(this,arguments)}}
-{const r2=result;result=function(){const r=r2.apply(this,arguments);sphOn=0;try{C.up.set(0,1,0)}catch(e){}return r}}
+{const s2=start;start=function(s){sphFix();const r=s2.apply(this,arguments);sphOn=0;if(modRun=='sphere'&&!TW){try{sphInit()}catch(e){console.error(e);sphOn=0}}return r}}
+{const m1=setMode;setMode=function(m){if(sphOn&&m!='game'&&m!='trans'){sphOn=0;sphFix();try{C.up.set(0,1,0);const ar=$('arr');if(ar)ar.style.transform=''}catch(e){}}return m1.apply(this,arguments)}}
+{const r2=result;result=function(){const r=r2.apply(this,arguments);sphOn=0;sphFix();try{C.up.set(0,1,0)}catch(e){}return r}}
 $('dash').addEventListener('click',e=>{if(!sphOn)return;e.stopImmediatePropagation();const K=SP;if(!K||mode!='game'||intro>0)return;if(K.dash){K.dash=0;return}if(dsE<15)return toast('⚡ ダッシュ回復中…');K.dash=1;SE.come();flash('#cc99ff')},true);
 $('come').addEventListener('click',e=>{if(!sphOn)return;e.stopImmediatePropagation();const K=SP;if(!K||mode!='game'||intro>0)return;if(K.cd>0)return toast('📣 あと'+Math.ceil(K.cd)+'秒');K.cd=18;K.call=10;SE.come();flash('#9affff');toast('📣 CPUの仲間をよんだ！(10秒)')},true);
 
