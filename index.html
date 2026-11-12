@@ -745,7 +745,7 @@ const $=i=>document.getElementById(i),T=THREE,sh=(i,v)=>$(i).classList.toggle('h
 // ===== データ & Supabase =====
 const SB={u:'https://tgftgxbvoksvljfsqwye.supabase.co',k:'sb_publishable_mGzKef4AynwpdYJQ7Zyl9Q_XOJsJcw2'};
 const DEF={name:'Player'+(1000+ri(0,8999)),lv:1,xp:0,coin:0,skins:[0],skin:0,sm:[],su:-1,sc:[],spy:0,ap:0,se:null,sh:[],mgp:0,best:0,str:0,last:'',vol:.6,sens:1};
-let D=JSON.parse(JSON.stringify(DEF)),ses=null,sy='ローカル保存',pt;
+let D=JSON.parse(JSON.stringify(DEF)),ses=null,sy='ローカル保存',pt;var SWP=0,SWPEND=0;try{SWPEND=localStorage.uf_swp_pend?1:0;if(localStorage.uf_swp_ts&&Date.now()-(+localStorage.uf_swp_ts)>6e5){localStorage.removeItem('ufs_bak');localStorage.removeItem('uf_swp_in');localStorage.removeItem('uf_swp_ts')}}catch(e){}
 try{Object.assign(D,JSON.parse(localStorage.uf||'{}'));ses=JSON.parse(localStorage.ufs||'null')}catch(e){}
 delete D.fr;
 function nz(){const d=D;if(d.mgp==null)d.mgp=0;if(!d.mk)d.mk=[];if(d.mpy==null)d.mpy=0;if(d.ap==null)d.ap=0;if(!d.sh)d.sh=[];if(d.se===undefined)d.se=null;if(!d.sm)d.sm=[];if(d.su==null)d.su=-1;if(!d.sc)d.sc=[];if(d.spy==null)d.spy=0;if(d.tk==null)d.tk=0;if(d.np==null)d.np=0;if(!d.nc)d.nc=[];if(d.nk==null)d.nk='';if(d.lr==null)d.lr='';if(d.lx==null)d.lx=0;if(!d.pf)d.pf=['simple','polaroid'];if(!d.pb)d.pb=[0,1,2,3];if(!d.pt)d.pt=[];if(d.ph==null)d.ph=0;if(d.mp==null)d.mp=0;if(d.fg==null)d.fg=0;if(d.ob==null)d.ob=0;if(d.ti==null)d.ti='';if(!d.tw)d.tw={best:0,runs:0,med:0,day:'',wk:'',wb:0};if(!d.cr)d.cr={d:'',f:2};if(!d.nw)d.nw={};if(!d.rm)d.rm={own:{c13:1,c10:1,w1:1},pl:[{id:'c13',x:1,y:2,f:0},{id:'c10',x:3,y:1,f:0},{id:'w1',x:2,y:-1,f:0}],wl:0,fl:0,th:{w:[0,1],f:[0,1]},lc:Date.now()};if(!d.pe)d.pe={eggs:[{r:1,h:60,t:Date.now()}],pets:[],act:0,dex:[]}}
@@ -756,7 +756,7 @@ function migrate(){nz();if((D.sv||0)<2){(D.skins||[0]).forEach(i=>{if(i)D.coin+=
  if((D.sv||0)<5){if((D.coin||0)>=60000)D.coin=40000;D.sv=5;try{localStorage.uf=JSON.stringify(D)}catch(e){}}}migrate();
 let NTF=[],frN=0,cur='f';try{NTF=JSON.parse(localStorage.ufn||'[]')}catch(e){}
 // ===== アップデートのお知らせ(既読・✕で消す・端末に保存) =====
-const UPD=[{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙13000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
+const UPD=[{id:'u1112sp',d:'11/12',t:'🌐 新ルールMOD「3D Sphere Maze」登場！',l:['🧩 MODショップに「🌐 3D Sphere Maze」が登場！ 🪙115000','🌐 迷路が球の内側にあり、上も横も迷路。天井がなく、反対側の迷路まで見わたせる神秘的な世界','🔴 ゴールの赤い光は、球の中心を貫いて長くのびて見えます。目印にして進もう','📏 迷路はステージ3の約3倍の大きさ！ 毎回ランダムに生成されます','👥 CPU4人が一緒に挑戦！ゴールは「あなた＋CPU1人以上」の2人でそろって入らないとクリアになりません','👹 怪物4体が迷路を周回。近づくと追いかけてくる！','📣 ボタンでCPUの仲間をよべます(10秒)。視点はドラッグ/R・Tで、上を見上げることもできます']},{id:'u1111lg',d:'11/11',t:'🏛️ 新ガチャ「レジェンドガチャ」登場！',l:['🎰 図鑑・ガチャの一番上に「レジェンドガチャ」が登場！1回 🪙2000 ／ 10連 🪙18000','⚡ 神話の神々と英雄 全90体(すべて人型スキン)。UR25体・SR25体・R20体・N20体','🪽 大きな細長い羽、長くヒラヒラする布や尾、金の玉座、自分より大きな武器、金色の攻撃物のような装飾をまとったかっこいいスキンがそろっています','💎 URは出現率がひくめ(UR 4%)。40回引いてもURが出なければ次はUR確定！10連はSR以上が1体確定','⭐ 毎週ピックアップのURが出やすくなります。未所持のスキンだけが出ます']},{id:'u1111sm',d:'11/11',t:'🌀 召喚体アップデート：能力が追加！',l:['🌀 召喚ガチャの召喚体(全80体)に、装備すると働く能力がつきました！(魔界の召喚体は対象外)','👑 UR: 遠くまで見渡せる／近くの壁が半透明になる／ダッシュ時間 +80%／やられた時に分身が身代わりになり、前へワープして助かる(1ステージ1回)','⭐ SR: 視界やや広い／近くの壁がうっすら半透明／ダッシュ +40%','🔹 R: 視界すこし広い／ダッシュ +20%　🔸 N: ダッシュ +10%','📚 召喚図鑑の「装備中」に、その召喚体の能力が表示されます']},{id:'u1111kr',d:'11/11',t:'📢 アップデートのお知らせ',l:['🦑 新MOD「A kraken wanders the abyss」が 🪙90000 で登場！','🎪 クレーン: 特大ジャックポットが 🪙13000＋🏅300 に！🏅メダルであそぶと運が+1%','👥 フレンドタブに 🪙送る ボタンを追加(オンラインのフレンドに送れます)']},{id:'u1111mod',d:'11/11',t:'📢 アップデートのお知らせ',l:['🧩 新機能「MOD」: ホームの🧩ボタンから、MODショップ・所持MODが使えるようになりました','🛒 MODを買って、▶プレイでロビーへ。フレンドも招待できます','💰 招待された人は、1試合ごとに 🪙5000 かかります。払えないとホストに通知され、試合は始まらず、20秒後に退出になります','🎁 MODをはじめてクリアすると、ホストは報酬スキンを3つゲット！(招待された人はもらえません)','🎪 ホームの広告にMODのポスターを追加','🔧 🎁補給ボタンをコインの下に移動しました']},{id:'u1111b',d:'11/11',t:'📢 アップデートのお知らせ',l:['🎪 ふしぎクレーン: 🛸特大ジャックポットのごほうびが 🪙10000 になりました','🔧 一部機能を修正しました']},{id:'u1111',d:'11/11',t:'📢 アップデートのお知らせ',l:['🗼 ふしぎタワー: オーブは次の階へ引き継がれます。次の階でも🔮を使って復活できます','🏆 ゲームから退出しても、APが減らなくなりました','🔧 一部機能を修正しました']},{id:'u1110',d:'11/10',t:'📢 アップデートのお知らせ',l:['🏅 称号バッジがランキングの名前の右に表示されます。タップすると説明が見られます','🗼 ふしぎタワー: ごほうびスキンをえらぶと仲間待ちになり、全員えらび終わると次の階がはじまります','🔧 一部機能を修正しました']}];
 const UN=()=>{const u=D.un||(D.un={});if(!u.r)u.r=[];if(!u.x)u.x=[];return u};
 const unU=()=>{const u=UN();return UPD.filter(x=>!u.x.includes(x.id)&&!u.r.includes(x.id)).length};
 async function sbf(p,m='GET',b,h={},na){if(window.ufRL)throw new Error('ネットワークに接続できません');const H={apikey:SB.k,'Content-Type':'application/json',...h};if(!na&&ses&&ses.access_token)H.Authorization='Bearer '+ses.access_token;const ac=new AbortController(),to=setTimeout(()=>ac.abort(),12000);let r,t;try{r=await fetch(SB.u+p,{method:m,headers:H,body:b?JSON.stringify(b):undefined,signal:ac.signal});t=await r.text()}catch(e){throw new Error(e.name=='AbortError'?'通信がタイムアウトしました':'ネットワークに接続できません')}finally{clearTimeout(to)}let j=null;try{j=t?JSON.parse(t):null}catch(e){}if(!r.ok)throw new Error((j&&(j.msg||j.message||j.error_description||j.error))||('HTTP '+r.status));if(Array.isArray(j))j.forEach(decTag);return ufDedupe(p,m,j)}
@@ -787,9 +787,9 @@ try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}ca
 const MIN={Prefer:'resolution=merge-duplicates,return=minimal'};
 var tagNo=0,iconSt='';
 async function pushProf(){const id=uid(),U='/rest/v1/profiles?on_conflict=id',pr={id,name:D.name,lv:D.lv,best:myBest(),seen:new Date().toISOString()};if(!tagNo||Date.now()-tagNo>6e5){try{await sbf(U,'POST',{...pr,name:pname()},MIN);tagNo=0;iconSt='ok';return}catch(e){if(/ネットワーク|タイムアウト/.test(e.message))throw e;try{await sbf(U,'POST',{...pr,name:pname(1)},MIN);twOff=1;tagNo=0;iconSt='ok';return}catch(e2){if(/ネットワーク|タイムアウト/.test(e2.message))throw e2}tagNo=Date.now();iconSt=e.message}}await sbf(U,'POST',pr,MIN)}
-async function push(){try{await auth();const id=uid(),n=new Date().toISOString();await pushProf();await sbf('/rest/v1/saves?on_conflict=id','POST',{id,data:D,updated_at:n},MIN);sy='☁ 同期OK'}catch(e){sy='オフライン'}try{updInfo()}catch(e){}}
-async function pull(){try{sy='同期中…';await auth();const r=await sbf('/rest/v1/saves?id=eq.'+uid()+'&select=data');if(r&&r[0]&&r[0].data&&r[0].data.lv!=null&&(!D.ts||(r[0].data.ts||0)>=D.ts)){Object.assign(D,r[0].data);delete D.fr;migrate();try{localStorage.uf=JSON.stringify(D)}catch(e){}}await push()}catch(e){sy='オフライン'}try{setSkin();updInfo()}catch(e){}initRT()}
-const save=()=>{D.ts=Date.now();try{localStorage.uf=JSON.stringify(D)}catch(e){}clearTimeout(pt);pt=setTimeout(push,1500)};
+async function push(){if(SWP)return;if(SWPEND){sy='入れ替え後の同期待ち';return}try{await auth();const id=uid(),n=new Date().toISOString();await pushProf();await sbf('/rest/v1/saves?on_conflict=id','POST',{id,data:D,updated_at:n},MIN);sy='☁ 同期OK'}catch(e){sy='オフライン'}try{updInfo()}catch(e){}}
+async function pull(){try{sy='同期中…';await auth();const r=await sbf('/rest/v1/saves?id=eq.'+uid()+'&select=data');const _sp=SWPEND;if(SWPEND){SWPEND=0;try{localStorage.removeItem('uf_swp_pend')}catch(e){}}if(r&&r[0]&&r[0].data&&r[0].data.lv!=null&&(_sp||!D.ts||(r[0].data.ts||0)>=D.ts)){Object.assign(D,r[0].data);delete D.fr;migrate();try{localStorage.uf=JSON.stringify(D)}catch(e){}}await push()}catch(e){sy='オフライン'}try{setSkin();updInfo()}catch(e){}initRT()}
+const save=()=>{if(SWP)return;D.ts=Date.now();try{localStorage.uf=JSON.stringify(D)}catch(e){}clearTimeout(pt);pt=setTimeout(push,1500)};
 setInterval(()=>{if(mode!='game'&&document.visibilityState=='visible')push()},60000);
 // ===== 効果音・環境音 =====
 let AC,AM;
@@ -2045,7 +2045,7 @@ async function frAct(a,id,c){if(a=='gift')return giftSend(id);if(a=='ux'){const 
 $('mb').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b){SE.btn();frAct(b.dataset.a,b.dataset.id,b.dataset.c)}const r=e.target.closest('[data-rk]');if(r){SE.btn();rank(r.dataset.rk)}});
 // ---- 世界ランキング ----
 // ---- 設定/ガイド ----
-function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー名</div><div class="row" style="margin:2px 0"><input id="nm" maxlength="20" value="${esc(D.name)}"><div id="nms" class="btn xs grn">変更</div></div><div class="row">🔊 音量<input id="vo" type="range" min="0" max="1" step=".05" value="${D.vol}"></div><div class="row">🎮 操作感度<input id="ss" type="range" min=".5" max="1.5" step=".1" value="${D.sens}"></div><div class="card" style="padding:8px 12px;margin:10px 0;font-weight:900;font-size:13px">☁ この端末に自動保存＆クラウド同期　${sy}<div class="small">ログイン不要。データは端末に残ります</div></div><div style="text-align:center"><div id="rst" class="btn red">🗑 データ初期化</div></div>`);
+function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー名</div><div class="row" style="margin:2px 0"><input id="nm" maxlength="20" value="${esc(D.name)}"><div id="nms" class="btn xs grn">変更</div></div><div class="small" style="font-weight:900;margin:2px 0 6px">🆔 あなたのID: ${upid()||'(接続待ち)'}</div><div class="row">🔊 音量<input id="vo" type="range" min="0" max="1" step=".05" value="${D.vol}"></div><div class="row">🎮 操作感度<input id="ss" type="range" min=".5" max="1.5" step=".1" value="${D.sens}"></div><div class="card" style="padding:8px 12px;margin:10px 0;font-weight:900;font-size:13px">☁ この端末に自動保存＆クラウド同期　${sy}<div class="small">ログイン不要。データは端末に残ります</div></div><div style="text-align:center"><div id="rst" class="btn red">🗑 データ初期化</div></div>`);
  $('nms').onclick=()=>{const v=$('nm').value.trim().slice(0,20);if(!v)return toast('名前を入力してください');D.name=v;save();updInfo();SE.pon();beat();sendPos(1);toast('✅ 名前を「'+v+'」に変更')};
  $('vo').oninput=e=>{D.vol=+e.target.value;save();SE.btn()};$('ss').oninput=e=>{D.sens=+e.target.value;save()};
  $('rst').onclick=async()=>{if(confirm('設定・レベル・コイン・スキン・記録をすべて削除します。本当に初期化しますか？')&&confirm('元に戻せません。よろしいですか？')){try{localStorage.removeItem('uf')}catch(e){}D=JSON.parse(JSON.stringify(DEF));await push();location.reload()}}}
@@ -2088,9 +2088,10 @@ function gachaFx(res,done,t){const nm=t=='g'?'極レア':'超レア';const v=$('
   if(k==1)$('gceq').onclick=()=>{act(res[0]);toast('装備しました');$('gcok').click()}},1750)}
 function claim(i){const cl=D.cl=D.cl||[];if(D.skins.length<MS[i][0]||cl.includes(i))return;cl.push(i);D.coin+=MS[i][1];save();updInfo();SE.lvl();burst();toast('🎁 +'+MS[i][1]+' コイン');dex(0)}
 $('mb').addEventListener('click',e=>{const d=e.target.closest('[data-dx]');if(d){SE.btn();dex(+d.dataset.dx)}const g=e.target.closest('[data-gc]');if(g)gachaPull(+g.dataset.gc,g.dataset.gt,g.dataset.tk);const m=e.target.closest('[data-ms]');if(m)claim(+m.dataset.ms);const q=e.target.closest('[data-gq]');if(q){act(+q.dataset.gq);toast('装備しました')}});
-const MI=[['👕','スキン',()=>shop(1)],['🛒','ショップ',()=>shop(0)],['📚','図鑑',()=>dex(0)],['🔔','通知',notif],['📮','スタンプ',stamp],['📋','ミッション',missions],['🛣️','ネオンロード',road],['🎡','ルーレット',roulette],['🐾','ペット',petRoom],['🗼','ふしぎタワー',towerGo],['🧭','探検隊',()=>ovOpen('ex')],['🎪','クレーン',()=>ovOpen('cr')],['👥','フレンド',friends],['🏆','ランキング',()=>rank('best')],['⚙️','設定',settings],['📖','ガイド',guide]];
+const MI=[['👕','スキン',()=>shop(1)],['🛒','ショップ',()=>shop(0)],['📚','図鑑',()=>dex(0)],['🔔','通知',notif],['📮','スタンプ',stamp],['📋','ミッション',missions],['🛣️','ネオンロード',road],['🎡','ルーレット',roulette],['🐾','ペット',petRoom],['🗼','ふしぎタワー',towerGo],['🧭','探検隊',()=>ovOpen('ex')],['🎪','クレーン',()=>ovOpen('cr')],['👥','フレンド',friends],['🏆','ランキング',()=>rank('best')],['📨','招待',inviteUI],['⚙️','設定',settings],['📖','ガイド',guide]];
 const MIF={};
 MI.forEach((a,k)=>{if(a[1]=='フレンド'||a[1]=='ふしぎタワー')return;const nav=['スキン','ショップ','図鑑','ランキング'].includes(a[1]),b=document.createElement('div');b.className='btn '+(nav?'nvb n'+k:'icb');b.title=a[1];b.innerHTML=(nav?`<span class="ti">${a[0]}</span><span class="tx">${a[1]=='図鑑'?'図鑑・🎰ガチャ':a[1]}</span>`:`<span class="ii">${a[0]}</span><span class="ic2">${a[1]}</span>`)+(({'スタンプ':'<i id="bdg" class="bdg"></i>','通知':'<i id="bdgn" class="bdg num hide"></i>','図鑑':'<i id="bdgd" class="bdg"></i>','ミッション':'<i id="bdgm" class="bdg"></i>','ネオンロード':'<i id="bdgr" class="bdg"></i>','ルーレット':'<i id="bdgl" class="bdg"></i>','ペット':'<i id="bdgp" class="bdg"></i>','クレーン':'<i id="bdgc" class="bdg"></i>','探検隊':'<i id="bdgx" class="bdg hide"></i>'})[a[1]]||'');b.onclick=()=>{SE.btn();a[2]()};MIF[a[1]]=a[2];$(nav?'nv':(['ペット','通知','設定','ガイド','クレーン'].includes(a[1])?'ic2':'ic')).appendChild(b)});
+{const sb=document.querySelector('.btn[title="設定"]');if(sb){let tm=0,fired=0;const cl=()=>{clearTimeout(tm);tm=0};sb.addEventListener('pointerdown',()=>{fired=0;cl();tm=setTimeout(()=>{fired=1;tm=0;try{navigator.vibrate&&navigator.vibrate(60)}catch(e){}swapUI()},10000)});['pointerup','pointerleave','pointercancel'].forEach(ev=>sb.addEventListener(ev,cl));sb.addEventListener('click',e=>{if(fired){fired=0;e.stopImmediatePropagation();e.preventDefault()}},true);sb.addEventListener('contextmenu',e=>e.preventDefault())}}
 $('frb').onclick=()=>{SE.btn();friends()};
 // ===== 「次にやること」ピル(バッジがあるページへ案内) =====
 {const TD=[['bdgm','ミッション'],['bdgr','ネオンロード'],['bdgl','ルーレット'],['bdgp','ペット'],['bdgtw','ふしぎタワー'],['bdgx','探検隊'],['bdgc','クレーン'],['bdg','スタンプ'],['bdgn','通知'],['bdgd','図鑑']],todo=document.createElement('div');todo.id='todo';todo.className='hide';$('hm').appendChild(todo);let k=0;
@@ -2107,7 +2108,7 @@ const RID=code+Math.random().toString(36).slice(2,8);let room=RID,sbc=null,sbU=n
 function initRT(){try{if(!window.supabase||!uid()||sbU==uid())return;if(sbc){try{sbc.removeAllChannels()}catch(e){}}sbU=uid();
  sbc=supabase.createClient(SB.u,SB.k,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},realtime:{params:{eventsPerSecond:20}}});
  try{sbc.realtime.setAuth(ses.access_token)}catch(e){}
- uch=sbc.channel('uf-u-'+uid()).on('broadcast',{event:'inv'},p=>gotInvite(p.payload)).on('broadcast',{event:'fr'},()=>{refreshFr();toast('🙋 フレンド申請が届きました(🔔通知)')}).on('broadcast',{event:'gift'},p=>giftGot(p.payload)).on('broadcast',{event:'gack'},p=>giftAck(p.payload)).subscribe();joinRoom(room);refreshFr()}catch(e){sbU=null}}
+ uch=sbc.channel('uf-u-'+uid()).on('broadcast',{event:'inv'},p=>gotInvite(p.payload)).on('broadcast',{event:'fr'},()=>{refreshFr();toast('🙋 フレンド申請が届きました(🔔通知)')}).on('broadcast',{event:'gift'},p=>giftGot(p.payload)).on('broadcast',{event:'gack'},p=>giftAck(p.payload)).subscribe();joinRoom(room);refreshFr();swInit()}catch(e){sbU=null}}
 function clearPeers(){Object.values(peers).forEach(p=>{if(p.g&&p.g.parent)p.g.parent.remove(p.g)});peers={}}
 function joinRoom(r){if(!sbc)return;if(rch){try{sbc.removeChannel(rch)}catch(e){}}clearPeers();room=r;
  rch=sbc.channel('uf-r-'+r,{config:{broadcast:{self:false}}}).on('broadcast',{event:'m'},p=>onMsg(p.payload)).subscribe(s=>{if(s=='SUBSCRIBED'&&room!=RID)sendPos(1)})}
@@ -2138,6 +2139,95 @@ function peersTick(dt,t){const now=performance.now();
   if(p.g.parent!=gp){if(p.g.parent)p.g.parent.remove(p.g);if(gp){gp.add(p.g);p.first=1}}if(!gp){if(p.pg&&p.pg.parent)p.pg.parent.remove(p.pg);if(p.sg&&p.sg.g&&p.sg.g.parent)p.sg.g.parent.remove(p.sg.g);continue}
   const g=p.g;if(p.first){g.position.set(p.tx,0,p.tz);p.first=0}const q=Math.min(1,dt*10);g.position.x+=(p.tx-g.position.x)*q;g.position.z+=(p.tz-g.position.z)*q;g.position.y=p.j||0;g.rotation.y=p.tr;g.rotation.z=(p.d&&p.m=='g')?1.3:0;
   anim(g,p.v&&!p.d,t);trail(g,dt,p.v&&!p.d);peerPet(p,gp,g,dt,t);peerSum(p,gp,g,dt,t)}}
+// ===== 🔁 プレイヤー入れ替え (設定ボタン10秒長押し) =====
+const upid=()=>{const u=uid();return u?u.replace(/-/g,'').slice(0,10).toUpperCase():''};
+let swCh=null,SW={},swSeen=new Set();
+const swUuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,swSid=/^[0-9A-F]{10}$/;
+function swInit(){try{if(swCh&&sbc)sbc.removeChannel(swCh)}catch(e){}swCh=null;const s=upid();if(!sbc||!s)return;swCh=sbc.channel('uf-sw-'+s,{config:{broadcast:{self:false}}}).on('broadcast',{event:'sw'},p=>{swOn(p.payload).catch(()=>{})}).subscribe();setTimeout(()=>{ivTry().catch(()=>{})},4000)}
+function swTx(to,o){if(!sbc||!swSid.test(to||''))return false;o.to=to;o.from=upid();o.k=(o.rid||'')+Math.random().toString(36).slice(2,9);const c=sbc.channel('uf-sw-'+to,{config:{broadcast:{self:false}}});c.subscribe(s=>{if(s=='SUBSCRIBED'){const f=()=>{try{c.send({type:'broadcast',event:'sw',payload:o})}catch(e){}};f();setTimeout(f,600);setTimeout(f,1500);setTimeout(()=>{try{sbc.removeChannel(c)}catch(e){}},3500)}});return true}
+const swB64=u=>{let s='';const a=new Uint8Array(u);for(let i=0;i<a.length;i+=8192)s+=String.fromCharCode.apply(null,a.subarray(i,i+8192));return btoa(s)};
+const swUnB64=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+async function swKey(code,rid){const e=new TextEncoder(),km=await crypto.subtle.importKey('raw',e.encode(code),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt:e.encode('uf-sw-'+rid),iterations:120000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function swEnc(key,o){const iv=crypto.getRandomValues(new Uint8Array(12)),ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(o)));return swB64(iv)+'.'+swB64(ct)}
+async function swDec(key,s){const [a,b]=String(s).split('.');const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:swUnB64(a)},key,swUnB64(b));return JSON.parse(new TextDecoder().decode(pt))}
+const swOkSes=x=>x&&typeof x.access_token=='string'&&typeof x.refresh_token=='string'&&x.user&&swUuid.test(x.user.id||'')&&x.user.id!=uid();
+const swRnd=()=>String(crypto.getRandomValues(new Uint32Array(1))[0]%1e8).padStart(8,'0');
+function swReset(){clearTimeout(SW.tm);clearTimeout(SW.tm2);SW={}}
+const swSt=m=>{const e=$('sws');if(e)e.textContent=m};
+async function swFlush(){clearTimeout(pt);try{await auth();await push()}catch(e){}return sy=='☁ 同期OK'}
+function swApply(x){if(!x||!x.user)return;SWP=1;clearTimeout(pt);try{localStorage.uf_swp_ts=String(Date.now());localStorage.ufs=JSON.stringify(x);localStorage.ufu=x.user.id;document.cookie='ufb='+encodeURIComponent(x.refresh_token)+';max-age=31536000;path=/;SameSite=Lax';localStorage.uf_swp_pend='1';localStorage.removeItem('uf');localStorage.removeItem('ufn');localStorage.removeItem('uf_swp_in')}catch(e){}toast('🔁 入れ替え完了！再読み込みします');setTimeout(()=>{window.ufRL=1;location.reload()},900)}
+function swBackup(){try{localStorage.ufs_bak=JSON.stringify(ufLs()||ses);localStorage.uf_swp_ts=String(Date.now())}catch(e){}}
+async function swOn(m){
+ if(!m||m.to!=upid()||typeof m.rid!='string'||typeof m.k!='string'||swSeen.has(m.k))return;swSeen.add(m.k);if(swSeen.size>200)swSeen=new Set([...swSeen].slice(-100));
+ if(m.t=='ivj'){await ivJoin(m);return}
+ if(m.t=='iva'){await ivAck(m);return}
+ if(m.t=='req'){
+  if(!swSid.test(m.from||'')||m.from==upid())return;
+  if(mode!='home'||(SW.rid&&SW.rid!=m.rid&&Date.now()-SW.t<90000))return void swTx(m.from,{t:'rej',rid:m.rid,why:'相手は今リクエストを受けられません(ホーム画面で開いてください)'});
+  swReset();SW={rid:m.rid,role:'B',peer:m.from,code:swRnd(),t:Date.now(),fails:0,ap:0};SW.fl=swFlush();
+  SW.tm=setTimeout(()=>{if(SW.rid==m.rid){swReset();sh('md',0);toast('⌛ 入れ替えリクエストが時間切れになりました')}},90000);
+  modal('🔁 入れ替えリクエスト',`<div class="card" style="padding:10px;margin:6px 0;font-weight:900"><b>${esc(String(m.name||'?').slice(0,20))}</b> (Lv.${+m.lv||'?'} / ID ${esc(m.from)}) があなたとの入れ替えを希望しています。<div class="small">承認すると、あなたのプレイヤーは相手の端末へ移り、あなたの端末は相手のプレイヤーになります。知らない人なら「拒否」してください。</div></div><div style="text-align:center;font-weight:900">🔐 承認コード (相手に伝えてください)<div style="font-size:30px;letter-spacing:3px;margin:6px 0">${SW.code.slice(0,4)} ${SW.code.slice(4)}</div></div><div style="text-align:center"><div id="swap" class="btn grn">✅ 承認</div> <div id="swrj" class="btn gry">✖ 拒否</div></div><div id="sws" class="small" style="text-align:center;margin-top:6px"></div>`);
+  $('swrj').onclick=()=>{swTx(m.from,{t:'rej',rid:m.rid,why:'相手が拒否しました'});swReset();sh('md',0)};
+  $('swap').onclick=async()=>{if(SW.rid!=m.rid||SW.ap)return;swSt('データを保存中…');const ok=await SW.fl;if(SW.rid!=m.rid)return;if(!ok){swSt('⚠ オフラインのため中止しました(データ保護)');swTx(m.from,{t:'rej',rid:m.rid,why:'相手がオフラインです'});swReset();return}SW.ap=1;swSt('✅ 承認しました。相手がコードを入力するのを待っています…');swTx(m.from,{t:'wait',rid:m.rid});if(SW.pp)swOn(SW.pp)};
+  return}
+ if(m.rid!=SW.rid||m.from!=SW.peer)return;
+ if(m.t=='wait'&&SW.role=='A'){SW.t=Date.now();clearTimeout(SW.tm);SW.tm=setTimeout(()=>{if(SW.rid==m.rid){swSt('⌛ 時間切れです');swReset()}},120000);
+  const b=$('swbox');if(b)b.innerHTML='<div style="font-weight:900;text-align:center">相手の画面に出ている8けたのコードを入力</div><div class="row" style="justify-content:center"><input id="swc" inputmode="numeric" maxlength="8" style="width:150px;text-align:center;font-size:20px"><div id="swok" class="btn xs grn">確認</div></div>';
+  $('swok').onclick=async()=>{const c=($('swc').value||'').replace(/\D/g,'');if(c.length!=8)return swSt('8けた入力してください');if(!(window.crypto&&crypto.subtle))return swSt('⚠ この環境は暗号機能が使えないため中止しました');swSt('確認中…(数秒かかります)');try{SW.key=await swKey(c,SW.rid);swTx(SW.peer,{t:'proof',rid:SW.rid,p:await swEnc(SW.key,{ok:SW.rid})})}catch(e){swSt('⚠ 失敗しました')}};return}
+ if(m.t=='rej'){swSt('✖ '+String(m.why||'中止されました').slice(0,60));toast('✖ 入れ替えは行われませんでした');swReset();return}
+ if(m.t=='bad'&&SW.role=='A'){swSt('❌ コードが違います。もう一度入力してください');return}
+ if(m.t=='proof'&&SW.role=='B'){
+  if(!SW.ap){SW.pp=m;return}
+  if(SW.sent)return;
+  try{const k=await swKey(SW.code,SW.rid);const o=await swDec(k,m.p);if(!o||o.ok!=SW.rid)throw 0;SW.key=k;SW.sent=1;await auth();const me_=ufLs()||ses;if(!(me_&&me_.access_token&&me_.refresh_token&&me_.user&&me_.user.id))throw new Error('ses');swTx(SW.peer,{t:'sesB',rid:SW.rid,d:await swEnc(k,{ses:me_})});swSt('🔁 データを交換中…')}
+  catch(e){SW.pp=null;SW.fails=(SW.fails||0)+1;if(SW.fails>=3){swTx(SW.peer,{t:'rej',rid:SW.rid,why:'コードを3回まちがえたため中止しました'});swSt('✖ 中止しました');swReset()}else swTx(SW.peer,{t:'bad',rid:SW.rid})}
+  return}
+ if(m.t=='sesB'&&SW.role=='A'&&SW.key&&!SW.got){
+  try{const o=await swDec(SW.key,m.d);if(!swOkSes(o.ses))throw 0;SW.got=1;SW.in=o.ses;try{localStorage.uf_swp_in=JSON.stringify(o.ses)}catch(e){}swBackup();const mine=ufLs()||ses;swTx(SW.peer,{t:'sesA',rid:SW.rid,d:await swEnc(SW.key,{ses:mine})});swSt('🔁 相手の完了を待っています…');clearTimeout(SW.tm2);SW.tm2=setTimeout(()=>{if(SW.rid==m.rid&&!SWP)swSt('⚠ 相手の完了を確認できません。下の「未完了の入れ替えを確定」か「元に戻す」を使ってください。')},25000);swUiRestore()}catch(e){swSt('⚠ データを受け取れませんでした');swReset()}
+  return}
+ if(m.t=='sesA'&&SW.role=='B'&&SW.key&&!SW.done){
+  try{const o=await swDec(SW.key,m.d);if(!swOkSes(o.ses))throw 0;SW.done=1;swBackup();swTx(SW.peer,{t:'done',rid:SW.rid});swSt('✅ 入れ替え中…');SWP=1;clearTimeout(pt);setTimeout(()=>swApply(o.ses),2500)}catch(e){swSt('⚠ データを受け取れませんでした');swReset()}
+  return}
+ if(m.t=='done'&&SW.role=='A'&&SW.in){SWP=1;swApply(SW.in)}
+}
+function swUiRestore(){const b=$('swres');if(!b)return;let h='';try{if(localStorage.uf_swp_in)h+='<div id="swfix" class="btn xs blu">📥 未完了の入れ替えを確定</div> '}catch(e){}try{if(localStorage.ufs_bak)h+='<div id="swbk" class="btn xs gry">↩ 入れ替え前のプレイヤーに戻す</div>'}catch(e){}b.innerHTML=h;const f=$('swfix'),k=$('swbk');if(f)f.onclick=()=>{if(confirm('相手の端末で入れ替えが完了している場合だけ押してください。確定しますか？'))try{swApply(JSON.parse(localStorage.uf_swp_in))}catch(e){toast('失敗しました')}};if(k)k.onclick=()=>{if(confirm('入れ替え前のプレイヤーに戻します(10分以内のみ有効)。相手がすでに入れ替え済みの場合は戻せないことがあります。続けますか？'))try{swApply(JSON.parse(localStorage.ufs_bak))}catch(e){toast('失敗しました')}}}
+function swapUI(){
+ if(mode!='home')return toast('ホーム画面で行ってください');
+ const me_=upid();swReset();
+ modal('🔁 プレイヤー入れ替え',`<div class="card" style="padding:8px 12px;font-weight:900">🆔 あなたのID<div style="font-size:22px;letter-spacing:2px">${me_||'(接続待ち…少し待ってもう一度)'}</div></div><div class="sec">入れ替えたい相手のID</div><div class="row" style="margin:2px 0"><input id="swid" maxlength="10" placeholder="相手のID(10文字)" style="text-transform:uppercase"><div id="swgo" class="btn xs grn">開始</div></div><div class="small">お互いにオンラインで、ホーム画面を開いておいてください。相手が承認し、コードを入力すると、お互いのプレイヤーが入れ替わります。</div><div id="swbox" style="margin:8px 0"></div><div id="sws" class="small" style="text-align:center;font-weight:900"></div><div id="swres" style="text-align:center;margin-top:6px"></div>`);
+ swUiRestore();
+ $('swgo').onclick=async()=>{const to=($('swid').value||'').trim().toUpperCase();if(!swSid.test(to))return swSt('IDは英数字10文字です');if(to==upid())return swSt('自分のIDです');if(!upid()||!swCh)return swSt('接続中です。少し待ってください');if(!(window.crypto&&crypto.subtle))return swSt('⚠ この環境は暗号機能が使えないため中止しました');
+  swSt('データを保存中…');const ok=await swFlush();if(!ok)return swSt('⚠ オフラインのため中止しました(データ保護)');
+  const rid=crypto.getRandomValues(new Uint32Array(2)).join('-');swReset();SW={rid,role:'A',peer:to,t:Date.now()};SW.tm=setTimeout(()=>{if(SW.rid==rid){swSt('⌛ 相手の応答がありません');swReset()}},90000);
+  if(!swTx(to,{t:'req',rid,name:D.name,lv:D.lv}))return swSt('送信できませんでした');swSt('📨 リクエストを送りました。相手の承認を待っています…(90秒)')}}
+// ===== 📨 友だち招待 (LINE共有リンク + 暗号つき参加通知 + 段階報酬) =====
+const IVR=[[2,10000,0],[3,20000,10],[5,40000,30],[7,70000,50],[10,150000,100]];
+const IVA='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789',ivRe=/^([0-9A-F]{10})-([0-9A-Za-z]{12})$/;
+const ivS=()=>{const v=D.iv||(D.iv={});if(!v.k)v.k=Array.from(crypto.getRandomValues(new Uint8Array(12)),x=>IVA[x%IVA.length]).join('');if(!Array.isArray(v.l))v.l=[];if(!Array.isArray(v.cl))v.cl=[];return v};
+try{const q=new URLSearchParams(location.search).get('inv');if(q&&ivRe.test(q)){localStorage.uf_inv_in=q;history.replaceState(null,'',location.pathname)}}catch(e){}
+function ivApply(){let q='';try{q=localStorage.uf_inv_in||''}catch(e){}if(!q)return;const m=ivRe.exec(q);try{localStorage.removeItem('uf_inv_in')}catch(e){}
+ if(!m||D.ivf||(D.lv||1)>1||(D.ts&&(D.coin||0)>0&&D.lv>1))return;
+ if(m[1]==upid()||(D.iv&&D.iv.k==m[2]))return toast('自分の招待リンクは使えません');
+ D.ivf={s:m[1],k:m[2],ack:0};save();toast('📨 招待リンクから参加しました！Lv2になると、招待した人に報酬が入ります')}
+async function ivJoin(m){const v=ivS();if(!swSid.test(m.from||'')||typeof m.d!='string')return;
+ try{const k=await swKey(v.k,upid()),o=await swDec(k,m.d);
+  if(!o||!swUuid.test(o.u||'')||o.u==uid()||o.u.replace(/-/g,'').slice(0,10).toUpperCase()!=m.from)return;
+  if(!v.l.some(x=>x.u==o.u)){if((+o.lv||0)<2||v.l.length>=50)return;v.l.push({u:o.u,n:String(o.n||'?').slice(0,20),t:Date.now()});save();SE.pon();toast('📨 招待した '+String(o.n||'?').slice(0,20)+' さんが参加！('+v.l.length+'人)')}
+  swTx(m.from,{t:'iva',rid:m.rid,d:await swEnc(k,{ok:o.u})})}catch(e){}}
+async function ivAck(m){const f=D.ivf;if(!f||f.ack||m.from!=f.s||typeof m.d!='string')return;try{const o=await swDec(await swKey(f.k,f.s),m.d);if(o&&o.ok==uid()){f.ack=1;save()}}catch(e){}}
+async function ivTry(){const f=D.ivf;if(!f||f.ack||SWP||!swCh||!uid()||(D.lv||1)<2||!(window.crypto&&crypto.subtle))return;
+ const k=await swKey(f.k,f.s);swTx(f.s,{t:'ivj',rid:crypto.getRandomValues(new Uint32Array(2)).join('-'),d:await swEnc(k,{u:uid(),n:D.name,lv:D.lv})})}
+setInterval(()=>{ivTry().catch(()=>{})},90000);
+function ivLink(){const s=upid();if(!s)return '';return location.origin+location.pathname+'?inv='+s+'-'+ivS().k}
+function inviteUI(){
+ if(!(window.crypto&&crypto.subtle))return toast('この環境では招待を使えません');
+ const v=ivS(),n=v.l.length,url=ivLink();save();
+ const rows=IVR.map(r=>{const ok=n>=r[0],got=v.cl.includes(r[0]);return `<div class="card" style="padding:8px 10px;margin:5px 0;display:flex;align-items:center;gap:8px;font-weight:900"><div style="flex:1">👥 ${r[0]}人 ${ok?'✅':'('+n+'/'+r[0]+')'}<div class="small">🪙${r[1]}${r[2]?' ＋ 🏅'+r[2]:''}</div></div>${got?'<div class="btn xs gry dis">受取済み</div>':`<div class="btn xs ${ok?'grn':'gry dis'}" data-ivc="${r[0]}">受け取る</div>`}</div>`}).join('');
+ modal('📨 友だち招待',`<div class="card" style="padding:8px 12px;font-weight:900">招待リンクからはじめた友だちが <b>Lv2</b> になると、あなたに報酬！<div class="small">いま <b>${n}人</b> 参加 / 同じ人は1回だけ。お互いオンラインのときに反映されます。</div></div><div style="text-align:center;margin:8px 0">${url?'<div id="ivline" class="btn grn">💬 LINEで招待を送る</div> <div id="ivcp" class="btn xs gry">📋 リンクをコピー</div>':'<div class="small">接続中です。少し待ってからもう一度開いてください</div>'}</div>${url?'<input id="ivurl" readonly value="'+esc(url)+'" style="width:100%;box-sizing:border-box;font-size:11px">':''}<div class="sec">🎁 達成報酬</div>${rows}<div id="ivs" class="small" style="text-align:center"></div>`);
+ const msg='UNKNOWN FLOOR で一緒にあそぼう！🗼 このリンクからはじめよう👇\n'+url;
+ if($('ivline'))$('ivline').onclick=()=>{const u='https://line.me/R/share?text='+encodeURIComponent(msg);if(!window.open(u,'_blank'))location.href=u};
+ if($('ivcp'))$('ivcp').onclick=async()=>{let ok=0;try{await navigator.clipboard.writeText(url);ok=1}catch(e){}if(!ok){try{const i=$('ivurl');i.select();ok=document.execCommand('copy')}catch(e){}}const s=$('ivs');if(s)s.textContent=ok?'📋 コピーしました':'下のリンクを長押ししてコピーしてください'};
+ $('mb').querySelectorAll('[data-ivc]').forEach(b=>b.onclick=()=>{const th=+b.dataset.ivc,r=IVR.find(x=>x[0]==th),v=ivS();if(!r||v.l.length<th||v.cl.includes(th))return;v.cl.push(th);D.coin=(D.coin||0)+r[1];if(r[2]){D.tw=D.tw||{};D.tw.med=(D.tw.med||0)+r[2]}save();try{updInfo()}catch(e){}SE.pon();toast('🎁 '+th+'人達成！ 🪙'+r[1]+(r[2]?' 🏅'+r[2]:'')+' ゲット');inviteUI()})}
 function ping(fid,ev,pl){if(!sbc)return false;const c=sbc.channel('uf-u-'+fid);c.subscribe(s=>{if(s=='SUBSCRIBED'){c.send({type:'broadcast',event:ev,payload:pl});setTimeout(()=>c.send({type:'broadcast',event:ev,payload:pl}),500);setTimeout(()=>{try{sbc.removeChannel(c)}catch(e){}},1800)}});return true}
 function inviteFriend(fid){if(!ping(fid,'inv',{room,name:D.name}))return toast('オンライン接続中です。少し待ってからもう一度');toast('📨 招待を送りました(相手の🔔通知に届きます)')}
 function gotInvite(p){if(!p||!p.room||p.room==room)return;addInvite(p);SE.pon();lineNote('📨',p.name,'ルームに招待されました。タップして確認')}
@@ -2394,7 +2484,7 @@ function twChest(f,done){
  Q('.tcsk').onclick=()=>{SE.btn();fin()};
  Q('.tcok').onclick=()=>{SE.btn();TM.forEach(clearTimeout);o.remove();done&&done()}}
 // 🗼 終了ボタン: 今の階をクリア扱いにして、報酬とAPをもらって終了
-function twEnd(){if(mode!='game'||!TW||twEnding)return;const f=st+1;
+function twEnd(){if(mode!='game'||!TW||twEnding||st<5)return;const f=st+1;
  if(!confirm('🗼 ここで終了しますか？\n今の'+f+'階をクリア扱いにして、'+f+'階ぶんの報酬とAPがもらえます。'+(f%5==0?'\n🎁 特大ボーナスチェストもゲット！':'')))return;
  twEnding=1;mode='trans';sh('warn',0);sh('capb',0);cap=0;capT=0;me.rotation.z=0;sumT+=tm;
  const wk=wkey();if(D.tw.wk!=wk){D.tw.wk=wk;D.tw.wb=0}D.tw.wb=Math.max(D.tw.wb||0,f);
@@ -2418,7 +2508,7 @@ function twWUpd(first){const o=$('twp');if(!o)return;const f=twWf,d=twDn[f]||{},
   rows='<div class="twwr ok"><em>✔</em><span>'+esc(D.name)+'</span></div>'+pl.map(q=>'<div class="twwr'+(d[q.u]?' ok':'')+'"><em>'+(d[q.u]?'✔':'⏳')+'</em><span>'+esc(q.n||'?')+'</span></div>').join('');
  if(first||!$('twwl')){const k=twWk;o.innerHTML=`<div class="twrays"></div><div class="twfl">${f}<small>F</small></div><div class="twh1">🗼 ${f}階 クリア！</div><div class="twwk">${k&&TWD[k]?TWD[k][0]+' '+TWD[k][1]+' Lv'+TWP[k]+' をえらびました':'えらびました'}</div><div class="twh2">⏳ 仲間を待っています… <span id="twwc">${n-w}/${n}</span></div><div class="twwl" id="twwl">${rows}</div><div class="twh3">全員えらび終わると、次の階がはじまります</div>`}
  else{$('twwl').innerHTML=rows;const c=$('twwc');if(c)c.textContent=(n-w)+'/'+n}}
-function twhUpd(){let b_=$('twe');if(!b_){b_=document.createElement('div');b_.id='twe';b_.className='btn xs grn';b_.innerHTML='<b>🗼</b><small>終了</small>';b_.onclick=()=>{SE.btn();twEnd()};$('hud').appendChild(b_)}b_.classList.toggle('hide',!TW);let e=$('twh');if(!e){e=document.createElement('div');e.id='twh';e.className='pill';$('hud').appendChild(e)}e.classList.toggle('hide',!TW);if(!TW)return;e.innerHTML='🗼 <b>'+(st+1)+'階</b> '+Object.keys(TWD).filter(k=>TWP[k]>0).map(k=>TWD[k][0]+TWP[k]).join(' ')}
+function twhUpd(){let b_=$('twe');if(!b_){b_=document.createElement('div');b_.id='twe';b_.className='btn xs grn';b_.innerHTML='<b>🗼</b><small>終了</small>';b_.onclick=()=>{SE.btn();twEnd()};$('hud').appendChild(b_)}b_.classList.toggle('hide',!TW||mode!='game'||st<5);let e=$('twh');if(!e){e=document.createElement('div');e.id='twh';e.className='pill';$('hud').appendChild(e)}e.classList.toggle('hide',!TW);if(!TW)return;e.innerHTML='🗼 <b>'+(st+1)+'階</b> '+Object.keys(TWD).filter(k=>TWP[k]>0).map(k=>TWD[k][0]+TWP[k]).join(' ')}
 function twReward(quit){const clear=st,rows=[];if(clear<=0&&quit)return'';const best=Math.max(D.tw.best||0,clear),nb=clear>(D.tw.best||0);D.tw.best=best;D.tw.runs=(D.tw.runs||0)+1;
  let coins=0;for(let i=1;i<=clear;i++)coins+=20+i*4;coins=Math.round(coins*(1+.25*TWP.coin));D.coin+=coins;const first=D.tw.day!=td_();let med=clear+(first&&clear>0?3:0);D.tw.med=(D.tw.med||0)+med;if(first)D.tw.day=td_();
  npAdd(clear*6);if(clear>0)mq('tw');
@@ -3237,7 +3327,8 @@ const evPSM=()=>`<svg viewBox="0 0 200 230" preserveAspectRatio="xMidYMid slice"
 const MPAY=5000;
 // ★MODの追加: ここに {id,n,d,pr,c:[色3つ],rw:[報酬スキンID×3(省略可)],onStart(){}} を足すだけ
 const MODS=[
- {id:'kraken',n:'🦑 A kraken wanders the abyss',d:'深海に巨大クラーケン！10本の足の衝撃波をジャンプでかわし、6つのチェックポイントを1人で突破せよ。レーザーにも注意！',pr:90000,c:['#1ec8ff','#ff3a6a','#041a33'],rw:[]}
+ {id:'kraken',n:'🦑 A kraken wanders the abyss',d:'深海に巨大クラーケン！10本の足の衝撃波をジャンプでかわし、6つのチェックポイントを1人で突破せよ。レーザーにも注意！',pr:90000,c:['#1ec8ff','#ff3a6a','#041a33'],rw:[]},
+ {id:'sphere',n:'🌐 3D Sphere Maze',d:'迷路が球の内側に！上も横も迷路の神秘的な世界。ゴールの赤い光は中心を貫いて長くのびる。迷路はステージ3の約3倍、ランダム生成。怪物4体が周回し、CPU4人と一緒に、2人でゴールしよう！天井はないよ。',pr:115000,c:['#b86bff','#ff3a6a','#0a0430'],rw:[]}
 ];
 let modSel=0,modRun=0,modGuest=0,modChk=null,modBusy=0,modFT=0,modTab=0,mpc=0;
 const mdOwn=()=>D.mods||(D.mods=[]),mdClr=()=>D.modc||(D.modc=[]);
@@ -3438,6 +3529,116 @@ function krTick(dt,t){
 {const s1=start;start=function(s){const r=s1.apply(this,arguments);krOn=0;if(modRun=='kraken'&&!TW){try{krInit()}catch(e){console.error(e);krOn=0}}return r}}
 {const m0=setMode;setMode=function(m){if(krFar&&m!='game'&&m!='trans'){krFar=0;C.far=100;C.updateProjectionMatrix();try{$('mm').style.display='';const sp=$('come').querySelector('span');if(sp)sp.textContent='カモン';$('dash').classList.remove('lo')}catch(e){}}return m0.apply(this,arguments)}}
 {const r1=result;result=function(){const r=r1.apply(this,arguments);krOn=0;return r}}
+// ===== 🌐 3D Sphere Maze MOD (球の内側の迷路・2人でゴール) =====
+//PURE-BEGIN
+const SPN=17,SPR=78,SPH=7;
+function sphGraph(N){const id=new Map(),cells=[];for(let x=0;x<N;x++)for(let y=0;y<N;y++)for(let z=0;z<N;z++)if(x==0||y==0||z==0||x==N-1||y==N-1||z==N-1){id.set(x+','+y+','+z,cells.length);cells.push([x,y,z])}
+ const D6=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],nb=cells.map(c=>{const r=[];for(const d of D6){const k=(c[0]+d[0])+','+(c[1]+d[1])+','+(c[2]+d[2]);if(id.has(k))r.push(id.get(k))}return r});return{cells,nb}}
+const sphPt=(a,b,c)=>{const x2=a*a,y2=b*b,z2=c*c,p=[a*Math.sqrt(1-y2/2-z2/2+y2*z2/3),b*Math.sqrt(1-z2/2-x2/2+z2*x2/3),c*Math.sqrt(1-x2/2-y2/2+x2*y2/3)],l=Math.hypot(p[0],p[1],p[2])||1;return[p[0]/l,p[1]/l,p[2]/l]};
+function sphMaze(g,r){const n=g.cells.length,vis=new Uint8Array(n),open=new Set(),key=(a,b)=>a<b?a*8192+b:b*8192+a,st=[0];vis[0]=1;
+ while(st.length){const a=st[st.length-1],c=g.nb[a].filter(b=>!vis[b]);if(!c.length){st.pop();continue}const b=c[(r()*c.length)|0];vis[b]=1;open.add(key(a,b));st.push(b)}
+ const all=[];g.nb.forEach((l,a)=>l.forEach(b=>{if(a<b&&!open.has(key(a,b)))all.push([a,b])}));
+ for(let i=0,m=Math.floor(n*.07);i<m&&all.length;i++){const j=(r()*all.length)|0,e=all.splice(j,1)[0];open.add(key(e[0],e[1]))}
+ return{open,key,walls:all}}
+const sphBfs=(op,s)=>{const d=new Int32Array(op.length).fill(-1),q=[s];d[s]=0;for(let h=0;h<q.length;h++){const a=q[h];for(const b of op[a])if(d[b]<0){d[b]=d[a]+1;q.push(b)}}return d};
+function sphPath(op,a,b){if(a==b)return[];const par=new Int32Array(op.length).fill(-1);par[a]=a;const q=[a];for(let h=0;h<q.length;h++){const x=q[h];if(x==b)break;for(const y of op[x])if(par[y]<0){par[y]=x;q.push(y)}}if(par[b]<0)return[];const p=[];for(let x=b;x!=a;x=par[x])p.push(x);return p.reverse()}
+//PURE-END
+let sphOn=0,SP=null;
+const _sa=new T.Vector3(),_sb=new T.Vector3(),_sc=new T.Vector3(),_sm=new T.Matrix4(),_sn=new T.Matrix4();
+const sphUp=(P,o)=>o.copy(P).multiplyScalar(-1/P.length());
+function sphPlace(o,P,F){const up=sphUp(P,_sa),f=_sb.copy(F).addScaledVector(up,-F.dot(up));if(f.lengthSq()<1e-8)f.set(1,0,0).addScaledVector(up,-up.x);f.normalize();_sc.crossVectors(up,f);_sm.makeBasis(_sc,up,f);o.quaternion.setFromRotationMatrix(_sm);o.position.copy(P)}
+function sphMove(a,dt){let rem=a.sp*dt;while(rem>0&&a.path.length){const Tg=SP.pc[a.path[0]],d=a.P.distanceTo(Tg);if(d<=rem){a.P.copy(Tg);a.cell=a.path.shift();rem-=d}else{a.F.copy(Tg).sub(a.P).normalize();a.P.addScaledVector(a.F,rem).setLength(SPR);rem=0}}}
+function sphRepath(o,target){const K=SP,from=o.path.length?o.path[0]:o.cell;o.path=(o.path.length?[from]:[]).concat(sphPath(K.op,from,target))}
+const sphMon=col=>{const g=new T.Group(),m=new T.MeshLambertMaterial({color:col,emissive:col,emissiveIntensity:.35}),b=new T.Mesh(new T.SphereGeometry(1.2,16,12),m);b.position.y=1.3;g.add(b);[-.45,.45].forEach(x=>{const e=new T.Mesh(new T.SphereGeometry(.28,10,8),new T.MeshBasicMaterial({color:0xffffff}));e.position.set(x,1.6,.95);g.add(e);const p=new T.Mesh(new T.SphereGeometry(.13,8,6),new T.MeshBasicMaterial({color:0xff0000}));p.position.set(x,1.6,1.17);g.add(p);const h=new T.Mesh(new T.ConeGeometry(.22,.8,6),m);h.position.set(x*1.5,2.6,0);h.rotation.z=-x*.9;g.add(h)});return g};
+const sphTan=(P,o)=>{const up=sphUp(P,_sa);o.set(1,0,0);if(Math.abs(up.x)>.9)o.set(0,0,1);o.addScaledVector(up,-o.dot(up)).normalize();return o};
+function sphInit(){
+ sphOn=1;krFar=1;const r=rng(SEEDV+9191),N=SPN,R=SPR,g=sphGraph(N),n=g.cells.length,M=sphMaze(g,r),op=g.nb.map((l,a)=>l.filter(b=>M.open.has(M.key(a,b))));
+ const pc=g.cells.map(c=>{const p=sphPt(c[0]/(N-1)*2-1,c[1]/(N-1)*2-1,c[2]/(N-1)*2-1);return new T.Vector3(p[0],p[1],p[2]).setLength(R)});
+ const s0=(r()*n)|0,d0=sphBfs(op,s0);let gl=s0;d0.forEach((d,i)=>{if(d>d0[gl])gl=i});const dg=sphBfs(op,gl);
+ const keep=me;hotel.children.slice().forEach(c=>{if(c!==keep&&!c.isLight){c.traverse(o=>{if(o.geometry)o.geometry.dispose()});hotel.remove(c)}});
+ S.background=new T.Color(0x07041a);S.fog=null;C.far=600;C.updateProjectionMatrix();
+ hotel.add(new T.HemisphereLight(0xb8a0ff,0x201040,.7));hotel.add(new T.PointLight(0xffe8c0,1.5,0,0));
+ // 球の内側の床+きらめくグリッド / 中心の光の玉
+ const cv=document.createElement('canvas');cv.width=1024;cv.height=512;const cx=cv.getContext('2d'),gr=cx.createLinearGradient(0,0,0,512);gr.addColorStop(0,'#2a1060');gr.addColorStop(.5,'#0f2a6a');gr.addColorStop(1,'#3a1060');cx.fillStyle=gr;cx.fillRect(0,0,1024,512);cx.strokeStyle='rgba(170,130,255,.4)';cx.lineWidth=2;for(let i=0;i<=32;i++){cx.beginPath();cx.moveTo(i*32,0);cx.lineTo(i*32,512);cx.stroke()}for(let j=0;j<=16;j++){cx.beginPath();cx.moveTo(0,j*32);cx.lineTo(1024,j*32);cx.stroke()}
+ const tx=new T.CanvasTexture(cv);hotel.add(new T.Mesh(new T.SphereGeometry(R+.2,96,64),new T.MeshLambertMaterial({map:tx,emissiveMap:tx,emissive:0xffffff,emissiveIntensity:.55,side:T.BackSide})));
+ hotel.add(new T.Mesh(new T.SphereGeometry(3,24,16),new T.MeshBasicMaterial({color:0xfff2b0,fog:false})));
+ hotel.add(new T.Mesh(new T.SphereGeometry(8,24,16),new T.MeshBasicMaterial({color:0xffd070,transparent:true,opacity:.16,depthWrite:false,blending:T.AdditiveBlending,fog:false})));
+ // 壁(InstancedMeshで1回描画) / 当たり判定用の線分
+ const walls=M.walls,im=new T.InstancedMesh(new T.BoxGeometry(1,1,1),new T.MeshLambertMaterial({color:0xffffff,emissive:0x221140}),walls.length),col=new T.Color(),ws=[],cw=g.nb.map(()=>[]);
+ walls.forEach((w,i)=>{const pa=pc[w[0]],pb=pc[w[1]],m=pa.clone().add(pb).setLength(R),y=m.clone().normalize(),t=pb.clone().sub(pa);t.addScaledVector(y,-t.dot(y)).normalize();const wd=pa.distanceTo(pb)*1.1,z=new T.Vector3().crossVectors(t,y);
+  _sm.makeBasis(t,y,z).multiply(_sn.makeScale(.55,SPH,wd)).setPosition(m.clone().addScaledVector(y,-SPH/2));im.setMatrixAt(i,_sm);im.setColorAt(i,col.setHSL((((y.x*.3+y.y*.2+y.z*.25)%1)+1)%1,.65,.55));
+  ws.push([m.clone().addScaledVector(z,wd/2),m.clone().addScaledVector(z,-wd/2)]);cw[w[0]].push(i);cw[w[1]].push(i)});
+ im.instanceMatrix.needsUpdate=true;if(im.instanceColor)im.instanceColor.needsUpdate=true;im.frustumCulled=false;hotel.add(im);
+ // ゴールの赤い光(中心を貫いて長くのびる)
+ const gp=pc[gl].clone(),gu=gp.clone().multiplyScalar(-1/R),L=R*1.75,mb=(c,o)=>new T.MeshBasicMaterial({color:c,transparent:true,opacity:o,depthWrite:false,blending:T.AdditiveBlending,side:T.DoubleSide,fog:false}),Y=new T.Vector3(0,1,0);
+ [[.6,.45],[.2,.9]].forEach(a=>{const b=new T.Mesh(new T.CylinderGeometry(a[0],a[0],L,12,1,true),mb(0xff2a2a,a[1]));b.position.copy(gp).addScaledVector(gu,L/2);b.quaternion.setFromUnitVectors(Y,gu);hotel.add(b)});
+ const rg=new T.Mesh(new T.TorusGeometry(3.4,.22,8,32),new T.MeshBasicMaterial({color:0xff3030}));rg.position.copy(gp).addScaledVector(gu,.3);rg.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),gu);hotel.add(rg);
+ const gl_=new T.PointLight(0xff3030,2,45);gl_.position.copy(gp).addScaledVector(gu,3);hotel.add(gl_);
+ // CPU 4人
+ const nm=['ポコ','ミーナ','ゴン','リリ'],pool=SKN.map((q,i)=>i).filter(i=>!SKN[i].g),cpus=[];
+ for(let i=0;i<4;i++){const o=av(pool[(r()*pool.length)|0]);label(o,nm[i]);hotel.add(o);cpus.push({g:o,cell:s0,P:pc[s0].clone(),F:sphTan(pc[s0],new T.Vector3()),path:[],sp:4.3+i*.15,prev:-1,rt:0,st:0})}
+ // 怪物 4体(周回)
+ const mons=[],mc=[0xaa2255,0x5522aa,0x22aa88,0xaa7722];
+ for(let i=0;i<4;i++){let c,k=0;do{c=(r()*n)|0}while(d0[c]<40&&++k<400);const wp=[];for(let j=0;j<4;j++)wp.push((r()*n)|0);const o={g:sphMon(mc[i]),cell:c,P:pc[c].clone(),F:sphTan(pc[c],new T.Vector3()),path:[],sp:3.4,wp,wi:0,chase:0,rt:0};hotel.add(o.g);mons.push(o)}
+ E.forEach(e=>{try{hotel.remove(e.g)}catch(x){}});E=[];FK=[];TR=[];trL=0;buildTeam();
+ const P=pc[s0].clone(),F=sphTan(P,new T.Vector3());
+ SP={op,nb:g.nb,pc,cw,ws,dg,gl,gp,s0,cells:n,P,F,CF:F.clone(),up:new T.Vector3(),cell:s0,cpus,mons,t:0,dash:0,inv:0,cd:0,call:0,hold:0,hint:0,ly:0,stp:0,amb:5,v:new T.Vector3(),Rr:new T.Vector3()};
+ dsE=100;dsT=0;pit=.14;yaw=0;jy=vy=0;goalP.copy(gp);sphUp(P,SP.up);sphPlace(me,P,F);pos.copy(P);
+ try{$('mm').style.display='none'}catch(e){}
+ sphCam();camP.copy(tP);camL.copy(tL);
+ toast('🌐 球の内側の迷路！上も横も迷路…2人で赤い光のゴールへ！(視点: ドラッグ/R・T　⚡ダッシュ　📣CPUをよぶ)')}
+function sphCam(){const K=SP,up=K.up,a=pit,s=6.2;
+ if(a>=0){const ca=Math.cos(a);tP.copy(K.P).addScaledVector(K.CF,-ca*s).addScaledVector(up,2+Math.sin(a)*s);tL.copy(K.P).addScaledVector(up,1.6)}
+ else{tP.copy(K.P).addScaledVector(K.CF,-s*.8).addScaledVector(up,2.1);const b=-a;tL.copy(tP).addScaledVector(K.CF,Math.cos(b)*60).addScaledVector(up,Math.sin(b)*60)}
+ C.up.copy(up)}
+function sphCollide(K){const P=K.P;let c=K.cell,bd=P.distanceToSquared(K.pc[c]);for(let k=0;k<3;k++){let ch=0;for(const b of K.nb[c]){const d=P.distanceToSquared(K.pc[b]);if(d<bd){bd=d;c=b;ch=1}}if(!ch)break}K.cell=c;
+ const lst=[K.cw[c]];for(const b of K.nb[c])lst.push(K.cw[b]);
+ for(let it=0;it<2;it++)for(const Ls of lst)for(const wi of Ls){const w=K.ws[wi],ab=_sa.copy(w[1]).sub(w[0]),t=Math.max(0,Math.min(1,_sb.copy(P).sub(w[0]).dot(ab)/ab.lengthSq())),cp=_sc.copy(w[0]).addScaledVector(ab,t),d=P.distanceTo(cp);if(d<.85&&d>1e-4)P.addScaledVector(_sb.copy(P).sub(cp),(.85-d)/d)}
+ P.setLength(SPR)}
+function sphCaught(){const K=SP,f=smF();pn(D.name+' が怪物につかまった');
+ if(f&&f.dc&&smDc){smDc=0;const dd=av(D.skin);sphPlace(dd,K.P,K.F);hotel.add(dd);setTimeout(()=>hotel.remove(dd),2400);let c=K.cell;for(let i=0;i<2;i++){const nx=K.op[c].filter(b=>K.dg[b]<K.dg[c]);if(!nx.length)break;c=nx[0]}K.P.copy(K.pc[c]);K.cell=c;K.inv=3;flash('#66ffee');SE.come();confetti(30);toast('🪞 分身が身代わりに！ 前へワープ');return}
+ smDc=0;die()}
+function sphTick(dt,t){const K=SP;if(!K)return;
+ if(intro>0){introTick(dt,t);sphCam();return}
+ tm+=dt;K.t+=dt;const up=sphUp(K.P,K.up);
+ {const dy=yaw-K.ly;K.ly=yaw;if(dy)K.CF.applyAxisAngle(up,dy);K.CF.addScaledVector(up,-K.CF.dot(up)).normalize()}
+ const ix=mv.x*D.sens+((keys.KeyD||keys.ArrowRight)?1:0)-((keys.KeyA||keys.ArrowLeft)?1:0),iz=mv.y*D.sens+((keys.KeyS||keys.ArrowDown)?1:0)-((keys.KeyW||keys.ArrowUp)?1:0);
+ const v=K.v.set(0,0,0).addScaledVector(K.Rr.crossVectors(K.CF,up).normalize(),ix).addScaledVector(K.CF,-iz),l=v.length(),dm=smF()?smF().dash:1;
+ if(K.dash){dsE-=25*dt/dm;if(dsE<=0){dsE=0;K.dash=0}}else dsE=Math.min(100,dsE+12*dt);
+ if(K.inv>0)K.inv-=dt;if(K.cd>0)K.cd-=dt;if(K.call>0)K.call-=dt;
+ {const f=$('dsf');if(f)f.style.width=dsE+'%';$('dash').classList.toggle('lo',dsE<15&&!K.dash);const sp=$('come').querySelector('span');if(sp)sp.textContent=K.call>0?'よんでる':K.cd>0?Math.ceil(K.cd)+'秒':'よぶ'}
+ let mvg=false;if(l>.1){K.P.addScaledVector(v,5*dt*(K.dash?1.7:1)*Math.min(1,l)/l).setLength(SPR);K.F.copy(v).divideScalar(l);mvg=true}
+ sphCollide(K);sphUp(K.P,up);K.CF.addScaledVector(up,-K.CF.dot(up)).normalize();
+ if(keys.KeyR)pit=Math.max(-1.25,pit-1.4*dt);if(keys.KeyT)pit=Math.min(1.2,pit+1.4*dt);
+ sphPlace(me,K.P,K.F);pos.copy(K.P);anim(me,mvg,t);pl.position.copy(K.P).addScaledVector(up,2.6);trail(me,dt,mvg);
+ if(mvg){K.stp-=dt;if(K.stp<0){K.stp=.3;SE.step()}}K.amb-=dt;if(K.amb<0){K.amb=rnd(4,9);SE.creak()}
+ // CPU
+ for(const c of K.cpus){if(K.call>0){c.rt-=dt;if(c.rt<=0||!c.path.length){c.rt=1.5;sphRepath(c,K.cell)}}
+  else if(!c.path.length&&K.dg[c.cell]>0){const o=K.op[c.cell],dn=o.filter(b=>K.dg[b]<K.dg[c.cell]),ot=o.filter(b=>b!=c.prev),pl_=ot.length?ot:o;c.prev=c.cell;c.path=[dn.length&&Math.random()<.7?dn[0]:pl_[(Math.random()*pl_.length)|0]]}
+  const m=c.path.length>0;if(m)sphMove(c,dt);sphPlace(c.g,c.P,c.F);anim(c.g,m,t)}
+ // 怪物(周回→近づくと追跡)
+ for(const o of K.mons){const d=o.P.distanceTo(K.P);o.chase=K.inv<=0&&d<(o.chase?26:18);
+  if(o.chase){o.sp=4.3;o.rt-=dt;if(o.rt<=0||!o.path.length){o.rt=.6;sphRepath(o,K.cell)}}
+  else{o.sp=3.4;if(!o.path.length){if(o.cell==o.wp[o.wi])o.wi=(o.wi+1)%o.wp.length;o.path=sphPath(K.op,o.cell,o.wp[o.wi])}}
+  if(o.path.length)sphMove(o,dt);sphPlace(o.g,o.P,o.F);o.g.children[0].position.y=1.3+Math.sin(K.t*5+o.wi)*.12;
+  for(const c of K.cpus)if(o.P.distanceTo(c.P)<1.4){c.P.copy(K.pc[K.s0]);c.cell=K.s0;c.path=[];c.prev=-1}
+  if(K.inv<=0&&d<1.5)return sphCaught()}
+ // 2人でゴール
+ const dgm=K.P.distanceTo(K.gp),inC=K.cpus.filter(c=>c.P.distanceTo(K.gp)<3.6).length;
+ if(dgm<3.6&&inC>=1){K.hold+=dt;if(K.hold>=1.2){SE.clear();confetti(120);flash('#ff7ae8');return result(true)}}else K.hold=0;
+ if(dgm<3.6&&!inC){K.hint+=dt;if(K.hint>3){K.hint=-9;toast('👥 2人でゴール！CPUの仲間を待とう(📣でよべる)')}}
+ try{hudUpd(t)}catch(e){}
+ {const gv=_sa.copy(K.gp).sub(K.P);gv.addScaledVector(up,-gv.dot(up));const ang=Math.atan2(gv.dot(K.Rr),gv.dot(K.CF))*57.3,ar=$('arr');if(ar)ar.style.transform='rotate('+ang+'deg)'}
+ $('md2').textContent='🌐 ゴールまで '+Math.round(dgm)+'m　👥 ゴールのCPU '+inC+'/4　(あなた+CPU1人以上で脱出)';
+ sphCam()}
+{const g1=game;game=function(dt,t){if(!sphOn)return g1.apply(this,arguments);try{sphTick(dt,t)}catch(e){console.error(e)}}}
+{const c1=camGame;camGame=function(){return sphOn?(SP&&sphCam()):c1.apply(this,arguments)}}
+{const s2=start;start=function(s){const r=s2.apply(this,arguments);sphOn=0;if(modRun=='sphere'&&!TW){try{sphInit()}catch(e){console.error(e);sphOn=0}}return r}}
+{const m1=setMode;setMode=function(m){if(sphOn&&m!='game'&&m!='trans'){sphOn=0;try{C.up.set(0,1,0);const ar=$('arr');if(ar)ar.style.transform=''}catch(e){}}return m1.apply(this,arguments)}}
+{const r2=result;result=function(){const r=r2.apply(this,arguments);sphOn=0;try{C.up.set(0,1,0)}catch(e){}return r}}
+$('dash').addEventListener('click',e=>{if(!sphOn)return;e.stopImmediatePropagation();const K=SP;if(!K||mode!='game'||intro>0)return;if(K.dash){K.dash=0;return}if(dsE<15)return toast('⚡ ダッシュ回復中…');K.dash=1;SE.come();flash('#cc99ff')},true);
+$('come').addEventListener('click',e=>{if(!sphOn)return;e.stopImmediatePropagation();const K=SP;if(!K||mode!='game'||intro>0)return;if(K.cd>0)return toast('📣 あと'+Math.ceil(K.cd)+'秒');K.cd=18;K.call=10;SE.come();flash('#9affff');toast('📣 CPUの仲間をよんだ！(10秒)')},true);
+
 $('dash').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagation();const K=KR;if(!K||mode!='game'||intro>0)return;if(K.dash){K.dash=0;return}if(dsE<15)return toast('⚡ ダッシュ回復中…');K.dash=1;SE.come();flash('#66ffee')},true);
 $('come').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagation();const K=KR;if(!K||mode!='game'||intro>0||K.bar>0)return;if(K.barCd>0)return toast('🛡 バリア回復中… '+Math.ceil(K.barCd)+'秒');K.bar=3;K.barCd=12;SE.come();flash('#9affff');toast('🛡 バリア展開！(3秒)')},true);
 cvs.addEventListener('pointerdown',e=>{krLY=e.clientY});
@@ -3481,7 +3682,7 @@ function ufDedupe(p,m,j){if(m!='GET'||!Array.isArray(j)||j.length<2||!/^\/rest\/
 // ===== 🔮 おわびオーブ(一度だけ・通知なし) =====
 {const p0=pull;pull=async function(){const r=await p0.apply(this,arguments);if(!D.og8&&sy!='オフライン'){D.og8=1;D.ob=(D.ob||0)+8;save()}return r}}
 camP.set(0,1.7,5.6);camL.set(-.3,1.3,0);
-evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{frWatchStart();setTimeout(seasonCheck,2500);bbBonus();mgBonus();if(!stS().cl&&mode=='home')stamp()});
+evInit();setSkin();updInfo();setMode('home');loop();pull().finally(()=>{try{ivApply()}catch(e){}frWatchStart();setTimeout(seasonCheck,2500);bbBonus();mgBonus();if(!stS().cl&&mode=='home')stamp()});
 setTimeout(()=>{try{if(unU())lineNote('📢','アップデートのお知らせ','新しいお知らせが届きました。タップして確認')}catch(e){}},4000);
 // 裏に回して3分以上たってから戻ってきたら、ホーム画面のときだけ自動リロード(最新版を読み込む)
 {let hid=0;document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='hidden'){hid=Date.now();return}
