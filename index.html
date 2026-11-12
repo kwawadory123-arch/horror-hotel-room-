@@ -1754,7 +1754,7 @@ function result(win,quit){if(mode=='res')return;mode='res';if(MG)BB=1;if(!win)se
   if(left<=0){clearInterval(iv);D.xp=cx;D.lv=cl;save();setTimeout(()=>updRank(1),3500);setTimeout(()=>{sh('rb',1)},300)}},50);
  $('rs').onclick=e=>{if(e.target.id=='rb'){SE.btn();sh('rs',0);if(MG){MG=0;BB=0}updInfo();setMode('lobby')}}}
 // ===== カメラ =====
-function camGame(){const d=5.8,cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.5;
+function camGame(){if(pit<0){const sy=Math.sin(yaw),cy=Math.cos(yaw),ty=1.5+jy*.6;let s=.5;for(;s<=5.8;s+=.15){const x=pos.x+sy*s,z=pos.z+cy*s;let b=0;for(const w of wnear(x,z))if(x>w[0]-.35&&x<w[2]+.35&&z>w[1]-.35&&z<w[3]+.35){b=1;break}if(b)break}s=Math.max(1.3,s-.3);tP.set(pos.x+sy*s,ty+.3,pos.z+cy*s);const a=-pit,ca=Math.cos(a);tL.set(tP.x-sy*ca*60,tP.y+Math.sin(a)*60,tP.z-cy*ca*60);return}const d=5.8,cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.5;
  for(;s<=d;s+=.15){const x=pos.x+ux*s,z=pos.z+uz*s,y=ty+uy*s;if(y>HH-.3||y<.35)break;let b=0;for(const w of wnear(x,z))if(x>w[0]-.35&&x<w[2]+.35&&z>w[1]-.35&&z<w[3]+.35){b=1;break}if(b)break}
  s=Math.max(2.6,s-.3);tP.set(pos.x+ux*s,Math.min(HH-.3,Math.max(.4,ty+uy*s+(s<4.2?(4.2-s)*.4:0))),pos.z+uz*s);tL.set(pos.x,ty,pos.z)}
 const gcount=()=>(!cap&&dist(pos,goalP)<2.4?1:0)+E.filter(e=>!e.dead&&!(e.ma>0)&&dist(e.p,goalP)<2.4).length+Object.values(peers).filter(p=>p.m=='g'&&p.st==st&&!p.d&&Math.hypot(p.tx-goalP.x,p.tz-goalP.z)<2.4).length;
@@ -1874,7 +1874,7 @@ const sue=e=>{if(e.pointerId==sid){sid=null;mv.x=mv.y=0;const h=stk.getBoundingC
 // 視点操作(画面ドラッグ)
 let dp=null;const cvs=R.domElement;
 cvs.addEventListener('pointerdown',e=>{if(mode=='game'||mode=='lobby'||mode=='trans'){dp={id:e.pointerId,x:e.clientX,y:e.clientY};try{cvs.setPointerCapture(e.pointerId)}catch(x){}}});
-cvs.addEventListener('pointermove',e=>{if(dp&&e.pointerId==dp.id){yaw-=(e.clientX-dp.x)*.006;pit=Math.max(.02,Math.min(1.1,pit+(e.clientY-dp.y)*.005));dp.x=e.clientX;dp.y=e.clientY}});
+cvs.addEventListener('pointermove',e=>{if(dp&&e.pointerId==dp.id){yaw-=(e.clientX-dp.x)*.006;pit=Math.max(-1.55,Math.min(1.1,pit+(e.clientY-dp.y)*.005));dp.x=e.clientX;dp.y=e.clientY}});
 const dpe=e=>{if(dp&&e.pointerId==dp.id)dp=null};cvs.addEventListener('pointerup',dpe);cvs.addEventListener('pointercancel',dpe);
 $('trap').onclick=()=>{if(mode!='game'||cap||trL<=0)return;trL--;mq('trap');SE.trap();const m=new T.Mesh(new T.CylinderGeometry(.6,.6,.05,16),new T.MeshBasicMaterial({color:0x66ffff,transparent:true,opacity:.35}));m.position.set(pos.x,.05,pos.z);hotel.add(m);TR.push({p:pos.clone(),m,arm:0})};
 $('jmp').onclick=()=>{if(mode=='game')jreq=1};
@@ -3545,7 +3545,7 @@ function krTick(dt,t){
  krClampR(pos,R-1.6);
  for(const o of K.obs){const ax=pos.x-o.x,az=pos.z-o.z,d=Math.hypot(ax,az),m=o.r+.45;if(d<m&&d>1e-4){pos.x=o.x+ax/d*m;pos.z=o.z+az/d*m}}
  const mvg=Math.hypot(pos.x-ox,pos.z-oz)>1e-4;
- if(keys.KeyR)krPit=Math.max(-1.25,krPit-1.4*dt);if(keys.KeyT)krPit=Math.min(1.2,krPit+1.4*dt);pit=krPit;
+ if(keys.KeyR)krPit=Math.max(-1.55,krPit-1.4*dt);if(keys.KeyT)krPit=Math.min(1.2,krPit+1.4*dt);pit=krPit;
  me.position.set(pos.x,jy,pos.z);anim(me,mvg,t);pl.position.set(pos.x,2.6,pos.z);trail(me,dt,mvg&&jy<.3);
  if(mvg&&jy==0){K.stp-=dt;if(K.stp<0){K.stp=.3;SE.step()}}
  K.amb-=dt;if(K.amb<0){K.amb=rnd(4,9);SE.creak()}
@@ -3673,7 +3673,7 @@ function sphTick(dt,t){const K=SP;if(!K)return;
  {const f=$('dsf');if(f)f.style.width=dsE+'%';$('dash').classList.toggle('lo',dsE<15&&!K.dash);const sp=$('come').querySelector('span');if(sp)sp.textContent=K.call>0?'よんでる':K.cd>0?Math.ceil(K.cd)+'秒':'よぶ'}
  let mvg=false;if(l>.1){K.P.addScaledVector(v,5*dt*(K.dash?1.7:1)*Math.min(1,l)/l).setLength(SPR);K.F.copy(v).divideScalar(l);mvg=true}
  sphCollide(K);sphUp(K.P,up);K.CF.addScaledVector(up,-K.CF.dot(up)).normalize();
- if(keys.KeyR)pit=Math.max(-1.25,pit-1.4*dt);if(keys.KeyT)pit=Math.min(1.2,pit+1.4*dt);
+ if(keys.KeyR)pit=Math.max(-1.55,pit-1.4*dt);if(keys.KeyT)pit=Math.min(1.2,pit+1.4*dt);
  sphPlace(me,K.P,K.F);pos.copy(K.P);anim(me,mvg,t);pl.position.copy(K.P).addScaledVector(up,2.6);trail(me,dt,mvg);
  if(mvg){K.stp-=dt;if(K.stp<0){K.stp=.3;SE.step()}}K.amb-=dt;if(K.amb<0){K.amb=rnd(4,9);SE.creak()}
  // CPU
@@ -3706,7 +3706,7 @@ $('come').addEventListener('click',e=>{if(!sphOn)return;e.stopImmediatePropagati
 $('dash').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagation();const K=KR;if(!K||mode!='game'||intro>0)return;if(K.dash){K.dash=0;return}if(dsE<15)return toast('⚡ ダッシュ回復中…');K.dash=1;SE.come();flash('#66ffee')},true);
 $('come').addEventListener('click',e=>{if(!krOn)return;e.stopImmediatePropagation();const K=KR;if(!K||mode!='game'||intro>0||K.bar>0)return;if(K.barCd>0)return toast('🛡 バリア回復中… '+Math.ceil(K.barCd)+'秒');K.bar=3;K.barCd=12;SE.come();flash('#9affff');toast('🛡 バリア展開！(3秒)')},true);
 cvs.addEventListener('pointerdown',e=>{krLY=e.clientY});
-cvs.addEventListener('pointermove',e=>{if(!krOn||mode!='game'||!dp||e.pointerId!=dp.id)return;krPit=Math.max(-1.25,Math.min(1.2,krPit+(e.clientY-krLY)*.005));krLY=e.clientY;pit=krPit});
+cvs.addEventListener('pointermove',e=>{if(!krOn||mode!='game'||!dp||e.pointerId!=dp.id)return;krPit=Math.max(-1.55,Math.min(1.2,krPit+(e.clientY-krLY)*.005));krLY=e.clientY;pit=krPit});
 
 
 // ===== 🌊 MOD「The Deep Secrets of the Undersea City」(海底都市・30秒ごとの大魚) =====
@@ -3791,9 +3791,9 @@ function deepInit(){
  try{$('mm').style.display='none';$('arr').style.visibility='hidden';const m=document.querySelector('#mis .mt');if(m)m.textContent='🌊 青く光るゴールへ'}catch(e){}
  deepCam();camP.copy(tP);camL.copy(tL);
  toast('🌊 海底都市へ…30秒ごとに鐘が鳴る。家の陰にかくれて大魚をやりすごせ！青い光がゴール')}
-function deepCam(){const K=DP;if(!K)return;const cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.6;
+function deepCam(){const K=DP;if(!K)return;if(pit<0){const sy=Math.sin(yaw),cy=Math.cos(yaw),ty=1.5+jy*.6;let s=.5;for(;s<=5.8;s+=.2){if(deepInHouse(pos.x+sy*s,pos.z+cy*s,.5,ty))break}s=Math.max(1.3,s-.3);tP.set(pos.x+sy*s,ty+.3,pos.z+cy*s);const a=-pit,ca=Math.cos(a);tL.set(tP.x-sy*ca*60,tP.y+Math.sin(a)*60,tP.z-cy*ca*60)}else{const cp=Math.cos(pit),ux=Math.sin(yaw)*cp,uz=Math.cos(yaw)*cp,uy=Math.sin(pit),ty=1.5+jy*.6;let s=.6;
  for(;s<=6.2;s+=.25){const x=pos.x+ux*s,z=pos.z+uz*s,y=ty+uy*s;if(y<.4||y>60||deepInHouse(x,z,.5,y))break}
- s=Math.max(2.2,s-.35);tP.set(pos.x+ux*s,Math.max(.5,ty+uy*s+(s<4?(4-s)*.35:0)),pos.z+uz*s);tL.set(pos.x,ty,pos.z);
+ s=Math.max(2.2,s-.35);tP.set(pos.x+ux*s,Math.max(.5,ty+uy*s+(s<4?(4-s)*.35:0)),pos.z+uz*s);tL.set(pos.x,ty,pos.z)}
  const k=K.k,a=k*k*3.4,R_=()=>Math.random()-.5;
  if(k>.02){tP.x+=R_()*a;tP.y+=R_()*a*.8;tP.z+=R_()*a;tL.x+=R_()*a*.7;tL.y+=R_()*a*.7;tL.z+=R_()*a*.7}
  try{if(k>.05){const q=k*k;cvs.style.transform=`translate(${R_()*q*60}px,${R_()*q*60}px) rotate(${R_()*q*7}deg) scale(${1.04+q*.12})`;cvs.style.filter=`blur(${q*3.5}px)`}else if(K.cs){cvs.style.transform='';cvs.style.filter=''}K.cs=k>.05}catch(e){}}
@@ -3809,7 +3809,7 @@ function deepTick(dt,t){const K=DP;if(!K)return;
  for(let it=0;it<2;it++)for(const h of deepNear(pos.x,pos.z)){const cx=Math.max(h[0],Math.min(pos.x,h[2])),cz=Math.max(h[1],Math.min(pos.z,h[3])),dx=pos.x-cx,dz=pos.z-cz,d=Math.hypot(dx,dz);if(d<.5&&d>1e-4){pos.x+=dx/d*(.5-d);pos.z+=dz/d*(.5-d)}}
  pos.x=Math.max(1.4,Math.min(L-1.4,pos.x));pos.z=Math.max(1.4,Math.min(L-1.4,pos.z));
  const mvg=Math.hypot(pos.x-ox,pos.z-oz)>1e-4;
- if(keys.KeyR)pit=Math.max(-1.25,pit-1.4*dt);if(keys.KeyT)pit=Math.min(1.2,pit+1.4*dt);
+ if(keys.KeyR)pit=Math.max(-1.55,pit-1.4*dt);if(keys.KeyT)pit=Math.min(1.2,pit+1.4*dt);
  me.position.set(pos.x,jy,pos.z);anim(me,mvg,t);pl.position.set(pos.x,2.6,pos.z);trail(me,dt,mvg&&jy<.3);
  if(mvg&&jy==0){K.stp-=dt;if(K.stp<0){K.stp=.3;SE.step()}}K.amb-=dt;if(K.amb<0){K.amb=rnd(4,9);SE.creak()}
  {const f=$('dsf');if(f)f.style.width=dsE+'%';$('dash').classList.toggle('lo',dsE<15&&!K.dash);const sp=$('come').querySelector('span');if(sp)sp.textContent='🫧×'+K.sh}
