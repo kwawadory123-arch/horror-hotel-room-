@@ -1274,7 +1274,7 @@ const crit=(P,S,mini)=>{const n0=P.children.length,R=S.R||.95,[sx,sy,sz,Hm,Bm,fz
  outl(P,n0);return Q},
  QS=c=>{const cv=document.createElement('canvas');cv.width=cv.height=96;const x=cv.getContext('2d');x.font='900 76px sans-serif';x.textAlign='center';x.textBaseline='middle';x.lineWidth=10;x.strokeStyle='#000';x.strokeText('?',48,52);x.fillStyle='#'+(c>>>0).toString(16).padStart(6,'0');x.fillText('?',48,52);return new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(cv),transparent:true,fog:false}))},
  build=S=>{const au=col(S.au,0xb88aff);HD.position.y=1.5;
-  const a=S_(G,1.9,new T.MeshBasicMaterial({color:au,transparent:true,opacity:.13,depthWrite:false,blending:T.AdditiveBlending}),0,1.5,0);FX.push(t=>a.scale.setScalar(1+Math.sin(t*2)*.05));
+  if(!MXV||S.rt>=4){const a=S_(G,1.9,new T.MeshBasicMaterial({color:au,transparent:true,opacity:.13,depthWrite:false,blending:T.AdditiveBlending}),0,1.5,0);FX.push(t=>a.scale.setScalar(1+Math.sin(t*2)*.05))}
   Y_(G,1.1,1.1,.02,new T.MeshBasicMaterial({color:0,transparent:true,opacity:.35}),0,.03,0);
   const Q=crit(G,S);
   if(S.fl)FX.push((t,m)=>{G.position.y=.3+Math.sin(t*2)*.14;G.rotation.z=m?Math.sin(t*6)*.06:0});
@@ -1284,8 +1284,8 @@ const crit=(P,S,mini)=>{const n0=P.children.length,R=S.R||.95,[sx,sy,sz,Hm,Bm,fz
     ms.forEach((g,j)=>{const an=t*(1.1+j*.15)+j*Math.PI,ro=1.6+j*.12,ox=Math.cos(an)*ro,oz=Math.sin(an)*ro,oy=.1+Math.abs(Math.sin(t*4+j*2))*.28,tx=(j?1:-1)*.95,tz=-1.75-j*.35,x=ox+(tx-ox)*k,z=oz+(tz-oz)*k;
      g.position.set(x,oy+(m?Math.abs(Math.sin(t*10+j))*.25:0),z);g.rotation.y=k>.5?0:Math.atan2(-x,-z)})})}
   const q=QS(au);q.scale.set(.6,.6,.6);G.add(q);FX.push(t=>q.position.set(S.mini?1.5:1.05,3.0+Math.sin(t*3)*.08,0));
-  const rt=S.rt;if(rt>=3){const rg=O_(G,S.mini?1.9:1.25,.05,B(au),0,.06,0);rg.rotation.x=Math.PI/2;FX.push(t=>{rg.rotation.z=t*2;rg.scale.setScalar(1+Math.sin(t*3)*.05)})}
-  if(rt==4)rise(6,0xffffff,.05,1.0,3.6,1);else if(rt==3)rise(3,au,.05,.9,3.2,1)};
+  const rt=S.rt;if(rt>=3&&(!MXV||rt==4)){const rg=O_(G,S.mini?1.9:1.25,.05,B(au),0,.06,0);rg.rotation.x=Math.PI/2;FX.push(t=>{rg.rotation.z=t*2;rg.scale.setScalar(1+Math.sin(t*3)*.05)})}
+  if(rt==4)rise(6,0xffffff,.05,1.0,3.6,1);else if(rt==3&&!MXV)rise(3,au,.05,.9,3.2,1)};
 const E_=(b,c,e,m,ar,x,o)=>Object.assign({b,c,e,m,ar,x},o);
 // 各行: [なまえ,絵文字,レア度(1N 2R 3SR 4UR),種類(0ふしぎ 1映え 2トリオ),設定]
 const MYS=[
@@ -1378,7 +1378,7 @@ MYS.push(
 ['ナゾの三つ子','👁️',4,2,E_('ball',[0x2a1a5a,0xffffff,0xff3a6a],[3,0xff3a6a],4,[0],['orbit',['spots',0x8a6aff]],{R:.9,au:0xb88aff,ef:6,mini:[ml('ball',[0x4a2a8a,0xffffff],[3,0x33ccff],4,[0]),ml('ball',[0x8a2a5a,0xffffff],[3,0xffcc33],4,[0])]})]);
 if(MYS.length!==80)console.warn('ミステリー数 '+MYS.length);
 const HATS=['cap','chef','crown','wiz','grad','umb','prop','straw','halo','mushcap','leafhat','flower','antenna','horns','fin'],AUT=['antenna','horns','flower','leafhat','spikes'],AUF=['bowtie','star','bell'];
-MYS.forEach(([n,e,rt,kd,S],i)=>{S.rt=rt;if(!S.mini&&(S.x||[]).length<4){const xs=(S.x||[]).map(q=>Array.isArray(q)?q[0]:q),tp=!(S.ar&&S.ar[0])&&!xs.some(q=>HATS.includes(q)),L=tp?AUT:AUF;S.x=[...(S.x||[]),[L[(i*5+3)%L.length],S.c[2]]]}SKN.push({n,e,c:9,g:1,m:1,rt,kd,nt:1,nh:1,nl:1,na:1,nb:1,t:S.c[0],l:S.c[0],s:S.c[0],a:S.c[0],h:S.c[0],x(){build(S)}})});
+MYS.forEach(([n,e,rt,kd,S],i)=>{S.rt=rt;if(!S.mini&&(S.x||[]).length<4){const xs=(S.x||[]).map(q=>Array.isArray(q)?q[0]:q),tp=!(S.ar&&S.ar[0])&&!xs.some(q=>HATS.includes(q)),L=tp?AUT:AUF;S.x=[...(S.x||[]),[L[(i*5+3)%L.length],S.c[2]]]}SKN.push({n,e,c:9,g:1,m:1,rt,kd,nt:1,nh:1,nl:1,na:1,nb:1,t:S.c[0],l:S.c[0],s:S.c[0],a:S.c[0],h:S.c[0],mxS:S,x(){build(S)}})});
 // ===== ヒストリー(古代勇者と仲間たち) 80体: UR10 SR16 R24 N30 =====
 const H_=E_,HIS=[
 ['古代勇者アルス','⚔️',4,1,H_('bean',[0x4a7aff,0xffe0c0,0xff9a5a],[1],0,[0],['helm','sword','shield','cape'],{au:0x6aa0ff})],
@@ -1624,7 +1624,7 @@ const vlB=SKN.length-LD.length;LD.forEach((r,k)=>{const P=SKN[vlB+k];P.nh=P.nt=P
 // ===== 🧱 レジェンド ブロックキャラ(小ブロック集合 / パーツ別ピボット / 形別モーション) =====
 // 形状: 小さなブロック(ボクセル)を 球・角丸箱・カプセル・ドーナツ の式で敷き詰め、足す/抜く/塗るで輪郭を作る
 // 結合: 1パーツ=1メッシュに結合(内部の面は消す)。角にはAO陰影を焼き込み、継ぎ目の見えない一体感にする
-const VXC={},VXD={appear:1.25,react:1.35,carry:1.6,jump:.78,idle2:1.5,get:1.9},VXK=(x,y,z)=>(x+1024)*4194304+(y+1024)*2048+(z+1024);
+const VXC={},VXD={appear:1.25,react:1.35,carry:1.6,jump:1.15,idle2:2.6,get:2.1,show:6.2},VXK=(x,y,z)=>(x+1024)*4194304+(y+1024)*2048+(z+1024);
 let VXG=null,VXMt=null;
 const vE=(c,r,col,op=0)=>({k:0,c,r:Array.isArray(r)?r:[r,r,r],col,op}),
  vB=(c,h,rr,col,op=0)=>({k:1,c,h,rr,col,op}),
@@ -1726,17 +1726,37 @@ function vxOnce(c,once,k,B){const mo=c.d.mo,rt=c.d.rt;
   if(rc=='joy'){B.dy+=Math.abs(Math.sin(k*Math.PI*2))*(mo.rj||.85)*(k<.9?1:0);B.ry=vxEase((k-.55)/.4)*6.2832;B.sy*=1+.1*Math.cos(k*Math.PI*4);B.sx*=1-.05*Math.cos(k*Math.PI*4);if(k>.5&&!c.fl){c.fl=1;vxEmit(c,'spark')}}
   else if(rc=='shock'){if(k<.12){const a=k/.12;B.dy+=.55*Math.sin(a*Math.PI/2);B.sy*=1+.22*a;B.sx*=1/Math.sqrt(1+.22*a);B.rx=-.2*a}else{const u=(k-.12)/.88;B.dy+=.55*Math.max(0,1-u*4);B.rz+=Math.sin(u*70)*.13*(1-u);B.rx=-.2*Math.max(0,1-u*3)}c.shock=Math.max(0,1-k*1.2)}
   else{B.rz+=Math.sin(k*55)*.2*(1-k*k)*(k<.75?1:0);B.sx*=1+Math.sin(k*55)*.04;if(k>.75){const u=(k-.75)/.25;B.dy+=Math.sin(u*Math.PI)*.8;B.ry=u*6.2832;if(!c.fl){c.fl=1;vxEmit(c,'spark')}}}}
- else if(once=='jump'){if(k<.12){const a=k/.12;B.sy=1-.25*a;B.sx=B.sz=1+.1*a}else if(k<.82){const a=(k-.12)/.7,u=Math.sin(a*Math.PI);B.sy=1+.2*u;B.sx=B.sz=1-.08*u;B.rx=-.08*u;c.q.tuck=u;c.wo=1;c.ex=u*.45;if(!c.f0){c.f0=1;vxEmit(c,'dust')}}else{const u=(k-.82)/.18;if(!c.fl){c.fl=1;vxEmit(c,'land')}B.sy=1-.3*Math.sin(u*Math.PI);B.sx=B.sz=1/Math.sqrt(B.sy)}}
+ else if(once=='jump'){const e=vxEase,jt=mo.show=='spin'||mo.loc=='hop';
+  if(k<.1){const a=e(k/.1);B.sy*=1-.28*a;B.sx*=1+.12*a;B.sz*=1+.12*a;c.q.tuck=a*.7}
+  else if(k<.62){const a=(k-.1)/.52,u=Math.sin(a*Math.PI);B.sy*=1+.22*u;B.sx*=1-.09*u;B.sz*=1-.09*u;B.rx-=.1*u;c.q.tuck=u;c.wo=1;c.ex=u*.8;if(jt)B.ry+=e(a)*6.2832;if(!c.f0){c.f0=1;vxEmit(c,'dust')}}
+  else if(k<.74){const a=(k-.62)/.12;if(!c.fl){c.fl=1;vxEmit(c,'land')}const dm=Math.exp(-a*2.2);B.sy*=1-.34*dm*Math.cos(a*6);B.sx*=1+.14*dm*Math.cos(a*6);B.sz*=1+.14*dm*Math.cos(a*6)}
+  else{const a=(k-.74)/.26;B.dy+=Math.sin(Math.min(1,a*1.6)*Math.PI)*.3*(a<.62?1:0);c.ex=.5*Math.sin(a*Math.PI);B.rz+=Math.sin(a*Math.PI*3)*.1*(1-a);B.ry+=Math.sin(a*Math.PI*2)*.35*(1-a)}}
  else if(once=='idle2'){const e=Math.sin(Math.PI*k),i2=mo.i2||'look';c.ex=e*.5;if(!c.f0){c.f0=1;if(rt>=3)vxEmit(c,'glint')}
   if(i2=='look'){B.ry=Math.sin(k*Math.PI*2)*.9*e;B.rz+=Math.sin(k*Math.PI*2)*.07*e}
-  else if(i2=='bounce'){B.dy+=Math.abs(Math.sin(k*Math.PI*3))*.5*(1-k*.4);B.sy*=1+.1*Math.cos(k*Math.PI*6)}
-  else if(i2=='spin'){B.ry=vxEase(k)*6.2832;B.dy+=e*.35}
-  else if(i2=='puff'){const s=1+.25*e*e;B.sx*=s;B.sy*=s;B.sz*=s;B.rz+=Math.sin(k*50)*.03*e*e}
+  else if(i2=='bounce'){B.dy+=Math.abs(Math.sin(k*Math.PI*3))*.95*(1-k*.4);B.sy*=1+.1*Math.cos(k*Math.PI*6)}
+  else if(i2=='spin'){B.ry=vxEase(k)*12.566;B.dy+=e*.8}
+  else if(i2=='puff'){const s=1+.4*e*e;B.sx*=s;B.sy*=s;B.sz*=s;B.rz+=Math.sin(k*50)*.03*e*e}
   else{B.rz+=Math.sin(k*60)*.1*e;B.sx*=1+Math.sin(k*60)*.03*e}}
- else if(once=='get'){const env=Math.sin(Math.PI*Math.min(1,k));c.ex=env;
-  if(k<.18){const a=k/.18;B.sy=1-.3*a;B.sx=B.sz=1+.14*a}
-  else if(k<.7){const a=(k-.18)/.52,u=Math.sin(a*Math.PI);B.dy+=u*1.5;B.sy*=1+.18*u;B.sx*=1-.08*u;B.sz*=1-.08*u;B.ry=a*6.2832*(rt>=3?2:1);if(!c.f0){c.f0=1;vxEmit(c,'ring');vxEmit(c,'star');if(rt>=4)vxEmit(c,'spark')}}
-  else{const u=(k-.7)/.3;if(!c.fl){c.fl=1;vxEmit(c,'land');vxEmit(c,'star')}B.sy=1-.2*Math.sin(u*Math.PI)*Math.exp(-u*2);B.sx=B.sz=1/Math.sqrt(B.sy);B.rz=Math.sin(u*40)*.06*(1-u)}}
+ else if(once=='show'){const st=mo.show||(mo.loc=='hover'?'wave':mo.loc=='legs'?'stomp':mo.loc=='slide'?'roll':'jump'),e=vxEase;c.ex=0;
+  if(k<.1){const a=e(k/.1);c.f2=0;c.f3=0;B.sy*=1-.32*a;B.sx*=1+.16*a;B.sz*=1+.16*a;c.q.tuck=a*.7;if(st=='stomp')B.rz+=Math.sin(k*60)*.04}
+  else if(k<.34){const a=(k-.1)/.24,u=Math.sin(a*Math.PI),h=st=='stomp'?.8:st=='wave'?1.1:1.9;B.dy+=u*h;B.sy*=1+.22*u;B.sx*=1-.1*u;B.sz*=1-.1*u;c.ex=u;c.q.tuck=u*.8;
+   if(st=='jump')B.ry+=e(a)*6.2832;else if(st=='spin')B.ry+=e(a)*12.566;else if(st=='roll')B.rz+=e(a)*6.2832;else if(st=='wave')B.rz+=Math.sin(a*6.2832)*.5;else B.rz+=Math.sin(a*12.566)*.12;
+   if(!c.f0){c.f0=1;vxEmit(c,'spark')}}
+  else if(k<.44){const a=(k-.34)/.1;if(!c.fl){c.fl=1;vxEmit(c,'land')}const dm=Math.exp(-a*2.4),w=Math.cos(a*7);B.sy*=1-.34*dm*w;B.sx*=1+.14*dm*w;B.sz*=1+.14*dm*w;B.rz+=Math.sin(a*14)*.1*dm}
+  else if(k<.56){const a=(k-.44)/.12;B.dy+=Math.sin(a*Math.PI)*.55;c.ex=Math.sin(a*Math.PI)*.6;if(a>.95&&!c.f2){c.f2=1;vxEmit(c,'dust')}}
+  else{const a=(k-.56)/.44,en=Math.sin(a*Math.PI);
+   if(st=='jump'||st=='look'){B.ry+=Math.sin(a*9.4248)*.9*en;c.ex=.35*en}
+   else if(st=='stomp'){const s=Math.abs(Math.sin(a*Math.PI*4));B.dy+=s*.3;B.sx*=1+.08*(1-s);B.sy*=1-.08*(1-s);B.rz+=Math.sin(a*Math.PI*4)*.12;if((a*4)%1<.08&&!c.f3){c.f3=1;vxEmit(c,'dust')}if((a*4)%1>.5)c.f3=0}
+   else if(st=='wave'){B.rz+=Math.sin(a*12.566)*.3*en;B.rx+=Math.sin(a*6.2832)*.15*en;c.ex=.5+.5*Math.sin(a*12.566)}
+   else if(st=='spin'){B.ry+=e(a)*6.2832;B.dy+=en*.35}
+   else if(st=='roll'){B.rx+=Math.sin(a*9.4248)*.3*en;B.rz+=Math.sin(a*6.2832)*.3*en}}}
+ else if(once=='get'){const gt=mo.gt||'leap',env=Math.sin(Math.PI*Math.min(1,k));c.ex=env;
+  if(k<.16){const a=k/.16;B.sy*=1-.34*a;B.sx*=1+.16*a;B.sz*=1+.16*a}
+  else if(k<.62){const a=(k-.16)/.46,u=Math.sin(a*Math.PI);B.dy+=u*(gt=='shock'?2.1:1.7);B.sy*=1+.2*u;B.sx*=1-.09*u;B.sz*=1-.09*u;
+   if(gt=='spin')B.ry+=a*18.85;else if(gt=='leap')B.ry+=a*6.2832*(rt>=3?2:1);else if(gt=='shock'){B.rz+=Math.sin(a*30)*.12;B.rx-=.25*u}else if(gt=='wiggle')B.rz+=Math.sin(a*25)*.3;else B.ry+=a*6.2832;
+   if(!c.f0){c.f0=1;vxEmit(c,'ring');vxEmit(c,'star');if(rt>=3)vxEmit(c,'spark')}}
+  else{const u=(k-.62)/.38;if(!c.fl){c.fl=1;vxEmit(c,'land');vxEmit(c,'star')}const dm=Math.exp(-u*3),w=Math.cos(u*10);B.sy*=1-.3*dm*w;B.sx*=1+.14*dm*w;B.sz*=1+.14*dm*w;
+   if(gt=='pose'){c.ex=1;B.rz+=Math.sin(u*6)*.1}else if(gt=='wiggle')B.rz+=Math.sin(u*40)*.2*(1-u);else B.rz+=Math.sin(u*40)*.06*(1-u)}}
  else if(once=='carry'){c.f=2;c.wo=1;
   if(k<.2){const a=k/.2;B.sy=1-.26*Math.sin(a*Math.PI/2);B.sx=B.sz=1+.1*a;B.rx=-.12*a;c.wo=0}
   else if(k<.86){const a=(k-.2)/.66;B.dx=3.6*vxEase(a);B.sx=1.28;B.sy=.9;B.sz=.9;B.rz=-.22;c.tr-=.016;if(c.tr<=0){c.tr=.06;vxEmit(c,'trail')}}
@@ -1746,6 +1766,7 @@ function vxEmit(c,kind){if(c.fx.length>44)return;const d=c.d,rt=d.rt,pal=d.fxc||
  const add=(px,py,pz,vx,vy,vz,L,s,col,g,sx=1,sy=1,sz=1)=>{const m=new T.Mesh(VXG||(VXG=new T.BoxGeometry(1,1,1)),new T.MeshBasicMaterial({color:col,transparent:true}));m.position.set(px,py,pz);m.scale.set(s*sx,s*sy,s*sz);c.fxg.add(m);c.fx.push({m,v:[vx,vy,vz],l:L,L,g,s,sx,sy,sz})};
  if(kind=='land'){for(let i=0;i<12;i++){const a=i/12*6.2832;add(x0+Math.cos(a)*.6,.07,Math.sin(a)*.6,Math.cos(a)*2.6,.25,Math.sin(a)*2.6,.45,rt>=3?.15:.11,i%2?0xffffff:pal[0],0)}if(rt>=3)vxEmit(c,'spark');if(rt>=4)vxEmit(c,'ring')}
  else if(kind=='spark'){const n=rt>=4?12:rt>=3?9:6;for(let i=0;i<n;i++){const a=Math.random()*6.2832,o=1+Math.random()*1.2;add(x0+Math.cos(a)*.4,cy+Math.random()*.8,Math.sin(a)*.4,Math.cos(a)*o,2.2+Math.random()*1.2,Math.sin(a)*o,.7,.1+Math.random()*.07,pal[i%pal.length],5)}}
+ else if(kind=='mote'){const a=Math.random()*6.2832,r=.7+Math.random()*.5;add(x0+Math.cos(a)*r,.15+Math.random()*cy*1.5,Math.min(Math.sin(a)*r,.2)-.1,0,.6+Math.random()*.6,0,.9,.05+Math.random()*.05,pal[(Math.random()*pal.length)|0],5)}
  else if(kind=='ring'){const n=rt>=4?20:14;for(let i=0;i<n;i++){const a=i/n*6.2832;add(x0+Math.cos(a)*.4,.1,Math.sin(a)*.4,Math.cos(a)*3.2,.05,Math.sin(a)*3.2,.55,.12,i%2?0xffffff:pal[i%pal.length],0)}}
  else if(kind=='star'||kind=='glint'){const n=kind=='glint'?1:(rt>=4?5:3);for(let i=0;i<n;i++){const a=Math.random()*6.2832,r=kind=='glint'?.9:.5,px=x0+Math.cos(a)*r*(kind=='glint'?1:.8),py=cy+(Math.random()-.2)*(kind=='glint'?1.4:1.1),pz=Math.sin(a)*r*.6+.5,s=kind=='glint'?.07:.1,col=i%2?0xffffff:pal[i%pal.length],vy=kind=='glint'?.4:1.4+Math.random();add(px,py,pz,0,vy,0,kind=='glint'?.8:.9,s,col,5,4,.7,.7);add(px,py,pz,0,vy,0,kind=='glint'?.8:.9,s,col,5,.7,4,.7)}}
  else if(kind=='trail'){for(let i=0;i<3;i++)add(x0-.5,cy-.5+i*.5,(i-1)*.25,0,0,0,.35,.1,pal[0],0,8,1,1)}
@@ -1759,10 +1780,15 @@ function vxTick(c,tt,m){let dt=c.lt==null?.016:tt-c.lt;if(!(dt>0&&dt<.25))dt=.01
  c.wk+=((m?1:0)-c.wk)*Math.min(1,dt*9);c.ex=0;c.fold=0;c.shock=0;c.wo=null;
  if(d.mo.i2!==undefined||d.rt!==undefined){const me_=typeof me!=='undefined'&&me&&vxOf(me)===c;
   if(me_){c.rn=(typeof dsT!=='undefined'&&dsT>0&&m)?1:0;const air=typeof jy!=='undefined'&&jy>.02;if(air&&!c.air&&c.once!=='appear')vxPlay(c,'jump');c.air=air}
-  if(!c.once&&c.wk<.1&&!c.rn&&d.mo.i2){c.i2t=(c.i2t==null?4+Math.random()*4:c.i2t)-dt;if(c.i2t<=0){c.i2t=7+Math.random()*5;vxPlay(c,'idle2')}}
+  if(!c.once&&c.wk<.1&&!c.rn&&(d.mo.i2||d.mo.show)){c.i2t=(c.i2t==null?.6+Math.random()*.8:c.i2t)-dt;if(c.i2t<=0){c.i2t=.35;c.shn=(c.shn||0)+1;vxPlay(c,c.shn%2?'show':'idle2')}}
   if(d.rt>=3&&!c.once){c.gl=(c.gl==null?1+Math.random()*2:c.gl)-dt;if(c.gl<=0){c.gl=d.rt>=4?2.2+Math.random()*1.5:5+Math.random()*3;vxEmit(c,'glint')}}}
  c.f=c.rn?1.8:1;
- vxBase(c,t,c.wk,c.f,B);if(c.rn){B.rx+=.2*c.wk;c.tr-=dt;if(c.tr<=0&&c.wk>.5){c.tr=.13;vxEmit(c,'dust')}}
+ vxBase(c,t,c.wk,c.f,B);
+ if(m&&!c.pm)c.stt=.22;if(!m&&c.pm)c.spt=.7;c.pm=m;
+ if(c.stt>0){const a=Math.sin(Math.min(1,c.stt/.22)*Math.PI);c.stt-=dt;B.sy*=1-.1*a;B.sx*=1+.05*a;B.sz*=1+.05*a;B.rx-=.1*a}
+ if(c.spt>0){const u=.7-c.spt,a=Math.exp(-u*5)*Math.sin(u*18);c.spt-=dt;B.rx+=.16*a;B.sy*=1+.06*a}
+ if(d.mo.i2!==undefined){c.mt2=(c.mt2||0)-dt;if(c.mt2<=0){c.mt2=(m?.12:.45)/(1+.3*(d.rt||1));vxEmit(c,'mote')}}
+ if(c.rn){B.rx+=.2*c.wk;c.tr-=dt;if(c.tr<=0&&c.wk>.5){c.tr=.13;vxEmit(c,'dust')}}
  if(c.once){c.mt+=dt;let k=c.mt/VXD[c.once];if(k>=1){const nx=c.nx;if(c.loop){c.mt=0;c.fl=0;c.f0=0;k=0}else{c.once=null;c.mt=0;c.nx=null;if(nx)vxPlay(c,nx);k=-1}}
   if(c.once&&k>=0){if(c.once=='carry')vxBase(c,t,c.wk,2,B);vxOnce(c,c.once,k,B)}}
  const wk=c.wo!=null?c.wo:c.wk;
@@ -1980,7 +2006,7 @@ function vlDef(r,k){
  if(has('O')){const nO=Math.max(2,num('O')),sp=[];for(let j=0;j<nO;j++){const t=j/nO*6.2832;sp.push(vE([Math.cos(t)*1.7,sh+.3,Math.sin(t)*1.7],.22,j%2?C:gd))}P.push({n:'orbs',p:[0,sh+.3,0],par:'body',role:'prop',spin:1.2,vs:.09,sh:sp})}
  // ---- 動き: 体型別に歩き方を変える。ドレス=滑る/玉座・翼2枚以上=浮く ----
  const mA=[{t:.95,s:.8,w:.8,b:.03,y:.05,h:.06},{t:1.25,s:.45,w:.5,b:.04,y:.14,h:.1},{t:1.6,s:.6,w:1.1,b:.05,y:.1,h:.22},{t:1,s:.7,w:.9,b:.03,y:.08,h:.07},{t:.85,s:.5,w:.6,b:.03,y:.12,h:.07},{t:1.3,s:.55,w:.8,b:.04,y:.1,h:.15}][ai];
- const mo={loc:'legs',tempo:mA.t,stride:mA.s,armSw:mA.w,bob:mA.b,sway:mA.y,hop:mA.h,wag:.35,fw:4,ap:['drop','spin','rise','pop','zap','roll'][k%6],rc:['joy','shock','shake'][(k>>1)%3],i2:['look','bounce','spin','puff','shiver'][k%5]};
+ const mo={loc:'legs',tempo:mA.t,stride:mA.s,armSw:mA.w,bob:mA.b,sway:mA.y,hop:mA.h,wag:.35,fw:4,ap:['drop','spin','rise','pop','zap','roll'][k%6],rc:['joy','shock','shake'][(k>>1)%3],i2:['look','bounce','spin','puff','shiver'][k%5],gt:['leap','spin','shock','pose','wiggle'][(k*2+(k%3))%5]};
  if(D){mo.loc='slide';mo.yaw=.15;mo.sq=.05;mo.bob=.07}else if(K||num('W')>=2){mo.loc='hover';mo.bob=.08}
  return{n,e,rt,c1:A,c2:B,cy:hip+S.th/2,head:[0,hy,.5],fxc:[C,gd,0xffffff],mo,parts:P}}
 
@@ -2010,7 +2036,7 @@ function vxViewer(start){const ids=SKN.map((_,i)=>i).filter(i=>SKN[i].vx);if(!id
 // ===== 🧱 超レア80体 ブロックキャラ(41種のシルエット × 色違い / 小ブロック集合 / パーツ別ピボット) =====
 // 形: 球・たまご形・カプセル・ドーナツの式で小ブロックを敷き詰め、足す/抜く/塗るで輪郭を作る。目・耳・尾・翼・ふた等は別パーツ(回転中心つき)
 // 動き: mo.loc(移動の型) / mo.i2(待機2) / mo.ap(登場) / mo.rc(反応)。パーツの role で「その形に合う動かし方」を選ぶ
-const UXC={},UXUR=['ゴールデンボール','ネオボール','にじぼしだま','ドラゴンたまご','ゴールドエッグ','あおいたいよう','きんいろUFO','ゴールドミミック','にじシャボン','ほしおばけ','ルビーボール','クリスタルボール'],
+const UXGT=n=>['leap','spin','shock','pose','wiggle'][[...n].reduce((a,c)=>a+c.charCodeAt(0),0)%5],UXC={},UXUR=['ゴールデンボール','ネオボール','にじぼしだま','ドラゴンたまご','ゴールドエッグ','あおいたいよう','きんいろUFO','ゴールドミミック','にじシャボン','ほしおばけ','ルビーボール','クリスタルボール'],
 UXB={chick:1,egg:1,mochi:1,pudding:1,tako:1,bun:1,rice:1,cloud:1,drop:1,ball:2,bomb:2,eye:2,mush:2,pump:2,frog:2,owl:2,peng:2,bee:2,lady:2,catb:2,bunb:2,bearb:2,slime:2,bubble:2,urchin:2,puffer:2,ghost:3,jelly:3,planet:3,sun:3,moon:3,star:3,flame:3,bolt:3,ufo:3,crys:3,whale:3,shark:3,bat:3,angel:3,mimic:3};
 const uD=(c,k)=>(Math.max(0,(c>>16&255)*k)|0)<<16|(Math.max(0,(c>>8&255)*k)|0)<<8|(Math.max(0,(c&255)*k)|0),
  uL=(c,k)=>{const f=x=>Math.min(255,x+(255-x)*k)|0;return f(c>>16&255)<<16|f(c>>8&255)<<8|f(c&255)},
@@ -2069,7 +2095,7 @@ slime:(a,b,c)=>{const R=[1.15,.85,1.05],f=uFc(R,1.1,c,{ck:b,ey:.12,mw:.2});retur
 // ---- 超レアの登録: 既存のDEF(旧モデル)にブロック版を割り当てる(名前・並び・所持データはそのまま) ----
 const UXLN={legs:'歩く',hop:'跳ねる',slide:'滑る',roll:'転がる',hover:'浮かぶ'},UXAN={drop:'落下→着地',spin:'回転して出現',rise:'せり上がる',pop:'ポンと弾けて出現',zap:'ワープして出現',roll:'転がって出現'},UXI2={look:'きょろきょろ',bounce:'ぴょんぴょん',spin:'くるっと回る',puff:'ふくらむ',shiver:'ぷるぷる'},UXRN={joy:'とび上がって喜ぶ',shock:'びっくり',shake:'ぷるぷる→ポン'};
 const UXP=(a,b,rt)=>rt>=4?[0xffe14d,uL(a,.4),b||0xff6ad0,0xffffff]:[uL(a,.45),uL(b||a,.5),0xffffff];
-function uxDef(q){const[f,a,b,c]=q.uf,r=UXK[f](a,b,c),cy=r.cy||1.5;return{n:q.n,e:q.e,rt:q.ur,cy,head:[0,cy,.4],fxc:r.fx||UXP(a,b,q.ur),mo:r.mo,parts:r.p}}
+function uxDef(q){const[f,a,b,c]=q.uf,r=UXK[f](a,b,c),cy=r.cy||1.5;return{n:q.n,e:q.e,rt:q.ur,cy,head:[0,cy,.4],fxc:r.fx||UXP(a,b,q.ur),mo:{gt:UXGT(q.n),...r.mo},parts:r.p}}
 function uxBuild(q,i){const d=UXC[i]||(UXC[i]=uxDef(q)),c=vxBuild(d,300+i);G.add(c.root);G.add(c.fxg);G.userData.vx=c;HD.position.set(d.head[0],d.head[1],d.head[2]);FX.push((t,m)=>vxTick(c,t,m))}
 SKN.forEach((q,i)=>{if(!(q.u&&q.uf))return;const o=q.x;q.ur=UXUR.includes(q.n)?4:(UXB[q.uf[0]]||1);q.uv=1;q.x=function(){try{uxBuild(q,i)}catch(e){console.warn('ux',q.n,e);o.call(q)}}});
 // ---- ビューア: 全モーションを1体ずつ確認(超レアガチャ画面のボタンから) ----
@@ -2172,7 +2198,87 @@ const UXEM={'ドラゴンナイト':'🐉','ネオン竜':'🐲'};
 function uxBuildD(d,i){const c=vxBuild(d,300+i);G.add(c.root);G.add(c.fxg);G.userData.vx=c;HD.position.set(d.head[0],d.head[1],d.head[2]);FX.push((t,m)=>vxTick(c,t,m))}
 {let hk=3;SKN.forEach((q,i)=>{if(!(q.g&&q.c===7&&!q.u))return;const H=UXH[q.n],O=UXG[q.n];if(!H&&!O)return;const o=q.x;q.nh=q.nt=q.nl=q.na=q.nb=1;q.uv=1;
  if(H){q.ur=H[0];q.vh=1;const k=hk++;q.x=function(){try{uxBuildD(UXC[i]||(UXC[i]=vlDef([q.n,UXEM[q.n]||q.e,H[0],H[1],H[2],H[3],H[4],H[5]],k)),i)}catch(e){console.warn('uxH',q.n,e);o.call(q)}}}
- else{q.ur=O[0];q.x=function(){try{if(!UXC[i]){const r=O[1]();UXC[i]={n:q.n,e:q.e,rt:O[0],cy:r.cy||1.5,head:[0,r.cy||1.5,.4],fxc:r.fx||(O[0]>=4?[0xffe14d,0xffffff,0xb06aff]:[uL(q.t||0xffd24a,.5),0xffffff,uL(q.l||q.t||0xffd24a,.4)]),mo:r.mo,parts:r.p}}uxBuildD(UXC[i],i)}catch(e){console.warn('uxG',q.n,e);o.call(q)}}}})}
+ else{q.ur=O[0];q.x=function(){try{if(!UXC[i]){const r=O[1]();UXC[i]={n:q.n,e:q.e,rt:O[0],cy:r.cy||1.5,head:[0,r.cy||1.5,.4],fxc:r.fx||(O[0]>=4?[0xffe14d,0xffffff,0xb06aff]:[uL(q.t||0xffd24a,.5),0xffffff,uL(q.l||q.t||0xffd24a,.4)]),mo:{gt:UXGT(q.n),...r.mo},parts:r.p}}uxBuildD(UXC[i],i)}catch(e){console.warn('uxG',q.n,e);o.call(q)}}}})}
+
+// ===== 🧱 ミステリー80体: 既存デザイン(体型・顔・耳・飾り)を保ち、メッシュを小ブロックへ自動変換 =====
+// 流れ: 旧ビルドで一時グループを作る → 各FXを試走して「動くオブジェクト」を特定 → 動かない部分は1つのブロック体に統合(継ぎ目なし)
+//       動く部分(耳・目・足・ハート等)はそのオブジェクトの子として個別ブロック化(元のアニメを維持) → 全体の動きはブロックエンジン(待機ショー/歩く/走る/ジャンプ/登場/獲得)
+let MXV=0;
+const mxM3=e=>[[e[0],e[4],e[8]],[e[1],e[5],e[9]],[e[2],e[6],e[10]]],
+ mxInv3=m=>{const[a,b,c]=m[0],[d,e,f]=m[1],[g,h,i]=m[2],A=e*i-f*h,B=-(d*i-f*g),C=d*h-e*g,id=1/((a*A+b*B+c*C)||1e-9);return[[A*id,-(b*i-c*h)*id,(b*f-c*e)*id],[B*id,(a*i-c*g)*id,-(a*f-c*d)*id],[C*id,-(a*h-b*g)*id,(a*e-b*d)*id]]},
+ mxA=e=>({R:mxM3(e),t:[e[12],e[13],e[14]]}),
+ mxAI=a=>{const R=mxInv3(a.R);return{R,t:[0,1,2].map(i=>-(R[i][0]*a.t[0]+R[i][1]*a.t[1]+R[i][2]*a.t[2]))}},
+ mxAM=(a,b)=>({R:[0,1,2].map(i=>[0,1,2].map(j=>a.R[i][0]*b.R[0][j]+a.R[i][1]*b.R[1][j]+a.R[i][2]*b.R[2][j])),t:[0,1,2].map(i=>a.R[i][0]*b.t[0]+a.R[i][1]*b.t[1]+a.R[i][2]*b.t[2]+a.t[i])}),
+ mxP=(a,p)=>[0,1,2].map(i=>a.R[i][0]*p[0]+a.R[i][1]*p[1]+a.R[i][2]*p[2]+a.t[i]),
+ mxCN=a=>[0,1,2].map(j=>Math.hypot(a.R[0][j],a.R[1][j],a.R[2][j])),
+ MXG=['SphereGeometry','BoxGeometry','ConeGeometry','CylinderGeometry','TorusGeometry','OctahedronGeometry'];
+function mxHalf(g){const a=g.parameters||{};switch(g.type){case'SphereGeometry':return[a.radius,a.radius,a.radius];case'BoxGeometry':return[a.width/2,a.height/2,a.depth/2];case'ConeGeometry':return[a.radius,a.height/2,a.radius];case'CylinderGeometry':{const r=Math.max(a.radiusTop,a.radiusBottom);return[r,a.height/2,r]}case'TorusGeometry':{const r=a.radius+a.tube;return[r,r,a.tube]}default:return[a.radius,a.radius,a.radius]}}
+function mxIn(g,p,mh){const a=g.parameters||{};switch(g.type){
+ case'SphereGeometry':{const r=Math.max(a.radius,Math.min(mh[0],mh[1],mh[2]));return p[0]*p[0]+p[1]*p[1]+p[2]*p[2]<=r*r}
+ case'BoxGeometry':return Math.abs(p[0])<=Math.max(a.width/2,mh[0])&&Math.abs(p[1])<=Math.max(a.height/2,mh[1])&&Math.abs(p[2])<=Math.max(a.depth/2,mh[2]);
+ case'ConeGeometry':{const h=Math.max(a.height,mh[1]*2),y=p[1]+h/2;if(y<0||y>h)return false;return Math.hypot(p[0],p[2])<=Math.max(a.radius,mh[0])*(1-y/h)+mh[0]*.0}
+ case'CylinderGeometry':{const h=Math.max(a.height,mh[1]*2),y=p[1]+h/2;if(y<0||y>h)return false;const rb=Math.max(a.radiusBottom,mh[0]),rt=Math.max(a.radiusTop,mh[0]*.5);return Math.hypot(p[0],p[2])<=rb+(rt-rb)*(y/h)}
+ case'TorusGeometry':return Math.hypot(Math.hypot(p[0],p[1])-a.radius,p[2])<=Math.max(a.tube,mh[2]);
+ case'OctahedronGeometry':return Math.abs(p[0])+Math.abs(p[1])+Math.abs(p[2])<=a.radius;
+ default:return false}}
+const mxCol=m=>{const mt=m.material;let c=mt.color?mt.color.getHex():0xcccccc;if(mt.transparent&&mt.opacity<1){const k=(1-mt.opacity)*.6,f=x=>(x+(255-x)*k)|0;c=f(c>>16&255)<<16|f(c>>8&255)<<8|f(c&255)}return c};
+// 1つのオーナー(動くオブジェクト/ルート)に属するメッシュ群を、立方体ブロックのVへ
+function mxVoxelize(list,vs,Wo,mOwner){
+ const S=mOwner?[mOwner.scale.x,mOwner.scale.y,mOwner.scale.z]:[1,1,1],WoI=mxAI(Wo);
+ const items=list.map(m=>{const Wm=mxA(m.matrixWorld.elements),toO=mxAM(WoI,Wm),toM=mxAM(mxAI(Wm),Wo),h=mxHalf(m.geometry),sc=mxCN(toO),lo=[1e9,1e9,1e9],hi=[-1e9,-1e9,-1e9];
+  for(const sx of[-1,1])for(const sy of[-1,1])for(const sz of[-1,1]){const q=mxP(toO,[sx*h[0],sy*h[1],sz*h[2]]);for(let k=0;k<3;k++){const u=q[k]*S[k];lo[k]=Math.min(lo[k],u);hi[k]=Math.max(hi[k],u)}}
+  const mh=sc.map((s,k)=>vs*.55/(s*(mOwner?S[k]:1)));
+  return{g:m.geometry,toM,lo:lo.map(v=>v-vs*.6),hi:hi.map(v=>v+vs*.6),col:mxCol(m),mh}});
+ let L=[1e9,1e9,1e9],H=[-1e9,-1e9,-1e9];items.forEach(it=>{for(let k=0;k<3;k++){L[k]=Math.min(L[k],it.lo[k]);H[k]=Math.max(H[k],it.hi[k])}});
+ const i0=L.map(v=>Math.floor(v/vs)),i1=H.map(v=>Math.ceil(v/vs)),X=[],Y=[],Z=[],C=[],Ms=new Set();
+ for(let i=i0[0];i<i1[0];i++)for(let j=i0[1];j<i1[1];j++)for(let k=i0[2];k<i1[2];k++){const u=[(i+.5)*vs,(j+.5)*vs,(k+.5)*vs],po=[u[0]/S[0],u[1]/S[1],u[2]/S[2]];
+  for(let n=items.length-1;n>=0;n--){const it=items[n];if(u[0]<it.lo[0]||u[0]>it.hi[0]||u[1]<it.lo[1]||u[1]>it.hi[1]||u[2]<it.lo[2]||u[2]>it.hi[2])continue;
+   if(mxIn(it.g,mxP(it.toM,po),it.mh)){X.push(i);Y.push(j);Z.push(k);C.push(it.col);Ms.add(VXK(i,j,k));break}}}
+ return{M:Ms,X,Y,Z,C,vs,S}}
+function mxAttach(V,owner,isMesh,ol){
+ if(!V.X.length)return 0;const m=vxMesh(V,[0,0,0]),S=V.S;
+ if(isMesh)for(const arr of[m.pos,m.opos])for(let i=0;i<arr.length;i+=3){arr[i]/=S[0];arr[i+1]/=S[1];arr[i+2]/=S[2]}
+ const geo=new T.BufferGeometry();geo.setAttribute('position',new T.BufferAttribute(m.pos,3));geo.setAttribute('normal',new T.BufferAttribute(m.nor,3));geo.setAttribute('color',new T.BufferAttribute(m.col,3));geo.setIndex(new T.BufferAttribute(m.idx,1));
+ let host;if(isMesh){owner.geometry=geo;owner.material=vxM();host=owner}else{host=new T.Mesh(geo,vxM());owner.add(host)}
+ if(ol){const og=new T.BufferGeometry();og.setAttribute('position',new T.BufferAttribute(m.opos,3));og.setIndex(new T.BufferAttribute(m.idx,1));host.add(new T.Mesh(og,OL))}
+ return m.n}
+function mxBuild(q,i,orig){
+ const g0=G,h0=HD,f0=FX,tg=new T.Group(),th=new T.Group(),fx=[];let err=null;
+ G=tg;HD=th;FX=fx;MXV=1;try{orig.call(q)}catch(e){err=e}finally{G=g0;HD=h0;FX=f0;MXV=0}
+ if(err)throw err;
+ const snap=()=>{const a=[];tg.traverse(o=>a.push([o,o.position.x,o.position.y,o.position.z,o.rotation.x,o.rotation.y,o.rotation.z,o.scale.x,o.scale.y,o.scale.z]));return a},
+  TS=[[0,false],[.37,false],[.91,true],[1.7,false],[3.1,true]],probe=new T.Group();
+ // 1) 全体の揺れ(G直接)のFXは除外し、残りを「細部のFX」として温存
+ const keep=[],dyn=new Set();
+ fx.forEach(f=>{let body=false;const b=snap();G=probe;try{for(const[t,m]of TS){probe.position.set(0,0,0);probe.rotation.set(0,0,0);probe.scale.set(1,1,1);f(t,m);if(Math.abs(probe.position.x)+Math.abs(probe.position.y)+Math.abs(probe.position.z)+Math.abs(probe.rotation.x)+Math.abs(probe.rotation.y)+Math.abs(probe.rotation.z)>1e-6)body=true;
+   snap().forEach((r,n)=>{const q0=b[n];if(q0&&r.some((v,k)=>k&&Math.abs(v-q0[k])>1e-5))dyn.add(r[0])})}}catch(e){}G=g0;if(!body)keep.push(f)});
+ keep.forEach(f=>{try{f(0,false)}catch(e){}});tg.updateMatrixWorld(true);
+ // 2) メッシュを分類
+ const meshes=[],kill=[];tg.traverse(o=>{if(!o.isMesh)return;const mt=o.material;if(!mt)return;if(mt.side===1){kill.push(o);return}if(mt.blending===2||(mt.transparent&&mt.opacity<.4)||!MXG.includes(o.geometry.type))return;meshes.push(o)});
+ const owner=o=>{let p=o;while(p&&p!==tg){if(dyn.has(p))return p;p=p.parent}return null},grp=new Map();
+ meshes.forEach(m=>{const k=owner(m);if(!grp.has(k))grp.set(k,[]);grp.get(k).push(m)});
+ const ext=m=>{const h=mxHalf(m.geometry),sc=mxCN(mxA(m.matrixWorld.elements));return Math.max(h[0]*sc[0],h[1]*sc[1],h[2]*sc[2])*2};
+ let vox=0;const Wid={R:[[1,0,0],[0,1,0],[0,0,1]],t:[0,0,0]};
+ grp.forEach((list,k)=>{
+  if(k===null){const fine=list.filter(m=>ext(m)<.4),big=list.filter(m=>ext(m)>=.4);
+   if(big.length)vox+=mxAttach(mxVoxelize(big,.1,Wid,null),tg,false,true);
+   if(fine.length)vox+=mxAttach(mxVoxelize(fine,.05,Wid,null),tg,false,false)}
+  else{const Wo=mxA(k.matrixWorld.elements),fine=Math.max(...list.map(ext))<.45,vs=fine?.05:.1;
+   if(k.isMesh&&list.length==1&&list[0]===k)vox+=mxAttach(mxVoxelize(list,vs,Wo,k),k,true,!fine);
+   else vox+=mxAttach(mxVoxelize(list,vs,Wo,null),k,false,!fine)}});
+ meshes.forEach(m=>{const g=grp.get(m);if(g&&g.length===1&&g[0]===m)return;if(m.parent)m.parent.remove(m)});
+ kill.forEach(o=>{if(o.parent)o.parent.remove(o)});
+ // 3) 動かし方(形から選ぶ)と全体の動きの組み立て
+ const S=q.mxS,b=S.b||'ball',XN=(S.x||[]).map(e=>Array.isArray(e)?e[0]:e),
+  loc=S.fl?'hover':(XN.includes('shoe')||XN.includes('legs'))?'legs':b=='cone'?'slide':XN.some(x=>['wing','prop','halo','moonhalo'].includes(x))?'hover':'hop',
+  hp={ball:.6,egg:.55,bean:.5,pill:.45,drop:.55,blob:.8,cube:.35,cone:.3}[b]||.5,
+  show=S.fl?'wave':loc=='legs'?'stomp':({ball:'jump',egg:'spin',bean:'wave',pill:'wave',drop:'jump',blob:'stomp',cube:'stomp',cone:'roll'}[b]||'jump'),
+  mo={loc,hop:hp,bob:.1,sway:.05,tempo:loc=='legs'?1.1:1,stride:.6,i2:['look','bounce','spin','puff','shiver'][i%5],show,ap:['drop','spin','rise','pop','zap','roll'][i%6],rc:['joy','shock','shake'][(i>>1)%3],gt:['leap','spin','shock','pose','wiggle'][(i*3+1)%5]},
+  au=S.au==null?0xb88aff:S.au,pal=q.rt>=4?[au,0xffe14d,0xffffff,S.c[0]]:[au,0xffffff,S.c[0],S.c[2]==null?au:S.c[2]];
+ const c=vxBuild({n:q.n,e:q.e,rt:q.rt,cy:1.5,head:[0,1.5,.4],fxc:pal,mo,parts:[]},400+i);c.vox=vox;c.body.add(tg);
+ G.add(c.root);G.add(c.fxg);G.userData.vx=c;HD.position.y=1.5;
+ FX.push((t,m)=>{vxTick(c,t,m);for(let n=0;n<keep.length;n++)keep[n](t,m)})}
+SKN.forEach((q,i)=>{if(!(q.m&&q.mxS))return;const o=q.x;q.ur=q.rt;q.uv=1;q.x=function(){try{mxBuild(q,i,o)}catch(e){console.warn('mx',q.n,e);o.call(q)}}});
 
 const NB=SKN.filter(q=>!q.g).length,NS=SKN.length,skN=i=>SKN[i].n,price=i=>i?(SKN[i].pr||60+i*10):0,emo=i=>SKN[i].e;
 function av(i){
@@ -2591,7 +2697,7 @@ function evBuild(){evDay=jd();const sl=[['bb',evPB()],['mg',evPMG()],['sum',evPS
 function evSet(){document.querySelectorAll('#evs .evsl').forEach((e,i)=>e.classList.toggle('on',i==evI));document.querySelectorAll('#evd i').forEach((e,i)=>e.classList.toggle('on',i==evI))}
 function evRk(){if(!evR||!$('evn1'))return;const ei=(id,p,d)=>{const e=$(id);if(!e)return;if(p&&p.skin!=null&&SKN[p.skin]){const f=faceOf(p.skin);if(f)e.innerHTML='<img alt="" src="'+f+'">';else e.textContent=emo(p.skin)}else e.textContent=d};ei('evi1',evR.b,'👑');ei('evi2',evR.l,'⭐');$('evn1').textContent=evR.b?evR.b.name:'まだいません';$('evt1').textContent=evR.b?mmss(evR.b.best):'--:--';$('evn2').textContent=evR.l?evR.l.name:'---';$('evl2').textContent=evR.l?'Lv.'+evR.l.lv:'Lv.--'}
 async function evRank(){try{await auth();const[b,l]=await Promise.all([sbf('/rest/v1/profiles?select=id,name,best&best=gt.0'+bbSeen()+'&order=best.asc&limit=1'),sbf('/rest/v1/profiles?select=id,name,lv&order=lv.desc&limit=1')]);evR={b:b&&b[0],l:l&&l[0]};evRk()}catch(e){}}
-function evInfo(){SE.btn();const it=[['🧩','MOD','','MODショップで買って、所持MODから▶プレイ！招待された人は1試合 🪙5000。MODをはじめてクリアするとホストは報酬スキン3つ(招待された人はもらえません)。'],['🗼','ふしぎタワー','','怪物がどんどん強くなる無限モード！1階クリアごとに3つから1つパワーアップをえらぼう。5階ごとに特大ボーナスチェスト。🗼終了ボタンで今の階をクリア扱いにして報酬とAPをもらえます。ホームの🗼かロビーで選べます。'],['⚔️','ペットバトル','','ペットを5体まで出して自動で戦う！勝つとペットが成長してボスもどんどん強く。オートで連戦もOK。'],['🧭','ペット探検隊','','ペットを探検に出して放置でごほうび＆経験値！時間が長いほど大きなお宝。'],['🎪','ふしぎクレーン','','◀▶でねらって「つかむ」！むりょうは1日2回、🗼タワーの🏅メダルや🪙300でもあそべます。🪙であそぶたび🛸ジャックポット運が+2%、🏅メダルなら+1%！ジャックポットは🪙16000＋🏅300！'],['🔮','ミステリーガチャ','',`ふしぎでかわいい全80体が登場！3体セットのトリオと映えスキンも。10連はSR以上確定、30回でUR確定。ミッションのチケットでも引けます。`],['🌀','召喚ガチャ','','図鑑の「召喚」タブから！1000コイン(10連9500)で、背後に付いてくる召喚体が仲間に。全80体・ハズレなし・URは特大！コンプ率報酬もあります。「😈魔界」では🪄マジックフェスで集めたマジックパーツ70個で、全120体の魔界ガチャが引けます！'],['🪄','マジックフェス','mg','毎月13〜16日。ステージ2の広さの丸いステージで、スタート時にマジック🪄を発動！最初は怪物3体、1体倒すごとに1体、30秒倒せないと1体、0体になると2体湧く。罠25個で合計20体倒せばクリア(10体から報酬)。最大🪙1000とマジックパーツ10個(魔界ガチャ用)。今月はじめてのログインで🪙2000！'],['🏆','AP・シーズン','','APはクリアや惜しい到達で上昇、ゲームオーバーで下降(CPUのみのクリアは少なめ)。ランキングはAP→クリアタイム→レベル→タワーの順で40位まで。毎月、前シーズンの1〜5位が発表され、1・2位に称号バッジ！'],['📋','新要素！','','デイリーミッション・ネオンロード・ふしぎオーブ＆ダッシュ(F/Shift)・ふしぎペット育成・ラッキールーレット・🪄マジックフェス・😈魔界ガチャ(全120体)・🎪クレーンのジャックポット運が追加！'],['💥','ビッグバンフェス','bb','毎月27日〜末日に開催！通常試合のかわりに、ステージ3の約3倍の特大ステージが1つだけ。怪物は常に2体。2人でゴールを見つけると報酬(経験値＋1500コイン)。その月はじめてログインすると4000コイン！この期間だけランキングの⏱がビッグバンタイムに入れかわります。スタート時は大爆発の演出つき！ロビーはネオンに輝き、光のくずが降ります。'],['🐺','怪物祭','mon','月・木・金に開催！ステージ2の怪物が2体に。そのかわり、ステージ2をクリアしたあとは経験値が2倍(ステージ3でやられても退出しても2倍)。'],['🪙','コイン祭','coin','土・日・火に開催！ログインスタンプでもらえるコインが2倍。'],['🗡️','裏切りイベント','bet','火曜日に開催！仲間のCPUが怪物に変身する確率が大幅アップ。'],['🎰','超レアガチャ','',`新しい超レアキャラ${SKN.filter(q=>q.u).length}体が、ガチャ限定で登場！ブラックボールなど個性的な仲間が出ます。`],['👑','ランキング1位発表','','クリアタイムとレベルの現在の1位を発表中。']];
+function evInfo(){SE.btn();const it=[['🧩','MOD','','MODショップで買って、所持MODから▶プレイ！招待された人は1試合 🪙5000。MODをはじめてクリアするとホストは報酬スキン3つ(招待された人はもらえません)。'],['🗼','ふしぎタワー','','怪物がどんどん強くなる無限モード！1階クリアごとに3つから1つパワーアップをえらぼう。5階ごとに特大ボーナスチェスト。🗼終了ボタンで今の階をクリア扱いにして報酬とAPをもらえます。ホームの🗼かロビーで選べます。'],['⚔️','ペットバトル','','ペットを5体まで出して自動で戦う！勝つとペットが成長してボスもどんどん強く。オートで連戦もOK。'],['🧭','ペット探検隊','','ペットを探検に出して放置でごほうび＆経験値！時間が長いほど大きなお宝。'],['🎪','ふしぎクレーン','','◀▶でねらって「つかむ」！むりょうは1日2回、🗼タワーの🏅メダルや🪙300でもあそべます。🪙であそぶたび🛸ジャックポット運が+2%、🏅メダルなら+1%！ジャックポットは🪙16000＋🏅300！'],['🔮','ミステリーガチャ','',`ふしぎでかわいい全80体が登場！3体セットのトリオと映えスキンも。10連はSR以上確定、30回でUR確定。ミッションのチケットでも引けます。`],['🌀','召喚ガチャ','','図鑑の「召喚」タブから！1000コイン(10連9500)で、背後に付いてくる召喚体が仲間に。全80体・ハズレなし・URは特大！コンプ率報酬もあります。「😈魔界」では🪄マジックフェスで集めたマジックパーツ70個で、全120体の魔界ガチャが引けます！'],['🪄','マジックフェス','mg','毎月13〜16日。ステージ2の広さの丸いステージで、スタート時にマジック🪄を発動！最初は怪物3体、1体倒すごとに1体、30秒倒せないと1体、0体になると2体湧く。罠25個で合計20体倒せばクリア(10体から報酬)。最大🪙1000とマジックパーツ25個(魔界ガチャ用)。今月はじめてのログインで🪙2000！'],['🏆','AP・シーズン','','APはクリアや惜しい到達で上昇、ゲームオーバーで下降(CPUのみのクリアは少なめ)。ランキングはAP→クリアタイム→レベル→タワーの順で40位まで。毎月、前シーズンの1〜5位が発表され、1・2位に称号バッジ！'],['📋','新要素！','','デイリーミッション・ネオンロード・ふしぎオーブ＆ダッシュ(F/Shift)・ふしぎペット育成・ラッキールーレット・🪄マジックフェス・😈魔界ガチャ(全120体)・🎪クレーンのジャックポット運が追加！'],['💥','ビッグバンフェス','bb','毎月27日〜末日に開催！通常試合のかわりに、ステージ3の約3倍の特大ステージが1つだけ。怪物は常に2体。2人でゴールを見つけると報酬(経験値＋1500コイン)。その月はじめてログインすると4000コイン！この期間だけランキングの⏱がビッグバンタイムに入れかわります。スタート時は大爆発の演出つき！ロビーはネオンに輝き、光のくずが降ります。'],['🐺','怪物祭','mon','月・木・金に開催！ステージ2の怪物が2体に。そのかわり、ステージ2をクリアしたあとは経験値が2倍(ステージ3でやられても退出しても2倍)。'],['🪙','コイン祭','coin','土・日・火に開催！ログインスタンプでもらえるコインが2倍。'],['🗡️','裏切りイベント','bet','火曜日に開催！仲間のCPUが怪物に変身する確率が大幅アップ。'],['🎰','超レアガチャ','',`新しい超レアキャラ${SKN.filter(q=>q.u).length}体が、ガチャ限定で登場！ブラックボールなど個性的な仲間が出ます。`],['👑','ランキング1位発表','','クリアタイムとレベルの現在の1位を発表中。']];
  modal('🎉 開催イベント',it.map(([e,n,k,d])=>`<div class="card" style="margin:6px 0;text-align:left"><div style="font-size:17px;font-weight:900">${e} ${n}${k?(evOn(k)?' <span class="evon" style="position:static;display:inline-block">開催中!</span>':` <span class="small">(${evDays(k)})</span>`):''}</div><div class="small" style="margin-top:3px">${d}</div></div>`).join(''))}
 const SUPMS=20*60*1000,SUPC=60;
 function supUpd(){const b=$('sup');if(!b)return;if((D.sup||0)>Date.now())D.sup=Date.now();const r=(D.sup||0)+SUPMS-Date.now();if(r<=0){b.className='btn xs rdy';b.textContent='🎁 +'+SUPC+'🪙 受取!'}else{b.className='btn xs';b.textContent='🎁 補給まで '+mmss(Math.ceil(r/1000))}}
@@ -2648,7 +2754,7 @@ function settings(){modal('⚙️ 設定',`<div class="sec">👤 プレイヤー
  $('nms').onclick=()=>{const v=$('nm').value.trim().slice(0,20);if(!v)return toast('名前を入力してください');if(nfBad(v))return toast('⚠ 下ネタ判定されました。もう一度べつの名前に変えてください');D.name=v;save();updInfo();SE.pon();beat();sendPos(1);toast('✅ 名前を「'+v+'」に変更')};
  $('vo').oninput=e=>{D.vol=+e.target.value;save();SE.btn()};$('ss').oninput=e=>{D.sens=+e.target.value;save()};
  $('rst').onclick=async()=>{if(confirm('設定・レベル・コイン・スキン・記録をすべて削除します。本当に初期化しますか？')&&confirm('元に戻せません。よろしいですか？')){try{localStorage.removeItem('uf')}catch(e){}D=JSON.parse(JSON.stringify(DEF));await push();location.reload()}}}
-const guide=()=>modal('📖 ガイド',[['🎯','各ステージのゴール(赤い光)に合計2人が入ると全員脱出。1人だけでは反応しません。ゴール担当のCPUが1人います。'],['🏨','ステージは全3回。進むほど広くなり、2つ目からは常に怪物が1体徘徊します。'],['👥','CPUの仲間が突然、怪物に変身することがあります。変身するとその場から追ってきます。CPUと怪物の位置は部屋の全員で同じです。'],['🪤','罠は通常最大10個(🪄マジックフェスは最初から25個)。走りながら設置OK。自分が踏んでも死亡(ジャンプ中は回避)。'],['📣','カモンでCPUの仲間が集まります。'],['🔔','招待やフレンド申請はホームの🔔通知に届きます。ここから参加・承認できます。'],['😀','エモート: 右下のボタン(キー1〜6)。📍は仲間のミニマップに位置を伝えます。'],['🎰','図鑑のガチャで極レア・超レアスキンを獲得。図鑑の達成で報酬コイン!'],['💥','ビッグバンフェス: 毎月27日〜末日は通常試合のかわりに特大ステージ1つだけ。怪物が常に2体。2人でゴールを見つけると報酬！この期間だけ、ランキングの⏱がビッグバンタイムに入れかわります。'],['🌀','召喚ガチャ: 図鑑→召喚タブ。1000コインで引くと、背後に付いてくる召喚体が仲間に！全80体、10連でSR以上確定、30回でUR確定。当たり判定は本人だけです。「😈魔界」タブでは、🔮マジックパーツ70個で魔界ガチャ(全120体)が引けます。'],['🪄','マジックフェス: 毎月13〜16日。ステージ2と同じ広さの丸いステージで、最初に怪物が3体。1体たおすごとに1体、30秒たおせないと1体、0体になると2体わく！罠25個で合計20体たおせばクリア。10体から報酬、最大🪙1000とマジックパーツ🔮10個。今月はじめてのログインで🪙2000！'],['🏆','AP: クリアや惜しい到達で上がり、ゲームオーバーで下がる。ランキングはAP順(40位まで)。毎月1〜5位が発表され、1・2位は称号バッジ🏅！'],['🔮','ミステリーガチャ: 図鑑→ガチャ。トリオ(3体)・映えスキンが出る。10連でSR以上確定、30回でUR確定。'],['📋','ミッション・🛣️ネオンロード・🎡ルーレットで毎日ごほうび！チケット🎫でもガチャが引けます。'],['🔮','マップのふしぎオーブを集めるとダッシュ⚡が使える！(F/Shiftキー)'],['🐾','ふしぎペット: タマゴをあたためて孵化→ごはん(🔮)で育てて進化！ペットはついてきて、結果ボーナスもくれる。'],['🗼','ふしぎタワー: ホームの🗼かロビーで選ぶ。クリアするたびパワーアップを1つえらべる！怪物はどんどん強くなる。どこまで登れる？'],['🏠','マイルーム: グッズをかざって映え度アップ→おるすばんでコインがたまる。🎪クレーンや🗼タワーでレアグッズをゲット！'],['🎪','ふしぎクレーン: ◀▶でねらって「つかむ」。むりょうは1日2回、🗼タワーの🏅や🪙300でもあそべる。🪙であそぶたび🛸ジャックポット運が+2%、🏅メダルは+1%。'],['🎮','移動: スティック / WASD・矢印　視点: 画面ドラッグ　ジャンプ: Space　罠: E　カモン: Q　ダッシュ: F']].map(a=>`<div class="card gd"><b>${a[0]}</b><div>${a[1]}</div></div>`).join(''));
+const guide=()=>modal('📖 ガイド',[['🎯','各ステージのゴール(赤い光)に合計2人が入ると全員脱出。1人だけでは反応しません。ゴール担当のCPUが1人います。'],['🏨','ステージは全3回。進むほど広くなり、2つ目からは常に怪物が1体徘徊します。'],['👥','CPUの仲間が突然、怪物に変身することがあります。変身するとその場から追ってきます。CPUと怪物の位置は部屋の全員で同じです。'],['🪤','罠は通常最大10個(🪄マジックフェスは最初から25個)。走りながら設置OK。自分が踏んでも死亡(ジャンプ中は回避)。'],['📣','カモンでCPUの仲間が集まります。'],['🔔','招待やフレンド申請はホームの🔔通知に届きます。ここから参加・承認できます。'],['😀','エモート: 右下のボタン(キー1〜6)。📍は仲間のミニマップに位置を伝えます。'],['🎰','図鑑のガチャで極レア・超レアスキンを獲得。図鑑の達成で報酬コイン!'],['💥','ビッグバンフェス: 毎月27日〜末日は通常試合のかわりに特大ステージ1つだけ。怪物が常に2体。2人でゴールを見つけると報酬！この期間だけ、ランキングの⏱がビッグバンタイムに入れかわります。'],['🌀','召喚ガチャ: 図鑑→召喚タブ。1000コインで引くと、背後に付いてくる召喚体が仲間に！全80体、10連でSR以上確定、30回でUR確定。当たり判定は本人だけです。「😈魔界」タブでは、🔮マジックパーツ70個で魔界ガチャ(全120体)が引けます。'],['🪄','マジックフェス: 毎月13〜16日。ステージ2と同じ広さの丸いステージで、最初に怪物が3体。1体たおすごとに1体、30秒たおせないと1体、0体になると2体わく！罠25個で合計20体たおせばクリア。10体から報酬、最大🪙1000とマジックパーツ🔮25個。今月はじめてのログインで🪙2000！'],['🏆','AP: クリアや惜しい到達で上がり、ゲームオーバーで下がる。ランキングはAP順(40位まで)。毎月1〜5位が発表され、1・2位は称号バッジ🏅！'],['🔮','ミステリーガチャ: 図鑑→ガチャ。トリオ(3体)・映えスキンが出る。10連でSR以上確定、30回でUR確定。'],['📋','ミッション・🛣️ネオンロード・🎡ルーレットで毎日ごほうび！チケット🎫でもガチャが引けます。'],['🔮','マップのふしぎオーブを集めるとダッシュ⚡が使える！(F/Shiftキー)'],['🐾','ふしぎペット: タマゴをあたためて孵化→ごはん(🔮)で育てて進化！ペットはついてきて、結果ボーナスもくれる。'],['🗼','ふしぎタワー: ホームの🗼かロビーで選ぶ。クリアするたびパワーアップを1つえらべる！怪物はどんどん強くなる。どこまで登れる？'],['🏠','マイルーム: グッズをかざって映え度アップ→おるすばんでコインがたまる。🎪クレーンや🗼タワーでレアグッズをゲット！'],['🎪','ふしぎクレーン: ◀▶でねらって「つかむ」。むりょうは1日2回、🗼タワーの🏅や🪙300でもあそべる。🪙であそぶたび🛸ジャックポット運が+2%、🏅メダルは+1%。'],['🎮','移動: スティック / WASD・矢印　視点: 画面ドラッグ　ジャンプ: Space　罠: E　カモン: Q　ダッシュ: F']].map(a=>`<div class="card gd"><b>${a[0]}</b><div>${a[1]}</div></div>`).join(''));
 // ===== 通知 =====
 const ntfSave=()=>{try{localStorage.ufn=JSON.stringify(NTF)}catch(e){}};
 const ago=t=>{const q=Math.max(0,(Date.now()-t)/1000|0);return q<60?'たった今':q<3600?(q/60|0)+'分前':(q/3600|0)+'時間前'};
@@ -3967,7 +4073,7 @@ function mgTick(dt){let nk=0;for(const f of FK)if(f.dead&&!f.cnt){f.cnt=1;if(f.p
  if(!FK.some(f=>!f.dead&&f.perm)){const n=Math.min(2,left);for(let i=0;i<n;i++)spawnMon();mgS+=n;mgD=Math.max(0,mgD-n);mgT=0;return}
  while(mgD>0&&MGN-mgS>0){spawnMon();mgS++;mgD--}
  mgT+=dt;if(mgT>=30){mgT=0;if(MGN-mgS>0){spawnMon();mgS++}}}
-function mgGrant(){const k=Math.min(MGN,mgK);mgRw=k>=10?{c:Math.round(1000*k/MGN),p:Math.ceil(10*k/MGN)}:{c:0,p:0};D.coin+=mgRw.c;D.mgp=(D.mgp||0)+mgRw.p;rsCn=mgRw.c}
+function mgGrant(){const k=Math.min(MGN,mgK);mgRw=k>=10?{c:Math.round(1000*k/MGN),p:Math.ceil(25*k/MGN)}:{c:0,p:0};D.coin+=mgRw.c;D.mgp=(D.mgp||0)+mgRw.p;rsCn=mgRw.c}
 function mgFix(h){if(!MG)return h;const r=mgRw||{c:0,p:0},k=Math.min(MGN,mgK);
  return h.replace('💥 ビッグバン制覇！','🪄 マジックフェス制覇！').replace('💥 ビッグバン敗北…','🪄 マジックフェス終了').replace('2人でゴールを見つけ出した！','怪物を'+MGN+'体倒しきった！').replace('来月こそ制覇しよう…','討伐 '+k+'/'+MGN)
   .replace('<div class="rstag">💥 ビッグバン報酬 コイン獲得！</div>','').replace('💥 ビッグバン','🪄 マジックフェス')
